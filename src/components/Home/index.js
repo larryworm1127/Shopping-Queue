@@ -10,9 +10,9 @@ class Home extends React.Component {
     return (
       <div className="home__bg-image center">
         <Link className="home__button-link center" to={"./../Queue"}>
-               { /* Using the global state variable from App.js */}
+          { /* Using the global state variable from App.js */}
           <Button className="home__button">Go to the Queue {this.props.state.abc}</Button>
-        </Link> 
+        </Link>
       </div>
     );
   }

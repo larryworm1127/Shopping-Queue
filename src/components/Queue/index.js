@@ -11,7 +11,7 @@ import StudentForm from "./../StudentForm";
 import { addStudent } from "../../actions/queue";
 
 class Queue extends React.Component {
-  ///  React 'state'.
+  // React 'state'.
   // Allows us to keep track of changing data in this component.
   state = {
     studentName: "",
@@ -32,9 +32,9 @@ class Queue extends React.Component {
     // log(name)
 
     // 'this' is bound to the Queue component in this arrow function.
-     //  In arrow functinos, 'this' is bound to the enclosing lexical function/global scope
-     //  where it is *defined*.  This is different than 'this' in normal functions,
-     //  which are bound at the call-site.
+    //  In arrow functinos, 'this' is bound to the enclosing lexical function/global scope
+    //  where it is *defined*.  This is different than 'this' in normal functions,
+    //  which are bound at the call-site.
     this.setState({
       [name]: value // [name] sets the object property name to the value of the `name` variable.
     });
@@ -61,7 +61,7 @@ class Queue extends React.Component {
         />
 
         {/* The Student List */}
-        <StudentList students={this.state.students} queueComponent={this} />
+        <StudentList students={this.state.students} queueComponent={this}/>
       </div>
     );
   }
