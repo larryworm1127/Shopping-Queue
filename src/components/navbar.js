@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import { AccountCircle } from "@material-ui/icons";
+import AccountCircle from "@material-ui/icons";
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import StoreIcon from '@material-ui/icons/Store';
 
