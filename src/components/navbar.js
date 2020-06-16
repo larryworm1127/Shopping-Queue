@@ -58,51 +58,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-class NavBar extends React.Component {
+export default function NavBar() {
+  const classes = useStyles();
 
-  constructor(props) {
-    super(props);
-    this.classes = useStyles();
-  }
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography className={classes.title} variant="h6" noWrap>
+            Shopping Queue
+          </Typography>
 
-  render() {
-    return (
-      <div className={this.classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography className={this.classes.title} variant="h6" noWrap>
-              Shopping Queue
-            </Typography>
+          <div>
+            <IconButton color="inherit">
+              <StoreIcon/>
+            </IconButton>
+            <IconButton color="inherit">
+              <NotificationsIcon/>
+            </IconButton>
+            <IconButton color="inherit">
+              <AccountCircle/>
+            </IconButton>
+          </div>
 
-            <div>
-              <IconButton color="inherit">
-                <StoreIcon/>
-              </IconButton>
-              <IconButton color="inherit">
-                <NotificationsIcon/>
-              </IconButton>
-              <IconButton color="inherit">
-                <AccountCircle/>
-              </IconButton>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon/>
             </div>
-
-            <div className={this.classes.search}>
-              <div className={this.classes.searchIcon}>
-                <SearchIcon/>
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: this.classes.inputRoot,
-                  input: this.classes.inputInput,
-                }}
-              />
-            </div>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  }
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+            />
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
 
-export default NavBar;
