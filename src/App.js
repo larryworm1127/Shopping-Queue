@@ -7,6 +7,7 @@ import './App.css';
 // Importing the Queue and our simple Home Page
 import Queue from './components/Queue';
 import Home from './components/Home';
+import NavBar from "./components/navbar";
 
 class App extends React.Component {
 
@@ -17,6 +18,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <NavBar/>
         <BrowserRouter>
           <Switch>
             <Route exact path='/' render={() => (<Home state={this.state}/>)}/>
