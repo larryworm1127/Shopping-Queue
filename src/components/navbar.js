@@ -1,66 +1,66 @@
-import React, { Component } from "react";
-import withStyles from "@material-ui/styles/withStyles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Toolbar from "@material-ui/core/Toolbar";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Menu from "../utils/Menu";
+import React from 'react';
+import withStyles from '@material-ui/styles/withStyles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Menu from '../utils/Menu';
 
 // Temp React logo
-const logo = require("../logo.svg");
+const logo = require('../logo.svg');
 
 // Material UI themed style
 const styles = theme => ({
   appBar: {
-    position: "relative",
-    boxShadow: "none",
-    borderBottom: `1px solid ${theme.palette.grey["100"]}`,
-    backgroundColor: "white"
+    position: 'relative',
+    boxShadow: 'none',
+    borderBottom: `1px solid ${theme.palette.grey['100']}`,
+    backgroundColor: 'white'
   },
   inline: {
-    display: "inline"
+    display: 'inline'
   },
   flex: {
-    display: "flex",
-    [theme.breakpoints.down("sm")]: {
-      display: "flex",
-      justifyContent: "space-evenly",
-      alignItems: "center"
+    display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
+      justifyContent: 'space-evenly',
+      alignItems: 'center'
     }
   },
   productLogo: {
-    display: "inline-block",
-    borderLeft: `1px solid ${theme.palette.grey["A100"]}`,
+    display: 'inline-block',
+    borderLeft: `1px solid ${theme.palette.grey['A100']}`,
     marginLeft: 32,
     paddingLeft: 24,
-    [theme.breakpoints.up("md")]: {
-      paddingTop: "1.5em"
+    [theme.breakpoints.up('md')]: {
+      paddingTop: '1.5em'
     }
   },
   tagLine: {
-    display: "inline-block",
+    display: 'inline-block',
     marginLeft: 10,
-    [theme.breakpoints.up("md")]: {
-      paddingTop: "0.8em"
+    [theme.breakpoints.up('md')]: {
+      paddingTop: '0.8em'
     }
   },
   tabContainer: {
     marginLeft: 32,
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
     }
   },
   tabItem: {
     paddingTop: 20,
     paddingBottom: 20,
-    minWidth: "auto"
+    minWidth: 'auto'
   }
 });
 
 // NavBar component class
-class NavBar extends Component {
+class NavBar extends React.Component {
   state = {
     tabIndex: 0,
   };
@@ -75,12 +75,18 @@ class NavBar extends Component {
 
   currPath = () => {
     switch (this.props.currentPath) {
-      case "/": return 0;
-      case "/queue": return 1;
-      case "/profile": return 2;
-      case "/signup": return 3;
-      case "/login": return 4;
-      default: return 0;
+      case '/':
+        return 0;
+      case '/queue':
+        return 1;
+      case '/profile':
+        return 2;
+      case '/signup':
+        return 3;
+      case '/login':
+        return 4;
+      default:
+        return 0;
     }
   };
 

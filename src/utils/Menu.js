@@ -1,28 +1,28 @@
 const Menu = [
   {
-    label: "Home",
-    pathname: "/"
+    label: 'Home',
+    pathname: '/'
   },
   {
-    label: "My Queues",
-    pathname: "/queue"
+    label: 'My Queues',
+    pathname: '/queue'
   },
   {
-    label: "Profile",
-    pathname: "/profile"
+    label: 'Profile',
+    pathname: '/profile'
   },
   // Add mechanism so that nav bar shows these based on user auth status
   {
-    label: "Signup",
-    pathname: "/signup"
+    label: 'Signup',
+    pathname: '/signup'
   },
   {
-    label: "Login",
-    pathname: "/login"
+    label: 'Login',
+    pathname: '/login'
   },
   {
-    label: "Logout",
-    pathname: "/"
+    label: 'Logout',
+    pathname: '/'
   },
 ];
 
