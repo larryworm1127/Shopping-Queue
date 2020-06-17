@@ -12,6 +12,9 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import withStyles from '@material-ui/core/styles/withStyles';
 import NavBar from '../navbar';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 const styles = theme => ({
@@ -28,6 +31,15 @@ const styles = theme => ({
   form: {
     width: '100%',
     marginTop: theme.spacing(1),
+  },
+  formControlLabel: {
+    textTransform: 'uppercase',
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    color: theme.palette.secondary.main
+  },
+  formControl: {
+    width: '100%',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -49,10 +61,12 @@ class Login extends React.Component {
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon/>
             </Avatar>
+
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <form className={classes.form} noValidate>
+
+            <form className={classes.form}>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -64,6 +78,7 @@ class Login extends React.Component {
                 autoComplete="email"
                 autoFocus
               />
+
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -75,10 +90,29 @@ class Login extends React.Component {
                 id="password"
                 autoComplete="current-password"
               />
+
+              <Typography className={classes.formControlLabel}>
+                Login as
+              </Typography>
+
+              <FormControl
+                variant="outlined"
+                className={classes.formControl}
+              >
+                <Select>
+                  <MenuItem value={1}>Shopper</MenuItem>
+                  <MenuItem value={2}>Store Owner</MenuItem>
+                  <MenuItem value={3}>Admin</MenuItem>
+                </Select>
+              </FormControl>
+
               <FormControlLabel
-                control={<Checkbox value="remember" color="primary"/>}
+                control={
+                  <Checkbox value="remember" color="primary"/>
+                }
                 label="Remember me"
               />
+
               <Button
                 type="submit"
                 fullWidth
@@ -89,6 +123,7 @@ class Login extends React.Component {
               >
                 Sign In
               </Button>
+
               <Grid container>
                 <Grid item xs>
                   {/* implement password recovery in phase 2 */}
