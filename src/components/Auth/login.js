@@ -10,26 +10,49 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import withStyles from '@material-ui/core/styles/withStyles';
 import NavBar from '../navbar';
 
+
+const styles = theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+});
 
 class Login extends React.Component {
 
   render() {
+    const { classes } = this.props;
+
     return (
       <div>
         <NavBar currentPath={this.props.location.pathname}/>
 
         <Container component="main" maxWidth="xs">
           <CssBaseline/>
-          <div>
-            <Avatar>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
               <LockOutlinedIcon/>
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <form noValidate>
+            <form className={classes.form} noValidate>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -61,6 +84,7 @@ class Login extends React.Component {
                 fullWidth
                 variant="contained"
                 color="primary"
+                className={classes.submit}
                 href='/'
               >
                 Sign In
@@ -86,4 +110,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withStyles(styles)(Login);
