@@ -46,7 +46,7 @@ class Queue extends React.Component {
   render() {
     return (
       <div className="App">
-        <NavBar/>
+        <NavBar currentPath={this.props.location.pathname}/>
         {/* Header component with text props. */}
         <Header
           title="Student Help Queue Summer 2020"
