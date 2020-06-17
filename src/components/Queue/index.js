@@ -6,6 +6,7 @@ import React from "react";
 import Header from "./../Header";
 import StudentList from "./../StudentList";
 import StudentForm from "./../StudentForm";
+import NavBar from "../navbar";
 
 // Importing actions/required methods
 import { addStudent } from "../../actions/queue";
@@ -45,6 +46,7 @@ class Queue extends React.Component {
   render() {
     return (
       <div className="App">
+        <NavBar/>
         {/* Header component with text props. */}
         <Header
           title="Student Help Queue Summer 2020"

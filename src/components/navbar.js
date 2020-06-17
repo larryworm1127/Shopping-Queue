@@ -1,101 +1,121 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
-import { AccountCircle } from "@material-ui/icons";
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import StoreIcon from '@material-ui/icons/Store';
+import React, { Component } from "react";
+import withStyles from "@material-ui/styles/withStyles";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Toolbar from "@material-ui/core/Toolbar";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Menu from "./Menu";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-    [theme.breakpoints.up('sm')]: {
-      display: 'inline',
-    },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
+// Temp React logo
+const logo = require("../logo.svg");
 
-export default function NavBar() {
-  const classes = useStyles();
+// Material UI themed style
+const styles = theme => ({
+  appBar: {
+    position: "relative",
+    boxShadow: "none",
+    borderBottom: `1px solid ${theme.palette.grey["100"]}`,
+    backgroundColor: "white"
+  },
+  inline: {
+    display: "inline"
+  },
+  flex: {
+    display: "flex",
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      justifyContent: "space-evenly",
+      alignItems: "center"
+    }
+  },
+  productLogo: {
+    display: "inline-block",
+    borderLeft: `1px solid ${theme.palette.grey["A100"]}`,
+    marginLeft: 32,
+    paddingLeft: 24,
+    [theme.breakpoints.up("md")]: {
+      paddingTop: "1.5em"
+    }
+  },
+  tagLine: {
+    display: "inline-block",
+    marginLeft: 10,
+    [theme.breakpoints.up("md")]: {
+      paddingTop: "0.8em"
+    }
+  },
+  tabContainer: {
+    marginLeft: 32,
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
+  },
+  tabItem: {
+    paddingTop: 20,
+    paddingBottom: 20,
+    minWidth: "auto"
+  }
+});
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
+// NavBar component class
+class NavBar extends Component {
+  state = {
+    tabIndex: 0,
+  };
+
+  handleTabChange = (event, tabIndex) => {
+    this.setState({ tabIndex });
+  };
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <AppBar
+        position="absolute"
+        color="default"
+        className={classes.appBar}
+      >
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Shopping Queue
-          </Typography>
-
-          <div>
-            <IconButton color="inherit">
-              <StoreIcon/>
-            </IconButton>
-            <IconButton color="inherit">
-              <NotificationsIcon/>
-            </IconButton>
-            <IconButton color="inherit">
-              <AccountCircle/>
-            </IconButton>
-          </div>
-
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon/>
+          <Grid item xs={12} className={classes.flex}>
+            <div className={classes.inline}>
+              <Typography variant="h6" color="inherit" noWrap>
+                <img width={20} src={logo} alt="React logo"/>
+                <span className={classes.tagLine}>Shopping Queue</span>
+              </Typography>
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-            />
-          </div>
+
+            <div className={classes.productLogo}>
+              <Typography>A Pandemic Shopping Manager</Typography>
+            </div>
+
+            <div className={classes.tabContainer}>
+              <Tabs
+                value={this.state.tabIndex}
+                indicatorColor="primary"
+                textColor="primary"
+                onChange={this.handleTabChange}
+              >
+                {Menu.map((item, index) => (
+                  <Tab
+                    key={index}
+                    classes={{ root: classes.tabItem }}
+                    label={item.label}
+                  />
+                ))}
+              </Tabs>
+            </div>
+          </Grid>
         </Toolbar>
       </AppBar>
-    </div>
-  );
+    );
+  }
 }
 
+export default withStyles(styles)(NavBar);
