@@ -73,6 +73,17 @@ class NavBar extends Component {
     window.scrollTo(0, 0);
   }
 
+  currPath = () => {
+    switch (this.props.currentPath) {
+      case "/": return 0;
+      case "/queue": return 1;
+      case "/profile": return 2;
+      case "/signup": return 3;
+      case "/login": return 4;
+      default: return 0;
+    }
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -97,7 +108,7 @@ class NavBar extends Component {
 
             <div className={classes.tabContainer}>
               <Tabs
-                value={this.state.tabIndex}
+                value={this.currPath() || this.state.tabIndex}
                 indicatorColor="primary"
                 textColor="primary"
                 onChange={this.handleTabChange}
@@ -107,6 +118,7 @@ class NavBar extends Component {
                     key={index}
                     classes={{ root: classes.tabItem }}
                     label={item.label}
+                    href={item.pathname}
                   />
                 ))}
               </Tabs>
