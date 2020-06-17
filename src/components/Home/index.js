@@ -1,5 +1,5 @@
-import React from "react";
-import NavBar from "../navbar";
+import React from 'react';
+import NavBar from '../navbar';
 
 /* Component for the Home page */
 class Home extends React.Component {
