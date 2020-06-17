@@ -8,8 +8,8 @@ import StudentList from "./../StudentList";
 import StudentForm from "./../StudentForm";
 import NavBar from "../navbar";
 
-// Importing actions/required methods
-import { addStudent } from "../../actions/queue";
+// Importing utils/required methods
+import { addStudent } from "../../utils/queue";
 
 class Queue extends React.Component {
   // React 'state'.

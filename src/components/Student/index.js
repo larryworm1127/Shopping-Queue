@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 
-import { removeStudent } from "../../actions/queue";
+import { removeStudent } from "../../utils/queue";
 
 import "./styles.css";
 
