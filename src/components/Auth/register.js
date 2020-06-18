@@ -12,6 +12,7 @@ import NavBar from '../navbar';
 import Link from '@material-ui/core/Link';
 import ShopperProfile from './shopperProfile';
 import OwnerProfile from './ownerProfile';
+import { Redirect } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -46,13 +47,13 @@ const styles = theme => ({
   },
 });
 
-const steps = ['Account Details', 'Profile Details', 'Confirm'];
+const steps = ['Account Details', 'Profile Details'];
 
 class Register extends React.Component {
   state = {
     activeStep: 0,
     setActiveStep: 0,
-    registerFor: 0
+    registerFor: 1
   };
 
   getStepContent = (step) => {
@@ -66,10 +67,8 @@ class Register extends React.Component {
         );
       case 1:
         return this.state.registerFor === 1 ? <ShopperProfile/> : <OwnerProfile/>;
-      case 2:
-        return <div>test</div>;
       default:
-        throw new Error('Unknown step');
+        return <Redirect to={{ pathname: "/login" }}/>;
     }
   };
 
@@ -77,7 +76,7 @@ class Register extends React.Component {
     this.setState({
       registerFor: event.target.value
     });
-    console.log(this.state.registerFor)
+    console.log(this.state.registerFor);
   };
 
   handleNext = () => {

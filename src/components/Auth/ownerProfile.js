@@ -2,8 +2,23 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import Slider from '@material-ui/core/Slider';
+import Input from '@material-ui/core/Input';
+
 
 class OwnerProfile extends React.Component {
+
+  state = {
+    value: 0
+  };
+
+  handleBlur = () => {
+    if (this.state.value < 0) {
+      this.setState({ value: 0 });
+    } else if (this.state.value > 100) {
+      this.setState({ value: 100 });
+    }
+  };
 
   render() {
     return (
@@ -65,6 +80,33 @@ class OwnerProfile extends React.Component {
               }}
               inputProps={{
                 step: 300, // 5 min
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography>Customer Shopping Time Limit (min)</Typography>
+            <Slider
+              value={typeof this.state.value === 'number' ? this.state.value : 0}
+              onChange={
+                (event, newValue) => {
+                  this.setState({ value: newValue });
+                }
+              }
+            />
+            <Input
+              value={this.state.value}
+              margin="dense"
+              onChange={
+                (event) => {
+                  this.setState({ value: event.target.value === '' ? '' : Number(event.target.value) });
+                }
+              }
+              onBlur={this.handleBlur}
+              inputProps={{
+                step: 10,
+                min: 0,
+                max: 60,
+                type: 'number',
               }}
             />
           </Grid>

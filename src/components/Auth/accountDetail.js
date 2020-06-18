@@ -82,8 +82,10 @@ class AccountDetail extends React.Component {
               <Select
                 value={this.props.registerFor}
                 onChange={this.props.handleRegisterFor}
+                displayEmpty={true}
+                label={"Register as"}
               >
-                <MenuItem value={1}>Shopper</MenuItem>
+                <MenuItem value={1}>Shopper/Admin</MenuItem>
                 <MenuItem value={2}>Store Owner</MenuItem>
               </Select>
             </FormControl>
