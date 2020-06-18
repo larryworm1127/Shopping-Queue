@@ -13,8 +13,8 @@ const Menu = [
   },
   // Add mechanism so that nav bar shows these based on user auth status
   {
-    label: 'Signup',
-    pathname: '/signup'
+    label: 'Register',
+    pathname: '/register'
   },
   {
     label: 'Login',

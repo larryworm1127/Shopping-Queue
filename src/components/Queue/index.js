@@ -10,6 +10,7 @@ import NavBar from "../navbar";
 
 // Importing utils/required methods
 import { addStudent } from "../../utils/queue";
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 class Queue extends React.Component {
   // React 'state'.
@@ -46,6 +47,7 @@ class Queue extends React.Component {
   render() {
     return (
       <div className="App">
+        <CssBaseline/>
         <NavBar currentPath={this.props.location.pathname}/>
         {/* Header component with text props. */}
         <Header
