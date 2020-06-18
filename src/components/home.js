@@ -1,9 +1,8 @@
 import React from 'react';
-import NavBar from '../navbar';
+import NavBar from './navbar';
 
-
-class Signup extends React.Component {
-
+/* Component for the Home page */
+class Home extends React.Component {
   render() {
     return (
       <NavBar currentPath={this.props.location.pathname}/>
@@ -11,4 +10,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default Home;

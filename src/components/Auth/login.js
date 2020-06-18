@@ -52,7 +52,7 @@ class Login extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <React.Fragment>
         <NavBar currentPath={this.props.location.pathname}/>
 
         <Container component="main" maxWidth="xs">
@@ -72,10 +72,10 @@ class Login extends React.Component {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
               />
 
@@ -140,7 +140,7 @@ class Login extends React.Component {
             </form>
           </div>
         </Container>
-      </div>
+      </React.Fragment>
     );
   }
 }
