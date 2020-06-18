@@ -4,7 +4,7 @@ const log = console.log;
 
 // Function to add a student, needs to be exported
 export const addStudent = queue => {
-  log("adding student");
+  // log("adding student");
   const studentList = queue.state.students;
 
   const student = {
@@ -16,10 +16,10 @@ export const addStudent = queue => {
   const position = parseInt(queue.state.position);
 
   if (position > studentList.length || !position) {
-    log("here");
+    // log("here");
     studentList.push(student);
   } else {
-    log("here2");
+    // log("here2");
     studentList.splice(position - 1, 0, student);
   }
 

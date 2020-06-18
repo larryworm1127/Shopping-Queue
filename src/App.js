@@ -30,10 +30,6 @@ const theme = createMuiTheme({
 
 class App extends React.Component {
 
-  state = {
-    abc: '123'
-  };
-
   render() {
     return (
       <div>

@@ -31,17 +31,17 @@ class Student extends React.Component {
 
   componentWillUnmount() {
     // When the component leaves the DOM
-    log("clearing");
+    // log("clearing");
     clearInterval(this.studentTimer);
   }
 
   // To tick off the seconds
   tick() {
-    console.log("tick");
+    // console.log("tick");
     this.setState({
       seconds: this.state.seconds + 1
     });
-    log(this.state.seconds);
+    // log(this.state.seconds);
   }
 
   render() {
