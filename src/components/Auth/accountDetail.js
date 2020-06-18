@@ -24,7 +24,7 @@ const styles = theme => ({
 class AccountDetail extends React.Component {
 
   render() {
-    const { classes } = this.props
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
@@ -79,10 +79,12 @@ class AccountDetail extends React.Component {
             </Typography>
 
             <FormControl className={classes.formControl}>
-              <Select>
+              <Select
+                value={this.props.registerFor}
+                onChange={this.props.handleRegisterFor}
+              >
                 <MenuItem value={1}>Shopper</MenuItem>
                 <MenuItem value={2}>Store Owner</MenuItem>
-                <MenuItem value={3}>Admin</MenuItem>
               </Select>
             </FormControl>
           </Grid>

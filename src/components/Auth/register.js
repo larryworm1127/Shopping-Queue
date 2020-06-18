@@ -10,7 +10,8 @@ import AccountDetail from './accountDetail';
 import withStyles from '@material-ui/core/styles/withStyles';
 import NavBar from '../navbar';
 import Link from '@material-ui/core/Link';
-import ProfileDetail from './profileDetail';
+import ShopperProfile from './shopperProfile';
+import OwnerProfile from './ownerProfile';
 
 
 const styles = theme => ({
@@ -47,23 +48,36 @@ const styles = theme => ({
 
 const steps = ['Account Details', 'Profile Details', 'Confirm'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AccountDetail/>;
-    case 1:
-      return <ProfileDetail/>;
-    case 2:
-      return <div>test</div>;
-    default:
-      throw new Error('Unknown step');
-  }
-}
-
 class Register extends React.Component {
   state = {
     activeStep: 0,
-    setActiveStep: 0
+    setActiveStep: 0,
+    registerFor: 0
+  };
+
+  getStepContent = (step) => {
+    switch (step) {
+      case 0:
+        return (
+          <AccountDetail
+            handleRegisterFor={this.handleRegisterFor}
+            registerFor={this.state.registerFor}
+          />
+        );
+      case 1:
+        return this.state.registerFor === 1 ? <ShopperProfile/> : <OwnerProfile/>;
+      case 2:
+        return <div>test</div>;
+      default:
+        throw new Error('Unknown step');
+    }
+  };
+
+  handleRegisterFor = (event) => {
+    this.setState({
+      registerFor: event.target.value
+    });
+    console.log(this.state.registerFor)
   };
 
   handleNext = () => {
@@ -103,7 +117,7 @@ class Register extends React.Component {
               ))}
             </Stepper>
 
-            {getStepContent(this.state.activeStep)}
+            {this.getStepContent(this.state.activeStep)}
             <div className={classes.buttons}>
               {this.state.activeStep !== 0 && (
                 <Button onClick={this.handleBack} className={classes.button}>
