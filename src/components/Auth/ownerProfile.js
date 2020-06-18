@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -38,6 +38,34 @@ class OwnerProfile extends React.Component {
               name="customerLimit"
               label="Customer Limit"
               fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField
+              id="start-time"
+              label="Opening Time"
+              type="time"
+              defaultValue="07:30"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField
+              id="start-time"
+              label="Closing Time"
+              type="time"
+              defaultValue="07:30"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
             />
           </Grid>
         </Grid>
