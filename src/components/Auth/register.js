@@ -121,7 +121,7 @@ class Register extends React.Component {
         <CssBaseline/>
         <NavBar currentPath={this.props.location.pathname}/>
 
-        <div className={classes.layout}>
+        <form className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
               Register
@@ -156,7 +156,7 @@ class Register extends React.Component {
           <Link href="/login" variant="body2">
             Already have an account? Sign in
           </Link>
-        </div>
+        </form>
       </React.Fragment>
     );
   }
