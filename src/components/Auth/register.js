@@ -45,6 +45,15 @@ const styles = theme => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
+  accountDetailFormControlLabel: {
+    textTransform: 'uppercase',
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    color: theme.palette.secondary.main
+  },
+  accountDetailFormControl: {
+    width: '100%',
+  },
 });
 
 const steps = ['Account Details', 'Profile Details'];
@@ -57,18 +66,28 @@ class Register extends React.Component {
   };
 
   getStepContent = (step) => {
+    const { classes } = this.props;
+
     switch (step) {
       case 0:
         return (
           <AccountDetail
             handleRegisterFor={this.handleRegisterFor}
             registerFor={this.state.registerFor}
+            classes={classes}
           />
         );
       case 1:
-        return this.state.registerFor === 1 ? <ShopperProfile/> : <OwnerProfile/>;
+        switch (this.state.registerFor) {
+          case 1:
+            return <ShopperProfile/>;
+          case 2:
+            return <OwnerProfile/>;
+          default:
+            return <Redirect to={{ pathname: '/login' }}/>;
+        }
       default:
-        return <Redirect to={{ pathname: "/login" }}/>;
+        return <Redirect to={{ pathname: '/login' }}/>;
     }
   };
 
@@ -76,7 +95,6 @@ class Register extends React.Component {
     this.setState({
       registerFor: event.target.value
     });
-    console.log(this.state.registerFor);
   };
 
   handleNext = () => {
@@ -117,6 +135,7 @@ class Register extends React.Component {
             </Stepper>
 
             {this.getStepContent(this.state.activeStep)}
+
             <div className={classes.buttons}>
               {this.state.activeStep !== 0 && (
                 <Button onClick={this.handleBack} className={classes.button}>
