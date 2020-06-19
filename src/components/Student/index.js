@@ -7,8 +7,6 @@ import { removeStudent } from "../../utils/queue";
 
 import "./styles.css";
 
-const log = console.log;
-
 class Student extends React.Component {
   /*  Common 'Lifecycle' methods 
       - constructor

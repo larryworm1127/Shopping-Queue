@@ -1,30 +1,20 @@
-import * as React from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import withStyles from '@material-ui/core/styles/withStyles';
-
-
-const styles = theme => ({
-  formControlLabel: {
-    textTransform: 'uppercase',
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    color: theme.palette.secondary.main
-  },
-  formControl: {
-    width: '100%',
-  },
-});
 
 
 class AccountDetail extends React.Component {
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      registerFor,
+      handleRegisterFor
+    } = this.props;
 
     return (
       <React.Fragment>
@@ -44,9 +34,11 @@ class AccountDetail extends React.Component {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              required
               id="email"
               name="email"
               label="Email Address"
+              type="email"
               fullWidth
               autoComplete="email"
             />
@@ -74,17 +66,19 @@ class AccountDetail extends React.Component {
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography className={classes.formControlLabel}>
+            <Typography className={classes.accountDetailFormControlLabel}>
               Register as
             </Typography>
 
-            <FormControl className={classes.formControl}>
+            <FormControl className={classes.accountDetailFormControl}>
               <Select
-                value={this.props.registerFor}
-                onChange={this.props.handleRegisterFor}
+                value={registerFor}
+                onChange={handleRegisterFor}
+                displayEmpty={true}
               >
                 <MenuItem value={1}>Shopper</MenuItem>
                 <MenuItem value={2}>Store Owner</MenuItem>
+                <MenuItem value={3}>Admin</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -94,4 +88,4 @@ class AccountDetail extends React.Component {
   }
 }
 
-export default withStyles(styles)(AccountDetail);
+export default AccountDetail;

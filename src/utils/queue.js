@@ -1,7 +1,5 @@
 // Methods in this file modifies the Queue component state
 
-const log = console.log;
-
 // Function to add a student, needs to be exported
 export const addStudent = queue => {
   // log("adding student");
