@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField';
 class ShopperProfile extends React.Component {
 
   render() {
+    const { handleFormField } = this.props;
+
     return (
       <React.Fragment>
         <Typography variant="h6" gutterBottom>
@@ -20,6 +22,9 @@ class ShopperProfile extends React.Component {
               label="First name"
               fullWidth
               autoComplete="given-name"
+              onChange={(event) => {
+                handleFormField('firstName', event);
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -30,6 +35,9 @@ class ShopperProfile extends React.Component {
               label="Last name"
               fullWidth
               autoComplete="family-name"
+              onChange={(event) => {
+                handleFormField('lastName', event);
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -40,11 +48,14 @@ class ShopperProfile extends React.Component {
               label="Address"
               fullWidth
               autoComplete="address"
+              onChange={(event) => {
+                handleFormField('address', event);
+              }}
             />
           </Grid>
         </Grid>
       </React.Fragment>
-    )
+    );
   }
 }
 

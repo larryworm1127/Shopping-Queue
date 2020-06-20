@@ -48,6 +48,18 @@ const styles = theme => ({
 
 class Login extends React.Component {
 
+  state = {
+    username: '',
+    password: '',
+    loginAs: 1
+  };
+
+  handleFormField = (field, event) => {
+    this.setState({
+      [field]: event.target.value
+    });
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -77,6 +89,9 @@ class Login extends React.Component {
                 name="username"
                 autoComplete="username"
                 autoFocus
+                onChange={(event) => {
+                  this.handleFormField('username', event);
+                }}
               />
 
               <TextField
@@ -89,6 +104,9 @@ class Login extends React.Component {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(event) => {
+                  this.handleFormField('password', event);
+                }}
               />
 
               <Typography className={classes.formControlLabel}>
@@ -99,7 +117,12 @@ class Login extends React.Component {
                 variant="outlined"
                 className={classes.formControl}
               >
-                <Select>
+                <Select
+                  value={this.state.loginAs}
+                  onChange={(event) => {
+                    this.handleFormField('loginAs', event);
+                  }}
+                >
                   <MenuItem value={1}>Shopper</MenuItem>
                   <MenuItem value={2}>Store Owner</MenuItem>
                   <MenuItem value={3}>Admin</MenuItem>
