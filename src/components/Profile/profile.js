@@ -1,18 +1,12 @@
 import React from "react";
 import NavBar from "../navbar";
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Link from '@material-ui/core/Link';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import Button from '@material-ui/core/Button';
-import History from "./history.js"
+import SearchHistory from "./searchHistory.js"
+
 class Profile extends React.Component {
 
   constructor(props) {
@@ -29,11 +23,11 @@ class Profile extends React.Component {
   profileSettings = () => {
     switch(this.state.setting) {
       case 0:
-        return <History text="K"></History>;
+        return <SearchHistory text="K"></SearchHistory>;
       case 1:
-        return <History text="L"></History>;
+        return <SearchHistory text="L"></SearchHistory>;
       case 2:
-        return <History text="M"></History>;
+        return <SearchHistory text="M"></SearchHistory>;
     };
   }
 
