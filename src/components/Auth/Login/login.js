@@ -16,6 +16,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { styles } from './style';
+import { loginVerify } from '../../../utils/verifyAuth';
+import { Redirect } from 'react-router-dom';
 
 
 class Login extends React.Component {
@@ -23,19 +25,39 @@ class Login extends React.Component {
   state = {
     username: '',
     password: '',
-    loginAs: 1
+    loginAs: 1,
+    loggedIn: false,
+    displayError: false,
+    errorMessage: ''
   };
 
   handleFormField = (field, event) => {
     this.setState({
-      [field]: event.target.value
+      [field]: event.target.value,
+      displayError: false,
+      errorMessage: ''
     });
+  };
+
+  handleLoginSubmit = (event) => {
+    event.preventDefault();
+    const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
+    if (verify === true) {
+      this.setState({
+        loggedIn: true
+      });
+    } else {
+      this.setState({
+        displayError: true,
+        errorMessage: verify
+      });
+    }
   };
 
   render() {
     const { classes } = this.props;
 
-    return (
+    return this.state.loggedIn ? (<Redirect to={{ pathname: '/' }}/>) : (
       <React.Fragment>
         <NavBar currentPath={this.props.location.pathname}/>
 
@@ -50,12 +72,13 @@ class Login extends React.Component {
               Sign in
             </Typography>
 
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={this.handleLoginSubmit}>
               <TextField
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
+                error={this.state.displayError}
                 id="username"
                 label="Username"
                 name="username"
@@ -71,6 +94,8 @@ class Login extends React.Component {
                 margin="normal"
                 required
                 fullWidth
+                error={this.state.displayError}
+                helperText={this.state.errorMessage}
                 name="password"
                 label="Password"
                 type="password"
@@ -114,25 +139,24 @@ class Login extends React.Component {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                href='/'
               >
                 Sign In
               </Button>
-
-              <Grid container>
-                <Grid item xs>
-                  {/* implement password recovery in phase 2 */}
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="/register" variant="body2">
-                    {'Don\'t have an account? Sign Up'}
-                  </Link>
-                </Grid>
-              </Grid>
             </form>
+
+            <Grid container>
+              <Grid item xs>
+                {/* implement password recovery in phase 2 */}
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/register" variant="body2">
+                  {'Don\'t have an account? Sign Up'}
+                </Link>
+              </Grid>
+            </Grid>
           </div>
         </Container>
       </React.Fragment>

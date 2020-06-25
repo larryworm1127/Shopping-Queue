@@ -1,47 +1,65 @@
+// Temporary credentials (reset every time server restarts)
 const shopperCredentials = [
-  { username: 'user', password: 'user' }
+  { username: 'user', password: 'user' },
+  { username: 'user2', password: 'user2' }
 ];
 
 const shopOwnerCredentials = [
-  { username: 'user2', password: 'user2' }
+  { username: 'store1', password: 'store1' },
+  { username: 'store2', password: 'store2' }
 ];
 
 const adminCredentials = [
   { username: 'admin', password: 'admin' }
 ];
 
-const verifyLoginCred = (username, password, credList) => {
+
+// Login
+const loginVerifyHelper = (username, password, credList) => {
   for (let index = 0; index < credList.length; index++) {
     if (credList[index].username === username) {
       return credList[index].password === password;
     }
   }
-  return false;
+  return 'Incorrect username or password!';
 };
 
 export const loginVerify = (username, password, accountType) => {
+  // Implement database access and query for user credential verification here.
   switch (accountType) {
     case 1:
-      return verifyLoginCred(username, password, shopperCredentials);
+      return loginVerifyHelper(username, password, shopperCredentials);
     case 2:
-      return verifyLoginCred(username, password, shopOwnerCredentials);
+      return loginVerifyHelper(username, password, shopOwnerCredentials);
     case 3:
-      return verifyLoginCred(username, password, adminCredentials);
+      return loginVerifyHelper(username, password, adminCredentials);
     default:
-      return Error("Unknown account type")
+      return Error('Unknown account type');
   }
 };
 
 
-export const registerVerify = (username, accountType) => {
+// Register
+const registerVerifyHelper = (username, password, credList) => {
+  for (let index = 0; index < credList.length; index++) {
+    if (credList[index].username === username) {
+      return false;
+    }
+  }
+  credList.push({ username: username, password: password });
+  return true;
+};
+
+export const registerVerify = (username, password, accountType) => {
+  // Implement database access and query for user credential verification here.
   switch (accountType) {
     case 1:
-      return;
+      return registerVerifyHelper(username, password, shopperCredentials);
     case 2:
-      return;
+      return registerVerifyHelper(username, password, shopOwnerCredentials);
     case 3:
-      return;
+      return registerVerifyHelper(username, password, adminCredentials);
     default:
-      return Error("Unknown account type")
+      return Error('Unknown account type');
   }
-}
+};
