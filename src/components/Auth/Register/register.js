@@ -8,53 +8,13 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AccountDetail from './accountDetail';
 import withStyles from '@material-ui/core/styles/withStyles';
-import NavBar from '../navbar';
+import NavBar from '../../Nav/navbar';
 import Link from '@material-ui/core/Link';
 import ShopperProfile from './shopperProfile';
 import OwnerProfile from './ownerProfile';
 import { Redirect } from 'react-router-dom';
+import { styles } from './style';
 
-
-const styles = theme => ({
-  appBar: {
-    position: 'relative',
-  },
-  layout: {
-    width: 'auto',
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
-  paper: {
-    marginTop: theme.spacing(6),
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(4),
-  },
-  stepper: {
-    padding: theme.spacing(3, 0, 5),
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
-  },
-  accountDetailFormControlLabel: {
-    textTransform: 'uppercase',
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    color: theme.palette.secondary.main
-  },
-  accountDetailFormControl: {
-    width: '100%',
-  },
-});
 
 const steps = ['Account Details', 'Profile Details'];
 

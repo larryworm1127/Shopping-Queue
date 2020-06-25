@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './home';
 import Queue from './Queue';
-import Login from './Auth/login';
-import Register from './Auth/register';
+import Login from './Auth/Login/login';
+import Register from './Auth/Register/register';
 import Profile from './Profile/profile';
 
 export default props => (
