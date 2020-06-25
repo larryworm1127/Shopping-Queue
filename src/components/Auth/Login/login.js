@@ -11,42 +11,26 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import withStyles from '@material-ui/core/styles/withStyles';
-import NavBar from '../navbar';
+import NavBar from '../../Nav/navbar';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { styles } from './style';
 
-
-const styles = theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-  },
-  formControlLabel: {
-    textTransform: 'uppercase',
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    color: theme.palette.secondary.main
-  },
-  formControl: {
-    width: '100%',
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-});
 
 class Login extends React.Component {
+
+  state = {
+    username: '',
+    password: '',
+    loginAs: 1
+  };
+
+  handleFormField = (field, event) => {
+    this.setState({
+      [field]: event.target.value
+    });
+  };
 
   render() {
     const { classes } = this.props;
@@ -77,6 +61,9 @@ class Login extends React.Component {
                 name="username"
                 autoComplete="username"
                 autoFocus
+                onChange={(event) => {
+                  this.handleFormField('username', event);
+                }}
               />
 
               <TextField
@@ -89,6 +76,9 @@ class Login extends React.Component {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(event) => {
+                  this.handleFormField('password', event);
+                }}
               />
 
               <Typography className={classes.formControlLabel}>
@@ -99,7 +89,12 @@ class Login extends React.Component {
                 variant="outlined"
                 className={classes.formControl}
               >
-                <Select>
+                <Select
+                  value={this.state.loginAs}
+                  onChange={(event) => {
+                    this.handleFormField('loginAs', event);
+                  }}
+                >
                   <MenuItem value={1}>Shopper</MenuItem>
                   <MenuItem value={2}>Store Owner</MenuItem>
                   <MenuItem value={3}>Admin</MenuItem>

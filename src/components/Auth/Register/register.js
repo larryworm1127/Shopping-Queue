@@ -8,53 +8,13 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AccountDetail from './accountDetail';
 import withStyles from '@material-ui/core/styles/withStyles';
-import NavBar from '../navbar';
+import NavBar from '../../Nav/navbar';
 import Link from '@material-ui/core/Link';
 import ShopperProfile from './shopperProfile';
 import OwnerProfile from './ownerProfile';
 import { Redirect } from 'react-router-dom';
+import { styles } from './style';
 
-
-const styles = theme => ({
-  appBar: {
-    position: 'relative',
-  },
-  layout: {
-    width: 'auto',
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
-  paper: {
-    marginTop: theme.spacing(6),
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(4),
-  },
-  stepper: {
-    padding: theme.spacing(3, 0, 5),
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
-  },
-  accountDetailFormControlLabel: {
-    textTransform: 'uppercase',
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    color: theme.palette.secondary.main
-  },
-  accountDetailFormControl: {
-    width: '100%',
-  },
-});
 
 const steps = ['Account Details', 'Profile Details'];
 
@@ -62,7 +22,29 @@ class Register extends React.Component {
   state = {
     activeStep: 0,
     setActiveStep: 0,
-    registerFor: 1
+    // account info states
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    registerFor: 1,
+    // shopper profile states
+    firstName: '',
+    lastName: '',
+    address: '',
+    // shop owner profile states
+    storeName: '',
+    location: '',
+    customerLimit: '',
+    openTime: '',
+    closeTime: '',
+    shoppingTimeLimit: ''
+  };
+
+  handleFormField = (field, event) => {
+    this.setState({
+      [field]: event.target.value
+    });
   };
 
   getStepContent = (step) => {
@@ -72,7 +54,7 @@ class Register extends React.Component {
       case 0:
         return (
           <AccountDetail
-            handleRegisterFor={this.handleRegisterFor}
+            handleFormField={this.handleFormField}
             registerFor={this.state.registerFor}
             classes={classes}
           />
@@ -80,21 +62,15 @@ class Register extends React.Component {
       case 1:
         switch (this.state.registerFor) {
           case 1:
-            return <ShopperProfile/>;
+            return <ShopperProfile handleFormField={this.handleFormField}/>;
           case 2:
-            return <OwnerProfile/>;
+            return <OwnerProfile handleFormField={this.handleFormField}/>;
           default:
             return <Redirect to={{ pathname: '/login' }}/>;
         }
       default:
         return <Redirect to={{ pathname: '/login' }}/>;
     }
-  };
-
-  handleRegisterFor = (event) => {
-    this.setState({
-      registerFor: event.target.value
-    });
   };
 
   handleNext = () => {

@@ -6,7 +6,7 @@ import React from "react";
 import Header from "./../Header";
 import StudentList from "./../StudentList";
 import StudentForm from "./../StudentForm";
-import NavBar from "../navbar";
+import NavBar from "../Nav/navbar";
 
 // Importing utils/required methods
 import { addStudent } from "../../utils/queue";

@@ -13,7 +13,7 @@ class AccountDetail extends React.Component {
     const {
       classes,
       registerFor,
-      handleRegisterFor
+      handleFormField
     } = this.props;
 
     return (
@@ -30,6 +30,9 @@ class AccountDetail extends React.Component {
               label="Username"
               fullWidth
               autoComplete="username"
+              onChange={(event) => {
+                handleFormField('username', event);
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -41,6 +44,9 @@ class AccountDetail extends React.Component {
               type="email"
               fullWidth
               autoComplete="email"
+              onChange={(event) => {
+                handleFormField('email', event);
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -52,6 +58,9 @@ class AccountDetail extends React.Component {
               type="password"
               fullWidth
               autoComplete="password"
+              onChange={(event) => {
+                handleFormField('password', event);
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -63,6 +72,9 @@ class AccountDetail extends React.Component {
               type="password"
               fullWidth
               autoComplete="confirm-password"
+              onChange={(event) => {
+                handleFormField('confirmPassword', event);
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -73,7 +85,9 @@ class AccountDetail extends React.Component {
             <FormControl className={classes.accountDetailFormControl}>
               <Select
                 value={registerFor}
-                onChange={handleRegisterFor}
+                onChange={(event) => {
+                  handleFormField('registerFor', event);
+                }}
                 displayEmpty={true}
               >
                 <MenuItem value={1}>Shopper</MenuItem>
