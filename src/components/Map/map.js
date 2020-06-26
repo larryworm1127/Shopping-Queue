@@ -1,14 +1,23 @@
 import React from 'react';
+import NavBar from '../Nav/navbar';
+import { withRouter } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 class Map extends React.Component {
 
   render() {
-    return (
-      <div>
+    const {
+      location
+    } = this.props;
 
-      </div>
+    return (
+      <React.Fragment>
+        <NavBar currentPath={location.pathname}/>
+        <CssBaseline/>
+      </React.Fragment>
     );
   }
 }
-export default Map;
+
+export default withRouter(Map);
