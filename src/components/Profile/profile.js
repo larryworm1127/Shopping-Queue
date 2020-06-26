@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import SearchHistory from "./searchHistory.js"
+import QueueHistory from "./queueHistory.js"
 
 class Profile extends React.Component {
 
@@ -23,11 +24,11 @@ class Profile extends React.Component {
   profileSettings = () => {
     switch(this.state.setting) {
       case 0:
-        return <SearchHistory text="K"></SearchHistory>;
+        return <SearchHistory></SearchHistory>;
       case 1:
-        return <SearchHistory text="L"></SearchHistory>;
+        return <SearchHistory></SearchHistory>;
       case 2:
-        return <SearchHistory text="M"></SearchHistory>;
+        return <QueueHistory></QueueHistory>;
     };
   }
 
@@ -50,14 +51,14 @@ class Profile extends React.Component {
                   <Grid item>
                     <Button onClick={() => this.setSetting(1)}>
                       <Link>
-                        Account History
+                        Search History
                       </Link>
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button onClick={() => this.setSetting(2)}>
                       <Link>
-                        Privacy Settings
+                        Queue History
                       </Link>
                     </Button>
                   </Grid>
