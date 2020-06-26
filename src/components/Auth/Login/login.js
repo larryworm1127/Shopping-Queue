@@ -11,13 +11,11 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import withStyles from '@material-ui/core/styles/withStyles';
 import NavBar from '../../Nav/navbar';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import { styles } from './style';
 import { loginVerify } from '../../../utils/verifyAuth';
 import { Redirect } from 'react-router-dom';
 import FormTextField from '../formTextField';
+import FormSelectField from '../formSelectField';
 
 
 class Login extends React.Component {
@@ -42,6 +40,7 @@ class Login extends React.Component {
   handleLoginSubmit = (event) => {
     event.preventDefault();
     const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
+    console.log(verify);
     if (verify === true) {
       this.setState({
         loggedIn: true
@@ -86,34 +85,24 @@ class Login extends React.Component {
                 margin="normal"
                 name="password"
                 label="Password"
+                type="password"
+                errorMessage={this.state.errorMessage}
                 displayError={this.state.displayError}
                 handleFormField={this.handleFormField}
               />
 
-              <Typography className={classes.formControlLabel}>
-                Login as
-              </Typography>
-
-              <FormControl
+              <FormSelectField
+                name="loginAs"
+                label="Login As"
                 variant="outlined"
-                className={classes.formControl}
-              >
-                <Select
-                  value={this.state.loginAs}
-                  onChange={(event) => {
-                    this.handleFormField('loginAs', event);
-                  }}
-                >
-                  <MenuItem value={1}>Shopper</MenuItem>
-                  <MenuItem value={2}>Store Owner</MenuItem>
-                  <MenuItem value={3}>Admin</MenuItem>
-                </Select>
-              </FormControl>
+                formControlLabelClass={classes.formControlLabel}
+                formControlClass={classes.formControl}
+                value={this.state.loginAs}
+                handleFormField={this.handleFormField}
+              />
 
               <FormControlLabel
-                control={
-                  <Checkbox value="remember" color="primary"/>
-                }
+                control={<Checkbox value="remember" color="primary"/>}
                 label="Remember me"
               />
 

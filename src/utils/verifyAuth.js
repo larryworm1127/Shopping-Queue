@@ -18,10 +18,10 @@ const adminCredentials = [
 const loginVerifyHelper = (username, password, credList) => {
   for (let index = 0; index < credList.length; index++) {
     if (credList[index].username === username) {
-      return credList[index].password === password;
+      return (credList[index].password === password) ? true : 'Incorrect username or password!';
     }
   }
-  return 'Incorrect username or password!';
+  return 'User is not registered!';
 };
 
 export const loginVerify = (username, password, accountType) => {

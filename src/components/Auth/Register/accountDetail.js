@@ -1,10 +1,8 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import FormTextField from '../formTextField';
+import FormSelectField from '../formSelectField';
 
 
 class AccountDetail extends React.Component {
@@ -52,25 +50,15 @@ class AccountDetail extends React.Component {
             handleFormField={handleFormField}
             errorMessage={errorMessage}
           />
-          <Grid item xs={12}>
-            <Typography className={classes.accountDetailFormControlLabel}>
-              Register as
-            </Typography>
 
-            <FormControl className={classes.accountDetailFormControl}>
-              <Select
-                value={registerFor}
-                onChange={(event) => {
-                  handleFormField('registerFor', event);
-                }}
-                displayEmpty={true}
-              >
-                <MenuItem value={1}>Shopper</MenuItem>
-                <MenuItem value={2}>Store Owner</MenuItem>
-                <MenuItem value={3}>Admin</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
+          <FormSelectField
+            name="registerFor"
+            label="Register For"
+            formControlLabelClass={classes.accountDetailFormControlLabel}
+            formControlClass={classes.accountDetailFormControl}
+            value={registerFor}
+            handleFormField={handleFormField}
+          />
         </Grid>
       </React.Fragment>
     );
