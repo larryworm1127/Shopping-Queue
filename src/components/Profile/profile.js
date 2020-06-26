@@ -1,13 +1,13 @@
-import React from "react";
-import NavBar from "../Nav/navbar";
+import React from 'react';
+import NavBar from '../Nav/navbar';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
-import SearchHistory from "./searchHistory.js";
-import QueueHistory from "./queueHistory.js";
-import UserProfile from "./userProfile.js";
+import SearchHistory from './searchHistory.js';
+import QueueHistory from './queueHistory.js';
+import UserProfile from './userProfile.js';
 
 
 class Profile extends React.Component {
@@ -16,23 +16,23 @@ class Profile extends React.Component {
     super(props);
     this.state = {
       setting: 0,
-    }
+    };
   }
 
   setSetting = (val) => {
-    this.setState({setting: val});
-  }
+    this.setState({ setting: val });
+  };
 
   profileSettings = () => {
-    switch(this.state.setting) {
+    switch (this.state.setting) {
       case 0:
-        return <UserProfile></UserProfile>;
+        return <UserProfile/>;
       case 1:
-        return <SearchHistory></SearchHistory>;
+        return <SearchHistory/>;
       case 2:
-        return <QueueHistory></QueueHistory>;
-    };
-  }
+        return <QueueHistory/>;
+    }
+  };
 
   render() {
     return (
@@ -44,11 +44,11 @@ class Profile extends React.Component {
               <CardContent>
                 <Grid container direction="column" alignItems="flex-start" alignContent="flex-start">
                   <Grid item>
-                      <Button onClick={() => this.setSetting(0)}>
-                        <Link>
-                          Profile
-                        </Link>
-                      </Button>
+                    <Button onClick={() => this.setSetting(0)}>
+                      <Link>
+                        Profile
+                      </Link>
+                    </Button>
                   </Grid>
                   <Grid item>
                     <Button onClick={() => this.setSetting(1)}>
@@ -65,15 +65,15 @@ class Profile extends React.Component {
                     </Button>
                   </Grid>
                 </Grid>
-              </CardContent> 
+              </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={8}> 
+          <Grid item xs={8}>
             {this.profileSettings()}
           </Grid>
         </Grid>
-      </React.Fragment> 
-    )
+      </React.Fragment>
+    );
   }
 }
 
