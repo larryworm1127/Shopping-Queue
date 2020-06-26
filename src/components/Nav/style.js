@@ -4,7 +4,8 @@ export const styles = theme => ({
     position: 'relative',
     boxShadow: 'none',
     borderBottom: `1px solid ${theme.palette.grey['100']}`,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    zIndex: theme.zIndex.drawer + 1
   },
   inline: {
     display: 'inline'
@@ -19,7 +20,7 @@ export const styles = theme => ({
   },
   productLogo: {
     display: 'inline-block',
-    borderLeft: `1px solid ${theme.palette.grey['A100']}`,
+    // borderLeft: `1px solid ${theme.palette.grey['A100']}`,
     marginLeft: 32,
     paddingLeft: 24,
     [theme.breakpoints.up('md')]: {

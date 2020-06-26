@@ -9,8 +9,6 @@ import Tab from '@material-ui/core/Tab';
 import Menu from '../../utils/menu';
 import { styles } from './style';
 
-// Temp React logo
-const logo = require('../../logo.svg');
 
 // NavBar component class
 class NavBar extends React.Component {
@@ -56,7 +54,6 @@ class NavBar extends React.Component {
           <Grid item xs={12} className={classes.flex}>
             <div className={classes.inline}>
               <Typography variant="h6" color="inherit" noWrap>
-                <img width={20} src={logo} alt="React logo"/>
                 <span className={classes.tagLine}>Shopping Queue</span>
               </Typography>
             </div>
