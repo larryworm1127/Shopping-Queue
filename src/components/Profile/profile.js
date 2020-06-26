@@ -1,16 +1,58 @@
 import React from 'react';
 import NavBar from '../Nav/navbar';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Link from '@material-ui/core/Link';
-import Button from '@material-ui/core/Button';
 import SearchHistory from './searchHistory.js';
 import QueueHistory from './queueHistory.js';
 import UserProfile from './userProfile.js';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import PersonIcon from '@material-ui/icons/Person';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import HistoryIcon from '@material-ui/icons/History';
+import ListItemText from '@material-ui/core/ListItemText';
+import Container from '@material-ui/core/Container';
 
 
-const tabs = ['Profile', 'Search History', 'Queue History'];
+const tabs = [
+  'Profile',
+  'Search History',
+  'Queue History'
+];
+
+const tabIcons = [
+  <PersonIcon/>,
+  <HistoryIcon/>,
+  <ShoppingCartIcon/>
+];
+
+const drawerWidth = 240;
+const styles = (theme) => ({
+  root: {
+    display: 'flex',
+  },
+  appBar: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3),
+  },
+});
 
 class Profile extends React.Component {
 
@@ -36,34 +78,39 @@ class Profile extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
+
     return (
       <React.Fragment>
+        <CssBaseline/>
         <NavBar currentPath={this.props.location.pathname}/>
-        <Grid container direction="row" justify="center" alignItems="baseline" spacing={3}>
-          <Grid item xs={2}>
-            <Card>
-              <CardContent>
-                <Grid container direction="column" alignItems="flex-start" alignContent="flex-start">
-                  {tabs.map((label) => (
-                    <Grid item key={label}>
-                      <Button onClick={() => this.setSetting(tabs.indexOf(label))}>
-                        <Link>
-                          {label}
-                        </Link>
-                      </Button>
-                    </Grid>
-                  ))}
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={8}>
-            {this.profileSettings()}
-          </Grid>
-        </Grid>
+
+        <Drawer
+          className={classes.drawer}
+          variant="permanent"
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          anchor="left"
+        >
+          <div className={classes.toolbar}/>
+          <Divider/>
+          <List>
+            {tabs.map((label, index) => (
+              <ListItem button key={label} onClick={() => this.setSetting(tabs.indexOf(label))}>
+                <ListItemIcon>{tabIcons[index]}</ListItemIcon>
+                <ListItemText primary={label}/>
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+
+        <Container>
+          {this.profileSettings()}
+        </Container>
       </React.Fragment>
     );
   }
 }
 
-export default (Profile);
+export default withStyles(styles)(Profile);
