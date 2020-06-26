@@ -5,19 +5,23 @@ import Queue from './Queue';
 import Login from './Auth/Login/login';
 import Register from './Auth/Register/register';
 import Profile from './Profile/profile';
+import Map from './Map/map';
 
 export default props => {
   const {
     loggedIn,
     loginUser,
     logoutUser
-  } = props
+  } = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path='/'>
           <Home/>
+        </Route>
+        <Route exact path='/map'>
+          <Map/>
         </Route>
         <Route exact path='/queue'>
           <Queue/>
