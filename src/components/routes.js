@@ -42,7 +42,7 @@ export default props => {
 }
 
 
-const NoMatch = props => {
+const NoMatch = () => {
   let location = useLocation();
 
   return (
