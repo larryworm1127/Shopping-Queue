@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../navbar";
+import NavBar from "../Nav/navbar";
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import SearchHistory from "./searchHistory.js";
 import QueueHistory from "./queueHistory.js";
 import UserProfile from "./userProfile.js";
+
 
 class Profile extends React.Component {
 
