@@ -10,14 +10,13 @@ import QueueHistory from './queueHistory.js';
 import UserProfile from './userProfile.js';
 
 
+const tabs = ['Profile', 'Search History', 'Queue History'];
+
 class Profile extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      setting: 0,
-    };
-  }
+  state = {
+    setting: 0,
+  };
 
   setSetting = (val) => {
     this.setState({ setting: val });
@@ -31,6 +30,8 @@ class Profile extends React.Component {
         return <SearchHistory/>;
       case 2:
         return <QueueHistory/>;
+      default:
+        return Error('Unknown case');
     }
   };
 
@@ -43,27 +44,16 @@ class Profile extends React.Component {
             <Card>
               <CardContent>
                 <Grid container direction="column" alignItems="flex-start" alignContent="flex-start">
-                  <Grid item>
-                    <Button onClick={() => this.setSetting(0)}>
-                      <Link>
-                        Profile
-                      </Link>
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button onClick={() => this.setSetting(1)}>
-                      <Link>
-                        Search History
-                      </Link>
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button onClick={() => this.setSetting(2)}>
-                      <Link>
-                        Queue History
-                      </Link>
-                    </Button>
-                  </Grid>
+                  {tabs.map((label) => (
+                    <Grid item>
+                      {console.log(tabs.indexOf(label))}
+                      <Button onClick={() => this.setSetting(tabs.indexOf(label))}>
+                        <Link>
+                          {label}
+                        </Link>
+                      </Button>
+                    </Grid>
+                  ))}
                 </Grid>
               </CardContent>
             </Card>
