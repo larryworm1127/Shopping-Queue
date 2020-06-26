@@ -14,6 +14,7 @@ import ShopperProfile from './shopperProfile';
 import OwnerProfile from './ownerProfile';
 import { Redirect } from 'react-router-dom';
 import { styles } from './style';
+import { registerVerify } from '../../../utils/verifyAuth';
 
 
 const steps = ['Account Details', 'Profile Details'];
@@ -21,7 +22,6 @@ const steps = ['Account Details', 'Profile Details'];
 class Register extends React.Component {
   state = {
     activeStep: 0,
-    setActiveStep: 0,
     // account info states
     username: '',
     email: '',
@@ -38,13 +38,55 @@ class Register extends React.Component {
     customerLimit: '',
     openTime: '',
     closeTime: '',
-    shoppingTimeLimit: ''
+    shoppingTimeLimit: '',
+    // error reporting states
+    displayError: false,
+    errorMessage: ''
   };
 
   handleFormField = (field, event) => {
     this.setState({
-      [field]: event.target.value
+      [field]: event.target.value,
+      displayError: false,
+      errorMessage: ''
     });
+  };
+
+  handleRegisterForm = (event) => {
+    event.preventDefault();
+    switch (this.state.activeStep) {
+      case 0:
+        return this.handleAccountDetail();
+      case 1:
+        return (this.state.registerFor === 1) ? this.handleShopperProfile() : this.handleOwnerProfile();
+      default:
+        return Error('Unknown step');
+    }
+  };
+
+  handleAccountDetail = () => {
+    const verify = registerVerify(
+      this.state.username,
+      this.state.password,
+      this.state.confirmPassword,
+      this.state.registerFor
+    );
+    if (verify === true) {
+      this.handleNext();
+    } else {
+      this.setState({
+        displayError: true,
+        errorMessage: verify
+      });
+    }
+  };
+
+  handleOwnerProfile = () => {
+    this.handleNext();
+  };
+
+  handleShopperProfile = () => {
+    this.handleNext();
   };
 
   getStepContent = (step) => {
@@ -57,14 +99,22 @@ class Register extends React.Component {
             handleFormField={this.handleFormField}
             registerFor={this.state.registerFor}
             classes={classes}
+            displayError={this.state.displayError}
+            errorMessage={this.state.errorMessage}
           />
         );
       case 1:
         switch (this.state.registerFor) {
           case 1:
-            return <ShopperProfile handleFormField={this.handleFormField}/>;
+            return (
+              <ShopperProfile
+                handleFormField={this.handleFormField}
+              />);
           case 2:
-            return <OwnerProfile handleFormField={this.handleFormField}/>;
+            return (
+              <OwnerProfile
+                handleFormField={this.handleFormField}
+              />);
           default:
             return <Redirect to={{ pathname: '/login' }}/>;
         }
@@ -97,7 +147,7 @@ class Register extends React.Component {
         <CssBaseline/>
         <NavBar currentPath={this.props.location.pathname}/>
 
-        <form className={classes.layout}>
+        <div className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
               Register
@@ -110,29 +160,31 @@ class Register extends React.Component {
               ))}
             </Stepper>
 
-            {this.getStepContent(this.state.activeStep)}
+            <form onSubmit={this.handleRegisterForm}>
+              {this.getStepContent(this.state.activeStep)}
 
-            <div className={classes.buttons}>
-              {this.state.activeStep !== 0 && (
-                <Button onClick={this.handleBack} className={classes.button}>
-                  Back
+              <div className={classes.buttons}>
+                {this.state.activeStep !== 0 && (
+                  <Button onClick={this.handleBack} className={classes.button}>
+                    Back
+                  </Button>
+                )}
+                <Button
+                  type='submit'
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  Next
                 </Button>
-              )}
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.handleNext}
-                className={classes.button}
-              >
-                {this.state.activeStep === steps.length - 1 ? 'Register' : 'Next'}
-              </Button>
-            </div>
+              </div>
+            </form>
           </Paper>
 
           <Link href="/login" variant="body2">
             Already have an account? Sign in
           </Link>
-        </form>
+        </div>
       </React.Fragment>
     );
   }

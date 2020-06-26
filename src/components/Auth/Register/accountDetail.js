@@ -1,10 +1,8 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
+import FormTextField from '../formTextField';
+import FormSelectField from '../formSelectField';
 
 
 class AccountDetail extends React.Component {
@@ -13,7 +11,9 @@ class AccountDetail extends React.Component {
     const {
       classes,
       registerFor,
-      handleFormField
+      handleFormField,
+      displayError,
+      errorMessage
     } = this.props;
 
     return (
@@ -22,80 +22,43 @@ class AccountDetail extends React.Component {
           Register account
         </Typography>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="username"
-              name="username"
-              label="Username"
-              fullWidth
-              autoComplete="username"
-              onChange={(event) => {
-                handleFormField('username', event);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="email"
-              name="email"
-              label="Email Address"
-              type="email"
-              fullWidth
-              autoComplete="email"
-              onChange={(event) => {
-                handleFormField('email', event);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="password"
-              name="password"
-              label="Password"
-              type="password"
-              fullWidth
-              autoComplete="password"
-              onChange={(event) => {
-                handleFormField('password', event);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="confirm-password"
-              name="confirm-password"
-              label="Confirm Password"
-              type="password"
-              fullWidth
-              autoComplete="confirm-password"
-              onChange={(event) => {
-                handleFormField('confirmPassword', event);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Typography className={classes.accountDetailFormControlLabel}>
-              Register as
-            </Typography>
+          <FormTextField
+            name="username"
+            label="Username"
+            displayError={displayError}
+            handleFormField={handleFormField}
+          />
+          <FormTextField
+            name="email"
+            label="Email Address"
+            type="email"
+            displayError={displayError}
+            handleFormField={handleFormField}
+          />
+          <FormTextField
+            name="password"
+            label="Password"
+            type="password"
+            displayError={displayError}
+            handleFormField={handleFormField}
+          />
+          <FormTextField
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            displayError={displayError}
+            handleFormField={handleFormField}
+            errorMessage={errorMessage}
+          />
 
-            <FormControl className={classes.accountDetailFormControl}>
-              <Select
-                value={registerFor}
-                onChange={(event) => {
-                  handleFormField('registerFor', event);
-                }}
-                displayEmpty={true}
-              >
-                <MenuItem value={1}>Shopper</MenuItem>
-                <MenuItem value={2}>Store Owner</MenuItem>
-                <MenuItem value={3}>Admin</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
+          <FormSelectField
+            name="registerFor"
+            label="Register For"
+            formControlLabelClass={classes.accountDetailFormControlLabel}
+            formControlClass={classes.accountDetailFormControl}
+            value={registerFor}
+            handleFormField={handleFormField}
+          />
         </Grid>
       </React.Fragment>
     );

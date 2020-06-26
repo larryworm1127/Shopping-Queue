@@ -2,7 +2,6 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -12,10 +11,11 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import withStyles from '@material-ui/core/styles/withStyles';
 import NavBar from '../../Nav/navbar';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import { styles } from './style';
+import { loginVerify } from '../../../utils/verifyAuth';
+import { Redirect } from 'react-router-dom';
+import FormTextField from '../formTextField';
+import FormSelectField from '../formSelectField';
 
 
 class Login extends React.Component {
@@ -23,19 +23,40 @@ class Login extends React.Component {
   state = {
     username: '',
     password: '',
-    loginAs: 1
+    loginAs: 1,
+    loggedIn: false,
+    displayError: false,
+    errorMessage: ''
   };
 
   handleFormField = (field, event) => {
     this.setState({
-      [field]: event.target.value
+      [field]: event.target.value,
+      displayError: false,
+      errorMessage: ''
     });
+  };
+
+  handleLoginSubmit = (event) => {
+    event.preventDefault();
+    const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
+    console.log(verify);
+    if (verify === true) {
+      this.setState({
+        loggedIn: true
+      });
+    } else {
+      this.setState({
+        displayError: true,
+        errorMessage: verify
+      });
+    }
   };
 
   render() {
     const { classes } = this.props;
 
-    return (
+    return this.state.loggedIn ? (<Redirect to={{ pathname: '/' }}/>) : (
       <React.Fragment>
         <NavBar currentPath={this.props.location.pathname}/>
 
@@ -50,61 +71,38 @@ class Login extends React.Component {
               Sign in
             </Typography>
 
-            <form className={classes.form}>
-              <TextField
+            <form className={classes.form} onSubmit={this.handleLoginSubmit}>
+              <FormTextField
                 variant="outlined"
                 margin="normal"
-                required
-                fullWidth
-                id="username"
-                label="Username"
                 name="username"
-                autoComplete="username"
-                autoFocus
-                onChange={(event) => {
-                  this.handleFormField('username', event);
-                }}
+                label="Username"
+                displayError={this.state.displayError}
+                handleFormField={this.handleFormField}
               />
-
-              <TextField
+              <FormTextField
                 variant="outlined"
                 margin="normal"
-                required
-                fullWidth
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={(event) => {
-                  this.handleFormField('password', event);
-                }}
+                errorMessage={this.state.errorMessage}
+                displayError={this.state.displayError}
+                handleFormField={this.handleFormField}
               />
 
-              <Typography className={classes.formControlLabel}>
-                Login as
-              </Typography>
-
-              <FormControl
+              <FormSelectField
+                name="loginAs"
+                label="Login As"
                 variant="outlined"
-                className={classes.formControl}
-              >
-                <Select
-                  value={this.state.loginAs}
-                  onChange={(event) => {
-                    this.handleFormField('loginAs', event);
-                  }}
-                >
-                  <MenuItem value={1}>Shopper</MenuItem>
-                  <MenuItem value={2}>Store Owner</MenuItem>
-                  <MenuItem value={3}>Admin</MenuItem>
-                </Select>
-              </FormControl>
+                formControlLabelClass={classes.formControlLabel}
+                formControlClass={classes.formControl}
+                value={this.state.loginAs}
+                handleFormField={this.handleFormField}
+              />
 
               <FormControlLabel
-                control={
-                  <Checkbox value="remember" color="primary"/>
-                }
+                control={<Checkbox value="remember" color="primary"/>}
                 label="Remember me"
               />
 
@@ -114,25 +112,24 @@ class Login extends React.Component {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                href='/'
               >
                 Sign In
               </Button>
-
-              <Grid container>
-                <Grid item xs>
-                  {/* implement password recovery in phase 2 */}
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="/register" variant="body2">
-                    {'Don\'t have an account? Sign Up'}
-                  </Link>
-                </Grid>
-              </Grid>
             </form>
+
+            <Grid container>
+              <Grid item xs>
+                {/* implement password recovery in phase 2 */}
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/register" variant="body2">
+                  {'Don\'t have an account? Sign Up'}
+                </Link>
+              </Grid>
+            </Grid>
           </div>
         </Container>
       </React.Fragment>
