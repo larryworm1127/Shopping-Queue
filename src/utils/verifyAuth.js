@@ -62,7 +62,6 @@ const registerVerifyHelper = (username, password, confirmPass, credList) => {
       return dupUsername;
     }
   }
-  credList.push({ username: username, password: password });
   return true;
 };
 

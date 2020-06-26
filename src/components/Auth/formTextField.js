@@ -14,7 +14,8 @@ class FormTextField extends React.Component {
       errorMessage,
       margin,
       variant,
-      defaultValue
+      defaultValue,
+      value
     } = this.props;
 
     return (
@@ -31,6 +32,7 @@ class FormTextField extends React.Component {
           error={displayError}
           helperText={errorMessage}
           defaultValue={defaultValue}
+          value={value}
           onChange={(event) => {
             handleFormField(name, event);
           }}

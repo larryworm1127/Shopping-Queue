@@ -10,6 +10,10 @@ class AccountDetail extends React.Component {
   render() {
     const {
       classes,
+      username,
+      email,
+      password,
+      confirmPassword,
       registerFor,
       handleFormField,
       displayError,
@@ -27,6 +31,7 @@ class AccountDetail extends React.Component {
             label="Username"
             displayError={displayError}
             handleFormField={handleFormField}
+            value={username}
           />
           <FormTextField
             name="email"
@@ -34,6 +39,7 @@ class AccountDetail extends React.Component {
             type="email"
             displayError={displayError}
             handleFormField={handleFormField}
+            value={email}
           />
           <FormTextField
             name="password"
@@ -41,6 +47,7 @@ class AccountDetail extends React.Component {
             type="password"
             displayError={displayError}
             handleFormField={handleFormField}
+            value={password}
           />
           <FormTextField
             name="confirmPassword"
@@ -49,6 +56,7 @@ class AccountDetail extends React.Component {
             displayError={displayError}
             handleFormField={handleFormField}
             errorMessage={errorMessage}
+            value={confirmPassword}
           />
 
           <FormSelectField
@@ -56,8 +64,8 @@ class AccountDetail extends React.Component {
             label="Register For"
             formControlLabelClass={classes.accountDetailFormControlLabel}
             formControlClass={classes.accountDetailFormControl}
-            value={registerFor}
             handleFormField={handleFormField}
+            value={registerFor}
           />
         </Grid>
       </React.Fragment>

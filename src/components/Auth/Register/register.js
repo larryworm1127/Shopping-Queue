@@ -98,6 +98,10 @@ class Register extends React.Component {
           <AccountDetail
             handleFormField={this.handleFormField}
             registerFor={this.state.registerFor}
+            username={this.state.username}
+            email={this.state.email}
+            password={this.state.password}
+            confirmPassword={this.state.confirmPassword}
             classes={classes}
             displayError={this.state.displayError}
             errorMessage={this.state.errorMessage}
