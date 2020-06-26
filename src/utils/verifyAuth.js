@@ -14,14 +14,22 @@ const adminCredentials = [
 ];
 
 
+// Error messages
+const incorrectCred = 'Incorrect username or password!';
+const notRegistered = 'User is not registered!';
+const passwordTooShot = 'Password too short! (minimum 4 characters)';
+const confirmPassFails = 'Password don\'t match';
+const dupUsername = 'Username already taken!';
+
+
 // Login
 const loginVerifyHelper = (username, password, credList) => {
   for (let index = 0; index < credList.length; index++) {
     if (credList[index].username === username) {
-      return (credList[index].password === password) ? true : 'Incorrect username or password!';
+      return (credList[index].password === password) ? true : incorrectCred;
     }
   }
-  return 'User is not registered!';
+  return notRegistered;
 };
 
 export const loginVerify = (username, password, accountType) => {
@@ -42,16 +50,16 @@ export const loginVerify = (username, password, accountType) => {
 // Register
 const registerVerifyHelper = (username, password, confirmPass, credList) => {
   if (password.length < 4) {
-    return 'Password too short! (minimum 4 characters)';
+    return passwordTooShot;
   }
 
   if (password !== confirmPass) {
-    return 'Password don\'t match';
+    return confirmPassFails;
   }
 
   for (let index = 0; index < credList.length; index++) {
     if (credList[index].username === username) {
-      return 'Username taken!';
+      return dupUsername;
     }
   }
   credList.push({ username: username, password: password });
