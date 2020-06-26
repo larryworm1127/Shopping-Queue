@@ -15,6 +15,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HistoryIcon from '@material-ui/icons/History';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
+import { withRouter } from 'react-router-dom';
 
 
 const tabs = [
@@ -113,4 +114,4 @@ class Profile extends React.Component {
   }
 }
 
-export default withStyles(styles)(Profile);
+export default withRouter(withStyles(styles)(Profile));

@@ -13,7 +13,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import NavBar from '../../Nav/navbar';
 import { styles } from './style';
 import { loginVerify } from '../../../utils/verifyAuth';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import FormTextField from '../formTextField';
 import FormSelectField from '../formSelectField';
 
@@ -24,7 +24,6 @@ class Login extends React.Component {
     username: '',
     password: '',
     loginAs: 1,
-    loggedIn: false,
     displayError: false,
     errorMessage: ''
   };
@@ -38,13 +37,12 @@ class Login extends React.Component {
   };
 
   handleLoginSubmit = (event) => {
+    const { loginUser } = this.props;
+
     event.preventDefault();
     const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
-    console.log(verify);
     if (verify === true) {
-      this.setState({
-        loggedIn: true
-      });
+      loginUser();
     } else {
       this.setState({
         displayError: true,
@@ -54,11 +52,15 @@ class Login extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      location,
+      loggedIn,
+    } = this.props;
 
-    return this.state.loggedIn ? (<Redirect to={{ pathname: '/' }}/>) : (
+    return loggedIn ? (<Redirect to={{ pathname: '/' }}/>) : (
       <React.Fragment>
-        <NavBar currentPath={this.props.location.pathname}/>
+        <NavBar currentPath={location.pathname}/>
 
         <Container component="main" maxWidth="xs">
           <CssBaseline/>
@@ -137,4 +139,4 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(styles)(Login);
+export default withRouter(withStyles(styles)(Login));

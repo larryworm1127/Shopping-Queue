@@ -6,27 +6,50 @@ import Login from './Auth/Login/login';
 import Register from './Auth/Register/register';
 import Profile from './Profile/profile';
 
-export default props => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path='/' component={Home}/>
-      <Route exact path='/queue' component={Queue}/>
-      <Route exact path='/login' component={Login}/>
-      <Route exact path='/register' component={Register}/>
-      <Route exact path='/profile' component={Profile}/>
-      <Route path='*' component={NoMatch}/>
-    </Switch>
-  </BrowserRouter>
-)
+export default props => {
+  const {
+    loggedIn,
+    loginUser,
+    logoutUser
+  } = props
+
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/'>
+          <Home/>
+        </Route>
+        <Route exact path='/queue'>
+          <Queue/>
+        </Route>
+        <Route exact path='/login'>
+          <Login
+            loggedIn={loggedIn}
+            loginUser={loginUser}
+            logoutUser={logoutUser}
+          />
+        </Route>
+        <Route exact path='/register'>
+          <Register/>
+        </Route>
+        <Route exact path='/profile'>
+          <Profile/>
+        </Route>
+        <Route path='*' component={NoMatch}/>
+      </Switch>
+    </BrowserRouter>
+  );
+}
 
 
 const NoMatch = props => {
   let location = useLocation();
 
   return (
-  <div>
-    <h3>
-      No match for <code>{location.pathname}</code>
-    </h3>
-  </div>
-)};
+    <div>
+      <h3>
+        No match for <code>{location.pathname}</code>
+      </h3>
+    </div>
+  );
+};

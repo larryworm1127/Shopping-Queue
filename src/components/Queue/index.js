@@ -11,6 +11,7 @@ import NavBar from "../Nav/navbar";
 // Importing utils/required methods
 import { addStudent } from "../../utils/queue";
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { withRouter } from 'react-router-dom';
 
 class Queue extends React.Component {
   // React 'state'.
@@ -71,4 +72,4 @@ class Queue extends React.Component {
   }
 }
 
-export default Queue;
+export default withRouter(Queue);

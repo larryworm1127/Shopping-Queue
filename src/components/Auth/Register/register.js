@@ -12,7 +12,7 @@ import NavBar from '../../Nav/navbar';
 import Link from '@material-ui/core/Link';
 import ShopperProfile from './shopperProfile';
 import OwnerProfile from './ownerProfile';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { styles } from './style';
 import { registerVerify } from '../../../utils/verifyAuth';
 
@@ -194,4 +194,4 @@ class Register extends React.Component {
   }
 }
 
-export default withStyles(styles)(Register);
+export default withRouter(withStyles(styles)(Register));

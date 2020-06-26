@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBar from './Nav/navbar';
+import { withRouter } from 'react-router-dom';
 
 /* Component for the Home page */
 class Home extends React.Component {
@@ -10,4 +11,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);
