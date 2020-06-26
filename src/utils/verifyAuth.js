@@ -40,25 +40,33 @@ export const loginVerify = (username, password, accountType) => {
 
 
 // Register
-const registerVerifyHelper = (username, password, credList) => {
+const registerVerifyHelper = (username, password, confirmPass, credList) => {
+  if (password.length < 4) {
+    return 'Password too short! (minimum 4 characters)';
+  }
+
+  if (password !== confirmPass) {
+    return 'Password don\'t match';
+  }
+
   for (let index = 0; index < credList.length; index++) {
     if (credList[index].username === username) {
-      return false;
+      return 'Username taken!';
     }
   }
   credList.push({ username: username, password: password });
   return true;
 };
 
-export const registerVerify = (username, password, accountType) => {
+export const registerVerify = (username, password, confirmPass, accountType) => {
   // Implement database access and query for user credential verification here.
   switch (accountType) {
     case 1:
-      return registerVerifyHelper(username, password, shopperCredentials);
+      return registerVerifyHelper(username, password, confirmPass, shopperCredentials);
     case 2:
-      return registerVerifyHelper(username, password, shopOwnerCredentials);
+      return registerVerifyHelper(username, password, confirmPass, shopOwnerCredentials);
     case 3:
-      return registerVerifyHelper(username, password, adminCredentials);
+      return registerVerifyHelper(username, password, confirmPass, adminCredentials);
     default:
       return Error('Unknown account type');
   }

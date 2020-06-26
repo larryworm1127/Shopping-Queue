@@ -13,7 +13,9 @@ class AccountDetail extends React.Component {
     const {
       classes,
       registerFor,
-      handleFormField
+      handleFormField,
+      displayError,
+      errorMessage
     } = this.props;
 
     return (
@@ -29,6 +31,7 @@ class AccountDetail extends React.Component {
               name="username"
               label="Username"
               fullWidth
+              error={displayError}
               autoComplete="username"
               onChange={(event) => {
                 handleFormField('username', event);
@@ -43,6 +46,7 @@ class AccountDetail extends React.Component {
               label="Email Address"
               type="email"
               fullWidth
+              error={displayError}
               autoComplete="email"
               onChange={(event) => {
                 handleFormField('email', event);
@@ -57,7 +61,8 @@ class AccountDetail extends React.Component {
               label="Password"
               type="password"
               fullWidth
-              autoComplete="password"
+              error={displayError}
+              autoComplete="current-password"
               onChange={(event) => {
                 handleFormField('password', event);
               }}
@@ -71,7 +76,9 @@ class AccountDetail extends React.Component {
               label="Confirm Password"
               type="password"
               fullWidth
-              autoComplete="confirm-password"
+              error={displayError}
+              helperText={errorMessage}
+              autoComplete="corrent-password"
               onChange={(event) => {
                 handleFormField('confirmPassword', event);
               }}
