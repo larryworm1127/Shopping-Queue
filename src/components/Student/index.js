@@ -57,11 +57,21 @@ class Student extends React.Component {
 
         {/* Show how long the student has been waiting for */}
         <TableCell component="th" scope="row">
+        {/*
           Waiting for: {Math.floor(this.state.seconds / 60)} minutes{" "}
           {this.state.seconds % 60} seconds.
+        */}
+        {student.date}
         </TableCell>
 
         <TableCell component="th" scope="row">
+          <Button
+            variant="contained"
+            color="secondary"
+            >
+            details
+          </Button>
+
           <Button
             variant="contained"
             color="secondary"
@@ -71,8 +81,9 @@ class Student extends React.Component {
               //() => this.removeStudent(student) // this also works
             }
           >
-            remove
+            leave queue
           </Button>
+
         </TableCell>
       </TableRow>
     );

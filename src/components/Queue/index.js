@@ -19,8 +19,8 @@ class Queue extends React.Component {
     studentName: "",
     studentCourse: "",
     students: [
-      { name: "James", course: "CSC108" },
-      { name: "Kate", course: "CSC309" }
+      { name: "Loblaws", course: "13", date: "Friday, June 26th @ 7pm" },
+      { name: "Fortinos", course: "27", date: "Monday, June 29th @ 10am"  }
     ]
   };
 
@@ -51,11 +51,11 @@ class Queue extends React.Component {
         <NavBar currentPath={this.props.location.pathname}/>
         {/* Header component with text props. */}
         <Header
-          title="Student Help Queue Summer 2020"
-          subtitle="Below are the next students in line for help."
+          title="My Queues"
+          subtitle="Below are the grocery stores you've queued for."
         />
 
-        {/* Student Form component with text and function props. */}
+        {/* Student Form component with text and function props.
         <StudentForm
           studentName={this.state.studentName}
           studentCourse={this.state.studentCourse}
@@ -63,7 +63,7 @@ class Queue extends React.Component {
           handleChange={this.handleInputChange}
           addStudent={() => addStudent(this)}
         />
-
+        */}
         {/* The Student List */}
         <StudentList students={this.state.students} queueComponent={this}/>
       </div>

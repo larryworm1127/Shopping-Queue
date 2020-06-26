@@ -2,6 +2,8 @@ import React from "react";
 import { uid } from "react-uid";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
 
 import Student from "./../Student";
 
@@ -16,7 +18,22 @@ class StudentList extends React.Component {
        student list and make an <li> for each one. */
     return (
       <Table className="student-list">
+        {/* Header of table*/}
         <TableBody>
+            <TableRow component="th" scope="row">
+                <TableCell component="th" scope="row">
+                    {<strong>Grocery store</strong>}
+                </TableCell>
+
+                <TableCell component="th" scope="row">
+                    {<strong>Position in queue</strong>}
+                </TableCell>
+
+                <TableCell component="th" scope="row">
+                    {<strong>Arrive by</strong>}
+                </TableCell>
+            </TableRow>
+         { /* Grocery stores that user is in queue for */}
           {students.map(student => (
             <Student
               key={uid(
