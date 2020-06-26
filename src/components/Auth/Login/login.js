@@ -2,7 +2,6 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -18,6 +17,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { styles } from './style';
 import { loginVerify } from '../../../utils/verifyAuth';
 import { Redirect } from 'react-router-dom';
+import FormTextField from '../formTextField';
 
 
 class Login extends React.Component {
@@ -73,37 +73,21 @@ class Login extends React.Component {
             </Typography>
 
             <form className={classes.form} onSubmit={this.handleLoginSubmit}>
-              <TextField
+              <FormTextField
                 variant="outlined"
                 margin="normal"
-                required
-                fullWidth
-                error={this.state.displayError}
-                id="username"
-                label="Username"
                 name="username"
-                autoComplete="username"
-                autoFocus
-                onChange={(event) => {
-                  this.handleFormField('username', event);
-                }}
+                label="Username"
+                displayError={this.state.displayError}
+                handleFormField={this.handleFormField}
               />
-
-              <TextField
+              <FormTextField
                 variant="outlined"
                 margin="normal"
-                required
-                fullWidth
-                error={this.state.displayError}
-                helperText={this.state.errorMessage}
                 name="password"
                 label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={(event) => {
-                  this.handleFormField('password', event);
-                }}
+                displayError={this.state.displayError}
+                handleFormField={this.handleFormField}
               />
 
               <Typography className={classes.formControlLabel}>

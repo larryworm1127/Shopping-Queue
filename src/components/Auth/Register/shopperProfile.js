@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+import FormTextField from '../formTextField';
 
 class ShopperProfile extends React.Component {
 
@@ -14,45 +14,21 @@ class ShopperProfile extends React.Component {
           Profile details
         </Typography>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="firstName"
-              name="firstName"
-              label="First name"
-              fullWidth
-              autoComplete="given-name"
-              onChange={(event) => {
-                handleFormField('firstName', event);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="lastName"
-              name="lastName"
-              label="Last name"
-              fullWidth
-              autoComplete="family-name"
-              onChange={(event) => {
-                handleFormField('lastName', event);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="address"
-              name="address"
-              label="Address"
-              fullWidth
-              autoComplete="address"
-              onChange={(event) => {
-                handleFormField('address', event);
-              }}
-            />
-          </Grid>
+          <FormTextField
+            name="firstName"
+            label="First name"
+            handleFormField={handleFormField}
+          />
+          <FormTextField
+            name="lastName"
+            label="Last name"
+            handleFormField={handleFormField}
+          />
+          <FormTextField
+            name="address"
+            label="Address"
+            handleFormField={handleFormField}
+          />
         </Grid>
       </React.Fragment>
     );

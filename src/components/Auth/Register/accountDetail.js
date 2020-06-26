@@ -1,10 +1,10 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import FormTextField from '../formTextField';
 
 
 class AccountDetail extends React.Component {
@@ -24,66 +24,34 @@ class AccountDetail extends React.Component {
           Register account
         </Typography>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="username"
-              name="username"
-              label="Username"
-              fullWidth
-              error={displayError}
-              autoComplete="username"
-              onChange={(event) => {
-                handleFormField('username', event);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="email"
-              name="email"
-              label="Email Address"
-              type="email"
-              fullWidth
-              error={displayError}
-              autoComplete="email"
-              onChange={(event) => {
-                handleFormField('email', event);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="password"
-              name="password"
-              label="Password"
-              type="password"
-              fullWidth
-              error={displayError}
-              autoComplete="current-password"
-              onChange={(event) => {
-                handleFormField('password', event);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="confirm-password"
-              name="confirm-password"
-              label="Confirm Password"
-              type="password"
-              fullWidth
-              error={displayError}
-              helperText={errorMessage}
-              autoComplete="corrent-password"
-              onChange={(event) => {
-                handleFormField('confirmPassword', event);
-              }}
-            />
-          </Grid>
+          <FormTextField
+            name="username"
+            label="Username"
+            displayError={displayError}
+            handleFormField={handleFormField}
+          />
+          <FormTextField
+            name="email"
+            label="Email Address"
+            type="email"
+            displayError={displayError}
+            handleFormField={handleFormField}
+          />
+          <FormTextField
+            name="password"
+            label="Password"
+            type="password"
+            displayError={displayError}
+            handleFormField={handleFormField}
+          />
+          <FormTextField
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            displayError={displayError}
+            handleFormField={handleFormField}
+            errorMessage={errorMessage}
+          />
           <Grid item xs={12}>
             <Typography className={classes.accountDetailFormControlLabel}>
               Register as
