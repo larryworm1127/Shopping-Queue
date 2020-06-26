@@ -5,8 +5,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
-import SearchHistory from "./searchHistory.js"
-import QueueHistory from "./queueHistory.js"
+import SearchHistory from "./searchHistory.js";
+import QueueHistory from "./queueHistory.js";
+import UserProfile from "./userProfile.js";
 
 class Profile extends React.Component {
 
@@ -24,7 +25,7 @@ class Profile extends React.Component {
   profileSettings = () => {
     switch(this.state.setting) {
       case 0:
-        return <SearchHistory></SearchHistory>;
+        return <UserProfile></UserProfile>;
       case 1:
         return <SearchHistory></SearchHistory>;
       case 2:
