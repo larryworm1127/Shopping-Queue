@@ -45,8 +45,7 @@ class Profile extends React.Component {
               <CardContent>
                 <Grid container direction="column" alignItems="flex-start" alignContent="flex-start">
                   {tabs.map((label) => (
-                    <Grid item>
-                      {console.log(tabs.indexOf(label))}
+                    <Grid item key={label}>
                       <Button onClick={() => this.setSetting(tabs.indexOf(label))}>
                         <Link>
                           {label}

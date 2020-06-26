@@ -25,7 +25,7 @@ class UserProfile extends React.Component {
         <Typography variant='h5' component='h5'>
           Your Favourite Stores:
         </Typography>
-        <Grid container xs={8} spacing={3}>
+        <Grid container spacing={3}>
           <Grid item md={4}>
             <Card>
               <CardContent>
