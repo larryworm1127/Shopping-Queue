@@ -52,14 +52,14 @@ function Footer(props) {
                   />
                 </Box>
                 <Button
-                          variant="contained"
-                          color="secondary"
-                          fullWidth
-                          className={classes.Button}
-                          classes={{ label: classes.ButtonLabel }}
-                          
-                        >
-                          Submit
+                  variant="contained"
+                  color="secondary"
+                  fullWidth
+                  className={classes.Button}
+                  classes={{ label: classes.ButtonLabel }}
+
+                >
+                  Submit
                         </Button>
               </Box>
             </form>
@@ -84,7 +84,7 @@ function Footer(props) {
                         flexDirection="column"
                         justifyContent="center"
                       >
-                        <Typography variant="h6" className="text-white">
+                        <Typography variant="h6" className={classes.brandText}>
                           {info.description}
                         </Typography>
                       </Box>
@@ -95,14 +95,15 @@ function Footer(props) {
             </Grid>
           </Hidden>
           <Grid item xs={12} md={6} lg={4}>
-            <Typography variant="h6" paragraph className="text-white">
+            <Typography variant="h6" paragraph className={classes.brandText}>
               About the Company
             </Typography>
-            <Typography style={{ color: "#8f9296" }} paragraph>
+            <Typography style={{ color: "#FFFFFF" }} paragraph>
+              About the Company
               Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce
               euismod convallis velit, eu auctor lacus vehicula sit amet.
             </Typography>
-            
+
           </Grid>
         </Grid>
       </div>
