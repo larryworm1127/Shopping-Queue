@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 
-class Map extends React.Component {
+class StoreMap extends React.Component {
 
   render() {
     const {
@@ -20,4 +20,4 @@ class Map extends React.Component {
   }
 }
 
-export default withRouter(Map);
+export default withRouter(StoreMap);
