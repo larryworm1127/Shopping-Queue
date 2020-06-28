@@ -20,9 +20,12 @@ function Footer(props) {
   return (
     <div className={classNames("main_div", classes.footerwrapper)}>
       <div className={classes.footerInner}>
-        <Grid container spacing={10}>
+        <Grid container spacing={5}>
           <Grid item xs={12} md={6} lg={4}>
             <form>
+              <Typography variant="h3" paragraph className={classes.BigFont}>
+                Contact Us
+            </Typography>
               <Box display="flex" flexDirection="column">
                 <Box mb={1}>
                   <TextField

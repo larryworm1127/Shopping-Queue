@@ -3,10 +3,11 @@ export const styles = theme => (
     iconWrapper: {
       borderRadius: theme.shape.borderRadius,
       textAlign: "center",
-      marginBottom: theme.spacing(3),
-      padding: theme.spacing(1) * 1.5,
+      margin: theme.spacing(3),
+      padding: theme.spacing(3),
       borderRadius: "2px",
-      borderStyle: "solid"
+      borderStyle: "solid",
+      fontSize: "30"
     },
     LargeButton: {
       fontSize: theme.typography.body1.fontSize,
@@ -42,7 +43,7 @@ export const styles = theme => (
     },
     container: {
       marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(12),
+      marginBottom: theme.spacing(3),
     },
     containerFix: {
       maxWidth: "none !important"
@@ -56,7 +57,8 @@ export const styles = theme => (
     },
     BigFont: {
       fontWeight: 400,
-      color: theme.palette.common.white
+      color: theme.palette.common.white,
+      textAlign: "center"
     },
     paragraph: {
       fontWeight: 400,
