@@ -96,10 +96,10 @@ function Footer(props) {
           </Hidden>
           <Grid item xs={12} md={6} lg={4}>
             <Typography variant="h6" paragraph className={classes.brandText}>
-              About the Company
+              About Us
             </Typography>
-            <Typography style={{ color: "#FFFFFF" }} paragraph>
-              About the Company
+            <Typography className={classes.paragraph} paragraph>
+
               Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce
               euismod convallis velit, eu auctor lacus vehicula sit amet.
             </Typography>
