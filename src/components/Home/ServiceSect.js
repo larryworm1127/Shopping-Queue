@@ -68,7 +68,7 @@ function ServiceSect(props) {
         </Typography>
       </div>
       <div className={classNames(classes.container)}>
-        <Grid container spacing="2" >
+        <Grid container spacing={2} >
           {
             services.map(element => (
               <Grid

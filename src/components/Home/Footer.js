@@ -33,7 +33,7 @@ function Footer(props) {
                     multiline
                     placeholder="Contact us"
                     rows={4}
-                    InputProps={{ className: classes.whiteBg }}
+                    InputProps={{ className: classes.inputField }}
                     fullWidth
                     required
                   />

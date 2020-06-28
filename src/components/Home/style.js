@@ -1,7 +1,6 @@
 export const styles = theme => (
   {
     iconWrapper: {
-      borderRadius: theme.shape.borderRadius,
       textAlign: "center",
       margin: theme.spacing(3),
       padding: theme.spacing(3),
@@ -64,7 +63,7 @@ export const styles = theme => (
       fontWeight: 400,
       color: theme.palette.common.white
     },
-    whiteBg: {
+    inputField: {
       backgroundColor: theme.palette.common.white
     }
   });
