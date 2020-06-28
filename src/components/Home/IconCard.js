@@ -1,18 +1,8 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Typography, withStyles } from "@material-ui/core";
+import { styles } from './style';
 
-const styles = theme => ({
-  iconWrapper: {
-    borderRadius: theme.shape.borderRadius,
-    textAlign: "center",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: theme.spacing(3),
-    padding: theme.spacing(1) * 1.5
-  }
-});
 
 function Iconcard(props) {
   const { classes, Icon, color, headline, text } = props;
@@ -24,17 +14,19 @@ function Iconcard(props) {
         style={{
           color: color,
           backgroundColor: 0x0000ff,
-          fill: color
+          fill: color,
+          align: "center"
         }}
       >
         {Icon}
+
+        <Typography variant="h5" paragraph align="center">
+          {headline}
+        </Typography>
+        <Typography variant="body1" color="textSecondary" align="center">
+          {text}
+        </Typography>
       </div>
-      <Typography variant="h5" paragraph>
-        {headline}
-      </Typography>
-      <Typography variant="body1" color="textSecondary">
-        {text}
-      </Typography>
     </Fragment>
   );
 }

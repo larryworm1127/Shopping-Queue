@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Grid, Typography, isWidthUp, withWidth } from "@material-ui/core";
+import { Grid, Typography, withStyles, withWidth } from "@material-ui/core";
 
 import BuildIcon from "@material-ui/icons/Build";
 import ComputerIcon from "@material-ui/icons/Computer";
@@ -8,14 +8,13 @@ import BarChartIcon from "@material-ui/icons/BarChart";
 import HeadsetMicIcon from "@material-ui/icons/HeadsetMic";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import MeassageIcon from "@material-ui/icons/Message";
-import calculateSpacing from "./calculateSpacing";
 import Iconcard from "./IconCard";
-
-
+import classNames from "classnames";
+import { styles } from './style';
 
 const iconSize = 30;
 
-const features = [
+const services = [
   {
     color: "#00C853",
     headline: "Service 1",
@@ -70,42 +69,39 @@ const features = [
     mdDelay: "400",
     smDelay: "200"
   },
- 
+
 ];
 
 function ServiceSect(props) {
-  const { width } = props;
+  const { classes, width } = props;
   return (
-    <div style={{ backgroundColor: "#FFFFFF" }}>
-      <div className="container-fluid main_div">
-        <Typography variant="h3" align="center" className="lg-mg-bottom">
+    <div className="container-fluid main_div">
+      <div className={classNames(classes.containerFix, "container")}>
+        <Typography variant="h3" align="center">
           Services
         </Typography>
-        <div className="container-fluid">
-          <Grid container spacing={calculateSpacing(width)}>
-            {features.map(element => (
-              <Grid
-                item
-                xs={6}
-                md={4}
-                data-aos="zoom-in-up"
-                data-aos-delay={
-                  isWidthUp("md", width) ? element.mdDelay : element.smDelay
-                }
-                key={element.headline}
-              >
-                <Iconcard
-                  Icon={element.icon}
-                  color={element.color}
-                  headline={element.headline}
-                  text={element.text}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </div>
+      </div>
+      <div className={classNames(classes.container)}>
+        <Grid container spacing="5">
+          {services.map(element => (
+            <Grid
+              item
+              xs={6}
+              md={4}
+              key={element.headline}
+            >
+              <Iconcard
+                Icon={element.icon}
+                color={element.color}
+                headline={element.headline}
+                text={element.text}
+              />
+            </Grid>
+          ))}
+        </Grid>
       </div>
     </div>
+
   );
 }
 
@@ -115,4 +111,5 @@ ServiceSect.propTypes = {
 
 
 
-export default withWidth()(ServiceSect);
+export default withWidth()(
+  withStyles(styles)(ServiceSect));
