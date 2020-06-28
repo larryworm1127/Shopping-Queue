@@ -1,6 +1,6 @@
 
 import transitions from "@material-ui/core/styles/transitions";
-
+var URL = require('url').URL;
 export const styles = theme => ({
   iconWrapper: {
     borderRadius: theme.shape.borderRadius,
@@ -12,7 +12,7 @@ export const styles = theme => ({
     padding: theme.spacing(1) * 1.5,
     backgroundColor: 0x0000ff,
   },
-  extraLargeButtonLabel: {
+  LargeButton: {
     fontSize: theme.typography.body1.fontSize,
     [theme.breakpoints.up("sm")]: {
       fontSize: theme.typography.h6.fontSize
@@ -75,15 +75,10 @@ export const styles = theme => ({
   },
   wrapper: {
     position: "relative",
-    //   background-image: url("main_bg.jpg"),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundImage: "url(/main_bg.jpg)",
+    backgroundSize: "cover",
+    // backgroundColor: theme.palette.secondary.main,
     paddingBottom: theme.spacing(2)
-  },
-  image: {
-    maxWidth: "100%",
-    verticalAlign: "middle",
-    borderRadius: theme.shape.borderRadius,
-    boxShadow: theme.shadows[4]
   },
   container: {
     marginTop: theme.spacing(6),
@@ -102,9 +97,6 @@ export const styles = theme => ({
     [theme.breakpoints.up("md")]: {
       maxWidth: "none !important"
     }
-  },
-  waveBorder: {
-    paddingTop: theme.spacing(4)
   },
   footerInner: {
     backgroundColor: theme.palette.common.darkBlack,
@@ -125,7 +117,7 @@ export const styles = theme => ({
       paddingBottom: theme.spacing(10)
     }
   },
-  brandText: {
+  BigFont: {
     fontWeight: 400,
     color: theme.palette.common.white
   },
@@ -133,33 +125,9 @@ export const styles = theme => ({
     fontWeight: 400,
     color: theme.palette.common.white
   },
-  footerLinks: {
-    marginTop: theme.spacing(2.5),
-    marginBot: theme.spacing(1.5),
-    color: theme.palette.common.white
-  },
   infoIcon: {
     color: `${theme.palette.common.white} !important`,
     backgroundColor: "#33383b !important"
-  },
-  socialIcon: {
-    fill: theme.palette.common.white,
-    backgroundColor: "#33383b",
-    borderRadius: theme.shape.borderRadius,
-    "&:hover": {
-      backgroundColor: theme.palette.primary.light
-    }
-  },
-  link: {
-    cursor: "Pointer",
-    color: theme.palette.common.white,
-    transition: transitions.create(["color"], {
-      duration: theme.transitions.duration.shortest,
-      easing: theme.transitions.easing.easeIn
-    }),
-    "&:hover": {
-      color: theme.palette.primary.light
-    }
   },
   whiteBg: {
     backgroundColor: theme.palette.common.white

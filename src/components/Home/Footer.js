@@ -9,7 +9,6 @@ import {
   Hidden,
   withStyles,
   withWidth,
-  isWidthUp,
   TextField
 } from "@material-ui/core";
 import classNames from "classnames";
@@ -36,7 +35,7 @@ function Footer(props) {
   return (
     <div className={classNames("main_div", classes.wrapper)}>
       <div className={classes.footerInner}>
-        <Grid container spacing={isWidthUp("md", width) ? 10 : 5}>
+        <Grid container spacing={10}>
           <Grid item xs={12} md={6} lg={4}>
             <form>
               <Box display="flex" flexDirection="column">
@@ -84,7 +83,7 @@ function Footer(props) {
                         flexDirection="column"
                         justifyContent="center"
                       >
-                        <Typography variant="h6" className={classes.brandText}>
+                        <Typography variant="h6" className={classes.BigFont}>
                           {info.description}
                         </Typography>
                       </Box>
@@ -95,7 +94,7 @@ function Footer(props) {
             </Grid>
           </Hidden>
           <Grid item xs={12} md={6} lg={4}>
-            <Typography variant="h6" paragraph className={classes.brandText}>
+            <Typography variant="h6" paragraph className={classes.BigFont}>
               About Us
             </Typography>
             <Typography className={classes.paragraph} paragraph>

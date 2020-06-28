@@ -46,7 +46,7 @@ function HeadSection(props) {
                     color="secondary"
                     fullWidth
                     className={classes.extraLargeButton}
-                    classes={{ label: classes.extraLargeButtonLabel }}
+                    classes={{ label: classes.LargeButton }}
                     href="/register"
                   >
                     Signup
