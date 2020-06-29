@@ -5,7 +5,8 @@ import Queue from './Queue';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
 import Profile from './Profile/profile';
-import StoreMap from './Map/StoreMap';
+import StoreMap from './Map';
+import StoreDetail from './Store';
 
 export default props => {
   const {
@@ -39,6 +40,9 @@ export default props => {
         <Route exact path='/profile'>
           <Profile/>
         </Route>
+        <Route exact path='/:id'>
+          <StoreDetail/>
+        </Route>
         <Route path='*' component={NoMatch}/>
       </Switch>
     </BrowserRouter>
@@ -52,7 +56,7 @@ const NoMatch = () => {
   return (
     <div>
       <h3>
-        No match for <code>{location.pathname}</code>
+        Error 404! No match for <code>{location.pathname}</code>
       </h3>
     </div>
   );

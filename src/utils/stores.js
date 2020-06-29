@@ -1,4 +1,5 @@
 export const Store = function (
+  id,
   name,
   address,
   coordinate,
@@ -8,6 +9,7 @@ export const Store = function (
   customerLimit,
   customerShopTime
 ) {
+  this.id = id;
   this.name = name;
   this.address = address;
   this.coordinate = coordinate;
@@ -29,6 +31,7 @@ export const StoreTypes = {
 
 export const stores = [
   new Store(
+    0,
     'Floor Mart',
     '123 Street',
     [43.658702, -79.397168],
@@ -39,6 +42,7 @@ export const stores = [
     30
   ),
   new Store(
+    1,
     'Shoppers Not Drug Mart',
     '456 Street',
     [43.660896, -79.385397],
@@ -49,6 +53,7 @@ export const stores = [
     50
   ),
   new Store(
+    2,
     'Yes Frills',
     '789 Street',
     [43.658662, -79.390168],
@@ -59,6 +64,7 @@ export const stores = [
     40
   ),
   new Store(
+    3,
     'Unfreshco',
     '000 Street',
     [43.661915, -79.379381],
