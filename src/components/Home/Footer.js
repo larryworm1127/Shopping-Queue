@@ -5,40 +5,27 @@ import {
   Grid,
   Typography,
   Box,
-  IconButton,
-  Hidden,
   withStyles,
   withWidth,
-  isWidthUp,
   TextField
 } from "@material-ui/core";
 import classNames from "classnames";
-import PhoneIcon from "@material-ui/icons/Phone";
-import MailIcon from "@material-ui/icons/Mail";
+
 
 // import ColoredButton from "../../../shared/components/ColoredButton";
 import { styles } from './style';
 
-
-const infos = [
-  {
-    icon: <PhoneIcon />,
-    description: "+000 000 0000"
-  },
-  {
-    icon: <MailIcon />,
-    description: "support@company.com"
-  }
-];
-
 function Footer(props) {
-  const { classes, width } = props;
+  const { classes } = props;
   return (
-    <div className={classNames("main_div", classes.wrapper)}>
+    <div className={classNames("main_div", classes.footerwrapper)}>
       <div className={classes.footerInner}>
-        <Grid container spacing={isWidthUp("md", width) ? 10 : 5}>
+        <Grid container spacing={5}>
           <Grid item xs={12} md={6} lg={4}>
             <form>
+              <Typography variant="h3" paragraph className={classes.BigFont}>
+                Contact Us
+            </Typography>
               <Box display="flex" flexDirection="column">
                 <Box mb={1}>
                   <TextField
@@ -46,7 +33,7 @@ function Footer(props) {
                     multiline
                     placeholder="Contact us"
                     rows={4}
-                    InputProps={{ className: classes.whiteBg }}
+                    InputProps={{ className: classes.inputField }}
                     fullWidth
                     required
                   />
@@ -64,38 +51,15 @@ function Footer(props) {
               </Box>
             </form>
           </Grid>
-          <Hidden mdDown>
-            <Grid item xs={12} md={6} lg={4}>
-              <Box display="flex" justifyContent="center">
-                <div>
-                  {infos.map((info, index) => (
-                    <Box display="flex" mb={1} key={index}>
-                      <Box mr={2}>
-                        <IconButton
-                          className={classes.infoIcon}
-                          tabIndex={-1}
-                          disabled
-                        >
-                          {info.icon}
-                        </IconButton>
-                      </Box>
-                      <Box
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="center"
-                      >
-                        <Typography variant="h6" className={classes.brandText}>
-                          {info.description}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  ))}
-                </div>
-              </Box>
-            </Grid>
-          </Hidden>
+
           <Grid item xs={12} md={6} lg={4}>
-            <Typography variant="h6" paragraph className={classes.brandText}>
+            <Box display="flex" justifyContent="center">
+
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} md={6} lg={4}>
+            <Typography variant="h3" paragraph className={classes.BigFont}>
               About Us
             </Typography>
             <Typography className={classes.paragraph} paragraph>
