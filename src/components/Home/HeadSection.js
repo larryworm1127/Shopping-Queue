@@ -1,45 +1,39 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import {
-  Typography,
-  Card,
-  Button,
-  Box,
-  withStyles,
-  withWidth,
-} from "@material-ui/core";
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { Box, Button, Card, Typography, withStyles, withWidth, } from '@material-ui/core';
 import { styles } from './style';
+
 
 function HeadSection(props) {
   const { classes } = props;
   return (
     <Fragment>
-      <div className={classNames("main_div", classes.wrapper)}>
-        <div className={classNames("container-fluid", classes.container)}>
+      <div className={classNames('main_div', classes.wrapper)}>
+        <div className={classNames('container-fluid', classes.container)}>
           <Box display="flex" justifyContent="center" className="row">
             <Card
               className={classes.card}
               data-aos-delay="200"
               data-aos="zoom-in"
             >
-              <div className={classNames(classes.containerFix, "container")}>
+              <div className={classNames(classes.containerFix, 'container')}>
 
                 <div>
                   <Typography
-                    variant={"h3"}
+                    variant={'h3'}
                   >
                     Shopping Queue Manager
-                        </Typography>
+                  </Typography>
                 </div>
                 <div>
                   <Box mb={2}>
                     <Typography
-                      variant={"h6"}
+                      variant={'h6'}
                       color="textSecondary"
                     >
                       Now you don't need to risk your health for shopping
-                          </Typography>
+                    </Typography>
                   </Box>
                   <Button
                     variant="contained"
@@ -50,9 +44,8 @@ function HeadSection(props) {
                     href="/register"
                   >
                     Signup
-                        </Button>
+                  </Button>
                 </div>
-
               </div>
             </Card>
           </Box>

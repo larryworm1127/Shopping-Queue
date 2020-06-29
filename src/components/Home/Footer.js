@@ -1,31 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {
-  Button,
-  Grid,
-  Typography,
-  Box,
-  withStyles,
-  withWidth,
-  TextField
-} from "@material-ui/core";
-import classNames from "classnames";
-
-
-// import ColoredButton from "../../../shared/components/ColoredButton";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Box, Button, Grid, TextField, Typography, withStyles, withWidth } from '@material-ui/core';
+import classNames from 'classnames';
 import { styles } from './style';
+
 
 function Footer(props) {
   const { classes } = props;
   return (
-    <div className={classNames("main_div", classes.footerwrapper)}>
+    <div className={classNames('main_div', classes.footerwrapper)}>
       <div className={classes.footerInner}>
         <Grid container spacing={5}>
           <Grid item xs={12} md={6} lg={4}>
             <form>
               <Typography variant="h3" paragraph className={classes.BigFont}>
                 Contact Us
-            </Typography>
+              </Typography>
               <Box display="flex" flexDirection="column">
                 <Box mb={1}>
                   <TextField
@@ -47,7 +37,7 @@ function Footer(props) {
 
                 >
                   Submit
-                        </Button>
+                </Button>
               </Box>
             </form>
           </Grid>

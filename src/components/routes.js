@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, useLocation } from 'react-router-dom';
-import Home from './home';
+import Home from './Home/';
 import Queue from './Queue';
 import Login from './Auth/Login';
 import Register from './Auth/Register';

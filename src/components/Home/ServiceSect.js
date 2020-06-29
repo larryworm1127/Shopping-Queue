@@ -1,59 +1,59 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Grid, Typography, withStyles, withWidth } from "@material-ui/core";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Grid, Typography, withStyles, withWidth } from '@material-ui/core';
 
-import BuildIcon from "@material-ui/icons/Build";
-import ComputerIcon from "@material-ui/icons/Computer";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import HeadsetMicIcon from "@material-ui/icons/HeadsetMic";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import MeassageIcon from "@material-ui/icons/Message";
-import Iconcard from "./IconCard";
-import classNames from "classnames";
+import BuildIcon from '@material-ui/icons/Build';
+import ComputerIcon from '@material-ui/icons/Computer';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import MeassageIcon from '@material-ui/icons/Message';
+import Iconcard from './IconCard';
+import classNames from 'classnames';
 import { styles } from './style';
 
 const services = [
   {
-    color: "#00C853",
-    headline: "Service 1",
+    color: '#00C853',
+    headline: 'Service 1',
     text:
-      "Our service",
-    icon: <BuildIcon />,
+      'Our service',
+    icon: <BuildIcon/>,
   },
   {
-    color: "#6200EA",
-    headline: "Service 2",
+    color: '#6200EA',
+    headline: 'Service 2',
     text:
-      "Our service",
-    icon: <CalendarTodayIcon />,
+      'Our service',
+    icon: <CalendarTodayIcon/>,
   },
   {
-    color: "#0091EA",
-    headline: "Service 3",
+    color: '#0091EA',
+    headline: 'Service 3',
     text:
-      "Our service",
-    icon: <MeassageIcon />,
+      'Our service',
+    icon: <MeassageIcon/>,
   },
   {
-    color: "#d50000",
-    headline: "Service 4",
+    color: '#d50000',
+    headline: 'Service 4',
     text:
-      "Our service",
-    icon: <ComputerIcon />,
+      'Our service',
+    icon: <ComputerIcon/>,
   },
   {
-    color: "#DD2C00",
-    headline: "Service 5",
+    color: '#DD2C00',
+    headline: 'Service 5',
     text:
-      "Our service",
-    icon: <BarChartIcon />,
+      'Our service',
+    icon: <BarChartIcon/>,
   },
   {
-    color: "#64DD17",
-    headline: "Service 6",
+    color: '#64DD17',
+    headline: 'Service 6',
     text:
-      "Our service",
-    icon: <HeadsetMicIcon />,
+      'Our service',
+    icon: <HeadsetMicIcon/>,
   },
 
 ];
@@ -62,13 +62,13 @@ function ServiceSect(props) {
   const { classes } = props;
   return (
     <div className="container-fluid main_div">
-      <div className={classNames(classes.containerFix, "container")}>
+      <div className={classNames(classes.containerFix, 'container')}>
         <Typography variant="h3" align="center">
           Services
         </Typography>
       </div>
       <div className={classNames(classes.container)}>
-        <Grid container spacing={2} >
+        <Grid container spacing={2}>
           {
             services.map(element => (
               <Grid
@@ -96,7 +96,6 @@ function ServiceSect(props) {
 ServiceSect.propTypes = {
   width: PropTypes.string.isRequired
 };
-
 
 
 export default withWidth()(

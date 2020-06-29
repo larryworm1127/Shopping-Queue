@@ -1,12 +1,12 @@
 export const styles = theme => (
   {
     iconWrapper: {
-      textAlign: "center",
+      textAlign: 'center',
       margin: theme.spacing(3),
       padding: theme.spacing(3),
-      borderRadius: "2px",
-      borderStyle: "solid",
-      fontSize: "30"
+      borderRadius: '2px',
+      borderStyle: 'solid',
+      fontSize: '30'
     },
     LargeButton: {
       fontSize: theme.typography.body1.fontSize,
@@ -28,16 +28,16 @@ export const styles = theme => (
     },
     wrapper: {
       marginBottom: theme.spacing(2),
-      position: "relative",
-      backgroundImage: "url(/main_bg.jpg)",
-      backgroundSize: "cover",
+      position: 'relative',
+      backgroundImage: 'url(/main_bg.jpg)',
+      backgroundSize: 'cover',
       paddingBottom: theme.spacing(2)
     },
     footerwrapper: {
       marginTop: theme.spacing(3),
-      position: "relative",
-      backgroundImage: "url(/main_bg.jpg)",
-      backgroundSize: "cover",
+      position: 'relative',
+      backgroundImage: 'url(/main_bg.jpg)',
+      backgroundSize: 'cover',
       paddingBottom: theme.spacing(2)
     },
     container: {
@@ -45,7 +45,7 @@ export const styles = theme => (
       marginBottom: theme.spacing(3),
     },
     containerFix: {
-      maxWidth: "none !important"
+      maxWidth: 'none !important'
     },
     footerInner: {
       backgroundColor: theme.palette.common.darkBlack,
@@ -57,7 +57,7 @@ export const styles = theme => (
     BigFont: {
       fontWeight: 400,
       color: theme.palette.common.white,
-      textAlign: "center"
+      textAlign: 'center'
     },
     paragraph: {
       fontWeight: 400,

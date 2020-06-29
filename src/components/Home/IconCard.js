@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import { Typography, withStyles } from "@material-ui/core";
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { Typography, withStyles } from '@material-ui/core';
 import { styles } from './style';
 
 
@@ -15,7 +15,7 @@ function Iconcard(props) {
           color: color,
           backgroundColor: 0x0000ff,
           fill: color,
-          align: "center"
+          align: 'center'
         }}
       >
         {Icon}
