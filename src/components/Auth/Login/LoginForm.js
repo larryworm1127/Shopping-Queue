@@ -1,9 +1,10 @@
+// React imports
 import React from 'react';
+// Material UI imports
+import { Button, Checkbox, FormControlLabel } from '@material-ui/core';
+// User JS imports
 import FormTextField from '../FormTextField';
 import FormSelectField from '../FormSelectField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
 import { loginVerify } from '../../../utils/verifyAuth';
 
 

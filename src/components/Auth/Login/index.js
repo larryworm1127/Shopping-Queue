@@ -1,15 +1,12 @@
+// React imports
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import { Redirect, withRouter } from 'react-router-dom';
+// Material UI imports
+import { Avatar, Container, CssBaseline, Grid, Link, Typography, withStyles } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import withStyles from '@material-ui/core/styles/withStyles';
+// User JS imports
 import NavBar from '../../Nav/navbar';
 import { styles } from './style';
-import { Redirect, withRouter } from 'react-router-dom';
 import LoginForm from './LoginForm';
 
 

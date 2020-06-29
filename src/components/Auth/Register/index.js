@@ -1,19 +1,15 @@
+// React imports
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Typography from '@material-ui/core/Typography';
+import { uid } from 'react-uid';
+import { withRouter } from 'react-router-dom';
+// Material UI imports
+import { CssBaseline, Link, Paper, Step, StepLabel, Stepper, Typography, withStyles } from '@material-ui/core';
+// User JS imports
 import AccountDetail from './AccountDetail';
-import withStyles from '@material-ui/core/styles/withStyles';
 import NavBar from '../../Nav/navbar';
-import Link from '@material-ui/core/Link';
 import ShopperProfile from './ShopperProfile';
 import OwnerProfile from './OwnerProfile';
-import { withRouter } from 'react-router-dom';
 import { styles } from './style';
-import { uid } from 'react-uid';
 import FinishRegister from './FinishRegister';
 
 

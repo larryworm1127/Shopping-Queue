@@ -1,6 +1,8 @@
+// React imports
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+// Material UI imports
+import { Grid, Typography } from '@material-ui/core';
+// User JS imports
 import FormTextField from '../FormTextField';
 import FormSelectField from '../FormSelectField';
 import { registerVerify } from '../../../utils/verifyAuth';
