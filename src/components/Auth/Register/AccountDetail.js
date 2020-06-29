@@ -94,7 +94,7 @@ class AccountDetail extends React.Component {
               formControlClass={classes.formControl}
               handleFormField={handleFormField}
               value={registerAs}
-              menuItems={['Shopper', 'Shop Owner', 'Admin']}
+              menuItems={['Shopper', 'Shop Owner']}
             />
           </Grid>
 
