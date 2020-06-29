@@ -11,12 +11,13 @@ import NavBar from '../../Nav/navbar';
 import Link from '@material-ui/core/Link';
 import ShopperProfile from './ShopperProfile';
 import OwnerProfile from './OwnerProfile';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { styles } from './style';
 import { uid } from 'react-uid';
+import FinishRegister from './FinishRegister';
 
 
-const steps = ['Account Details', 'Profile Details'];
+const steps = ['Account Details', 'Profile Details', 'Success'];
 
 class Register extends React.Component {
   state = {
@@ -82,31 +83,26 @@ class Register extends React.Component {
           />
         );
       case 1:
-        switch (this.state.registerAs) {
-          case 0:
-            return (
-              <ShopperProfile
-                classes={classes}
-                handleNext={this.handleNext}
-                handleBack={this.handleBack}
-                activeStep={this.state.activeStep}
-                handleFormField={this.handleFormField}
-              />);
-          case 1:
-            return (
-              <OwnerProfile
-                classes={classes}
-                handleNext={this.handleNext}
-                handleBack={this.handleBack}
-                activeStep={this.state.activeStep}
-                storeType={this.state.storeType}
-                handleFormField={this.handleFormField}
-              />);
-          default:
-            return <Redirect to={{ pathname: '/login' }}/>;
-        }
+        return (this.state.registerAs === 0) ?
+          <ShopperProfile
+            classes={classes}
+            handleNext={this.handleNext}
+            handleBack={this.handleBack}
+            activeStep={this.state.activeStep}
+            handleFormField={this.handleFormField}
+          /> :
+          <OwnerProfile
+            classes={classes}
+            handleNext={this.handleNext}
+            handleBack={this.handleBack}
+            activeStep={this.state.activeStep}
+            storeType={this.state.storeType}
+            handleFormField={this.handleFormField}
+          />;
+      case 2:
+        return <FinishRegister/>;
       default:
-        return <Redirect to={{ pathname: '/login' }}/>;
+        return Error('Unknown step');
     }
   };
 
