@@ -35,11 +35,11 @@ const loginVerifyHelper = (username, password, credList) => {
 export const loginVerify = (username, password, accountType) => {
   // Implement database access and query for user credential verification here.
   switch (accountType) {
-    case 1:
+    case 0:
       return loginVerifyHelper(username, password, shopperCredentials);
-    case 2:
+    case 1:
       return loginVerifyHelper(username, password, shopOwnerCredentials);
-    case 3:
+    case 2:
       return loginVerifyHelper(username, password, adminCredentials);
     default:
       return Error('Unknown account type');
@@ -68,11 +68,11 @@ const registerVerifyHelper = (username, password, confirmPass, credList) => {
 export const registerVerify = (username, password, confirmPass, accountType) => {
   // Implement database access and query for user credential verification here.
   switch (accountType) {
-    case 1:
+    case 0:
       return registerVerifyHelper(username, password, confirmPass, shopperCredentials);
-    case 2:
+    case 1:
       return registerVerifyHelper(username, password, confirmPass, shopOwnerCredentials);
-    case 3:
+    case 2:
       return registerVerifyHelper(username, password, confirmPass, adminCredentials);
     default:
       return Error('Unknown account type');

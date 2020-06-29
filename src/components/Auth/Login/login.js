@@ -23,7 +23,7 @@ class Login extends React.Component {
   state = {
     username: '',
     password: '',
-    loginAs: 1,
+    loginAs: 0,
     displayError: false,
     errorMessage: ''
   };

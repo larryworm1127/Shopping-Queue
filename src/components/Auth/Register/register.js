@@ -27,7 +27,7 @@ class Register extends React.Component {
     email: '',
     password: '',
     confirmPassword: '',
-    registerFor: 1,
+    registerAs: 0,
     // shopper profile states
     firstName: '',
     lastName: '',
@@ -39,6 +39,7 @@ class Register extends React.Component {
     openTime: '',
     closeTime: '',
     shoppingTimeLimit: '',
+    storeType: '',
     // error reporting states
     displayError: false,
     errorMessage: ''
@@ -58,7 +59,7 @@ class Register extends React.Component {
       case 0:
         return this.handleAccountDetail();
       case 1:
-        return (this.state.registerFor === 1) ? this.handleShopperProfile() : this.handleOwnerProfile();
+        return (this.state.registerAs === 0) ? this.handleShopperProfile() : this.handleOwnerProfile();
       default:
         return Error('Unknown step');
     }
@@ -69,7 +70,7 @@ class Register extends React.Component {
       this.state.username,
       this.state.password,
       this.state.confirmPassword,
-      this.state.registerFor
+      this.state.registerAs
     );
     if (verify === true) {
       this.handleNext();
@@ -97,7 +98,7 @@ class Register extends React.Component {
         return (
           <AccountDetail
             handleFormField={this.handleFormField}
-            registerFor={this.state.registerFor}
+            registerFor={this.state.registerAs}
             username={this.state.username}
             email={this.state.email}
             password={this.state.password}
@@ -108,7 +109,7 @@ class Register extends React.Component {
           />
         );
       case 1:
-        switch (this.state.registerFor) {
+        switch (this.state.registerAs) {
           case 1:
             return (
               <ShopperProfile

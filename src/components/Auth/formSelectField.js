@@ -35,9 +35,9 @@ class FormSelectField extends React.Component {
             }}
             displayEmpty={true}
           >
-            <MenuItem value={1}>Shopper</MenuItem>
-            <MenuItem value={2}>Store Owner</MenuItem>
-            <MenuItem value={3}>Admin</MenuItem>
+            <MenuItem value={0}>Shopper</MenuItem>
+            <MenuItem value={1}>Store Owner</MenuItem>
+            <MenuItem value={2}>Admin</MenuItem>
           </Select>
         </FormControl>
       </Grid>
