@@ -19,7 +19,7 @@ export const Store = function (
 };
 
 
-const StoreTypes = {
+export const StoreTypes = {
   GROCERY: 'Grocery',
   DEPARTMENT: 'Department',
   CLOTHING: 'Clothing',

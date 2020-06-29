@@ -58,12 +58,11 @@ class AccountDetail extends React.Component {
             errorMessage={errorMessage}
             value={confirmPassword}
           />
-
           <FormSelectField
             name="registerAs"
             label="Register For"
-            formControlLabelClass={classes.accountDetailFormControlLabel}
-            formControlClass={classes.accountDetailFormControl}
+            formControlLabelClass={classes.formControlLabel}
+            formControlClass={classes.formControl}
             handleFormField={handleFormField}
             value={registerAs}
             menuItems={['Shopper', 'Shop Owner', 'Admin']}

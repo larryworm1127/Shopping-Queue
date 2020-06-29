@@ -111,14 +111,16 @@ class Register extends React.Component {
         );
       case 1:
         switch (this.state.registerAs) {
-          case 1:
+          case 0:
             return (
               <ShopperProfile
                 handleFormField={this.handleFormField}
               />);
-          case 2:
+          case 1:
             return (
               <OwnerProfile
+                classes={classes}
+                storeType={this.state.storeType}
                 handleFormField={this.handleFormField}
               />);
           default:
