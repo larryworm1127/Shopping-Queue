@@ -1,4 +1,4 @@
-const Store = function (
+export const Store = function (
   name,
   address,
   coordinate,
