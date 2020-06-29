@@ -49,7 +49,7 @@ class App extends React.Component {
       <div>
         <ThemeProvider theme={theme}>
           <Routes
-            loggedIn={this.state.loggedIn}
+            // loggedIn={this.state.loggedIn}
             loginUser={this.loginUser}
             logoutUser={this.logoutUser}
           />
