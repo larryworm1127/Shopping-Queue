@@ -28,13 +28,13 @@ export const styles = theme => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
-  accountDetailFormControlLabel: {
+  formControlLabel: {
     textTransform: 'uppercase',
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(1),
     color: theme.palette.secondary.main
   },
-  accountDetailFormControl: {
+  formControl: {
     width: '100%',
   },
 });
