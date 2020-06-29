@@ -5,7 +5,7 @@ import Queue from './Queue';
 import Login from './Auth/Login/login';
 import Register from './Auth/Register/register';
 import Profile from './Profile/profile';
-import Map from './Map/map';
+import StoreMap from './Map/StoreMap';
 
 export default props => {
   const {
@@ -21,7 +21,7 @@ export default props => {
           <Home/>
         </Route>
         <Route exact path='/map'>
-          <Map/>
+          <StoreMap/>
         </Route>
         <Route exact path='/queue'>
           <Queue/>
