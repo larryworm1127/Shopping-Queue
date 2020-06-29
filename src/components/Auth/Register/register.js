@@ -15,6 +15,7 @@ import OwnerProfile from './ownerProfile';
 import { Redirect, withRouter } from 'react-router-dom';
 import { styles } from './style';
 import { registerVerify } from '../../../utils/verifyAuth';
+import { uid } from 'react-uid';
 
 
 const steps = ['Account Details', 'Profile Details'];
@@ -98,7 +99,7 @@ class Register extends React.Component {
         return (
           <AccountDetail
             handleFormField={this.handleFormField}
-            registerFor={this.state.registerAs}
+            registerAs={this.state.registerAs}
             username={this.state.username}
             email={this.state.email}
             password={this.state.password}
@@ -159,7 +160,7 @@ class Register extends React.Component {
             </Typography>
             <Stepper activeStep={this.state.activeStep} className={classes.stepper}>
               {steps.map((label) => (
-                <Step key={label}>
+                <Step key={uid(label)}>
                   <StepLabel>{label}</StepLabel>
                 </Step>
               ))}

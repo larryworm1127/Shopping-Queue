@@ -14,7 +14,7 @@ class AccountDetail extends React.Component {
       email,
       password,
       confirmPassword,
-      registerFor,
+      registerAs,
       handleFormField,
       displayError,
       errorMessage
@@ -60,12 +60,13 @@ class AccountDetail extends React.Component {
           />
 
           <FormSelectField
-            name="registerFor"
+            name="registerAs"
             label="Register For"
             formControlLabelClass={classes.accountDetailFormControlLabel}
             formControlClass={classes.accountDetailFormControl}
             handleFormField={handleFormField}
-            value={registerFor}
+            value={registerAs}
+            menuItems={['Shopper', 'Shop Owner', 'Admin']}
           />
         </Grid>
       </React.Fragment>

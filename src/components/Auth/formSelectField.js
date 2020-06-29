@@ -4,8 +4,20 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
+import { uid } from 'react-uid';
 
 class FormSelectField extends React.Component {
+
+  renderMenuItems(items) {
+    return items.map((item, index) => (
+      <MenuItem
+        value={index}
+        key={uid(item)}
+      >
+        {item}
+      </MenuItem>
+    ))
+  }
 
   render() {
     const {
@@ -15,7 +27,8 @@ class FormSelectField extends React.Component {
       formControlClass,
       value,
       variant,
-      handleFormField
+      handleFormField,
+      menuItems
     } = this.props
 
     return (
@@ -35,9 +48,7 @@ class FormSelectField extends React.Component {
             }}
             displayEmpty={true}
           >
-            <MenuItem value={0}>Shopper</MenuItem>
-            <MenuItem value={1}>Store Owner</MenuItem>
-            <MenuItem value={2}>Admin</MenuItem>
+            {this.renderMenuItems(menuItems)}
           </Select>
         </FormControl>
       </Grid>
