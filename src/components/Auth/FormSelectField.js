@@ -16,7 +16,7 @@ class FormSelectField extends React.Component {
       >
         {item}
       </MenuItem>
-    ))
+    ));
   }
 
   render() {
@@ -29,30 +29,33 @@ class FormSelectField extends React.Component {
       variant,
       handleFormField,
       menuItems
-    } = this.props
+    } = this.props;
 
     return (
-      <Grid item xs={12}>
-        <Typography className={formControlLabelClass}>
-          {label}
-        </Typography>
+      <React.Fragment>
+        <Grid item xs={12}>
+          <Typography className={formControlLabelClass}>
+            {label}
+          </Typography>
 
-        <FormControl
-          className={formControlClass}
-          variant={variant}
-        >
-          <Select
-            value={value}
-            onChange={(event) => {
-              handleFormField(name, event);
-            }}
-            displayEmpty={true}
+          <FormControl
+            className={formControlClass}
+            variant={variant}
           >
-            {this.renderMenuItems(menuItems)}
-          </Select>
-        </FormControl>
-      </Grid>
+            <Select
+              value={value}
+              onChange={(event) => {
+                handleFormField(name, event);
+              }}
+              displayEmpty={true}
+            >
+              {this.renderMenuItems(menuItems)}
+            </Select>
+          </FormControl>
+        </Grid>
+      </React.Fragment>
     );
   }
 }
+
 export default FormSelectField;

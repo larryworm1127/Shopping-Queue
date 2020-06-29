@@ -1,8 +1,8 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import FormTextField from '../formTextField';
-import FormSelectField from '../formSelectField';
+import FormTextField from '../FormTextField';
+import FormSelectField from '../FormSelectField';
 import { StoreTypes } from '../../../utils/stores';
 
 
