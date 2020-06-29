@@ -28,21 +28,21 @@ const theme = createMuiTheme({
 
 class App extends React.Component {
 
-  state = {
-    loggedIn: false
-  };
+  // state = {
+  //   loggedIn: false
+  // };
 
-  loginUser = () => {
-    this.setState({
-      loggedIn: true
-    });
-  };
+  // loginUser = () => {
+  //   this.setState({
+  //     loggedIn: true
+  //   });
+  // };
 
-  logoutUser = () => {
-    this.setState({
-      loggedIn: false
-    });
-  };
+  // logoutUser = () => {
+  //   this.setState({
+  //     loggedIn: false
+  //   });
+  // };
 
   render() {
     return (

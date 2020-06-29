@@ -10,6 +10,9 @@ import Menu from '../../utils/menu';
 import { styles } from './style';
 
 
+let Menuretrun = [];
+Menuretrun = Menulog();
+
 // NavBar component class
 class NavBar extends React.Component {
   state = {
@@ -71,7 +74,7 @@ class NavBar extends React.Component {
                 textColor="primary"
                 onChange={this.handleTabChange}
               >
-                {Menu.map((item, index) => (
+                {Menuretrun.map((item, index) => (
                   <Tab
                     key={index}
                     classes={{ root: classes.tabItem }}

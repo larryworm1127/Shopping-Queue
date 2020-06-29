@@ -7,6 +7,7 @@ import Register from './Auth/Register';
 import Profile from './Profile/profile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
+import store from 'store'
 
 export default props => {
   const {
@@ -19,35 +20,72 @@ export default props => {
     <BrowserRouter>
       <Switch>
         <Route exact path='/'>
-          <Home/>
+          <Home />
         </Route>
-        <Route exact path='/map'>
-          <StoreMap/>
-        </Route>
-        <Route exact path='/queue'>
-          <Queue/>
-        </Route>
+        <AuthenRoute path='/map' component={Map}>
+        </AuthenRoute>
+        <AuthenRoute path='/queue' component={Queue}>
+        </AuthenRoute>
         <Route exact path='/login'>
           <Login
-            loggedIn={loggedIn}
             loginUser={loginUser}
             logoutUser={logoutUser}
           />
         </Route>
-        <Route exact path='/register'>
-          <Register/>
+        <Route exact path='/register' component={regsiterfunc()}>
+
         </Route>
-        <Route exact path='/profile'>
-          <Profile/>
+        <AuthenRoute path='/profile' component={Profile} >
+        </AuthenRoute>
+        <Route path='/logout' component={signoutfunc()}>
         </Route>
         <Route exact path='/:id'>
-          <StoreDetail/>
+          <StoreDetail />
         </Route>
-        <Route path='*' component={NoMatch}/>
+        <Route path='*' component={NoMatch} />
       </Switch>
     </BrowserRouter>
   );
 }
+
+const signoutfunc = () => () => {
+  store.remove('loggedIn');
+  return (<Redirect
+    to={{
+      pathname: "/login",
+    }} />)
+};
+
+const regsiterfunc = () => () => {
+  return (
+    <Route
+      render={() =>
+        store.get('loggedIn') ? (
+          <Profile />
+        ) : (
+            <Register />
+          )
+      }
+    />
+  )
+};
+
+function AuthenRoute({ component: Component, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        !!store.get('loggedIn') ? (
+          <Component {...props} />
+        ) : (
+            <Login />
+          )
+      }
+    />
+  );
+}
+
+
 
 
 const NoMatch = () => {
