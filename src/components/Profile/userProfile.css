@@ -1,0 +1,9 @@
+.inline-text {
+  display: inline-block;
+  margin-right: 8px;
+  font-weight: normal;
+}
+
+.right-text {
+  margin-left: 8px;
+}
