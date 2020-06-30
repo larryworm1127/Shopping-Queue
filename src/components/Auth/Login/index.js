@@ -8,7 +8,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import NavBar from '../../Nav/navbar';
 import { styles } from './style';
 import LoginForm from './LoginForm';
-
+import store from 'store';
 
 class Login extends React.Component {
 
@@ -20,15 +20,15 @@ class Login extends React.Component {
       loginUser
     } = this.props;
 
-    return loggedIn ? (<Redirect to={{ pathname: '/' }}/>) : (
+    return !!store.get('loggedIn') ? (<Redirect to={{ pathname: '/queue' }} />) : (
       <React.Fragment>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} />
 
         <Container component="main" maxWidth="xs">
-          <CssBaseline/>
+          <CssBaseline />
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <LockOutlinedIcon/>
+              <LockOutlinedIcon />
             </Avatar>
 
             <Typography component="h1" variant="h5">

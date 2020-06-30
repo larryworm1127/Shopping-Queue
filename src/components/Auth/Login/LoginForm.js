@@ -9,10 +9,11 @@ import { loginVerify } from '../../../utils/verifyAuth';
 import {
   Redirect, withRouter,
   useHistory,
-  useLocation
+  useLocation,
+  Route
 } from 'react-router-dom';
 import store from 'store';
-
+import Profile from '../../Profile/profile';
 class LoginForm extends React.Component {
 
   state = {
@@ -39,21 +40,20 @@ class LoginForm extends React.Component {
   };
 
   handleLoginSubmit = (event) => {
-    const { loginUser, history } = this.props;
-
     event.preventDefault();
+    const { history } = this.props;
     const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
     if (verify === true) {
       // loginUser();
       store.set('loggedIn', true);
-      history.push('\profile');
+      history.push('/profile');
     } else {
       this.displayError(verify);
     }
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, history } = this.props;
 
     return (
       <React.Fragment>
@@ -108,4 +108,14 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+const regsiterfunc1 = () => () => {
+  return (
+    <Route
+      render={() =>
+
+        <Profile />
+      }
+    />
+  )
+};
+export default withRouter(LoginForm);
