@@ -6,9 +6,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Menu from '../../utils/menu';
+import Menulog from '../../utils/menu';
+
 import { styles } from './style';
 
+
+let Menuretrun = [];
+Menuretrun = Menulog();
 
 // NavBar component class
 class NavBar extends React.Component {
@@ -71,7 +75,7 @@ class NavBar extends React.Component {
                 textColor="primary"
                 onChange={this.handleTabChange}
               >
-                {Menu.map((item, index) => (
+                {Menuretrun.map((item, index) => (
                   <Tab
                     key={index}
                     classes={{ root: classes.tabItem }}

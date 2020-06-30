@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, useLocation } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import Home from './Home/';
 import Queue from './Queue';
 import Login from './Auth/Login';
@@ -7,6 +7,8 @@ import Register from './Auth/Register';
 import Profile from './Profile/profile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
+import store from 'store';
+
 
 export default props => {
   const {
@@ -21,24 +23,22 @@ export default props => {
         <Route exact path='/'>
           <Home/>
         </Route>
-        <Route exact path='/map'>
-          <StoreMap/>
-        </Route>
-        <Route exact path='/queue'>
-          <Queue/>
-        </Route>
+        <AuthenRoute path='/map' component={StoreMap}>
+        </AuthenRoute>
+        <AuthenRoute path='/queue' component={Queue}>
+        </AuthenRoute>
         <Route exact path='/login'>
           <Login
-            loggedIn={loggedIn}
             loginUser={loginUser}
             logoutUser={logoutUser}
           />
         </Route>
-        <Route exact path='/register'>
-          <Register/>
+        <Route exact path='/register' component={regsiterfunc()}>
+
         </Route>
-        <Route exact path='/profile'>
-          <Profile/>
+        <AuthenRoute path='/profile' component={Profile}>
+        </AuthenRoute>
+        <Route path='/logout' component={signoutfunc()}>
         </Route>
         <Route exact path='/store/:id'>
           <StoreDetail/>
@@ -46,6 +46,46 @@ export default props => {
         <Route path='*' component={NoMatch}/>
       </Switch>
     </BrowserRouter>
+  );
+}
+
+const signoutfunc = () => () => {
+  store.remove('loggedIn');
+  return (
+    <Redirect
+      to={{
+        pathname: '/login',
+      }}
+    />
+  );
+};
+
+const regsiterfunc = () => () => {
+  return (
+    <Route
+      render={() =>
+        store.get('loggedIn') ? (
+          <Profile/>
+        ) : (
+          <Register/>
+        )
+      }
+    />
+  );
+};
+
+function AuthenRoute({ component: Component, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        !!store.get('loggedIn') ? (
+          <Component {...props} />
+        ) : (
+          <Login/>
+        )
+      }
+    />
   );
 }
 

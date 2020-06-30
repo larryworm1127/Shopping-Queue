@@ -6,8 +6,12 @@ import { Button, Checkbox, FormControlLabel } from '@material-ui/core';
 import FormTextField from '../FormTextField';
 import FormSelectField from '../FormSelectField';
 import { loginVerify } from '../../../utils/verifyAuth';
-
-
+import {
+  withRouter,
+  Route
+} from 'react-router-dom';
+import store from 'store';
+import Profile from '../../Profile/profile';
 class LoginForm extends React.Component {
 
   state = {
@@ -34,12 +38,13 @@ class LoginForm extends React.Component {
   };
 
   handleLoginSubmit = (event) => {
-    const { loginUser } = this.props;
-
     event.preventDefault();
+    const { history } = this.props;
     const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
     if (verify === true) {
-      loginUser();
+      // loginUser();
+      store.set('loggedIn', true);
+      history.push('/profile');
     } else {
       this.displayError(verify);
     }
@@ -82,7 +87,7 @@ class LoginForm extends React.Component {
           />
 
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary"/>}
+            control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
 
@@ -101,4 +106,14 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+const regsiterfunc1 = () => () => {
+  return (
+    <Route
+      render={() =>
+
+        <Profile />
+      }
+    />
+  )
+};
+export default withRouter(LoginForm);
