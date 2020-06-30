@@ -3,10 +3,24 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Box, Button, Card, Typography, withStyles, withWidth, } from '@material-ui/core';
 import { styles } from './style';
+import store from 'store'
+import parse from 'html-react-parser';
 
 
 function HeadSection(props) {
   const { classes } = props;
+  let main_text = 'Shopping Queue Manager';
+  let button_text = 'Signup';
+  let sub_text = ' Now you don\'t need to risk your health for shopping';
+  let button_url = '/register';
+
+  if (store.get('loggedIn')) {
+    main_text = 'Welcome ' + store.get('user');
+    button_text = 'Your Profile';
+    sub_text = '';
+    button_url = '/profile';
+  }
+
   return (
     <Fragment>
       <div className={classNames('main_div', classes.wrapper)}>
@@ -23,7 +37,7 @@ function HeadSection(props) {
                   <Typography
                     variant={'h3'}
                   >
-                    Shopping Queue Manager
+                    {parse(main_text)}
                   </Typography>
                 </div>
                 <div>
@@ -32,7 +46,7 @@ function HeadSection(props) {
                       variant={'h6'}
                       color="textSecondary"
                     >
-                      Now you don't need to risk your health for shopping
+                      {parse(sub_text)}
                     </Typography>
                   </Box>
                   <Button
@@ -41,9 +55,9 @@ function HeadSection(props) {
                     fullWidth
                     className={classes.extraLargeButton}
                     classes={{ label: classes.LargeButton }}
-                    href="/register"
+                    href={parse(button_url)}
                   >
-                    Signup
+                    {parse(button_text)}
                   </Button>
                 </div>
               </div>
@@ -53,6 +67,8 @@ function HeadSection(props) {
       </div>
     </Fragment>
   );
+
+
 }
 
 HeadSection.propTypes = {

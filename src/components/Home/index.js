@@ -10,10 +10,10 @@ class Home extends React.Component {
   render() {
     return (
       <div className="App">
-        <NavBar/>
-        <HeadSection/>
-        <ServiceSect/>
-        <Footer/>
+        <NavBar />
+        <HeadSection />
+        <ServiceSect />
+        <Footer />
       </div>
     );
   }

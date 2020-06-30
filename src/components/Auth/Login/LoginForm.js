@@ -44,6 +44,8 @@ class LoginForm extends React.Component {
     if (verify === true) {
       // loginUser();
       store.set('loggedIn', true);
+      store.set('loginas', this.state.loginAs);
+      store.set('user', this.state.username);
       history.push('/profile');
     } else {
       this.displayError(verify);
@@ -106,14 +108,4 @@ class LoginForm extends React.Component {
   }
 }
 
-const regsiterfunc1 = () => () => {
-  return (
-    <Route
-      render={() =>
-
-        <Profile />
-      }
-    />
-  )
-};
 export default withRouter(LoginForm);
