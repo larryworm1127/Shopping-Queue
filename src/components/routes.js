@@ -40,7 +40,7 @@ export default props => {
         </AuthenRoute>
         <Route path='/logout' component={signoutfunc()}>
         </Route>
-        <Route exact path='/:id'>
+        <Route exact path='/store/:id'>
           <StoreDetail/>
         </Route>
         <Route path='*' component={NoMatch}/>

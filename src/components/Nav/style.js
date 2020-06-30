@@ -1,7 +1,7 @@
 // Material UI themed style
 export const styles = theme => ({
   appBar: {
-    position: 'relative',
+    position: 'fixed',
     boxShadow: 'none',
     borderBottom: `1px solid ${theme.palette.grey['100']}`,
     backgroundColor: 'white',
