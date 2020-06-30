@@ -61,7 +61,7 @@ class StoreMap extends React.Component {
           </Grid>
 
           <Grid item xs={3} className={classes.cardStyles}>
-            <StoreCards classes={classes}/>
+            <StoreCards classes={classes} handleHighlight={this.handleHighlight}/>
           </Grid>
         </Grid>
       </React.Fragment>

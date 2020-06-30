@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 class StoreCards extends React.Component {
 
   render() {
-    const { classes } = this.props;
+    const { classes, handleHighlight } = this.props;
 
     return stores.map((store, index) => (
         <Card key={index} id={index}>
@@ -38,7 +38,7 @@ class StoreCards extends React.Component {
               type="button"
               color="primary"
               onClick={() => {
-                this.handleHighlight(index);
+                handleHighlight(index);
               }}
             >
               Highlight on Map
