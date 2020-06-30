@@ -6,24 +6,19 @@ import Button from '@material-ui/core/Button';
 
 class StoreQueueForm extends React.Component {
 
-  state = {
-    date: '',
-    shoppingTime: '',
-    numCustomer: ''
-  };
-
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-    });
-  };
-
   render() {
-    const { classes, store } = this.props;
-    const today = new Date().toISOString().slice(0, 10);
+    const {
+      classes,
+      store,
+      date,
+      shoppingTime,
+      numCustomer,
+      handleFormSubmit,
+      handleFormField
+    } = this.props;
 
     return (
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
@@ -31,10 +26,9 @@ class StoreQueueForm extends React.Component {
               name="date"
               label="Date"
               type="date"
-              defaultValue={today}
-              min={today}
+              value={date}
               onChange={(event) => {
-                this.handleFormField("date", event);
+                handleFormField('date', event);
               }}
             />
           </Grid>
@@ -44,24 +38,23 @@ class StoreQueueForm extends React.Component {
               name="shoppingTime"
               label="Estimated Shopping Time (min)"
               type="number"
-              min={0}
               max={store.customerShopTime}
+              value={shoppingTime}
               onChange={(event) => {
-                this.handleFormField("shoppingTime", event);
+                handleFormField('shoppingTime', event);
               }}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              required
               name="numCustomer"
               label="Number of Shopper"
               type="number"
-              min={0}
               max={store.customerLimit}
+              value={numCustomer}
               onChange={(event) => {
-                this.handleFormField("numCustomer", event);
+                handleFormField('numCustomer', event);
               }}
             />
           </Grid>
