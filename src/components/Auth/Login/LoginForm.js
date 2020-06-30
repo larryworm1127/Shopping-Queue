@@ -8,10 +8,8 @@ import FormSelectField from '../FormSelectField';
 import { loginVerify } from '../../../utils/verifyAuth';
 import {
   withRouter,
-  Route
 } from 'react-router-dom';
 import store from 'store';
-import Profile from '../../Profile/profile';
 class LoginForm extends React.Component {
 
   state = {
