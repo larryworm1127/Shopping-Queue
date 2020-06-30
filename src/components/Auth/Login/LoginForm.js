@@ -7,9 +7,7 @@ import FormTextField from '../FormTextField';
 import FormSelectField from '../FormSelectField';
 import { loginVerify } from '../../../utils/verifyAuth';
 import {
-  Redirect, withRouter,
-  useHistory,
-  useLocation,
+  withRouter,
   Route
 } from 'react-router-dom';
 import store from 'store';
@@ -53,7 +51,7 @@ class LoginForm extends React.Component {
   };
 
   render() {
-    const { classes, history } = this.props;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>

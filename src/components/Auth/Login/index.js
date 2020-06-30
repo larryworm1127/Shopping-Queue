@@ -20,7 +20,7 @@ class Login extends React.Component {
       loginUser
     } = this.props;
 
-    return !!store.get('loggedIn') ? (<Redirect to={{ pathname: '/queue' }} />) : (
+    return !!store.get('loggedIn') ? (<Redirect to={{ pathname: '/profile' }} />) : (
       <React.Fragment>
         <NavBar currentPath={location.pathname} />
 
