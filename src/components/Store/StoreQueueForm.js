@@ -2,36 +2,23 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Queue } from '../../utils/stores';
 
 
 class StoreQueueForm extends React.Component {
 
-  state = {
-    date: new Date().toISOString().slice(0, 10),
-    shoppingTime: 30,
-    numCustomer: 1
-  };
-
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-    });
-  };
-
-  handleFormSubmit = (event) => {
-    event.preventDefault();
-
-    const { store } = this.props;
-    const newQueue = new Queue('test', this.state.date, this.state.shoppingTime, this.state.numCustomer);
-    store.queue.push(newQueue);
-  };
-
   render() {
-    const { classes, store } = this.props;
+    const {
+      classes,
+      store,
+      date,
+      shoppingTime,
+      numCustomer,
+      handleFormSubmit,
+      handleFormField
+    } = this.props;
 
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
@@ -39,9 +26,9 @@ class StoreQueueForm extends React.Component {
               name="date"
               label="Date"
               type="date"
-              value={this.state.date}
+              value={date}
               onChange={(event) => {
-                this.handleFormField('date', event);
+                handleFormField('date', event);
               }}
             />
           </Grid>
@@ -52,9 +39,9 @@ class StoreQueueForm extends React.Component {
               label="Estimated Shopping Time (min)"
               type="number"
               max={store.customerShopTime}
-              value={this.state.shoppingTime}
+              value={shoppingTime}
               onChange={(event) => {
-                this.handleFormField('shoppingTime', event);
+                handleFormField('shoppingTime', event);
               }}
             />
           </Grid>
@@ -65,9 +52,9 @@ class StoreQueueForm extends React.Component {
               label="Number of Shopper"
               type="number"
               max={store.customerLimit}
-              value={this.state.numCustomer}
+              value={numCustomer}
               onChange={(event) => {
-                this.handleFormField('numCustomer', event);
+                handleFormField('numCustomer', event);
               }}
             />
           </Grid>

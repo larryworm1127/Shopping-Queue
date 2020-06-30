@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../Nav/navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { stores } from '../../utils/stores';
+import { Queue, stores } from '../../utils/stores';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
@@ -14,10 +14,37 @@ import StoreQueueForm from './StoreQueueForm';
 
 class StoreDetail extends React.Component {
 
-  render() {
-    const { match, classes } = this.props;
-    const store = stores[match.params.id];
+  state = {
+    date: new Date().toISOString().slice(0, 10),
+    shoppingTime: 30,
+    numCustomer: 1
+  };
 
+  handleFormField = (field, event) => {
+    this.setState({
+      [field]: event.target.value,
+    });
+  };
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    const { store } = this.props;
+    const newQueue = new Queue('test', this.state.date, this.state.shoppingTime, this.state.numCustomer);
+    store.queue.push(newQueue);
+  };
+
+  render() {
+    const {
+      match,
+      classes,
+      date,
+      shoppingTime,
+      numCustomer,
+      handleFormSubmit,
+      handleFormField
+    } = this.props;
+    const store = stores[match.params.id];
 
     return (
       <React.Fragment>
@@ -44,7 +71,15 @@ class StoreDetail extends React.Component {
                   Queue at store:
                 </Typography>
 
-                <StoreQueueForm classes={classes} store={store}/>
+                <StoreQueueForm
+                  classes={classes}
+                  store={store}
+                  date={(date === undefined) ? this.state.date : date}
+                  shoppingTime={(shoppingTime === undefined) ? this.state.shoppingTime : shoppingTime}
+                  numCustomer={(numCustomer === undefined) ? this.state.numCustomer : numCustomer}
+                  handleFormSubmit={(handleFormSubmit === undefined) ? this.handleFormSubmit : handleFormSubmit}
+                  handleFormField={(handleFormField === undefined) ? this.handleFormField : handleFormField}
+                />
               </Grid>
             </Grid>
           </Paper>
