@@ -20,14 +20,6 @@ export default function Menulog() {
         pathname: '/profile'
       },
       {
-        label: 'Register',
-        pathname: '/register'
-      },
-      {
-        label: 'Login',
-        pathname: '/login'
-      },
-      {
         label: 'Logout',
         pathname: '/logout'
       },
@@ -42,6 +34,10 @@ export default function Menulog() {
       {
         label: 'Login',
         pathname: '/login'
+      },
+      {
+        label: 'Register',
+        pathname: '/register'
       },
     ];
   }
