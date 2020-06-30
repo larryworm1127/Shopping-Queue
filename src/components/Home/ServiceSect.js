@@ -69,7 +69,7 @@ function ServiceSect(props) {
   let title_text = 'Services';
   let second_title = '';
   let second_services = [];
-  if (store.get('loggedIn')) {
+  if (store.get('loggedIn') && store.get('loginas') == '0') {
     title_text = 'Recommended Vendors';
     second_title = 'Based off your Queue History'
 
@@ -120,6 +120,7 @@ function ServiceSect(props) {
         icon: <LocalGroceryStore />,
       },
     ];
+
   }
   return (
     <div className="container-fluid main_div">
