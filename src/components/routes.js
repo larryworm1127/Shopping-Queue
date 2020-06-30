@@ -10,12 +10,7 @@ import StoreDetail from './Store';
 import store from 'store';
 
 
-export default props => {
-  const {
-    loggedIn,
-    loginUser,
-    logoutUser
-  } = props;
+export default () => {
 
   return (
     <BrowserRouter>
@@ -27,11 +22,7 @@ export default props => {
         </AuthenRoute>
         <AuthenRoute path='/queue' component={Queue}>
         </AuthenRoute>
-        <Route exact path='/login'>
-          <Login
-            loginUser={loginUser}
-            logoutUser={logoutUser}
-          />
+        <Route exact path='/login' component={Login}>
         </Route>
         <Route exact path='/register' component={regsiterfunc()}>
 

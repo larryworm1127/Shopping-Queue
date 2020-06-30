@@ -16,8 +16,6 @@ class Login extends React.Component {
     const {
       classes,
       location,
-      loggedIn,
-      loginUser
     } = this.props;
 
     return store.get('loggedIn') ? (<Redirect to={{ pathname: '/profile' }} />) : (
@@ -35,10 +33,7 @@ class Login extends React.Component {
               Sign in
             </Typography>
 
-            <LoginForm
-              classes={classes}
-              loginUser={loginUser}
-            />
+            <LoginForm classes={classes}/>
 
             <Grid container>
               <Grid item xs>
