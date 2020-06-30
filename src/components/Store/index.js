@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
 import { styles } from './style';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import StoreDetailList from './StoreDetailList';
 import StoreQueueForm from './StoreQueueForm';
 
