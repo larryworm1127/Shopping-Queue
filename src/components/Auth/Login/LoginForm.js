@@ -3,8 +3,8 @@ import React from 'react';
 // Material UI imports
 import { Button, Checkbox, FormControlLabel } from '@material-ui/core';
 // User JS imports
-import FormTextField from '../FormTextField';
-import FormSelectField from '../FormSelectField';
+import FormTextField from '../../FormTextField';
+import FormSelectField from '../../FormSelectField';
 import { loginVerify } from '../../../utils/verifyAuth';
 import {
   withRouter,

@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import FormTextField from '../FormTextField';
+import FormTextField from '../../FormTextField';
 import RegisterFormButtons from './RegisterFormButtons';
 
 class ShopperProfile extends React.Component {
