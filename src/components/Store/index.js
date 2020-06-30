@@ -9,26 +9,16 @@ import { withStyles } from '@material-ui/core';
 import { styles } from './style';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import StoreDetailList from './StoreDetailList';
+import StoreQueueForm from './StoreQueueForm';
 
 
 class StoreDetail extends React.Component {
 
-  state = {
-    date: '',
-    shoppingTime: '',
-    customerLimit: ''
-  };
-
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-    });
-  };
-
   render() {
     const { match, classes } = this.props;
     const store = stores[match.params.id];
-    const today = new Date().toISOString().slice(0, 10);
+
 
     return (
       <React.Fragment>
@@ -43,55 +33,23 @@ class StoreDetail extends React.Component {
             <br/>
 
             <Grid container>
-              <Grid item xs={6}>
+              <Grid item xs={7}>
                 <Typography variant="h6" gutterBottom>
                   Store details
                 </Typography>
+
+                <StoreDetailList store={store}/>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={5}>
                 <Typography variant="h6" gutterBottom>
-                  Book at store:
+                  Queue at store:
                 </Typography>
 
-                <form>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        name="date"
-                        label="Date"
-                        type="date"
-                        defaultValue={today}
-                        min={today}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        name="shoppingTime"
-                        label="Estimated Shopping Time (min)"
-                        type="number"
-                        min={0}
-                        max={store.customerShopTime}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        name="numCustomer"
-                        label="Number of Shopper"
-                        type="number"
-                        min={0}
-                        max={store.customerLimit}
-                      />
-                    </Grid>
-                  </Grid>
-                </form>
+                <StoreQueueForm classes={classes} store={store}/>
               </Grid>
             </Grid>
           </Paper>
         </div>
-
       </React.Fragment>
     );
   }
