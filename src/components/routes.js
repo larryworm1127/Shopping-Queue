@@ -40,7 +40,7 @@ export default props => {
         <Route exact path='/profile'>
           <Profile/>
         </Route>
-        <Route exact path='/:id'>
+        <Route exact path='/store/:id'>
           <StoreDetail/>
         </Route>
         <Route path='*' component={NoMatch}/>
