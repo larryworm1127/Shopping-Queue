@@ -29,7 +29,6 @@ class StoreQueueForm extends React.Component {
 
   render() {
     const { classes, store } = this.props;
-    const today = new Date().toISOString().slice(0, 10);
 
     return (
       <form onSubmit={this.handleFormSubmit}>
