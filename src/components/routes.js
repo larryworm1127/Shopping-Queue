@@ -11,6 +11,12 @@ import store from 'store';
 
 
 export default props => {
+  const {
+    loggedIn,
+    loginUser,
+    logoutUser
+  } = props;
+
   return (
     <BrowserRouter>
       <Switch>
