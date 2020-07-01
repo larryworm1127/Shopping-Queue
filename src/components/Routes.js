@@ -3,7 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-route
 import Home from './Home/';
 import Queue from './Queue';
 import Login from './Auth/Login';
-import Profile from './Profile/profile';
+import Profile from './Profile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
 import store from 'store';

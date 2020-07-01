@@ -1,6 +1,6 @@
 import React from 'react';
 // Importing routing component
-import Routes from './components/routes';
+import Routes from './components/Routes';
 import './App.css';
 // Importing material UI items
 import { createMuiTheme } from '@material-ui/core/styles';

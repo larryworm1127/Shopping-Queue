@@ -1,8 +1,8 @@
 import React from 'react';
 import NavBar from '../Nav/navbar';
-import SearchHistory from './searchHistory.js';
-import QueueHistory from './queueHistory.js';
-import UserProfile from './userProfile.js';
+import SearchHistory from './SearchHistory.js';
+import QueueHistory from './QueueHistory.js';
+import UserProfile from './UserProfile.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,6 +16,7 @@ import HistoryIcon from '@material-ui/icons/History';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
 import { withRouter } from 'react-router-dom';
+import { styles } from './style';
 
 
 const tabs = [
@@ -30,36 +31,6 @@ const tabIcons = [
   <ShoppingCartIcon/>
 ];
 
-const drawerWidth = 240;
-const styles = (theme) => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-});
 
 class Profile extends React.Component {
 
@@ -72,7 +43,7 @@ class Profile extends React.Component {
   };
 
   profileSettings = () => {
-    const { classes } = this.props
+    const { classes } = this.props;
 
     switch (this.state.setting) {
       case 0:
