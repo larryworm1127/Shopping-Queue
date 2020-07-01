@@ -33,7 +33,13 @@ class StoreCards extends React.Component {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" color="primary">Queue Here</Button>
+            <Button
+              size="small"
+              color="primary"
+              href={`/store/${store.id}`}
+            >
+              Queue Here
+            </Button>
             <Button
               type="button"
               color="primary"

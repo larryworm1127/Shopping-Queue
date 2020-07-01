@@ -3,13 +3,13 @@ import React from 'react';
 // Material UI imports
 import { Button, Checkbox, FormControlLabel } from '@material-ui/core';
 // User JS imports
-import FormTextField from '../FormTextField';
-import FormSelectField from '../FormSelectField';
+import FormTextField from '../../FormTextField';
+import FormSelectField from '../../FormSelectField';
 import { loginVerify } from '../../../utils/verifyAuth';
-import {
-  withRouter,
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import store from 'store';
+
+
 class LoginForm extends React.Component {
 
   state = {
@@ -40,7 +40,6 @@ class LoginForm extends React.Component {
     const { history } = this.props;
     const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
     if (verify === true) {
-      // loginUser();
       store.set('loggedIn', true);
       store.set('loginas', this.state.loginAs);
       store.set('user', this.state.username);

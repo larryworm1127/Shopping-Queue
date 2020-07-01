@@ -3,8 +3,8 @@ import React from 'react';
 // Material UI imports
 import { Grid, Typography } from '@material-ui/core';
 // User JS imports
-import FormTextField from '../FormTextField';
-import FormSelectField from '../FormSelectField';
+import FormTextField from '../../FormTextField';
+import FormSelectField from '../../FormSelectField';
 import { registerVerify } from '../../../utils/verifyAuth';
 import RegisterFormButtons from './RegisterFormButtons';
 

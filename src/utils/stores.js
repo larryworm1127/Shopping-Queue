@@ -18,6 +18,20 @@ export const Store = function (
   this.closingTime = closingTime;
   this.customerLimit = customerLimit;
   this.customerShopTime = customerShopTime;
+  this.queue = [];
+};
+
+
+export const Queue = function (
+  username,
+  date,
+  shopTime,
+  numCustomer
+) {
+  this.username = username;
+  this.date = date;
+  this.shopTime = shopTime;
+  this.numCustomer = numCustomer;
 };
 
 
