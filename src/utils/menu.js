@@ -1,6 +1,6 @@
 import store from 'store'
 
-export default function Menulog() {
+export default function Menu() {
   if (!!store.get('loggedIn')) {
     return [
       {
