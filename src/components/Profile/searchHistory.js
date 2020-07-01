@@ -2,10 +2,11 @@ import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 function createSearchData(shopName, address, shopType, date) {
   return { shopName, address, shopType, date };
@@ -20,41 +21,47 @@ const searchRows = [
 
 class SearchHistory extends React.Component {
   render() {
+    const { classes } = this.props;
+
     return (
       <React.Fragment>
-        <Typography variant="h3" component="h4">
-          Shop Search History
-        </Typography>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Shop Name</TableCell>
-                <TableCell>Address</TableCell>
-                <TableCell>Shop Type</TableCell>
-                <TableCell>Date Searched</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {searchRows.map((searchRow) => (
-                <TableRow key={searchRow.shopName}>
-                  <TableCell component="th" scope="row">
-                    {searchRow.shopName}
-                  </TableCell>
-                  <TableCell align="left">
-                    {searchRow.address}
-                  </TableCell>
-                  <TableCell align="left">
-                    {searchRow.shopType}
-                  </TableCell>
-                  <TableCell align="left">
-                    {searchRow.date}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                Shop Search History
+              </Typography>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Shop Name</TableCell>
+                    <TableCell>Address</TableCell>
+                    <TableCell>Shop Type</TableCell>
+                    <TableCell>Date Searched</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {searchRows.map((searchRow) => (
+                    <TableRow key={searchRow.shopName}>
+                      <TableCell component="th" scope="row">
+                        {searchRow.shopName}
+                      </TableCell>
+                      <TableCell align="left">
+                        {searchRow.address}
+                      </TableCell>
+                      <TableCell align="left">
+                        {searchRow.shopType}
+                      </TableCell>
+                      <TableCell align="left">
+                        {searchRow.date}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Paper>
+          </Grid>
+        </Grid>
       </React.Fragment>
     );
   }

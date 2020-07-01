@@ -2,10 +2,11 @@ import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 
 function createQueueData(shopName, address, bookedDate, dateQueued) {
@@ -21,41 +22,47 @@ const queueRows = [
 
 class QueueHistory extends React.Component {
   render() {
+    const { classes } = this.props;
+
     return (
       <React.Fragment>
-        <Typography variant="h3" component="h4">
-          Queueing History
-        </Typography>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Shop Name</TableCell>
-                <TableCell>Address</TableCell>
-                <TableCell>Date Booked</TableCell>
-                <TableCell>Date Booked</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {queueRows.map((queueRow) => (
-                <TableRow key={queueRow.shopName}>
-                  <TableCell component="th" scope="row">
-                    {queueRow.shopName}
-                  </TableCell>
-                  <TableCell align="left">
-                    {queueRow.address}
-                  </TableCell>
-                  <TableCell align="left">
-                    {queueRow.bookedDate}
-                  </TableCell>
-                  <TableCell align="left">
-                    {queueRow.dateQueued}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                Queueing History
+              </Typography>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Shop Name</TableCell>
+                    <TableCell>Address</TableCell>
+                    <TableCell>Date Booked</TableCell>
+                    <TableCell>Date Booked</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {queueRows.map((queueRow) => (
+                    <TableRow key={queueRow.shopName}>
+                      <TableCell component="th" scope="row">
+                        {queueRow.shopName}
+                      </TableCell>
+                      <TableCell align="left">
+                        {queueRow.address}
+                      </TableCell>
+                      <TableCell align="left">
+                        {queueRow.bookedDate}
+                      </TableCell>
+                      <TableCell align="left">
+                        {queueRow.dateQueued}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Paper>
+          </Grid>
+        </Grid>
       </React.Fragment>
     );
   }

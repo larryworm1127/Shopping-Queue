@@ -26,12 +26,14 @@ export const Queue = function (
   username,
   date,
   shopTime,
-  numCustomer
+  numCustomer,
+  timeQueued,
 ) {
   this.username = username;
   this.date = date;
   this.shopTime = shopTime;
   this.numCustomer = numCustomer;
+  this.timeQueued = timeQueued;
 };
 
 

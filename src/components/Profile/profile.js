@@ -35,10 +35,6 @@ const styles = (theme) => ({
   root: {
     display: 'flex',
   },
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-  },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -53,6 +49,16 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
   },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
 });
 
 class Profile extends React.Component {
@@ -66,13 +72,15 @@ class Profile extends React.Component {
   };
 
   profileSettings = () => {
+    const { classes } = this.props
+
     switch (this.state.setting) {
       case 0:
-        return <UserProfile/>;
+        return <UserProfile classes={classes}/>;
       case 1:
-        return <SearchHistory/>;
+        return <SearchHistory classes={classes}/>;
       case 2:
-        return <QueueHistory/>;
+        return <QueueHistory classes={classes}/>;
       default:
         return Error('Unknown case');
     }
@@ -106,7 +114,7 @@ class Profile extends React.Component {
           </List>
         </Drawer>
 
-        <Container>
+        <Container className={classes.container}>
           {this.profileSettings()}
         </Container>
       </React.Fragment>

@@ -30,7 +30,7 @@ class StoreDetail extends React.Component {
     event.preventDefault();
 
     const { store } = this.props;
-    const newQueue = new Queue('test', this.state.date, this.state.shoppingTime, this.state.numCustomer);
+    const newQueue = new Queue('test', this.state.date, this.state.shoppingTime, this.state.numCustomer, new Date());
     store.queue.push(newQueue);
   };
 
