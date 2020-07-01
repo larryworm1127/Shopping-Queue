@@ -10,6 +10,7 @@ import { styles } from './style';
 import LoginForm from './LoginForm';
 import store from 'store';
 
+
 class Login extends React.Component {
 
   render() {
@@ -18,15 +19,15 @@ class Login extends React.Component {
       location,
     } = this.props;
 
-    return store.get('loggedIn') ? (<Redirect to={{ pathname: '/profile' }} />) : (
+    return store.get('loggedIn') ? (<Redirect to={{ pathname: '/profile' }}/>) : (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} />
+        <NavBar currentPath={location.pathname}/>
 
         <Container component="main" maxWidth="xs">
-          <CssBaseline />
+          <CssBaseline/>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
+              <LockOutlinedIcon/>
             </Avatar>
 
             <Typography component="h1" variant="h5">

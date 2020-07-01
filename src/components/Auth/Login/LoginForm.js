@@ -41,7 +41,7 @@ class LoginForm extends React.Component {
     const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
     if (verify === true) {
       store.set('loggedIn', true);
-      store.set('loginas', this.state.loginAs);
+      store.set('loginAs', this.state.loginAs);
       store.set('user', this.state.username);
       history.push('/profile');
     } else {

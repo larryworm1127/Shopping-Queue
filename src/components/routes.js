@@ -15,32 +15,21 @@ export default () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/'>
-          <Home/>
-        </Route>
-        <AuthenRoute path='/map' component={StoreMap}>
-        </AuthenRoute>
-        <AuthenRoute path='/queue' component={Queue}>
-        </AuthenRoute>
-        <Route exact path='/login' component={Login}>
-        </Route>
-        <Route exact path='/register' component={regsiterfunc()}>
-
-        </Route>
-        <AuthenRoute path='/profile' component={Profile}>
-        </AuthenRoute>
-        <Route path='/logout' component={signoutfunc()}>
-        </Route>
-        <Route exact path='/store/:id'>
-          <StoreDetail/>
-        </Route>
+        <Route exact path='/' component={Home}/>
+        <AuthenRoute path='/map' component={StoreMap}/>
+        <AuthenRoute path='/queue' component={Queue}/>
+        <AuthenRoute path='/profile' component={Profile}/>
+        <Route exact path='/login' component={Login}/>
+        <Route exact path='/register' component={RegisterRedirect}/>
+        <Route path='/logout' component={SignOutRedirect}/>
+        <Route exact path='/store/:id' component={StoreDetail}/>
         <Route path='*' component={NoMatch}/>
       </Switch>
     </BrowserRouter>
   );
 }
 
-const signoutfunc = () => () => {
+const SignOutRedirect = () => {
   store.remove('loggedIn');
   return (
     <Redirect
@@ -51,7 +40,8 @@ const signoutfunc = () => () => {
   );
 };
 
-const regsiterfunc = () => () => {
+
+const RegisterRedirect = () => {
   return (
     <Route
       render={() =>
