@@ -3,11 +3,11 @@ import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-route
 import Home from './Home/';
 import Queue from './Queue';
 import Login from './Auth/Login';
-import Register from './Auth/Register';
 import Profile from './Profile/profile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
 import store from 'store';
+import Register from './Auth/Register';
 
 
 export default () => {
@@ -31,36 +31,24 @@ export default () => {
 
 const SignOutRedirect = () => {
   store.remove('loggedIn');
-  return (
-    <Redirect
-      to={{
-        pathname: '/login',
-      }}
-    />
-  );
+  return <Redirect to={{ pathname: '/login' }}/>;
 };
 
 
 const RegisterRedirect = () => {
+  return store.get('loggedIn') ? <Redirect to={{ pathname: '/profile' }}/> : <Register/>;
+};
+
+const AuthenRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
-      render={() =>
-        store.get('loggedIn') ? <Profile/> : <Register/>
+      {...rest}
+      render={props => !!store.get('loggedIn') ?
+        <Component {...props} /> : <Redirect to={{ pathname: '/login' }}/>
       }
     />
   );
 };
-
-function AuthenRoute({ component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        !!store.get('loggedIn') ? <Component {...props} /> : <Login/>
-      }
-    />
-  );
-}
 
 
 const NoMatch = () => {
