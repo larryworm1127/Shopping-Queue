@@ -5,16 +5,16 @@ export const styles = theme => ({
     padding: theme.spacing(3),
     borderRadius: '2px',
     borderStyle: 'solid',
-    fontSize: '30'
-  },
-  LargeButton: {
-    fontSize: theme.typography.body1.fontSize,
+    fontSize: '30',
+    backgroundColor: 0x0000ff,
+    align: 'center'
   },
   extraLargeButton: {
+    fontSize: theme.typography.body1.fontSize,
     paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1.5),
   },
-  Button: {
+  button: {
     paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1.5),
   },
@@ -33,15 +33,12 @@ export const styles = theme => ({
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(5)
   },
-  footerwrapper: {
+  footerWrapper: {
     marginTop: theme.spacing(3),
     position: 'relative',
     backgroundImage: 'url(/main_bg.jpg)',
     backgroundSize: 'cover',
     paddingBottom: theme.spacing(2)
-  },
-  containerFix: {
-    maxWidth: 'none !important'
   },
   footerInner: {
     paddingTop: theme.spacing(8),
@@ -49,7 +46,7 @@ export const styles = theme => ({
     paddingRight: theme.spacing(2),
     paddingBottom: theme.spacing(6),
   },
-  BigFont: {
+  bigFont: {
     fontWeight: 400,
     color: theme.palette.common.white,
     textAlign: 'center'
@@ -60,5 +57,12 @@ export const styles = theme => ({
   },
   inputField: {
     backgroundColor: theme.palette.common.white
+  },
+  table: {
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(6),
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '95%',
   }
 });

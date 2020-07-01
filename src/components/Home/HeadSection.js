@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Button, Card, Typography, withStyles } from '@material-ui/core';
-import { styles } from './style';
+import { Box, Button, Card, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import store from 'store';
 
@@ -34,29 +33,26 @@ class HeadSection extends React.Component {
               data-aos-delay="200"
               data-aos="zoom-in"
             >
-              <div className={classes.containerFix}>
-                <Typography variant={'h3'}>
-                  {headerTexts.mainText}
-                </Typography>
-                <Box mb={2}>
-                  <Typography
-                    variant={'h6'}
-                    color="textSecondary"
-                  >
-                    {headerTexts.subText}
-                  </Typography>
-                </Box>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  fullWidth
-                  className={classes.extraLargeButton}
-                  classes={{ label: classes.LargeButton }}
-                  href={headerTexts.buttonUrl}
+              <Typography variant={'h3'}>
+                {headerTexts.mainText}
+              </Typography>
+              <Box mb={2}>
+                <Typography
+                  variant={'h6'}
+                  color="textSecondary"
                 >
-                  {headerTexts.buttonText}
-                </Button>
-              </div>
+                  {headerTexts.subText}
+                </Typography>
+              </Box>
+              <Button
+                variant="contained"
+                color="secondary"
+                fullWidth
+                className={classes.extraLargeButton}
+                href={headerTexts.buttonUrl}
+              >
+                {headerTexts.buttonText}
+              </Button>
             </Card>
           </Box>
         </div>
@@ -67,7 +63,6 @@ class HeadSection extends React.Component {
 
 HeadSection.propTypes = {
   classes: PropTypes.object,
-  theme: PropTypes.object
 };
 
-export default withStyles(styles)(HeadSection);
+export default HeadSection;

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Grid, Typography, withStyles } from '@material-ui/core';
-import Iconcard from './IconCard';
-import TableContainer from '@material-ui/core/TableContainer';
-import Paper from '@material-ui/core/Paper';
+import IconCard from './IconCard';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -35,11 +33,9 @@ class Services extends React.Component {
 
     return (
       <React.Fragment>
-        <div className={classes.containerFix}>
-          <Typography variant="h3" align="center">
-            {serviceData.title}
-          </Typography>
-        </div>
+        <Typography variant="h3" align="center">
+          {serviceData.title}
+        </Typography>
         <Grid container spacing={2}>
           {serviceData.services.map(element => (
             <Grid
@@ -48,7 +44,8 @@ class Services extends React.Component {
               md={4}
               key={element.headline}
             >
-              <Iconcard
+              <IconCard
+                classes={classes}
                 Icon={element.icon}
                 color={element.color}
                 headline={element.headline}
@@ -59,11 +56,9 @@ class Services extends React.Component {
           }
         </Grid>
 
-        <div className={classes.containerFix}>
-          <Typography variant="h3" align="center">
-            {serviceData.secondTitle}
-          </Typography>
-        </div>
+        <Typography variant="h3" align="center">
+          {serviceData.secondTitle}
+        </Typography>
         <Grid container spacing={2}>
           {serviceData.secondServices.map(element => (
             <Grid
@@ -72,7 +67,8 @@ class Services extends React.Component {
               md={4}
               key={element.headline}
             >
-              <Iconcard
+              <IconCard
+                classes={classes}
                 Icon={element.icon}
                 color={element.color}
                 headline={element.headline}
@@ -84,35 +80,35 @@ class Services extends React.Component {
         </Grid>
 
         {serviceData.rows !== undefined && (
-          <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>User</StyledTableCell>
-                  <StyledTableCell align="center">User Type</StyledTableCell>
-                  <StyledTableCell align="center">Messages</StyledTableCell>
-                  <StyledTableCell align="center">Date</StyledTableCell>
-                  <StyledTableCell align="center">Reply</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {serviceData.rows.map((row) => (
-                  <StyledTableRow key={row.user}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.user}
-                    </StyledTableCell>
+          <Table className={classes.table} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>User</StyledTableCell>
+                <StyledTableCell align="center">User Type</StyledTableCell>
+                <StyledTableCell align="center">Messages</StyledTableCell>
+                <StyledTableCell align="center">Date</StyledTableCell>
+                <StyledTableCell align="center">Reply</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {serviceData.rows.map((row) => (
+                <StyledTableRow key={row.user}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.user}
+                  </StyledTableCell>
 
-                    <StyledTableCell align="center">{row.type}</StyledTableCell>
-                    <StyledTableCell align="center">{row.message}</StyledTableCell>
-                    <StyledTableCell align="center">{row.date}</StyledTableCell>
-                    <StyledTableCell align="center"><Button variant="contained" color="secondary">
+                  <StyledTableCell align="center">{row.type}</StyledTableCell>
+                  <StyledTableCell align="center">{row.message}</StyledTableCell>
+                  <StyledTableCell align="center">{row.date}</StyledTableCell>
+                  <StyledTableCell align="center">
+                    <Button variant="contained" color="secondary">
                       Reply
-                    </Button></StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                    </Button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
         )}
       </React.Fragment>
     );

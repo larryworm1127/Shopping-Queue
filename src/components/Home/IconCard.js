@@ -1,37 +1,36 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography, withStyles } from '@material-ui/core';
-import { styles } from './style';
+import { Typography } from '@material-ui/core';
 
 
-function Iconcard(props) {
-  const { classes, Icon, color, headline, text } = props;
-  return (
-    <Fragment>
-      <div
-        // We will set color and fill here, due to some prios complications
-        className={classes.iconWrapper}
-        style={{
-          color: color,
-          backgroundColor: 0x0000ff,
-          fill: color,
-          align: 'center'
-        }}
-      >
-        {Icon}
+class IconCard extends React.Component {
 
-        <Typography variant="h5" paragraph align="center">
-          {headline}
-        </Typography>
-        <Typography variant="body1" color="textSecondary" align="center">
-          {text}
-        </Typography>
-      </div>
-    </Fragment>
-  );
+  render() {
+    const { classes, Icon, color, headline, text } = this.props;
+
+    return (
+      <React.Fragment>
+        <div
+          // We will set color and fill here, due to some prios complications
+          className={classes.iconWrapper}
+          style={{
+            color: color,
+          }}
+        >
+          {Icon}
+          <Typography variant="h5" paragraph align="center">
+            {headline}
+          </Typography>
+          <Typography variant="body1" color="textSecondary" align="center">
+            {text}
+          </Typography>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
 
-Iconcard.propTypes = {
+IconCard.propTypes = {
   classes: PropTypes.object.isRequired,
   Icon: PropTypes.element.isRequired,
   color: PropTypes.string.isRequired,
@@ -39,4 +38,4 @@ Iconcard.propTypes = {
   text: PropTypes.string.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(Iconcard);
+export default IconCard;
