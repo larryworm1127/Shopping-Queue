@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Typography, withStyles, withWidth, makeStyles } from '@material-ui/core';
+import { Grid, Typography, withStyles, withWidth } from '@material-ui/core';
 import BuildIcon from '@material-ui/icons/Build';
 import ComputerIcon from '@material-ui/icons/Computer';
 import BarChartIcon from '@material-ui/icons/BarChart';
