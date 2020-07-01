@@ -8,12 +8,14 @@ import Footer from './Footer';
 /* Component for the Home page */
 class Home extends React.Component {
   render() {
+    const { location } = this.props
+
     return (
-      <div className="App">
-        <NavBar />
-        <HeadSection />
-        <ServiceSect />
-        <Footer />
+      <div>
+        <NavBar currentPath={location.pathname}/>
+        <HeadSection/>
+        <ServiceSect/>
+        <Footer/>
       </div>
     );
   }

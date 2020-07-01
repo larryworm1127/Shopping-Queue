@@ -45,11 +45,7 @@ const RegisterRedirect = () => {
   return (
     <Route
       render={() =>
-        store.get('loggedIn') ? (
-          <Profile/>
-        ) : (
-          <Register/>
-        )
+        store.get('loggedIn') ? <Profile/> : <Register/>
       }
     />
   );
@@ -60,11 +56,7 @@ function AuthenRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={props =>
-        !!store.get('loggedIn') ? (
-          <Component {...props} />
-        ) : (
-          <Login/>
-        )
+        !!store.get('loggedIn') ? <Component {...props} /> : <Login/>
       }
     />
   );

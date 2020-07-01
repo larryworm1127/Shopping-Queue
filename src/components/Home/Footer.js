@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Button, Grid, TextField, Typography, withStyles, withWidth } from '@material-ui/core';
-import classNames from 'classnames';
+import { Box, Button, Grid, TextField, Typography, withStyles } from '@material-ui/core';
 import { styles } from './style';
 
 
 function Footer(props) {
   const { classes } = props;
   return (
-    <div className={classNames('main_div', classes.footerwrapper)}>
+    <div className={classes.footerwrapper}>
       <div className={classes.footerInner}>
         <Grid container spacing={5}>
           <Grid item xs={12} md={6} lg={4}>
@@ -34,7 +33,6 @@ function Footer(props) {
                   fullWidth
                   className={classes.Button}
                   classes={{ label: classes.ButtonLabel }}
-
                 >
                   Submit
                 </Button>
@@ -71,4 +69,4 @@ Footer.propTypes = {
   width: PropTypes.string.isRequired
 };
 
-export default withWidth()(withStyles(styles, { withTheme: true })(Footer));
+export default withStyles(styles)(Footer);

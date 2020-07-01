@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Typography, withStyles, withWidth } from '@material-ui/core';
+import { Grid, Typography, withStyles } from '@material-ui/core';
 import BuildIcon from '@material-ui/icons/Build';
 import ComputerIcon from '@material-ui/icons/Computer';
 import BarChartIcon from '@material-ui/icons/BarChart';
@@ -22,53 +22,46 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+
+
 let services = [
   {
     color: '#00C853',
     headline: 'Service 1',
-    text:
-      'Our service',
-    icon: <BuildIcon />,
+    text: 'Our service',
+    icon: <BuildIcon/>,
   },
   {
     color: '#6200EA',
     headline: 'Service 2',
-    text:
-      'Our service',
-    icon: <CalendarTodayIcon />,
+    text: 'Our service',
+    icon: <CalendarTodayIcon/>,
   },
   {
     color: '#0091EA',
     headline: 'Service 3',
-    text:
-      'Our service',
-    icon: <MeassageIcon />,
+    text: 'Our service',
+    icon: <MeassageIcon/>,
   },
   {
     color: '#d50000',
     headline: 'Service 4',
-    text:
-      'Our service',
-    icon: <ComputerIcon />,
+    text: 'Our service',
+    icon: <ComputerIcon/>,
   },
   {
     color: '#DD2C00',
     headline: 'Service 5',
-    text:
-      'Our service',
-    icon: <BarChartIcon />,
+    text: 'Our service',
+    icon: <BarChartIcon/>,
   },
   {
     color: '#64DD17',
     headline: 'Service 6',
-    text:
-      'Our service',
-    icon: <HeadsetMicIcon />,
-  },
-
+    text: 'Our service',
+    icon: <HeadsetMicIcon/>,
+  }
 ];
-
-
 
 
 function ServiceSect(props) {
@@ -76,9 +69,10 @@ function ServiceSect(props) {
   let title_text = 'Services';
   let second_title = '';
   let second_services = [];
-  if (store.get('loggedIn') && store.get('loginas') === 0) {
+
+  if (store.get('loggedIn') && store.get('loginAs') === 0) {
     title_text = 'Recommended Vendors';
-    second_title = 'Based off your Queue History'
+    second_title = 'Based off your Queue History';
 
     second_services = [
       {
@@ -86,21 +80,21 @@ function ServiceSect(props) {
         headline: 'BallMart',
         text:
           'Biggest Box store',
-        icon: <LocalGroceryStore />,
+        icon: <LocalGroceryStore/>,
       },
       {
         color: '#6200EA',
         headline: 'Canadian wire',
         text:
           'We got All the wires and more',
-        icon: <LocalGroceryStore />,
+        icon: <LocalGroceryStore/>,
       },
       {
         color: '#0091EA',
         headline: 'Bow\'s',
         text:
           'We got all your bows',
-        icon: <LocalGroceryStore />,
+        icon: <LocalGroceryStore/>,
       },
     ];
 
@@ -110,26 +104,25 @@ function ServiceSect(props) {
         headline: 'No deals',
         text:
           'Only deal Grocery',
-        icon: <LocalGroceryStore />,
+        icon: <LocalGroceryStore/>,
       },
       {
         color: '#6200EA',
         headline: 'Bestco',
         text:
           'Your one stop shop',
-        icon: <LocalGroceryStore />,
+        icon: <LocalGroceryStore/>,
       },
       {
         color: '#0091EA',
         headline: 'Tesco Restaurants',
         text:
           'Chain restaurant for Soul Food',
-        icon: <LocalGroceryStore />,
+        icon: <LocalGroceryStore/>,
       },
     ];
 
-  }
-  else if (store.get('loggedIn') && store.get('loginas') === 2) {
+  } else if (store.get('loggedIn') && store.get('loginAs') === 2) {
     title_text = 'User Stats';
     let second_title = 'User Support Messages';
     const StyledTableCell = withStyles((theme) => ({
@@ -154,23 +147,24 @@ function ServiceSect(props) {
         headline: 'End Users',
         text:
           '200 end users',
-        icon: <People />,
+        icon: <People/>,
       },
       {
         color: '#6200EA',
         headline: 'Online Users',
         text:
           '100 online users',
-        icon: <People />,
+        icon: <People/>,
       },
       {
         color: '#0091EA',
         headline: 'Shop Owners',
         text:
           '100 Shop owners',
-        icon: <People />,
+        icon: <People/>,
       },
     ];
+
     function createData(user, type, message, date) {
       return { user, type, message, date, };
     }
@@ -181,6 +175,7 @@ function ServiceSect(props) {
       createData('Bestco', 'Shop owner', 'Issue with deleting seeing queue', 'Yesterday 4:30PM'),
       createData('Jim Joy', 'end user', 'Issue with deleting user', '06/20/2020'),
     ];
+
     return (
       <div className="container-fluid main_div">
         <div className={classNames(classes.containerFix, 'container')}>
@@ -259,7 +254,7 @@ function ServiceSect(props) {
                   <StyledTableCell align="center">{row.date}</StyledTableCell>
                   <StyledTableCell align="center"><Button variant="contained" color="secondary">
                     Reply
-      </Button></StyledTableCell>
+                  </Button></StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
@@ -324,10 +319,7 @@ function ServiceSect(props) {
           }
         </Grid>
       </div>
-
-
     </div>
-
   );
 }
 
@@ -336,5 +328,4 @@ ServiceSect.propTypes = {
 };
 
 
-export default withWidth()(
-  withStyles(styles)(ServiceSect));
+export default withStyles(styles)(ServiceSect);

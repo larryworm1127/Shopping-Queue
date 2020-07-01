@@ -119,12 +119,12 @@ class Register extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, location } = this.props;
 
     return (
       <React.Fragment>
         <CssBaseline/>
-        <NavBar currentPath={this.props.location.pathname}/>
+        <NavBar currentPath={location.pathname}/>
 
         <div className={classes.layout}>
           <Paper className={classes.paper}>
