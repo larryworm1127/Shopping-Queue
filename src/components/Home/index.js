@@ -1,24 +1,29 @@
 import React from 'react';
 import NavBar from '../Nav/navbar';
 import HeadSection from './HeadSection';
-import ServiceSect from './ServiceSect';
 import Footer from './Footer';
+import { getServiceData } from '../../utils/services';
+import store from 'store';
+import Services from './Services';
+import { styles } from './style';
+import { withStyles } from '@material-ui/core';
 
 
 /* Component for the Home page */
 class Home extends React.Component {
   render() {
-    const { location } = this.props
+    const { location, classes } = this.props
+    const serviceData = getServiceData((store.get('loggedIn')) ? store.get('loginAs') : -1);
 
     return (
       <div>
         <NavBar currentPath={location.pathname}/>
         <HeadSection/>
-        <ServiceSect/>
+        <Services classes={classes} serviceData={serviceData}/>
         <Footer/>
       </div>
     );
   }
 }
 
-export default Home;
+export default withStyles(styles)(Home);

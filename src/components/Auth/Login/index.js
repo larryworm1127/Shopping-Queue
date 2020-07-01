@@ -14,10 +14,7 @@ import store from 'store';
 class Login extends React.Component {
 
   render() {
-    const {
-      classes,
-      location,
-    } = this.props;
+    const { classes, location } = this.props;
 
     return store.get('loggedIn') ? (<Redirect to={{ pathname: '/profile' }}/>) : (
       <React.Fragment>
