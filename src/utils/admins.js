@@ -18,7 +18,7 @@ export class Admin {
     this.email = email;
     this.viewableShoppers = viewableShoppers;
     this.viewableStores = viewableStores;
-  }
+  };
 }
 
 const admins = [

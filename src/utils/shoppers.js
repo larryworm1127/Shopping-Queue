@@ -35,7 +35,7 @@ export class Shopper {
 }
 
 
-const shoppers = [
+export const shoppers = [
   new Shopper(
     'user',
     'John',

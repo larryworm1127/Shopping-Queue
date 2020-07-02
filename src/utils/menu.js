@@ -17,7 +17,7 @@ export default function Menu() {
       },
       {
         label: 'Profile',
-        pathname: '/profile'
+        pathname: (store.get('loginAs') === 0 ? '/profile' : (store.get('loginAs') === 1 ? 'owner-profile' : 'admin-profile'))
       },
       {
         label: 'Logout',
