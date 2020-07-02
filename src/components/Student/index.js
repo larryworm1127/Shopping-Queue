@@ -2,8 +2,10 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
+import Divider from "@material-ui/core/Divider";
 
 import { removeStudent } from "../../utils/queue";
+import DetailsWindow from "../Details/index";
 
 import "./styles.css";
 
@@ -17,36 +19,23 @@ class Student extends React.Component {
   constructor(props) {
     // When the componenet is created
     super(props);
-    this.state = {
-      seconds: 0
-    };
+    this.state = { seen: false };
+
   }
 
-  componentDidMount() {
-    // When the component enters the DOM
-    this.studentTimer = setInterval(() => this.tick(), 1000);
-  }
-
-  componentWillUnmount() {
-    // When the component leaves the DOM
-    // log("clearing");
-    clearInterval(this.studentTimer);
-  }
-
-  // To tick off the seconds
-  tick() {
-    // console.log("tick");
+  toggleDetails() {
     this.setState({
-      seconds: this.state.seconds + 1
-    });
-    // log(this.state.seconds);
-  }
+       seen: !this.state.seen
+  });
+   }
 
   render() {
     const { student, queueComponent } = this.props;
 
     return (
+
       <TableRow className="student" key={student.name}>
+
         <TableCell component="th" scope="row">
           {student.name}
         </TableCell>
@@ -66,13 +55,27 @@ class Student extends React.Component {
 
         <TableCell component="th" scope="row">
           <Button
+            class="button"
             variant="contained"
             color="secondary"
+            onClick={this.toggleDetails.bind(this)}
             >
-            details
+            DETAILS
           </Button>
 
           <Button
+            class="button"
+            variant="contained"
+            color="secondary"
+            /*onClick={
+                redirect to the store page
+            }*/
+            >
+            EDIT BOOKING
+          </Button>
+
+          <Button
+            class="button"
             variant="contained"
             color="secondary"
             onClick={
@@ -81,12 +84,29 @@ class Student extends React.Component {
               //() => this.removeStudent(student) // this also works
             }
           >
-            leave queue
+            LEAVE QUEUE
           </Button>
 
+
+
+        {this.state.seen ?
+            <DetailsWindow
+                store={student.name}
+                closePopup={this.toggleDetails.bind(this)}
+            />
+            : null
+        }
+
+
         </TableCell>
+
       </TableRow>
+
+
+
+
     );
+
   }
 }
 
