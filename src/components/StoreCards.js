@@ -14,7 +14,7 @@ const styles = () => ({
   pos: {
     marginBottom: 12,
   },
-})
+});
 
 
 class StoreCards extends React.Component {

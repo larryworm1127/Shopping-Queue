@@ -53,7 +53,6 @@ class StoreDetail extends React.Component {
       handleFormField
     } = this.props;
     const store = getStore(match.params.id);
-    console.log(store)
 
     return (
       <React.Fragment>
