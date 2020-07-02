@@ -1,6 +1,6 @@
 import { stores } from './stores';
 
-class Shopper {
+export class Shopper {
   constructor(
     username,
     firstName,

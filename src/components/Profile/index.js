@@ -17,8 +17,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
 import { withRouter } from 'react-router-dom';
 import { styles } from './style';
-import { getShopper } from '../../utils/shoppers';
+import { getShopper, Shopper } from '../../utils/shoppers';
 import store from 'store';
+import PropTypes from 'prop-types';
 
 
 const tabs = [
@@ -44,9 +45,8 @@ class Profile extends React.Component {
     this.setState({ setting: val });
   };
 
-  profileSettings = () => {
-    const shopper = getShopper(store.get('user'));
-    console.log(shopper)
+  profileSettings = (propShopper) => {
+    const shopper = (propShopper === undefined) ? getShopper(store.get('user')) : propShopper;
 
     switch (this.state.setting) {
       case 0:
@@ -61,7 +61,7 @@ class Profile extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, shopper } = this.props;
 
     return (
       <React.Fragment>
@@ -80,7 +80,7 @@ class Profile extends React.Component {
           <Divider/>
           <List>
             {tabs.map((label, index) => (
-              <ListItem button key={label} onClick={() => this.setSetting(tabs.indexOf(label))}>
+              <ListItem button key={label} onClick={() => this.setSetting(index)}>
                 <ListItemIcon>{tabIcons[index]}</ListItemIcon>
                 <ListItemText primary={label}/>
               </ListItem>
@@ -89,11 +89,16 @@ class Profile extends React.Component {
         </Drawer>
 
         <Container className={classes.container}>
-          {this.profileSettings()}
+          {this.profileSettings(shopper)}
         </Container>
       </React.Fragment>
     );
   }
 }
+
+Profile.propTypes = {
+  classes: PropTypes.object.isRequired,
+  shopper: PropTypes.objectOf(Shopper)
+};
 
 export default withRouter(withStyles(styles)(Profile));

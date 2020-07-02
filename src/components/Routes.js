@@ -16,12 +16,12 @@ export default () => {
     <BrowserRouter>
       <Switch>
         <Route exact path='/' component={Home}/>
-        <AuthenRoute path='/map' component={StoreMap}/>
-        <AuthenRoute path='/queue' component={Queue}/>
-        <AuthenRoute path='/profile' component={Profile}/>
+        <AuthenRoute exact path='/map' component={StoreMap}/>
+        <AuthenRoute exact path='/queue' component={Queue}/>
+        <AuthenRoute exact path='/profile' component={Profile}/>
         <Route exact path='/login' component={Login}/>
         <Route exact path='/register' component={RegisterRedirect}/>
-        <Route path='/logout' component={SignOutRedirect}/>
+        <Route exact path='/logout' component={SignOutRedirect}/>
         <Route exact path='/store/:id' component={StoreDetail}/>
         <Route path='*' component={NoMatch}/>
       </Switch>
@@ -38,6 +38,7 @@ const SignOutRedirect = () => {
 const RegisterRedirect = () => {
   return store.get('loggedIn') ? <Redirect to={{ pathname: '/profile' }}/> : <Register/>;
 };
+
 
 const AuthenRoute = ({ component: Component, ...rest }) => {
   return (
