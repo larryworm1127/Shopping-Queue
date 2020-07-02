@@ -1,25 +1,31 @@
-export const Store = function (
-  id,
-  name,
-  address,
-  coordinate,
-  type,
-  openingTime,
-  closingTime,
-  customerLimit,
-  customerShopTime
-) {
-  this.id = id;
-  this.name = name;
-  this.address = address;
-  this.coordinate = coordinate;
-  this.type = type;
-  this.openingTime = openingTime;
-  this.closingTime = closingTime;
-  this.customerLimit = customerLimit;
-  this.customerShopTime = customerShopTime;
-  this.queue = [];
-};
+class Store {
+  constructor(
+    id,
+    name,
+    address,
+    coordinate,
+    type,
+    openingTime,
+    closingTime,
+    customerLimit,
+    customerShopTime
+  ) {
+    this.id = id;
+    this.name = name;
+    this.address = address;
+    this.coordinate = coordinate;
+    this.type = type;
+    this.openingTime = openingTime;
+    this.closingTime = closingTime;
+    this.customerLimit = customerLimit;
+    this.customerShopTime = customerShopTime;
+    this.queue = [];
+  }
+
+  addNewQueue = (queue) => {
+    this.queue.push(queue)
+  }
+}
 
 
 export const Queue = function (
@@ -28,14 +34,12 @@ export const Queue = function (
   shopTime,
   numCustomer,
   timeQueued,
-  dateQueued
 ) {
   this.username = username;
   this.date = date;
   this.shopTime = shopTime;
   this.numCustomer = numCustomer;
   this.timeQueued = timeQueued;
-  this.dateQueued = dateQueued;
 };
 
 

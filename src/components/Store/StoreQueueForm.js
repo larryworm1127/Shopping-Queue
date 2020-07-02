@@ -18,7 +18,7 @@ class StoreQueueForm extends React.Component {
     } = this.props;
 
     return (
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={(event) => {handleFormSubmit(event, store)}}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField

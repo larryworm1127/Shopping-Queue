@@ -10,6 +10,7 @@ import { styles } from './style';
 import Grid from '@material-ui/core/Grid';
 import StoreDetailList from './StoreDetailList';
 import StoreQueueForm from './StoreQueueForm';
+import store from 'store';
 
 
 class StoreDetail extends React.Component {
@@ -26,12 +27,16 @@ class StoreDetail extends React.Component {
     });
   };
 
-  handleFormSubmit = (event) => {
+  handleFormSubmit = (event, selectedStore) => {
     event.preventDefault();
-
-    const { store } = this.props;
-    const newQueue = new Queue('test', this.state.date, this.state.shoppingTime, this.state.numCustomer, new Date());
-    store.queue.push(newQueue);
+    const newQueue = new Queue(
+      store.get('user'),
+      this.state.date,
+      this.state.shoppingTime,
+      this.state.numCustomer,
+      new Date()
+    );
+    selectedStore.addNewQueue(newQueue);
   };
 
   render() {
