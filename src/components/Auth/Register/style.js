@@ -24,14 +24,5 @@ export const styles = theme => ({
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
-  },
-  formControlLabel: {
-    textTransform: 'uppercase',
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    color: theme.palette.secondary.main
-  },
-  formControl: {
-    width: '100%',
   }
 });

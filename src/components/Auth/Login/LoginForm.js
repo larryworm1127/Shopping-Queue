@@ -78,8 +78,6 @@ class LoginForm extends React.Component {
             name="loginAs"
             label="Login As"
             variant="outlined"
-            formControlLabelClass={classes.formControlLabel}
-            formControlClass={classes.formControl}
             value={this.state.loginAs}
             handleFormField={this.handleFormField}
             menuItems={['Shopper', 'Shop Owner', 'Admin']}

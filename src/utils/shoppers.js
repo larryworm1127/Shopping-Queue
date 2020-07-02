@@ -32,6 +32,30 @@ export class Shopper {
     this.currentQueue.push(queue);
     this.queueHistory.push(queue);
   };
+
+  updateUserProfile = (
+    firstName,
+    lastName,
+    address,
+    email,
+    remindTime,
+    favoriteStores
+  ) => {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address = address;
+    this.email = email;
+    this.remindTime = remindTime;
+    this.favoriteStores = [...favoriteStores];
+  };
+
+  clearQueueHistory = () => {
+    this.queueHistory = [];
+  };
+
+  clearSearchHistory = () => {
+    this.searchHistory = [];
+  };
 }
 
 

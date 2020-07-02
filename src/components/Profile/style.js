@@ -27,4 +27,10 @@ export const styles = (theme) => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
+  edit: {
+    marginTop: theme.spacing(2),
+  },
+  bottomButton: {
+    marginRight: theme.spacing(2)
+  }
 });

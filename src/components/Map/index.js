@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { styles } from './style';
 import StoreCards from '../StoreCards';
+import Button from '@material-ui/core/Button';
 
 
 class StoreMap extends React.Component {
@@ -63,10 +64,19 @@ class StoreMap extends React.Component {
           <Grid item xs={3} className={classes.cardStyles}>
             {stores.map((store, index) => (
               <StoreCards
-                handleHighlight={this.handleHighlight}
+                secondButton={(
+                  <Button
+                    type="button"
+                    color="primary"
+                    onClick={() => {
+                      this.handleHighlight(index);
+                    }}
+                  >
+                    Highlight on Map
+                  </Button>
+                )}
                 store={store}
                 index={index}
-                disableHighlight={false}
               />
             ))}
           </Grid>
