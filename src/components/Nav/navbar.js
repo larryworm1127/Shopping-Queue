@@ -31,13 +31,13 @@ class NavBar extends React.Component {
         return 0;
       case '/profile':
         return 1;
+      case '/owner-profile':
+        return 1;
+      case '/admin-profile':
+        return 1;
       case '/map':
         return 2;
       case '/queue':
-        return 3;
-      case '/owner-profile':
-        return 3;
-      case '/admin-profile':
         return 3;
       case '/login':
         return 1;

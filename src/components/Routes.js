@@ -5,6 +5,7 @@ import Queue from './Queue';
 import Login from './Auth/Login';
 import Profile from './Profile';
 import AdminProfile from './AdminProfile';
+import OwnerPage from './OwnerProfile/ownerProfile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
 import store from 'store';
@@ -20,6 +21,7 @@ export default () => {
         <AuthenRoute exact path='/map' component={StoreMap}/>
         <AuthenRoute exact path='/queue' component={Queue}/>
         <AuthenRoute exact path='/profile' component={Profile}/>
+        <AuthenRoute exact path='/owner-profile' component={OwnerPage}/>
         <AuthenRoute exact path='/admin-profile' component={AdminProfile}/>
         <Route exact path='/login' component={Login}/>
         <Route exact path='/register' component={RegisterRedirect}/>
