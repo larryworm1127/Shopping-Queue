@@ -13,7 +13,7 @@ export default function Menu() {
       [
         // Hide Map and My Queues tabs from shop owners and admin
         { label: 'Home', pathname: '/' },
-        { label: 'Profile', pathname: '/profile' },
+        { label: 'Profile', pathname: (store.get('loginAs') === 1 ? '/owner-profile' : '/admin-profile') },
         { label: 'Logout', pathname: '/logout' },
       ];
   } else {
@@ -24,3 +24,5 @@ export default function Menu() {
     ];
   }
 }
+
+// pathname: (store.get('loginAs') === 0 ? '/profile' : (store.get('loginAs') === 1 ? 'owner-profile' : 'admin-profile'))
