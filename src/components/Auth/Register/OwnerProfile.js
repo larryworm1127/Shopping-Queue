@@ -77,8 +77,6 @@ class OwnerProfile extends React.Component {
             <FormSelectField
               name="storeType"
               label="Store Type"
-              formControlLabelClass={classes.formControlLabel}
-              formControlClass={classes.formControl}
               handleFormField={handleFormField}
               value={storeType}
               menuItems={Object.keys(StoreTypes)}

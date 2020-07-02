@@ -93,8 +93,6 @@ class AccountDetail extends React.Component {
             <FormSelectField
               name="registerAs"
               label="Register For"
-              formControlLabelClass={classes.formControlLabel}
-              formControlClass={classes.formControl}
               handleFormField={handleFormField}
               value={registerAs}
               menuItems={['Shopper', 'Shop Owner']}
