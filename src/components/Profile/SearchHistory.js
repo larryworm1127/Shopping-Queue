@@ -7,21 +7,14 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core';
+import { styles } from './style';
 
-function createSearchData(shopName, address, shopType, date) {
-  return { shopName, address, shopType, date };
-}
-
-const searchRows = [
-  createSearchData('Floor Mart', '123 Street', 'General', '02-05-2020'),
-  createSearchData('Shoppers Not Drug Mart', '456 Street', 'General', '08-05-2020'),
-  createSearchData('Yes Frills', '789 Street', 'Groceries', '15-05-2020'),
-  createSearchData('Unfreshco', '000 Street', 'Groceries', '22-05-2020'),
-];
 
 class SearchHistory extends React.Component {
+
   render() {
-    const { classes } = this.props;
+    const { classes, shopper } = this.props;
 
     return (
       <React.Fragment>
@@ -31,6 +24,7 @@ class SearchHistory extends React.Component {
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
                 Shop Search History
               </Typography>
+
               <Table>
                 <TableHead>
                   <TableRow>
@@ -40,20 +34,21 @@ class SearchHistory extends React.Component {
                     <TableCell>Date Searched</TableCell>
                   </TableRow>
                 </TableHead>
+
                 <TableBody>
-                  {searchRows.map((searchRow) => (
-                    <TableRow key={searchRow.shopName}>
+                  {shopper.searchHistory.map((search, index) => (
+                    <TableRow key={index}>
                       <TableCell component="th" scope="row">
-                        {searchRow.shopName}
+                        {search.store.name}
                       </TableCell>
                       <TableCell align="left">
-                        {searchRow.address}
+                        {search.store.address}
                       </TableCell>
                       <TableCell align="left">
-                        {searchRow.shopType}
+                        {search.store.type}
                       </TableCell>
                       <TableCell align="left">
-                        {searchRow.date}
+                        {search.date}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -67,4 +62,4 @@ class SearchHistory extends React.Component {
   }
 }
 
-export default SearchHistory;
+export default withStyles(styles)(SearchHistory);

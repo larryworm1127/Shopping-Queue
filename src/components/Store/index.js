@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../Nav/navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Queue, stores } from '../../utils/stores';
+import { getStore } from '../../utils/stores';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
@@ -11,6 +11,8 @@ import Grid from '@material-ui/core/Grid';
 import StoreDetailList from './StoreDetailList';
 import StoreQueueForm from './StoreQueueForm';
 import store from 'store';
+import { Queue } from '../../utils/queue';
+import { getShopper } from '../../utils/shoppers';
 
 
 class StoreDetail extends React.Component {
@@ -37,6 +39,7 @@ class StoreDetail extends React.Component {
       new Date()
     );
     selectedStore.addNewQueue(newQueue);
+    getShopper(store.get('user')).queueUp(newQueue);
   };
 
   render() {
@@ -49,7 +52,7 @@ class StoreDetail extends React.Component {
       handleFormSubmit,
       handleFormField
     } = this.props;
-    const store = stores[match.params.id];
+    const store = getStore(match.params.id);
 
     return (
       <React.Fragment>

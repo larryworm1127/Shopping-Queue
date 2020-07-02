@@ -2,6 +2,7 @@ class Store {
   constructor(
     id,
     name,
+    username,
     address,
     coordinate,
     type,
@@ -11,7 +12,11 @@ class Store {
     customerShopTime
   ) {
     this.id = id;
+    this.username = username;
     this.name = name;
+    // Coordinates and addresses are hardcoded for phase 1.
+    // Google Place API will be used for phase 2 to assists with the map feature
+    // and allow more dynamic coordinate for stores.
     this.address = address;
     this.coordinate = coordinate;
     this.type = type;
@@ -19,28 +24,13 @@ class Store {
     this.closingTime = closingTime;
     this.customerLimit = customerLimit;
     this.customerShopTime = customerShopTime;
-    this.queue = [];
+    this.currentQueue = [];
   }
 
   addNewQueue = (queue) => {
-    this.queue.push(queue)
+    this.currentQueue.push(queue)
   }
 }
-
-
-export const Queue = function (
-  username,
-  date,
-  shopTime,
-  numCustomer,
-  timeQueued,
-) {
-  this.username = username;
-  this.date = date;
-  this.shopTime = shopTime;
-  this.numCustomer = numCustomer;
-  this.timeQueued = timeQueued;
-};
 
 
 export const StoreTypes = {
@@ -55,7 +45,8 @@ export const stores = [
   new Store(
     0,
     'Floor Mart',
-    '123 Street',
+    'store1',
+    '123 Street, Toronto, ON',
     [43.658702, -79.397168],
     StoreTypes.CLOTHING,
     '10:00',
@@ -66,7 +57,8 @@ export const stores = [
   new Store(
     1,
     'Shoppers Not Drug Mart',
-    '456 Street',
+    'store2',
+    '456 Street, Toronto, ON',
     [43.660896, -79.385397],
     StoreTypes.DEPARTMENT,
     '11:00',
@@ -77,7 +69,8 @@ export const stores = [
   new Store(
     2,
     'Yes Frills',
-    '789 Street',
+    'store3',
+    '789 Street, Toronto, ON',
     [43.658662, -79.390168],
     StoreTypes.GROCERY,
     '08:00',
@@ -88,7 +81,8 @@ export const stores = [
   new Store(
     3,
     'Unfreshco',
-    '000 Street',
+    'store4',
+    '000 Street, Toronto, ON',
     [43.661915, -79.379381],
     StoreTypes.GROCERY,
     '07:00',
@@ -97,3 +91,12 @@ export const stores = [
     30
   ),
 ];
+
+
+export const getStore = (storeId) => {
+  for (let i = 0; i < stores.length; i++) {
+    if (stores[i].id === storeId) {
+      return stores[i];
+    }
+  }
+}

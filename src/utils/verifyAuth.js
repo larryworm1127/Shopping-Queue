@@ -6,7 +6,9 @@ const shopperCredentials = [
 
 const shopOwnerCredentials = [
   { username: 'store1', password: 'store1' },
-  { username: 'store2', password: 'store2' }
+  { username: 'store2', password: 'store2' },
+  { username: 'store3', password: 'store3' },
+  { username: 'store4', password: 'store4' }
 ];
 
 const adminCredentials = [

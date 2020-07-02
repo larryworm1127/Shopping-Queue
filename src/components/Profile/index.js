@@ -17,6 +17,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
 import { withRouter } from 'react-router-dom';
 import { styles } from './style';
+import { getShopper } from '../../utils/shoppers';
+import store from 'store';
 
 
 const tabs = [
@@ -43,15 +45,16 @@ class Profile extends React.Component {
   };
 
   profileSettings = () => {
-    const { classes } = this.props;
+    const shopper = getShopper(store.get('user'));
+    console.log(shopper)
 
     switch (this.state.setting) {
       case 0:
-        return <UserProfile classes={classes}/>;
+        return <UserProfile shopper={shopper}/>;
       case 1:
-        return <SearchHistory classes={classes}/>;
+        return <SearchHistory shopper={shopper}/>;
       case 2:
-        return <QueueHistory classes={classes}/>;
+        return <QueueHistory shopper={shopper}/>;
       default:
         return Error('Unknown case');
     }

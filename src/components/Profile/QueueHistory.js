@@ -7,6 +7,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { styles } from './style';
+import { withStyles } from '@material-ui/core';
 
 
 function createQueueData(shopName, address, bookedDate, dateQueued) {
@@ -68,4 +70,4 @@ class QueueHistory extends React.Component {
   }
 }
 
-export default QueueHistory;
+export default withStyles(styles)(QueueHistory);
