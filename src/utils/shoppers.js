@@ -8,6 +8,7 @@ class Shopper {
     address,
     email,
     remindTime,
+    currentQueue,  // testing only
     favoriteStores,  // phase 1 only
     searchHistory,  // phase 1 only
     queueHistory,  // testing only
@@ -17,11 +18,20 @@ class Shopper {
     this.lastName = lastName;
     this.address = address;
     this.email = email;
+    this.currentQueue = [...currentQueue];
     this.favoriteStores = [...favoriteStores];
+    // Since search feature isn't implemented for phase 1
+    // Below hardcoded data list is used for current data display
+    // Search history data will be accessed from external source in phase 2
     this.searchHistory = [...searchHistory];
     this.queueHistory = [...queueHistory];
     this.remindTime = remindTime;
   }
+
+  queueUp = (queue) => {
+    this.currentQueue.push(queue);
+    this.queueHistory.push(queue);
+  };
 }
 
 
@@ -33,8 +43,13 @@ const shoppers = [
     '123 Test Street, Toronto, ON',
     'user@test.com',
     30,
-    [stores[0], stores[1]],
     [],
+    [stores[0], stores[1]],
+    [
+      { store: stores[0], date: '02-05-2020' },
+      { store: stores[0], date: '08-05-2020' },
+      { store: stores[1], date: '15-05-2020' }
+    ],
     []
   ),
   new Shopper(
@@ -44,8 +59,15 @@ const shoppers = [
     '123 Test Street, Toronto, ON',
     'user2@test.com',
     45,
-    [stores[1], stores[3]],
     [],
+    [stores[0], stores[1], stores[2], stores[3]],
+    [
+      { store: stores[0], date: '02-05-2020' },
+      { store: stores[0], date: '08-05-2020' },
+      { store: stores[1], date: '15-05-2020' },
+      { store: stores[3], date: '22-05-2020' },
+      { store: stores[2], date: '17-06-2020' }
+    ],
     []
   )
 ];

@@ -11,23 +11,10 @@ import { withStyles } from '@material-ui/core';
 import { styles } from './style';
 
 
-// Since search feature isn't implemented for phase 1
-// Below function is used for current data display
-// Search history data will be accessed from <shoppers.js> in phase 2
-function createSearchData(shopName, address, shopType, date) {
-  return { shopName, address, shopType, date };
-}
-
-const searchRows = [
-  createSearchData('Floor Mart', '123 Street', 'General', '02-05-2020'),
-  createSearchData('Shoppers Not Drug Mart', '456 Street', 'General', '08-05-2020'),
-  createSearchData('Yes Frills', '789 Street', 'Groceries', '15-05-2020'),
-  createSearchData('Unfreshco', '000 Street', 'Groceries', '22-05-2020'),
-];
-
 class SearchHistory extends React.Component {
+
   render() {
-    const { classes } = this.props;
+    const { classes, shopper } = this.props;
 
     return (
       <React.Fragment>
@@ -47,20 +34,21 @@ class SearchHistory extends React.Component {
                     <TableCell>Date Searched</TableCell>
                   </TableRow>
                 </TableHead>
+
                 <TableBody>
-                  {searchRows.map((searchRow) => (
-                    <TableRow key={searchRow.shopName}>
+                  {shopper.searchHistory.map((search, index) => (
+                    <TableRow key={index}>
                       <TableCell component="th" scope="row">
-                        {searchRow.shopName}
+                        {search.store.name}
                       </TableCell>
                       <TableCell align="left">
-                        {searchRow.address}
+                        {search.store.address}
                       </TableCell>
                       <TableCell align="left">
-                        {searchRow.shopType}
+                        {search.store.type}
                       </TableCell>
                       <TableCell align="left">
-                        {searchRow.date}
+                        {search.date}
                       </TableCell>
                     </TableRow>
                   ))}
