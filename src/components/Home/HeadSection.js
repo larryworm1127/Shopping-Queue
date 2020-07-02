@@ -11,7 +11,9 @@ class HeadSection extends React.Component {
       mainText: 'Welcome ' + store.get('user'),
       buttonText: 'Your Profile',
       subText: '',
-      buttonUrl: '/profile'
+      buttonUrl: (store.get('loginAs') === 0 ? '/profile' : 
+                 (store.get('loginAs') === 1 ? '/owner-profile' : 
+                 '/admin-profile'))
     } : {
       mainText: 'Shopping Queue Manager',
       buttonText: 'Signup',
