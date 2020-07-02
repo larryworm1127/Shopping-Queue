@@ -57,13 +57,10 @@ class Register extends React.Component {
   };
 
   getStepContent = (step) => {
-    const { classes } = this.props;
-
     switch (step) {
       case 0:
         return (
           <AccountDetail
-            classes={classes}
             handleNext={this.handleNext}
             handleBack={this.handleBack}
             activeStep={this.state.activeStep}
@@ -81,14 +78,12 @@ class Register extends React.Component {
       case 1:
         return (this.state.registerAs === 0) ?
           <ShopperProfile
-            classes={classes}
             handleNext={this.handleNext}
             handleBack={this.handleBack}
             activeStep={this.state.activeStep}
             handleFormField={this.handleFormField}
           /> :
           <OwnerProfile
-            classes={classes}
             handleNext={this.handleNext}
             handleBack={this.handleBack}
             activeStep={this.state.activeStep}

@@ -5,6 +5,8 @@ import FormTextField from '../../FormTextField';
 import FormSelectField from '../../FormSelectField';
 import { StoreTypes } from '../../../utils/stores';
 import RegisterFormButtons from './RegisterFormButtons';
+import { styles } from './style';
+import { withStyles } from '@material-ui/core';
 
 
 class OwnerProfile extends React.Component {
@@ -90,4 +92,4 @@ class OwnerProfile extends React.Component {
   }
 }
 
-export default OwnerProfile;
+export default withStyles(styles)(OwnerProfile);
