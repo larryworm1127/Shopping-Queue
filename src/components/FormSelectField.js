@@ -5,6 +5,21 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 import { uid } from 'react-uid';
+import { withStyles } from '@material-ui/core';
+
+
+const styles = theme => ({
+  formControlLabel: {
+    textTransform: 'uppercase',
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    color: theme.palette.secondary.main
+  },
+  formControl: {
+    width: '100%',
+  }
+})
+
 
 class FormSelectField extends React.Component {
 
@@ -21,10 +36,9 @@ class FormSelectField extends React.Component {
 
   render() {
     const {
+      classes,
       name,
       label,
-      formControlLabelClass,
-      formControlClass,
       value,
       variant,
       handleFormField,
@@ -34,12 +48,12 @@ class FormSelectField extends React.Component {
     return (
       <React.Fragment>
         <Grid item xs={12}>
-          <Typography className={formControlLabelClass}>
+          <Typography className={classes.formControlLabel}>
             {label}
           </Typography>
 
           <FormControl
-            className={formControlClass}
+            className={classes.formControl}
             variant={variant}
           >
             <Select
@@ -58,4 +72,4 @@ class FormSelectField extends React.Component {
   }
 }
 
-export default FormSelectField;
+export default withStyles(styles)(FormSelectField);

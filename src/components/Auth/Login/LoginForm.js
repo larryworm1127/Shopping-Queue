@@ -3,15 +3,13 @@ import React from 'react';
 // Material UI imports
 import { Button, Checkbox, FormControlLabel } from '@material-ui/core';
 // User JS imports
-import FormTextField from '../FormTextField';
-import FormSelectField from '../FormSelectField';
+import FormTextField from '../../FormTextField';
+import FormSelectField from '../../FormSelectField';
 import { loginVerify } from '../../../utils/verifyAuth';
-import {
-  withRouter,
-  Route
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import store from 'store';
-import Profile from '../../Profile/profile';
+
+
 class LoginForm extends React.Component {
 
   state = {
@@ -42,9 +40,10 @@ class LoginForm extends React.Component {
     const { history } = this.props;
     const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
     if (verify === true) {
-      // loginUser();
       store.set('loggedIn', true);
-      history.push('/profile');
+      store.set('loginAs', this.state.loginAs);
+      store.set('user', this.state.username);
+      history.push('/');
     } else {
       this.displayError(verify);
     }
@@ -79,8 +78,6 @@ class LoginForm extends React.Component {
             name="loginAs"
             label="Login As"
             variant="outlined"
-            formControlLabelClass={classes.formControlLabel}
-            formControlClass={classes.formControl}
             value={this.state.loginAs}
             handleFormField={this.handleFormField}
             menuItems={['Shopper', 'Shop Owner', 'Admin']}
@@ -106,14 +103,4 @@ class LoginForm extends React.Component {
   }
 }
 
-const regsiterfunc1 = () => () => {
-  return (
-    <Route
-      render={() =>
-
-        <Profile />
-      }
-    />
-  )
-};
 export default withRouter(LoginForm);

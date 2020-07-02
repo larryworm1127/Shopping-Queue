@@ -6,13 +6,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Menulog from '../../utils/menu';
-
+import Menu from '../../utils/menu';
 import { styles } from './style';
+import PropTypes from 'prop-types';
 
-
-let Menuretrun = [];
-Menuretrun = Menulog();
 
 // NavBar component class
 class NavBar extends React.Component {
@@ -32,16 +29,20 @@ class NavBar extends React.Component {
     switch (this.props.currentPath) {
       case '/':
         return 0;
-      case '/map':
-        return 1;
-      case '/queue':
-        return 2;
       case '/profile':
+        return 1;
+      case '/map':
+        return 2;
+      case '/queue':
         return 3;
-      case '/register':
-        return 4;
+      case '/owner-profile':
+        return 3;
+      case '/admin-profile':
+        return 3;
       case '/login':
-        return 5;
+        return 1;
+      case '/register':
+        return 2;
       default:
         return 0;
     }
@@ -52,7 +53,6 @@ class NavBar extends React.Component {
 
     return (
       <AppBar
-        position="absolute"
         color="default"
         className={classes.appBar}
       >
@@ -75,7 +75,7 @@ class NavBar extends React.Component {
                 textColor="primary"
                 onChange={this.handleTabChange}
               >
-                {Menuretrun.map((item, index) => (
+                {Menu().map((item, index) => (
                   <Tab
                     key={index}
                     classes={{ root: classes.tabItem }}
@@ -90,6 +90,10 @@ class NavBar extends React.Component {
       </AppBar>
     );
   }
+}
+
+NavBar.propTypes = {
+  classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(NavBar);

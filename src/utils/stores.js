@@ -1,24 +1,38 @@
-export const Store = function (
-  id,
-  name,
-  address,
-  coordinate,
-  type,
-  openingTime,
-  closingTime,
-  customerLimit,
-  customerShopTime
-) {
-  this.id = id;
-  this.name = name;
-  this.address = address;
-  this.coordinate = coordinate;
-  this.type = type;
-  this.openingTime = openingTime;
-  this.closingTime = closingTime;
-  this.customerLimit = customerLimit;
-  this.customerShopTime = customerShopTime;
-};
+class Store {
+  constructor(
+    id,
+    name,
+    username,
+    email,
+    address,
+    coordinate,
+    type,
+    openingTime,
+    closingTime,
+    customerLimit,
+    customerShopTime
+  ) {
+    this.id = id;
+    this.username = username;
+    this.name = name;
+    this.email = email;
+    // Coordinates and addresses are hardcoded for phase 1.
+    // Google Place API will be used for phase 2 to assists with the map feature
+    // and allow more dynamic coordinate for stores.
+    this.address = address;
+    this.coordinate = coordinate;
+    this.type = type;
+    this.openingTime = openingTime;
+    this.closingTime = closingTime;
+    this.customerLimit = customerLimit;
+    this.customerShopTime = customerShopTime;
+    this.currentQueue = [];
+  }
+
+  addNewQueue = (queue) => {
+    this.currentQueue.push(queue);
+  };
+}
 
 
 export const StoreTypes = {
@@ -33,7 +47,9 @@ export const stores = [
   new Store(
     0,
     'Floor Mart',
-    '123 Street',
+    'store1',
+    'store1@test.com',
+    '123 Street, Toronto, ON',
     [43.658702, -79.397168],
     StoreTypes.CLOTHING,
     '10:00',
@@ -44,7 +60,9 @@ export const stores = [
   new Store(
     1,
     'Shoppers Not Drug Mart',
-    '456 Street',
+    'store2',
+    'store2@test.com',
+    '456 Street, Toronto, ON',
     [43.660896, -79.385397],
     StoreTypes.DEPARTMENT,
     '11:00',
@@ -55,7 +73,9 @@ export const stores = [
   new Store(
     2,
     'Yes Frills',
-    '789 Street',
+    'store3',
+    'store3@test.com',
+    '789 Street, Toronto, ON',
     [43.658662, -79.390168],
     StoreTypes.GROCERY,
     '08:00',
@@ -66,7 +86,9 @@ export const stores = [
   new Store(
     3,
     'Unfreshco',
-    '000 Street',
+    'store4',
+    'store4@test.com',
+    '000 Street, Toronto, ON',
     [43.661915, -79.379381],
     StoreTypes.GROCERY,
     '07:00',
@@ -75,3 +97,41 @@ export const stores = [
     30
   ),
 ];
+
+
+export const getStore = (storeId) => {
+  for (let i = 0; i < stores.length; i++) {
+    if (stores[i].id === parseInt(storeId)) {
+      return stores[i];
+    }
+  }
+};
+
+
+export const addStore = (
+  name,
+  username,
+  address,
+  email,
+  coordinate,
+  type,
+  openingTime,
+  closingTime,
+  customerLimit,
+  customerShopTime
+) => {
+  const newStore = new Store(
+    stores.length,
+    name,
+    username,
+    email,
+    address,
+    coordinate,
+    type,
+    openingTime,
+    closingTime,
+    customerLimit,
+    customerShopTime
+  );
+  stores.push(newStore);
+};

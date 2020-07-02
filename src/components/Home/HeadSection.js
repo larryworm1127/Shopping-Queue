@@ -1,65 +1,70 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Box, Button, Card, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Box, Button, Card, Typography, withStyles, withWidth, } from '@material-ui/core';
-import { styles } from './style';
+import store from 'store';
 
 
-function HeadSection(props) {
-  const { classes } = props;
-  return (
-    <Fragment>
-      <div className={classNames('main_div', classes.wrapper)}>
-        <div className={classNames('container-fluid', classes.container)}>
+class HeadSection extends React.Component {
+
+  getText = () => {
+    return (store.get('loggedIn')) ? {
+      mainText: 'Welcome ' + store.get('user'),
+      buttonText: 'Your Profile',
+      subText: '',
+      buttonUrl: (store.get('loginAs') === 0 ? '/profile' : 
+                 (store.get('loginAs') === 1 ? '/owner-profile' : 
+                 '/admin-profile'))
+    } : {
+      mainText: 'Shopping Queue Manager',
+      buttonText: 'Signup',
+      subText: 'Now you don\'t need to risk your health for shopping',
+      buttonUrl: '/register'
+    };
+  };
+
+  render() {
+    const { classes } = this.props;
+    const headerTexts = this.getText();
+
+    return (
+      <React.Fragment>
+        <div className={classes.wrapper}>
           <Box display="flex" justifyContent="center" className="row">
             <Card
               className={classes.card}
               data-aos-delay="200"
               data-aos="zoom-in"
             >
-              <div className={classNames(classes.containerFix, 'container')}>
-
-                <div>
-                  <Typography
-                    variant={'h3'}
-                  >
-                    Shopping Queue Manager
-                  </Typography>
-                </div>
-                <div>
-                  <Box mb={2}>
-                    <Typography
-                      variant={'h6'}
-                      color="textSecondary"
-                    >
-                      Now you don't need to risk your health for shopping
-                    </Typography>
-                  </Box>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    fullWidth
-                    className={classes.extraLargeButton}
-                    classes={{ label: classes.LargeButton }}
-                    href="/register"
-                  >
-                    Signup
-                  </Button>
-                </div>
-              </div>
+              <Typography variant={'h3'}>
+                {headerTexts.mainText}
+              </Typography>
+              <Box mb={2}>
+                <Typography
+                  variant={'h6'}
+                  color="textSecondary"
+                >
+                  {headerTexts.subText}
+                </Typography>
+              </Box>
+              <Button
+                variant="contained"
+                color="secondary"
+                fullWidth
+                className={classes.extraLargeButton}
+                href={headerTexts.buttonUrl}
+              >
+                {headerTexts.buttonText}
+              </Button>
             </Card>
           </Box>
         </div>
-      </div>
-    </Fragment>
-  );
+      </React.Fragment>
+    );
+  }
 }
 
 HeadSection.propTypes = {
   classes: PropTypes.object,
-  theme: PropTypes.object
 };
 
-export default withWidth()(
-  withStyles(styles, { withTheme: true })(HeadSection)
-);
+export default HeadSection;

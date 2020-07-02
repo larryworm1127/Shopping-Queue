@@ -7,7 +7,8 @@ import { withStyles } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { styles } from './style';
-import StoreCards from './StoreCards';
+import StoreCards from '../StoreCards';
+import Button from '@material-ui/core/Button';
 
 
 class StoreMap extends React.Component {
@@ -61,7 +62,23 @@ class StoreMap extends React.Component {
           </Grid>
 
           <Grid item xs={3} className={classes.cardStyles}>
-            <StoreCards classes={classes}/>
+            {stores.map((store, index) => (
+              <StoreCards
+                secondButton={(
+                  <Button
+                    type="button"
+                    color="primary"
+                    onClick={() => {
+                      this.handleHighlight(index);
+                    }}
+                  >
+                    Highlight on Map
+                  </Button>
+                )}
+                store={store}
+                index={index}
+              />
+            ))}
           </Grid>
         </Grid>
       </React.Fragment>

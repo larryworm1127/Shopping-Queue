@@ -1,6 +1,6 @@
 import React from 'react';
 // Importing routing component
-import Routes from './components/routes';
+import Routes from './components/Routes';
 import './App.css';
 // Importing material UI items
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -28,31 +28,11 @@ const theme = createMuiTheme({
 
 class App extends React.Component {
 
-  // state = {
-  //   loggedIn: false
-  // };
-
-  // loginUser = () => {
-  //   this.setState({
-  //     loggedIn: true
-  //   });
-  // };
-
-  // logoutUser = () => {
-  //   this.setState({
-  //     loggedIn: false
-  //   });
-  // };
-
   render() {
     return (
       <div>
         <ThemeProvider theme={theme}>
-          <Routes
-            // loggedIn={this.state.loggedIn}
-            loginUser={this.loginUser}
-            logoutUser={this.logoutUser}
-          />
+          <Routes/>
         </ThemeProvider>
       </div>
     );

@@ -10,17 +10,13 @@ import { styles } from './style';
 import LoginForm from './LoginForm';
 import store from 'store';
 
+
 class Login extends React.Component {
 
   render() {
-    const {
-      classes,
-      location,
-      loggedIn,
-      loginUser
-    } = this.props;
+    const { classes, location } = this.props;
 
-    return !!store.get('loggedIn') ? (<Redirect to={{ pathname: '/profile' }} />) : (
+    return store.get('loggedIn') ? (<Redirect to={{ pathname: '/' }} />) : (
       <React.Fragment>
         <NavBar currentPath={location.pathname} />
 
@@ -35,10 +31,7 @@ class Login extends React.Component {
               Sign in
             </Typography>
 
-            <LoginForm
-              classes={classes}
-              loginUser={loginUser}
-            />
+            <LoginForm classes={classes} />
 
             <Grid container>
               <Grid item xs>

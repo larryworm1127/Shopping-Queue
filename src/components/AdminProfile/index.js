@@ -1,8 +1,8 @@
 import React from 'react';
 import NavBar from '../Nav/navbar';
-import SearchHistory from './searchHistory.js';
-import QueueHistory from './queueHistory.js';
-import UserProfile from './userProfile.js';
+import AdminPage from './AdminProfile.js';
+import ShoppersProfile from './ShoppersProfile.js';
+import OwnersProfile from './OwnersProfile.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,13 +15,16 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HistoryIcon from '@material-ui/icons/History';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
-import { withRouter } from 'react-router-dom';
+import { styles } from './style';
+import { getAdmin, Admin } from '../../utils/admins';
+import store from 'store';
+import PropTypes from 'prop-types';
 
 
 const tabs = [
   'Profile',
-  'Search History',
-  'Queue History'
+  'User Profiles',
+  'Shop Owner Profiles'
 ];
 
 const tabIcons = [
@@ -30,33 +33,7 @@ const tabIcons = [
   <ShoppingCartIcon/>
 ];
 
-const drawerWidth = 240;
-const styles = (theme) => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
-  },
-});
-
-class Profile extends React.Component {
-
+class AdminProfile extends React.Component {
   state = {
     setting: 0,
   };
@@ -65,21 +42,23 @@ class Profile extends React.Component {
     this.setState({ setting: val });
   };
 
-  profileSettings = () => {
+  profileSettings = (adminProp) => {
+    const admin = (adminProp === undefined) ? getAdmin(store.get('user')) : adminProp;
+
     switch (this.state.setting) {
       case 0:
-        return <UserProfile/>;
+        return <AdminPage admin={admin}/>;
       case 1:
-        return <SearchHistory/>;
+        return <ShoppersProfile admin={admin}/>;
       case 2:
-        return <QueueHistory/>;
+        return <OwnersProfile admin={admin}/>;
       default:
         return Error('Unknown case');
     }
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, admin } = this.props;
 
     return (
       <React.Fragment>
@@ -98,7 +77,7 @@ class Profile extends React.Component {
           <Divider/>
           <List>
             {tabs.map((label, index) => (
-              <ListItem button key={label} onClick={() => this.setSetting(tabs.indexOf(label))}>
+              <ListItem button key={label} onClick={() => this.setSetting(index)}>
                 <ListItemIcon>{tabIcons[index]}</ListItemIcon>
                 <ListItemText primary={label}/>
               </ListItem>
@@ -106,12 +85,17 @@ class Profile extends React.Component {
           </List>
         </Drawer>
 
-        <Container>
-          {this.profileSettings()}
+        <Container className={classes.container}>
+          {this.profileSettings(admin)}
         </Container>
       </React.Fragment>
     );
   }
 }
 
-export default withRouter(withStyles(styles)(Profile));
+AdminProfile.propTypes = {
+  classes: PropTypes.object.isRequired,
+  shopper: PropTypes.objectOf(Admin)
+};
+
+export default withStyles(styles)(AdminProfile);

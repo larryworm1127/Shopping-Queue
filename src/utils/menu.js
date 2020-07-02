@@ -1,44 +1,28 @@
-import store from 'store'
+import store from 'store';
 
-export default function Menulog() {
+export default function Menu() {
   if (!!store.get('loggedIn')) {
+    return (store.get('loginAs') === 0) ?
+      [
+        { label: 'Home', pathname: '/' },
+        { label: 'Profile', pathname: '/profile' },
+        { label: 'Map', pathname: '/map' },
+        { label: 'My Queues', pathname: '/queue' },
+        { label: 'Logout', pathname: '/logout' }
+      ] :
+      [
+        // Hide Map and My Queues tabs from shop owners and admin
+        { label: 'Home', pathname: '/' },
+        { label: 'Profile', pathname: (store.get('loginAs') === 1 ? '/owner-profile' : '/admin-profile') },
+        { label: 'Logout', pathname: '/logout' },
+      ];
+  } else {
     return [
-      {
-        label: 'Home',
-        pathname: '/'
-      },
-      {
-        label: 'Map',
-        pathname: '/map'
-      },
-      {
-        label: 'My Queues',
-        pathname: '/queue'
-      },
-      {
-        label: 'Profile',
-        pathname: '/profile'
-      },
-      {
-        label: 'Logout',
-        pathname: '/logout'
-      },
-    ];
-  }
-  else {
-    return [
-      {
-        label: 'Home',
-        pathname: '/'
-      },
-      {
-        label: 'Login',
-        pathname: '/login'
-      },
-      {
-        label: 'Register',
-        pathname: '/register'
-      },
+      { label: 'Home', pathname: '/' },
+      { label: 'Login', pathname: '/login' },
+      { label: 'Register', pathname: '/register' },
     ];
   }
 }
+
+// pathname: (store.get('loginAs') === 0 ? '/profile' : (store.get('loginAs') === 1 ? 'owner-profile' : 'admin-profile'))

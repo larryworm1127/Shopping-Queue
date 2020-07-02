@@ -40,3 +40,24 @@ export const removeStudent = (queue, student) => {
     students: filteredStudents
   });
 };
+
+
+export class Queue {
+  constructor(
+    username,
+    date,
+    shopTime,
+    numCustomer,
+    dateTimeQueued,
+  ) {
+    this.username = username;
+    this.date = date;
+    this.shopTime = shopTime;
+    this.numCustomer = numCustomer;
+    this.dateTimeQueued = dateTimeQueued;
+  }
+
+  getTimeQueued = () => {
+    
+  }
+}

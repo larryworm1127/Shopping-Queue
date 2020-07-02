@@ -1,33 +1,35 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import FormTextField from '../FormTextField';
-import FormSelectField from '../FormSelectField';
+import FormTextField from '../../FormTextField';
+import FormSelectField from '../../FormSelectField';
 import { StoreTypes } from '../../../utils/stores';
 import RegisterFormButtons from './RegisterFormButtons';
+import { styles } from './style';
+import { withStyles } from '@material-ui/core';
 
 
 class OwnerProfile extends React.Component {
 
-  handleOwnerProfile = (event) => {
-    event.preventDefault();
-
-    const { handleNext } = this.props;
-    handleNext();
-  };
-
   render() {
     const {
       classes,
+      handleNext,
       handleFormField,
       activeStep,
       handleBack,
-      storeType
+      storeType,
+      storeName,
+      location,
+      customerLimit,
+      shoppingTimeLimit,
+      openTime,
+      closeTime
     } = this.props;
 
     return (
       <React.Fragment>
-        <form onSubmit={this.handleOwnerProfile}>
+        <form onSubmit={handleNext}>
           <Typography variant="h6" gutterBottom>
             Profile details
           </Typography>
@@ -35,44 +37,46 @@ class OwnerProfile extends React.Component {
             <FormTextField
               name="storeName"
               label="Store Name"
+              value={storeName}
               handleFormField={handleFormField}
             />
             <FormTextField
               name="location"
               label="Location"
+              value={location}
               handleFormField={handleFormField}
             />
             <FormTextField
               name="customerLimit"
               label="Customer Limit"
               type="number"
+              value={customerLimit}
               handleFormField={handleFormField}
             />
             <FormTextField
               name="shoppingTimeLimit"
               label="Customer Shopping Time Limit (min)"
               type="number"
+              value={shoppingTimeLimit}
               handleFormField={handleFormField}
             />
             <FormTextField
               name="openTime"
               label="Opening Time"
               type="time"
-              defaultValue="07:30"
+              value={openTime}
               handleFormField={handleFormField}
             />
             <FormTextField
               name="closeTime"
               label="Closing Time"
               type="time"
-              defaultValue="07:30"
+              value={closeTime}
               handleFormField={handleFormField}
             />
             <FormSelectField
               name="storeType"
               label="Store Type"
-              formControlLabelClass={classes.formControlLabel}
-              formControlClass={classes.formControl}
               handleFormField={handleFormField}
               value={storeType}
               menuItems={Object.keys(StoreTypes)}
@@ -90,4 +94,4 @@ class OwnerProfile extends React.Component {
   }
 }
 
-export default OwnerProfile;
+export default withStyles(styles)(OwnerProfile);

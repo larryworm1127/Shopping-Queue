@@ -6,7 +6,9 @@ const shopperCredentials = [
 
 const shopOwnerCredentials = [
   { username: 'store1', password: 'store1' },
-  { username: 'store2', password: 'store2' }
+  { username: 'store2', password: 'store2' },
+  { username: 'store3', password: 'store3' },
+  { username: 'store4', password: 'store4' }
 ];
 
 const adminCredentials = [
@@ -72,9 +74,22 @@ export const registerVerify = (username, password, confirmPass, accountType) => 
       return registerVerifyHelper(username, password, confirmPass, shopperCredentials);
     case 1:
       return registerVerifyHelper(username, password, confirmPass, shopOwnerCredentials);
-    case 2:
-      return registerVerifyHelper(username, password, confirmPass, adminCredentials);
     default:
       return Error('Unknown account type');
   }
+};
+
+
+export const addNewUser = (username, password, accountType) => {
+  switch (accountType) {
+    case 0:
+      shopperCredentials.push({ username: username, password: password });
+      break;
+    case 1:
+      shopOwnerCredentials.push({ username: username, password: password });
+      break;
+    default:
+      return Error('Unknown account type');
+  }
+
 };
