@@ -43,7 +43,7 @@ class LoginForm extends React.Component {
       store.set('loggedIn', true);
       store.set('loginAs', this.state.loginAs);
       store.set('user', this.state.username);
-      history.push('/profile');
+      history.push('/');
     } else {
       this.displayError(verify);
     }

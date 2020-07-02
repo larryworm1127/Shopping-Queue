@@ -16,22 +16,22 @@ class Login extends React.Component {
   render() {
     const { classes, location } = this.props;
 
-    return store.get('loggedIn') ? (<Redirect to={{ pathname: '/profile' }}/>) : (
+    return store.get('loggedIn') ? (<Redirect to={{ pathname: '/' }} />) : (
       <React.Fragment>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} />
 
         <Container component="main" maxWidth="xs">
-          <CssBaseline/>
+          <CssBaseline />
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <LockOutlinedIcon/>
+              <LockOutlinedIcon />
             </Avatar>
 
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
 
-            <LoginForm classes={classes}/>
+            <LoginForm classes={classes} />
 
             <Grid container>
               <Grid item xs>
