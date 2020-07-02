@@ -29,11 +29,11 @@ class NavBar extends React.Component {
     switch (this.props.currentPath) {
       case '/':
         return 0;
-      case '/map':
-        return 1;
-      case '/queue':
-        return 2;
       case '/profile':
+        return 1;
+      case '/map':
+        return 2;
+      case '/queue':
         return 3;
       case '/login':
         return 1;
