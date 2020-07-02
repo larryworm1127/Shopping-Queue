@@ -79,3 +79,27 @@ export const getShopper = (username) => {
     }
   }
 };
+
+
+export const addShopper = (
+  username,
+  firstName,
+  lastName,
+  address,
+  email,
+  remindTime
+) => {
+  const newShopper = new Shopper(
+    username,
+    firstName,
+    lastName,
+    address,
+    email,
+    remindTime,
+    [],
+    [],
+    [],
+    []
+  );
+  shoppers.push(newShopper);
+};
