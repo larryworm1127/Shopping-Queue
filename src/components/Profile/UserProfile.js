@@ -1,32 +1,41 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Paper from '@material-ui/core/Paper';
+import StoreCards from '../StoreCards';
+import { styles } from './style';
+import { withStyles } from '@material-ui/core';
 
 
 class UserProfile extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { notificationTime: 15 };
-  }
-
-  setNotificationTime(newTime) {
-    this.setState({ notificationTime: newTime });
-  }
-
-  handleChange = (event) => {
-    this.setNotificationTime(event.target.value);
-  };
-
   render() {
-    const { classes } = this.props;
+    const { classes, shopper } = this.props;
 
     return (
       <React.Fragment>
         <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                Your Name
+              </Typography>
+              <Typography component="p" variant="h6">
+                {`${shopper.firstName} ${shopper.lastName}`}
+              </Typography>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                Your Email
+              </Typography>
+              <Typography component="p" variant="h6">
+                {shopper.email}
+              </Typography>
+            </Paper>
+          </Grid>
 
           <Grid item xs={12}>
             <Paper className={classes.paper}>
@@ -34,7 +43,7 @@ class UserProfile extends React.Component {
                 Your Location
               </Typography>
               <Typography component="p" variant="h6">
-                100 St. George Street, Toronto, ON
+                {shopper.address}
               </Typography>
             </Paper>
           </Grid>
@@ -45,28 +54,16 @@ class UserProfile extends React.Component {
                 Your Favourite Stores:
               </Typography>
               <Grid container spacing={3}>
-                <Grid item md={4}>
-                  <Card variant="outlined">
-                    <CardContent>
-                      <Typography component='h5'>
-                        FloorMart
-                      </Typography>
-                      <Typography component='p'>Image of store here</Typography>
-                      This restaurant is a good place to buy general items
-                    </CardContent>
-                  </Card>
-                </Grid>
-                <Grid item md={4}>
-                  <Card variant="outlined">
-                    <CardContent>
-                      <Typography component='h5'>
-                        FloorMart
-                      </Typography>
-                      <Typography component='p'>Image of store here</Typography>
-                      This restaurant is a good place to buy general items
-                    </CardContent>
-                  </Card>
-                </Grid>
+                {shopper.favoriteStores.map((store, index) => (
+                  <Grid item md={4} key={index}>
+                    <StoreCards
+                      handleHighlight={this.handleHighlight}
+                      store={store}
+                      index={index}
+                      disableHighlight={true}
+                    />
+                  </Grid>
+                ))}
               </Grid>
             </Paper>
           </Grid>
@@ -77,7 +74,7 @@ class UserProfile extends React.Component {
                 Notification Settings:
               </Typography>
               <Typography component="p" variant="h6">
-                Remind me 15 minutes before my booking.
+                Remind me {shopper.remindTime} minutes before my booking.
               </Typography>
               {/*<FormControl>*/}
               {/*  <Select*/}
@@ -103,4 +100,4 @@ class UserProfile extends React.Component {
   }
 }
 
-export default UserProfile;
+export default withStyles(styles)(UserProfile);

@@ -7,7 +7,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core';
+import { styles } from './style';
 
+
+// Since search feature isn't implemented for phase 1
+// Below function is used for current data display
+// Search history data will be accessed from <shoppers.js> in phase 2
 function createSearchData(shopName, address, shopType, date) {
   return { shopName, address, shopType, date };
 }
@@ -31,6 +37,7 @@ class SearchHistory extends React.Component {
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
                 Shop Search History
               </Typography>
+
               <Table>
                 <TableHead>
                   <TableRow>
@@ -67,4 +74,4 @@ class SearchHistory extends React.Component {
   }
 }
 
-export default SearchHistory;
+export default withStyles(styles)(SearchHistory);

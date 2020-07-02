@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { styles } from './style';
-import StoreCards from './StoreCards';
+import StoreCards from '../StoreCards';
 
 
 class StoreMap extends React.Component {
@@ -61,7 +61,14 @@ class StoreMap extends React.Component {
           </Grid>
 
           <Grid item xs={3} className={classes.cardStyles}>
-            <StoreCards classes={classes} handleHighlight={this.handleHighlight}/>
+            {stores.map((store, index) => (
+              <StoreCards
+                handleHighlight={this.handleHighlight}
+                store={store}
+                index={index}
+                disableHighlight={false}
+              />
+            ))}
           </Grid>
         </Grid>
       </React.Fragment>
