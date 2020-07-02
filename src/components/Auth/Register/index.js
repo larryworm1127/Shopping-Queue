@@ -10,10 +10,13 @@ import NavBar from '../../Nav/navbar';
 import ShopperProfile from './ShopperProfile';
 import OwnerProfile from './OwnerProfile';
 import { styles } from './style';
-import FinishRegister from './FinishRegister';
+import ReviewRegister from './ReviewRegister';
+import { addNewUser } from '../../../utils/verifyAuth';
+import { addShopper } from '../../../utils/shoppers';
+import { addStore } from '../../../utils/stores';
 
 
-const steps = ['Account Details', 'Profile Details', 'Success'];
+const steps = ['Account Details', 'Profile Details', 'Review'];
 
 class Register extends React.Component {
   state = {
@@ -28,12 +31,13 @@ class Register extends React.Component {
     firstName: '',
     lastName: '',
     address: '',
+    remindTime: '',
     // shop owner profile states
     storeName: '',
     location: '',
     customerLimit: '',
-    openTime: '',
-    closeTime: '',
+    openTime: '07:30',
+    closeTime: '07:30',
     shoppingTimeLimit: '',
     storeType: '',
     // error reporting states
@@ -56,6 +60,39 @@ class Register extends React.Component {
     });
   };
 
+  handleRegister = (event) => {
+    event.preventDefault();
+
+    addNewUser(this.state.username, this.state.password, this.state.registerAs);
+    if (this.state.registerAs === 0) {
+      addShopper(
+        this.state.username,
+        this.state.firstName,
+        this.state.lastName,
+        this.state.address,
+        this.state.email,
+        this.state.remindTime
+      );
+    } else {
+      addStore(
+        this.state.storeName,
+        this.state.username,
+        this.state.location,
+        this.state.email,
+        // Use external data in phase 2 to get accurate coordinate based on location
+        [43, 66],
+        this.state.storeType,
+        this.state.openTime,
+        this.state.closeTime,
+        this.state.customerLimit,
+        this.state.shoppingTimeLimit
+      );
+    }
+
+    const { history } = this.props;
+    history.push('/login');
+  };
+
   getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -63,16 +100,9 @@ class Register extends React.Component {
           <AccountDetail
             handleNext={this.handleNext}
             handleBack={this.handleBack}
-            activeStep={this.state.activeStep}
             handleFormField={this.handleFormField}
-            username={this.state.username}
-            email={this.state.email}
-            password={this.state.password}
-            confirmPassword={this.state.confirmPassword}
-            registerAs={this.state.registerAs}
-            displayError={this.state.displayError}
-            errorMessage={this.state.errorMessage}
             setError={this.setError}
+            {...this.state}
           />
         );
       case 1:
@@ -80,18 +110,17 @@ class Register extends React.Component {
           <ShopperProfile
             handleNext={this.handleNext}
             handleBack={this.handleBack}
-            activeStep={this.state.activeStep}
             handleFormField={this.handleFormField}
+            {...this.state}
           /> :
           <OwnerProfile
             handleNext={this.handleNext}
             handleBack={this.handleBack}
-            activeStep={this.state.activeStep}
-            storeType={this.state.storeType}
             handleFormField={this.handleFormField}
+            {...this.state}
           />;
       case 2:
-        return <FinishRegister/>;
+        return <ReviewRegister {...this.state} handleRegister={this.handleRegister}/>;
       default:
         return Error('Unknown step');
     }

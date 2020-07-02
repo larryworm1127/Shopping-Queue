@@ -3,6 +3,7 @@ class Store {
     id,
     name,
     username,
+    email,
     address,
     coordinate,
     type,
@@ -14,6 +15,7 @@ class Store {
     this.id = id;
     this.username = username;
     this.name = name;
+    this.email = email;
     // Coordinates and addresses are hardcoded for phase 1.
     // Google Place API will be used for phase 2 to assists with the map feature
     // and allow more dynamic coordinate for stores.
@@ -28,8 +30,8 @@ class Store {
   }
 
   addNewQueue = (queue) => {
-    this.currentQueue.push(queue)
-  }
+    this.currentQueue.push(queue);
+  };
 }
 
 
@@ -46,6 +48,7 @@ export const stores = [
     0,
     'Floor Mart',
     'store1',
+    'store1@test.com',
     '123 Street, Toronto, ON',
     [43.658702, -79.397168],
     StoreTypes.CLOTHING,
@@ -58,6 +61,7 @@ export const stores = [
     1,
     'Shoppers Not Drug Mart',
     'store2',
+    'store2@test.com',
     '456 Street, Toronto, ON',
     [43.660896, -79.385397],
     StoreTypes.DEPARTMENT,
@@ -70,6 +74,7 @@ export const stores = [
     2,
     'Yes Frills',
     'store3',
+    'store3@test.com',
     '789 Street, Toronto, ON',
     [43.658662, -79.390168],
     StoreTypes.GROCERY,
@@ -82,6 +87,7 @@ export const stores = [
     3,
     'Unfreshco',
     'store4',
+    'store4@test.com',
     '000 Street, Toronto, ON',
     [43.661915, -79.379381],
     StoreTypes.GROCERY,
@@ -99,4 +105,33 @@ export const getStore = (storeId) => {
       return stores[i];
     }
   }
-}
+};
+
+
+export const addStore = (
+  name,
+  username,
+  address,
+  email,
+  coordinate,
+  type,
+  openingTime,
+  closingTime,
+  customerLimit,
+  customerShopTime
+) => {
+  const newStore = new Store(
+    stores.length,
+    name,
+    username,
+    email,
+    address,
+    coordinate,
+    type,
+    openingTime,
+    closingTime,
+    customerLimit,
+    customerShopTime
+  );
+  stores.push(newStore);
+};

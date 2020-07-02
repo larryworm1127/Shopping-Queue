@@ -6,26 +6,25 @@ import RegisterFormButtons from './RegisterFormButtons';
 import { styles } from './style';
 import { withStyles } from '@material-ui/core';
 
+
 class ShopperProfile extends React.Component {
-
-  handleShopperProfile = (event) => {
-    event.preventDefault();
-
-    const { handleNext } = this.props;
-    handleNext();
-  };
 
   render() {
     const {
       classes,
+      handleNext,
       activeStep,
       handleBack,
-      handleFormField
+      handleFormField,
+      firstName,
+      lastName,
+      address,
+      remindTime
     } = this.props;
 
     return (
       <React.Fragment>
-        <form onSubmit={this.handleShopperProfile}>
+        <form onSubmit={handleNext}>
           <Typography variant="h6" gutterBottom>
             Profile details
           </Typography>
@@ -33,16 +32,26 @@ class ShopperProfile extends React.Component {
             <FormTextField
               name="firstName"
               label="First name"
+              value={firstName}
               handleFormField={handleFormField}
             />
             <FormTextField
               name="lastName"
               label="Last name"
+              value={lastName}
               handleFormField={handleFormField}
             />
             <FormTextField
               name="address"
               label="Address"
+              value={address}
+              handleFormField={handleFormField}
+            />
+            <FormTextField
+              name="remindTime"
+              label="Remind Time (min)"
+              value={remindTime}
+              type="number"
               handleFormField={handleFormField}
             />
           </Grid>
