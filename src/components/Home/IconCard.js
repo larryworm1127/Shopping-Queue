@@ -11,7 +11,6 @@ class IconCard extends React.Component {
     return (
       <React.Fragment>
         <div
-          // We will set color and fill here, due to some prios complications
           className={classes.iconWrapper}
           style={{
             color: color,
