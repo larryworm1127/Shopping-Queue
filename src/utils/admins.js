@@ -26,7 +26,7 @@ const admins = [
     'admin',
     'John',
     'Doe',
-    '123 Admin Stree, Toronto, ON',
+    '123 Admin Street, Toronto, ON',
     'admin@test.com',
     shoppers,
     stores

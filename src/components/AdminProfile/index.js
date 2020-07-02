@@ -15,7 +15,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HistoryIcon from '@material-ui/icons/History';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
-import { withRouter } from 'react-router-dom';
 import { styles } from './style';
 import { getAdmin, Admin } from '../../utils/admins';
 import store from 'store';
