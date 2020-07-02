@@ -13,15 +13,6 @@ export const styles = theme => ({
     width: '100%',
     marginTop: theme.spacing(1),
   },
-  formControlLabel: {
-    textTransform: 'uppercase',
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    color: theme.palette.secondary.main
-  },
-  formControl: {
-    width: '100%',
-  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },

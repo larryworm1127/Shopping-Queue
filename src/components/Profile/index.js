@@ -20,6 +20,7 @@ import { styles } from './style';
 import { getShopper, Shopper } from '../../utils/shoppers';
 import store from 'store';
 import PropTypes from 'prop-types';
+import UserProfileEdit from './UserProfileEdit';
 
 
 const tabs = [
@@ -39,10 +40,15 @@ class Profile extends React.Component {
 
   state = {
     setting: 0,
+    editing: false
   };
 
   setSetting = (val) => {
     this.setState({ setting: val });
+  };
+
+  setEdit = (val) => {
+    this.setState({ editing: val });
   };
 
   profileSettings = (propShopper) => {
@@ -50,7 +56,9 @@ class Profile extends React.Component {
 
     switch (this.state.setting) {
       case 0:
-        return <UserProfile shopper={shopper}/>;
+        return (this.state.editing) ?
+          <UserProfileEdit shopper={shopper} setEdit={this.setEdit}/> :
+          <UserProfile shopper={shopper} setEdit={this.setEdit}/>;
       case 1:
         return <SearchHistory shopper={shopper}/>;
       case 2:
