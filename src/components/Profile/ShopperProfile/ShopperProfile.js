@@ -5,7 +5,7 @@ import { uid } from 'react-uid';
 import ProfileDataDisplay from '../ProfileDataDisplay';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
-import { styles } from './style';
+import { styles } from '../style';
 import ProfileEditButtons from '../ProfileEditButtons';
 
 

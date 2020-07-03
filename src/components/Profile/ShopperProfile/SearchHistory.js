@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core';
-import { styles } from './style';
+import { styles } from '../style';
 import Button from '@material-ui/core/Button';
 
 

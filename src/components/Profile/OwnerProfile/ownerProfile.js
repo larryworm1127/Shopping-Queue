@@ -14,7 +14,7 @@ import StoreProfile from './StoreProfile';
 import StoreSettings from './StoreSettings';
 import store from "store";
 import PropTypes from 'prop-types';
-import { styles } from './styles';
+import { styles } from '../style';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';

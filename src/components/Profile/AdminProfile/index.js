@@ -15,7 +15,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HistoryIcon from '@material-ui/icons/History';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
-import { styles } from './style';
+import { styles } from '../style';
 import { getAdmin, Admin } from '../../../utils/admins';
 import store from 'store';
 import PropTypes from 'prop-types';

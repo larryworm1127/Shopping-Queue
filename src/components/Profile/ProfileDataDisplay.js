@@ -41,11 +41,13 @@ class ProfileDataDisplay extends React.Component {
       return (
         <React.Fragment>
           {contentComponent}
-          <div className={classes.edit}>
-            <Link color="primary" onClick={() => setEdit(true)}>
-              Edit
-            </Link>
-          </div>
+          {setEdit !== undefined && (
+            <div className={classes.edit}>
+              <Link color="primary" onClick={() => setEdit(true)}>
+                Edit
+              </Link>
+            </div>
+          )}
         </React.Fragment>
       );
     }
@@ -70,11 +72,13 @@ class ProfileDataDisplay extends React.Component {
           {content}
         </Typography>
 
-        <div className={classes.edit}>
-          <Link color="primary" onClick={() => setEdit(true)}>
-            Edit
-          </Link>
-        </div>
+        {setEdit !== undefined && (
+          <div className={classes.edit}>
+            <Link color="primary" onClick={() => setEdit(true)}>
+              Edit
+            </Link>
+          </div>
+        )}
       </React.Fragment>
     );
   };
