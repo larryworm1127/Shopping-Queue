@@ -13,7 +13,6 @@ class ShoppersProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      profileView: 0,
       profileViews : new Array(this.props.admin.viewableShoppers.length).fill(0)
     }
   };
@@ -48,14 +47,13 @@ class ShoppersProfile extends React.Component {
       default:
         return;
     }
-  }
+  };
 
   render() {
     const { admin } = this.props;
 
     return (
       <React.Fragment>
-        
         {admin.viewableShoppers.map((shopper, index) => (
           <Box m={2}>
             <Card>
