@@ -8,7 +8,7 @@ import { styles } from './style';
 import { withStyles } from '@material-ui/core';
 
 
-class Student extends React.Component {
+class Booking extends React.Component {
 
   state = { seen: false };
 
@@ -82,4 +82,4 @@ class Student extends React.Component {
   }
 }
 
-export default withStyles(styles)(Student);
+export default withStyles(styles)(Booking);

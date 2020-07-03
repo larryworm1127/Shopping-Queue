@@ -3,7 +3,7 @@
 import React from 'react';
 // Importing components
 import Header from './Header';
-import StudentList from './QueueList';
+import BookingList from './BookingList';
 import NavBar from '../Nav/navbar';
 // Importing utils/required methods
 import { getBookings } from '../../utils/queue';
@@ -24,7 +24,7 @@ class Queue extends React.Component {
           title="My Queues"
           subtitle="Below are the grocery stores you've queued for."
         />
-        <StudentList bookings={this.state.bookings} queueComponent={this}/>
+        <BookingList bookings={this.state.bookings} queueComponent={this}/>
       </div>
     );
   }
