@@ -22,7 +22,7 @@ class StudentList extends React.Component {
         <TableBody>
             <TableRow component="th" scope="row">
                 <TableCell component="th" scope="row">
-                    {<strong>Grocery store</strong>}
+                    {<strong>Store</strong>}
                 </TableCell>
 
                 <TableCell component="th" scope="row">

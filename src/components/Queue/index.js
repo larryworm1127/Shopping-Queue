@@ -20,8 +20,8 @@ class Queue extends React.Component {
     studentName: "",
     studentCourse: "",
     students: [
-      { name: "Loblaws", course: "13", date: "Friday, June 26th @ 7pm" },
-      { name: "Fortinos", course: "27", date: "Monday, June 29th @ 10am"  }
+      { name: "Yes Frills", course: "13", date: "Friday, June 26th @ 7pm" },
+      { name: "Floor Mart", course: "27", date: "Monday, June 29th @ 10am"  }
     ]
   };
 
