@@ -3,12 +3,13 @@
 import React from 'react';
 // Importing components
 import Header from './Header';
-import StudentList from './QueueList';
+import BookingList from './BookingList';
 import NavBar from '../Nav/navbar';
 // Importing utils/required methods
 import { getBookings } from '../../utils/queue';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withRouter } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
 
 class Queue extends React.Component {
 
@@ -24,7 +25,9 @@ class Queue extends React.Component {
           title="My Queues"
           subtitle="Below are the grocery stores you've queued for."
         />
-        <StudentList bookings={this.state.bookings} queueComponent={this}/>
+        <Container>
+            <BookingList bookings={this.state.bookings} queueComponent={this}/>
+        </Container>
       </div>
     );
   }

@@ -4,35 +4,33 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Student from './Queue';
+import Booking from './Booking';
 import { styles } from './style';
 import { withStyles } from '@material-ui/core';
 
-/* Component for the List of Students */
-class StudentList extends React.Component {
+class BookingList extends React.Component {
 
   render() {
     const { bookings, queueComponent, classes } = this.props;
 
     return (
-      <Table className={classes.studentList}>
+      <Table className={classes.bookingList}>
         <TableBody>
           <TableRow scope="row">
             <TableCell component="th" scope="row">
-              {<strong>Store</strong>}
+                     Store
             </TableCell>
 
             <TableCell component="th" scope="row">
-              {<strong>Position in queue</strong>}
+                  Position in queue
             </TableCell>
 
             <TableCell component="th" scope="row">
-              {<strong>Arrive by</strong>}
+                    Arrive by
             </TableCell>
           </TableRow>
-          { /* Grocery stores that user is in queue for */}
           {bookings.map(booking => (
-            <Student
+            <Booking
               key={uid(booking)}
               booking={booking}
               queueComponent={queueComponent}
@@ -44,4 +42,4 @@ class StudentList extends React.Component {
   }
 }
 
-export default withStyles(styles)(StudentList);
+export default withStyles(styles)(BookingList);
