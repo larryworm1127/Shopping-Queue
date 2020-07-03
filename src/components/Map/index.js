@@ -9,6 +9,9 @@ import Grid from '@material-ui/core/Grid';
 import { styles } from './style';
 import StoreCards from '../StoreCards';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import CardActions from '@material-ui/core/CardActions';
+import Card from '@material-ui/core/Card';
 
 
 class StoreMap extends React.Component {
@@ -62,6 +65,21 @@ class StoreMap extends React.Component {
           </Grid>
 
           <Grid item xs={3} className={classes.cardStyles}>
+            <Card>
+              <CardActions>
+                <TextField
+                  variant="outlined"
+                  label="Search..."
+                />
+                <Button
+                  size="small"
+                  color="primary"
+                >
+                  Search
+                </Button>
+              </CardActions>
+            </Card>
+
             {stores.map((store, index) => (
               <StoreCards
                 secondButton={(
