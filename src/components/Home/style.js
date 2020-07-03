@@ -16,8 +16,9 @@ export const styles = theme => ({
     borderStyle: 'solid',
     fontSize: '30',
     backgroundColor: 0x0000ff,
-    align: 'center'
-  },
+    align: 'center',
+    color: props.color
+  }),
   extraLargeButton: {
     fontSize: theme.typography.body1.fontSize,
     paddingTop: theme.spacing(1.5),
@@ -73,5 +74,5 @@ export const styles = theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '95%',
-  }
+  },
 });

@@ -45,7 +45,6 @@ class Services extends React.Component {
               key={element.headline}
             >
               <IconCard
-                classes={classes}
                 Icon={element.icon}
                 color={element.color}
                 headline={element.headline}
@@ -68,7 +67,6 @@ class Services extends React.Component {
               key={element.headline}
             >
               <IconCard
-                classes={classes}
                 Icon={element.icon}
                 color={element.color}
                 headline={element.headline}
