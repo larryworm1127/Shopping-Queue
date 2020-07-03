@@ -33,7 +33,7 @@ For phase 1 of the project, we use the following credentials for authentication:
 
 | User Type   | Username | Password |
 |:-----------:|:--------:|:--------:|
-| shopper     | user1    | user1    |
+| shopper     | user     | user     |
 | shopper     | user2    | user2    |
 | store owner | store1   | store1   |
 | store owner | store2   | store2   |
