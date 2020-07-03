@@ -1,4 +1,7 @@
 export const styles = theme => ({
+  home_div: {
+    margin: '5px 15px',
+  },
   iconWrapper: {
     textAlign: 'center',
     margin: theme.spacing(3),
