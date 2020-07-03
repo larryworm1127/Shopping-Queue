@@ -107,6 +107,14 @@ export const getStore = (storeId) => {
   }
 };
 
+export const getStoreByUsername = (username) => {
+  for (let i = 0; i < stores.length; i++) {
+    if (stores[i].username === username) {
+      return stores[i];
+    }
+  }
+};
+
 
 export const addStore = (
   name,
