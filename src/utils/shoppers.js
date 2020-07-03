@@ -1,4 +1,5 @@
 import { stores } from './stores';
+import { Queue } from './queue';
 
 
 // Shopper class used to store shopper user profile data.
@@ -62,14 +63,6 @@ export class Shopper {
     this.remindTime = remindTime;
     this.favoriteStores = [...favoriteStores];
   };
-
-  clearQueueHistory = () => {
-    this.queueHistory = [];
-  };
-
-  clearSearchHistory = () => {
-    this.searchHistory = [];
-  };
 }
 
 
@@ -89,12 +82,15 @@ export const shoppers = [
       { store: stores[0], date: '08-05-2020' },
       { store: stores[1], date: '15-05-2020' }
     ],
-    []
+    [
+      new Queue('user', stores[0], '05-07-2020', 30, 1, new Date()),
+      new Queue('user', stores[2], '08-07-2020', 20, 2, new Date())
+    ]
   ),
   new Shopper(
     'user2',
-    'John',
     'Doe',
+    'John',
     '123 Test Street, Toronto, ON',
     'user2@test.com',
     45,

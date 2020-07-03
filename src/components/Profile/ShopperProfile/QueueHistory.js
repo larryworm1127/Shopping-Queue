@@ -10,18 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import { uid } from 'react-uid';
 
-
-function createQueueData(shopName, address, bookedDate, dateQueued) {
-  return { shopName, address, bookedDate, dateQueued };
-}
-
-const queueRows = [
-  createQueueData('Floor Mart', '123 Street', ' 11:00 AM 03-05-2020', '02-05-2020'),
-  createQueueData('Shoppers Not Drug Mart', '456 Street', '12:00 PM 09-05-2020', '08-05-2020'),
-  createQueueData('Yes Frills', '789 Street', '11:15 AM 16-05-2020', '15-05-2020'),
-  createQueueData('Unfreshco', '000 Street', '6:00 PM 24-05-2020', '22-05-2020'),
-];
 
 class QueueHistory extends React.Component {
 
@@ -60,24 +50,24 @@ class QueueHistory extends React.Component {
                     <TableCell>Shop Name</TableCell>
                     <TableCell>Address</TableCell>
                     <TableCell>Date Booked</TableCell>
-                    <TableCell>Date Booked</TableCell>
+                    <TableCell>Queued For</TableCell>
                     <TableCell/>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {queueRows.map((queueRow, index) => (
-                    <TableRow key={queueRow.shopName}>
+                  {this.state.queueHistory.map((queueRow, index) => (
+                    <TableRow key={uid(index)}>
                       <TableCell component="th" scope="row">
-                        {queueRow.shopName}
+                        {queueRow.store.name}
                       </TableCell>
                       <TableCell align="left">
-                        {queueRow.address}
+                        {queueRow.store.address}
                       </TableCell>
                       <TableCell align="left">
-                        {queueRow.bookedDate}
+                        {queueRow.getTimeQueued()}
                       </TableCell>
                       <TableCell align="left">
-                        {queueRow.dateQueued}
+                        {queueRow.date}
                       </TableCell>
                       <TableCell>
                         <Button

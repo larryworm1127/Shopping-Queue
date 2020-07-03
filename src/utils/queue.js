@@ -45,12 +45,14 @@ export const removeStudent = (queue, student) => {
 export class Queue {
   constructor(
     username,
+    store,
     date,
     shopTime,
     numCustomer,
     dateTimeQueued,
   ) {
     this.username = username;
+    this.store = store;
     this.date = date;
     this.shopTime = shopTime;
     this.numCustomer = numCustomer;
@@ -58,6 +60,6 @@ export class Queue {
   }
 
   getTimeQueued = () => {
-    
+    return this.dateTimeQueued.toLocaleString();
   }
 }
