@@ -1,6 +1,6 @@
 export const styles = theme => ({
   home_div: {
-    margin: '5px 15px',
+    margin: '0.5px 8px',
   },
   services_box: {
     display: "flex",
