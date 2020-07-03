@@ -14,13 +14,13 @@ const styles = () => ({
   pos: {
     marginBottom: 12,
   },
-})
+});
 
 
 class StoreCards extends React.Component {
 
   render() {
-    const { classes, handleHighlight, store, index, disableHighlight } = this.props;
+    const { classes, store, index, secondButton, disableQueue } = this.props;
 
     return (
       <Card key={index} id={index}>
@@ -46,20 +46,12 @@ class StoreCards extends React.Component {
           <Button
             size="small"
             color="primary"
+            disabled={disableQueue}
             href={`/store/${store.id}`}
           >
             Queue Here
           </Button>
-          <Button
-            type="button"
-            color="primary"
-            disabled={disableHighlight}
-            onClick={() => {
-              handleHighlight(index);
-            }}
-          >
-            Highlight on Map
-          </Button>
+          {secondButton}
         </CardActions>
       </Card>
     );

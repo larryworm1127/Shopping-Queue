@@ -5,24 +5,49 @@ import Paper from '@material-ui/core/Paper';
 import StoreCards from '../StoreCards';
 import { styles } from './style';
 import { withStyles } from '@material-ui/core';
+import { uid } from 'react-uid';
+import Link from '@material-ui/core/Link';
 
 
 class UserProfile extends React.Component {
 
   render() {
-    const { classes, shopper } = this.props;
+    const { classes, shopper, setEdit } = this.props;
 
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             <Paper className={classes.paper}>
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Your Name
+                Your First Name
               </Typography>
               <Typography component="p" variant="h6">
-                {`${shopper.firstName} ${shopper.lastName}`}
+                {shopper.firstName}
               </Typography>
+
+              <div className={classes.edit}>
+                <Link color="primary" onClick={() => setEdit(true)}>
+                  Edit
+                </Link>
+              </div>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={3}>
+            <Paper className={classes.paper}>
+              <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                Your Last Name
+              </Typography>
+              <Typography component="p" variant="h6">
+                {shopper.lastName}
+              </Typography>
+
+              <div className={classes.edit}>
+                <Link color="primary" onClick={() => setEdit(true)}>
+                  Edit
+                </Link>
+              </div>
             </Paper>
           </Grid>
 
@@ -34,6 +59,12 @@ class UserProfile extends React.Component {
               <Typography component="p" variant="h6">
                 {shopper.email}
               </Typography>
+
+              <div className={classes.edit}>
+                <Link color="primary" onClick={() => setEdit(true)}>
+                  Edit
+                </Link>
+              </div>
             </Paper>
           </Grid>
 
@@ -45,6 +76,12 @@ class UserProfile extends React.Component {
               <Typography component="p" variant="h6">
                 {shopper.address}
               </Typography>
+
+              <div className={classes.edit}>
+                <Link color="primary" onClick={() => setEdit(true)}>
+                  Edit
+                </Link>
+              </div>
             </Paper>
           </Grid>
 
@@ -55,16 +92,17 @@ class UserProfile extends React.Component {
               </Typography>
               <Grid container spacing={3}>
                 {shopper.favoriteStores.map((store, index) => (
-                  <Grid item md={4} key={index}>
-                    <StoreCards
-                      handleHighlight={this.handleHighlight}
-                      store={store}
-                      index={index}
-                      disableHighlight={true}
-                    />
+                  <Grid item md={4} key={uid(index)}>
+                    <StoreCards store={store} index={index}/>
                   </Grid>
                 ))}
               </Grid>
+
+              <div className={classes.edit}>
+                <Link color="primary" onClick={() => setEdit(true)}>
+                  Edit
+                </Link>
+              </div>
             </Paper>
           </Grid>
 
@@ -76,22 +114,12 @@ class UserProfile extends React.Component {
               <Typography component="p" variant="h6">
                 Remind me {shopper.remindTime} minutes before my booking.
               </Typography>
-              {/*<FormControl>*/}
-              {/*  <Select*/}
-              {/*    value={this.state.notificationTime}*/}
-              {/*    onChange={this.handleChange}*/}
-              {/*    displayEmpty*/}
-              {/*    inputProps={{ 'aria-label': 'Without label', 'left-margin': '8px' }}*/}
-              {/*  >*/}
-              {/*    <MenuItem value="">*/}
-              {/*      <em>None</em>*/}
-              {/*    </MenuItem>*/}
-              {/*    <MenuItem value={15}>15</MenuItem>*/}
-              {/*    <MenuItem value={30}>30</MenuItem>*/}
-              {/*    <MenuItem value={45}>45</MenuItem>*/}
-              {/*    <MenuItem value={60}>60</MenuItem>*/}
-              {/*  </Select>*/}
-              {/*</FormControl>*/}
+
+              <div className={classes.edit}>
+                <Link color="primary" onClick={() => setEdit(true)}>
+                  Edit
+                </Link>
+              </div>
             </Paper>
           </Grid>
         </Grid>
