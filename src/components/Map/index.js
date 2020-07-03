@@ -95,6 +95,7 @@ class StoreMap extends React.Component {
                 )}
                 store={store}
                 index={index}
+                key={index}
               />
             ))}
           </Grid>
