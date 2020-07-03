@@ -23,7 +23,7 @@ $ npm start
 ```
 and the website should be running on http://localhost:3000/.
 
-## Website Features
+## Website Features and Instruction
 
 ### Basic User Authentication
 
@@ -67,3 +67,42 @@ into their account they just registered.
 Note that for phase 1, the registered account would only last as long as the server
 running for the website. Restarting the server would result in lose of all registration
 data.
+
+
+### User Profile
+
+
+### Map
+
+A map feature is implemented for the website. The map itself is currently
+centered at a fixed coordinate for phase 1 and will be made more dynamic for phase 2
+uses shopper given address.
+
+The left side of the page is a view-only map where user can see the stores
+they want to queue in on the map, as shown in screenshot below. 
+
+![map](/assets/map_screenshot.PNG)
+
+The right side of the page is a list of all the shops registered on the website.
+The "highlight on map" button will place a marker (coordinate randomized 
+for phase 1) on the map to show user where the store is, while the "queue here"
+button will take user to store queue page where user can queue up that store.
+Detailed information about each store is also listed on the cards to help
+shoppers decide which store to queue at.
+
+
+### Store Queue
+
+The hidden page of the website where user can't access from the navigation panel is the store
+queue page, as shown in screenshot below.
+
+![store_queue](/assets/store_queue_screenshot.PNG)
+
+Shoppers can pick the date where they would come into the store, as well
+as their estimated shopping time (default to store limit, used to help speed
+up the queue algorithm which will be implemented in phase 2), and number of
+shoppers. After filling out the queue information, shopper must press
+"add to queue" in order to queue up at the store.
+
+Note: currently "add to queue" does not update the queue itself as that will
+be implemented in phase 2.
