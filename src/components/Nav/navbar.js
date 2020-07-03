@@ -36,9 +36,9 @@ class NavBar extends React.Component {
       case '/queue':
         return 3;
       case '/owner-profile':
-        return 3;
+        return 1;
       case '/admin-profile':
-        return 3;
+        return 1;
       case '/login':
         return 1;
       case '/register':
