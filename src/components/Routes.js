@@ -17,17 +17,17 @@ export default () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/' component={Home}/>
-        <AuthenRoute exact path='/map' component={StoreMap}/>
-        <AuthenRoute exact path='/queue' component={Queue}/>
-        <AuthenRoute exact path='/profile' component={ShopperProfile}/>
-        <AuthenRoute exact path='/owner-profile' component={OwnerPage}/>
-        <AuthenRoute exact path='/admin-profile' component={AdminProfile}/>
-        <Route exact path='/login' component={Login}/>
-        <Route exact path='/register' component={RegisterRedirect}/>
-        <Route exact path='/logout' component={SignOutRedirect}/>
-        <Route exact path='/store/:id' component={StoreDetail}/>
-        <Route path='*' component={NoMatch}/>
+        <Route exact path='/' component={Home} />
+        <AuthenRoute exact path='/map' component={StoreMap} />
+        <AuthenRoute exact path='/queue' component={Queue} />
+        <AuthenRoute exact path='/profile' component={ShopperProfile} />
+        <AuthenRoute exact path='/owner-profile' component={OwnerPage} />
+        <AuthenRoute exact path='/admin-profile' component={AdminProfile} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/register' component={RegisterRedirect} />
+        <Route exact path='/logout' component={SignOutRedirect} />
+        <Route exact path='/store/:id' component={StoreDetail} />
+        <Route path='*' component={NoMatch} />
       </Switch>
     </BrowserRouter>
   );
@@ -35,12 +35,14 @@ export default () => {
 
 const SignOutRedirect = () => {
   store.remove('loggedIn');
-  return <Redirect to={{ pathname: '/login' }}/>;
+  store.remove('user');
+  store.remove('loginAs');
+  return <Redirect to={{ pathname: '/login' }} />;
 };
 
 
 const RegisterRedirect = () => {
-  return store.get('loggedIn') ? <Redirect to={{ pathname: '/profile' }}/> : <Register/>;
+  return store.get('loggedIn') ? <Redirect to={{ pathname: '/profile' }} /> : <Register />;
 };
 
 
@@ -49,7 +51,7 @@ const AuthenRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props => !!store.get('loggedIn') ?
-        <Component {...props} /> : <Redirect to={{ pathname: '/login' }}/>
+        <Component {...props} /> : <Redirect to={{ pathname: '/login' }} />
       }
     />
   );
