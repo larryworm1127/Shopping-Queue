@@ -1,7 +1,4 @@
-// Store class used to store store owner user profile data.
-// For phase 2, this would be used as a middleware for transforming
-// database data into front-end readable Javascript object.
-class Store {
+export class Store {
   constructor(
     id,
     name,
@@ -118,6 +115,14 @@ export const stores = [
 export const getStore = (storeId) => {
   for (let i = 0; i < stores.length; i++) {
     if (stores[i].id === parseInt(storeId)) {
+      return stores[i];
+    }
+  }
+};
+
+export const getStoreByUsername = (username) => {
+  for (let i = 0; i < stores.length; i++) {
+    if (stores[i].username === username) {
       return stores[i];
     }
   }
