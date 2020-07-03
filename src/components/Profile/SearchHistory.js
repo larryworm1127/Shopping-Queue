@@ -9,12 +9,31 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core';
 import { styles } from './style';
+import Button from '@material-ui/core/Button';
 
 
 class SearchHistory extends React.Component {
 
+  constructor(props) {
+    super(props);
+    const { shopper } = this.props;
+    this.state = {
+      searchHistory: shopper.searchHistory
+    };
+  }
+
+  handleRemoveSearchHistory = (event, index) => {
+    event.preventDefault();
+
+    const { shopper } = this.props;
+    shopper.searchHistory.splice(index, 1);
+    this.setState({
+      searchHistory: shopper.searchHistory
+    });
+  };
+
   render() {
-    const { classes, shopper } = this.props;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
@@ -32,11 +51,12 @@ class SearchHistory extends React.Component {
                     <TableCell>Address</TableCell>
                     <TableCell>Shop Type</TableCell>
                     <TableCell>Date Searched</TableCell>
+                    <TableCell/>
                   </TableRow>
                 </TableHead>
 
                 <TableBody>
-                  {shopper.searchHistory.map((search, index) => (
+                  {this.state.searchHistory.map((search, index) => (
                     <TableRow key={index}>
                       <TableCell component="th" scope="row">
                         {search.store.name}
@@ -49,6 +69,15 @@ class SearchHistory extends React.Component {
                       </TableCell>
                       <TableCell align="left">
                         {search.date}
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          onClick={(event => this.handleRemoveSearchHistory(event, index))}
+                        >
+                          Remove
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}

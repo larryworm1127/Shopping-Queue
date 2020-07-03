@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { styles } from './style';
 import { withStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 
 function createQueueData(shopName, address, bookedDate, dateQueued) {
@@ -23,6 +24,25 @@ const queueRows = [
 ];
 
 class QueueHistory extends React.Component {
+
+  constructor(props) {
+    super(props);
+    const { shopper } = this.props;
+    this.state = {
+      queueHistory: shopper.queueHistory
+    };
+  }
+
+  handleRemoveQueueHistory = (event, index) => {
+    event.preventDefault();
+
+    const { shopper } = this.props;
+    shopper.queueHistory.splice(index, 1);
+    this.setState({
+      queueHistory: shopper.queueHistory
+    });
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -41,10 +61,11 @@ class QueueHistory extends React.Component {
                     <TableCell>Address</TableCell>
                     <TableCell>Date Booked</TableCell>
                     <TableCell>Date Booked</TableCell>
+                    <TableCell/>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {queueRows.map((queueRow) => (
+                  {queueRows.map((queueRow, index) => (
                     <TableRow key={queueRow.shopName}>
                       <TableCell component="th" scope="row">
                         {queueRow.shopName}
@@ -57,6 +78,15 @@ class QueueHistory extends React.Component {
                       </TableCell>
                       <TableCell align="left">
                         {queueRow.dateQueued}
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          onClick={(event => this.handleRemoveQueueHistory(event, index))}
+                        >
+                          Remove
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
