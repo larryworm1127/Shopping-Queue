@@ -13,10 +13,15 @@ import { addStudent } from "../../utils/queue";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withRouter } from 'react-router-dom';
 
+import { getBookings } from '../../utils/queue';
+
 class Queue extends React.Component {
+
+    state = {bookings: getBookings()};
+
   // React 'state'.
   // Allows us to keep track of changing data in this component.
-  state = {
+ /* state = {
     studentName: "",
     studentCourse: "",
     students: [
@@ -42,6 +47,8 @@ class Queue extends React.Component {
       [name]: value // [name] sets the object property name to the value of the `name` variable.
     });
   };
+*/
+
 
   // Each section of the Queue has its own componenet, cleaning up the
   // JSX a lot.
@@ -66,7 +73,7 @@ class Queue extends React.Component {
         />
         */}
         {/* The Student List */}
-        <StudentList students={this.state.students} queueComponent={this}/>
+        <StudentList bookings={this.state.bookings} queueComponent={this}/>
       </div>
     );
   }

@@ -14,21 +14,48 @@ import store from 'store';
 import { Queue } from '../../utils/queue';
 import { getShopper } from '../../utils/shoppers';
 
+import { addBooking, booking } from "../../utils/queue";
+
 
 class StoreDetail extends React.Component {
 
   state = {
-    date: new Date().toISOString().slice(0, 10),
-    shoppingTime: 30,
-    numCustomer: 1
-  };
+      date: new Date().toISOString().slice(0, 10),
+      est: 30,
+      num_of_shoppers: 1,
+    };
 
-  handleFormField = (field, event) => {
+ /* handleFormField = (field, event) => {
     this.setState({
       [field]: event.target.value,
     });
   };
+*/
 
+  handleFormField = event => {
+      const target = event.target;
+      const value = target.value;
+      const name = target.name;
+
+      this.setState({
+        [name]: value // [name] sets the object property name to the value of the `name` variable.
+      });
+    };
+
+
+  handleFormSubmit (){
+        /*event.preventDefault();*/
+      const newBooking = new booking(
+          store.id,
+          store.name,
+          this.state.date,
+          this.state.est,
+          this.state.num_of_shoppers
+      );
+    addBooking(newBooking);
+  };
+
+/*
   handleFormSubmit = (event, selectedStore) => {
     event.preventDefault();
     const newQueue = new Queue(
@@ -41,7 +68,7 @@ class StoreDetail extends React.Component {
     selectedStore.addNewQueue(newQueue);
     getShopper(store.get('user')).queueUp(newQueue);
   };
-
+*/
   render() {
     const {
       match,
@@ -53,7 +80,6 @@ class StoreDetail extends React.Component {
       handleFormField
     } = this.props;
     const store = getStore(match.params.id);
-    console.log(store)
 
     return (
       <React.Fragment>
@@ -86,7 +112,8 @@ class StoreDetail extends React.Component {
                   date={(date === undefined) ? this.state.date : date}
                   shoppingTime={(shoppingTime === undefined) ? this.state.shoppingTime : shoppingTime}
                   numCustomer={(numCustomer === undefined) ? this.state.numCustomer : numCustomer}
-                  handleFormSubmit={(handleFormSubmit === undefined) ? this.handleFormSubmit : handleFormSubmit}
+                  /*handleFormSubmit={(handleFormSubmit === undefined) ? this.handleFormSubmit : handleFormSubmit}*/
+                  handleFormSubmit={this.handleFormSubmit()}
                   handleFormField={(handleFormField === undefined) ? this.handleFormField : handleFormField}
                 />
               </Grid>

@@ -4,7 +4,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Divider from "@material-ui/core/Divider";
 
-import { removeStudent } from "../../utils/queue";
+import { removeBooking } from "../../utils/queue";
 import DetailsWindow from "../Details/index";
 
 import "./styles.css";
@@ -30,27 +30,22 @@ class Student extends React.Component {
    }
 
   render() {
-    const { student, queueComponent } = this.props;
+    const { booking, queueComponent } = this.props;
 
     return (
 
-      <TableRow className="student" key={student.name}>
+      <TableRow className="booking" key={booking.store}>
 
         <TableCell component="th" scope="row">
-          {student.name}
+          {booking.store}
         </TableCell>
 
         <TableCell component="th" scope="row">
-          {student.course}
+          {booking.position}
         </TableCell>
 
-        {/* Show how long the student has been waiting for */}
         <TableCell component="th" scope="row">
-        {/*
-          Waiting for: {Math.floor(this.state.seconds / 60)} minutes{" "}
-          {this.state.seconds % 60} seconds.
-        */}
-        {student.date}
+          {booking.date}
         </TableCell>
 
         <TableCell component="th" scope="row">
@@ -67,9 +62,10 @@ class Student extends React.Component {
             class="button"
             variant="contained"
             color="secondary"
-            /*onClick={
-                redirect to the store page
-            }*/
+            onClick={
+                removeBooking.bind(this, queueComponent, booking)
+            }
+            href={"/store/" + booking.id}
             >
             EDIT BOOKING
           </Button>
@@ -79,9 +75,7 @@ class Student extends React.Component {
             variant="contained"
             color="secondary"
             onClick={
-              /* Remove button onClick binds the student as the parameter to the remove function. */
-              removeStudent.bind(this, queueComponent, student)
-              //() => this.removeStudent(student) // this also works
+              removeBooking.bind(this, queueComponent, booking)
             }
           >
             LEAVE QUEUE
@@ -91,7 +85,7 @@ class Student extends React.Component {
 
         {this.state.seen ?
             <DetailsWindow
-                store={student.name}
+                store={booking.store}
                 closePopup={this.toggleDetails.bind(this)}
             />
             : null

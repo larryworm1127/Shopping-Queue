@@ -17,6 +17,7 @@ export const styles = theme => ({
   buttons: {
     display: 'flex',
     justifyContent: 'flex-end',
+    marginRight: '130px',
   },
   button: {
     marginTop: theme.spacing(3),
