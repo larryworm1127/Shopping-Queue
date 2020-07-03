@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import StoreDetailList from './StoreDetailList';
 import StoreQueueForm from './StoreQueueForm';
 import store from 'store';
-import { addBooking, booking } from '../../utils/queue';
+import { addBooking, Queue } from '../../utils/queue';
 
 
 class StoreDetail extends React.Component {
@@ -35,14 +35,15 @@ class StoreDetail extends React.Component {
 
   handleFormSubmit() {
     /*event.preventDefault();*/
-    const newBooking = new booking(
-      store.id,
-      store.name,
+    const newQueue = new Queue(
+      'user;',
+      store,
       this.state.date,
       this.state.est,
-      this.state.num_of_shoppers
+      this.state.num_of_shoppers,
+      new Date()
     );
-    addBooking(newBooking);
+    addBooking(newQueue);
   };
 
   /*
@@ -75,6 +76,7 @@ class StoreDetail extends React.Component {
       handleFormField
     } = this.props;
     const store = getStore(match.params.id);
+
 
     return (
       <React.Fragment>

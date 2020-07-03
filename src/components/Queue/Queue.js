@@ -24,7 +24,7 @@ class Student extends React.Component {
     return (
       <TableRow className={classes.booking} key={booking.store}>
         <TableCell component="th" scope="row">
-          {booking.store}
+          {booking.store.name}
         </TableCell>
 
         <TableCell component="th" scope="row">
@@ -52,7 +52,7 @@ class Student extends React.Component {
             onClick={
               removeBooking.bind(this, queueComponent, booking)
             }
-            href={'/store/' + booking.id}
+            href={'/store/' + booking.store.id}
           >
             EDIT BOOKING
           </Button>

@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core';
 class ShowDetails extends React.Component {
 
   state = {
-    store: stores.find(x => x.name === this.props.store)
+    store: stores.find(x => x.name === this.props.store.name)
   };
 
   render() {

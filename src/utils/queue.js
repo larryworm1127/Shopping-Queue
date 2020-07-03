@@ -1,19 +1,31 @@
-export class booking {
+import { stores } from './stores';
 
-    constructor(id, store, date, est, num_of_shoppers){
-        this.id = id;
-        this.store = store;
-        this.date = date;
-        this.est = est;
-        this.num_of_shoppers = num_of_shoppers;
-        this.position = Math.floor(1 + Math.random() * 49);
-    }
+export class Queue {
+  constructor(
+    username,
+    store,
+    date,
+    shopTime,
+    numCustomer,
+    dateTimeQueued,
+  ) {
+    this.username = username;
+    this.store = store;
+    this.date = date;
+    this.shopTime = shopTime;
+    this.numCustomer = numCustomer;
+    this.dateTimeQueued = dateTimeQueued;
+    this.position = Math.floor(1 + Math.random() * 49);
+  }
 
+  getTimeQueued = () => {
+    return this.dateTimeQueued.toLocaleString();
+  }
 }
 
-export let bookings = [new booking(2, "Yes Frills", "Friday, June 26th @ 7pm", 30, 1),
-                         new booking(0, "Floor Mart", "Monday, June 29th @ 10am", 50, 2),
-                         new booking(1, "Shoppers Not Drug Mart", "Thursday, July 3rd @ 10am", 10, 1)];
+export let bookings = [new Queue('user', stores[2], "Friday, June 26th @ 7pm", 30, 1, new Date()),
+                         new Queue('user', stores[0], "Monday, June 29th @ 10am", 50, 2, new Date()),
+                         new Queue('user', stores[1], "Thursday, July 3rd @ 10am", 10, 1, new Date())];
 
 export const getBookings = () =>{
     return bookings;
@@ -67,24 +79,4 @@ export const removeBooking = (queue, b) => {
 };
 
 
-export class Queue {
-  constructor(
-    username,
-    store,
-    date,
-    shopTime,
-    numCustomer,
-    dateTimeQueued,
-  ) {
-    this.username = username;
-    this.store = store;
-    this.date = date;
-    this.shopTime = shopTime;
-    this.numCustomer = numCustomer;
-    this.dateTimeQueued = dateTimeQueued;
-  }
 
-  getTimeQueued = () => {
-    return this.dateTimeQueued.toLocaleString();
-  }
-}
