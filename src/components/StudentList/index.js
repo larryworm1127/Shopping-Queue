@@ -12,7 +12,7 @@ import "./styles.css";
 /* Component for the List of Students */
 class StudentList extends React.Component {
   render() {
-    const { students, queueComponent } = this.props;
+    const { bookings, queueComponent } = this.props;
 
     /* Our student list.  We use the state to iterate through the 
        student list and make an <li> for each one. */
@@ -34,12 +34,12 @@ class StudentList extends React.Component {
                 </TableCell>
             </TableRow>
          { /* Grocery stores that user is in queue for */}
-          {students.map(student => (
+          {bookings.map(booking => (
             <Student
               key={uid(
-                student
+                booking
               )} /* unique id required to help React render more efficiently when we modify the students list. */
-              student={student}
+              booking={booking}
               queueComponent={queueComponent}
             />
           ))}

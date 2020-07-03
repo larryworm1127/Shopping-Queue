@@ -16,13 +16,9 @@ class StoreQueueForm extends React.Component {
       handleFormSubmit,
       handleFormField
     } = this.props;
-
+/*onSubmit={(event) => {handleFormSubmit(event, store)}}*/
     return (
-      <form
-        onSubmit={(event) => {
-          handleFormSubmit(event, store);
-        }}
-      >
+      <form>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
@@ -31,35 +27,40 @@ class StoreQueueForm extends React.Component {
               label="Date"
               type="date"
               value={date}
-              onChange={(event) => {
+             /* onChange={(event) => {
                 handleFormField('date', event);
               }}
+              */
+              onChange={handleFormField}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              name="shoppingTime"
+              name="est"
               label="Estimated Shopping Time (min)"
               type="number"
               max={store.customerShopTime}
               value={shoppingTime}
-              onChange={(event) => {
+             /* onChange={(event) => {
                 handleFormField('shoppingTime', event);
               }}
+              */
+              onChange={handleFormField}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              name="numCustomer"
+              name="num_of_shoppers"
               label="Number of Shopper"
               type="number"
               max={store.customerLimit}
               value={numCustomer}
-              onChange={(event) => {
+              /*onChange={(event) => {
                 handleFormField('numCustomer', event);
-              }}
+              }}*/
+              onChange={handleFormField}
             />
           </Grid>
         </Grid>
@@ -71,16 +72,10 @@ class StoreQueueForm extends React.Component {
             variant="contained"
             color="primary"
             className={classes.button}
+            onClick={handleFormSubmit}
+            href='/queue'
           >
-            Queue now
-          </Button>
-          <Button
-            type='submit'
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            Queue ahead
+            Add to queue
           </Button>
         </div>
       </form>
