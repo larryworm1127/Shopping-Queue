@@ -47,12 +47,26 @@ export class Store {
     name,
     email,
     address,
-    openingTime,
-    closingTime
+    storeType
   ) => {
     this.name = name;
     this.email = email;
     this.address = address;
+    this.type = storeType;
+  };
+
+  /**
+   * This function updates store owner store setting data using given args.
+   * It's called whenever user modifies profile data on profile page.
+   */
+  updateStoreSettings = (
+    customerLimit,
+    customerShopTime,
+    openingTime,
+    closingTime
+  ) => {
+    this.customerLimit = customerLimit;
+    this.customerShopTime = customerShopTime;
     this.openingTime = openingTime;
     this.closingTime = closingTime;
   };

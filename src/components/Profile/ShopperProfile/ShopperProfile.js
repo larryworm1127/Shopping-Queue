@@ -9,7 +9,7 @@ import { styles } from './style';
 import ProfileEditButtons from '../ProfileEditButtons';
 
 
-class UserProfile extends React.Component {
+class ShopperProfile extends React.Component {
 
   constructor(props) {
     super(props);
@@ -146,11 +146,12 @@ class UserProfile extends React.Component {
             title="Your Favorite Stores"
             contentComponent={
               <Grid container spacing={3}>
-                {
-                  (this.state.edit) ?
-                    this.getFavStoreEditComponent(shopper) :
-                    this.getFavStoreDisplayComponent(shopper)
-                }
+                {this.getFavStoreDisplayComponent(shopper)}
+              </Grid>
+            }
+            editComponent={
+              <Grid container spacing={3}>
+                {this.getFavStoreEditComponent(shopper)}
               </Grid>
             }
             edit={this.state.edit}
@@ -180,4 +181,4 @@ class UserProfile extends React.Component {
   }
 }
 
-export default withStyles(styles)(UserProfile);
+export default withStyles(styles)(ShopperProfile);

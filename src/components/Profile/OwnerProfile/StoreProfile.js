@@ -1,10 +1,9 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { styles } from './styles';
-import { withStyles } from '@material-ui/core';
 import ProfileDataDisplay from '../ProfileDataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
-import { stores } from '../../../utils/stores';
+import { StoreTypes } from '../../../utils/stores';
+import FormSelectField from '../../FormSelectField';
 
 
 class StoreProfile extends React.Component {
@@ -17,8 +16,7 @@ class StoreProfile extends React.Component {
       storeName: store.name,
       email: store.email,
       address: store.address,
-      openTime: store.openingTime,
-      closeTime: store.closingTime
+      storeType: store.type
     };
   }
 
@@ -41,14 +39,13 @@ class StoreProfile extends React.Component {
       this.state.storeName,
       this.state.email,
       this.state.address,
-      this.state.openTime,
-      this.state.closeTime,
+      this.state.storeType
     );
-    console.log(stores);
   };
 
   render() {
     const { store } = this.props;
+
     return (
       <React.Fragment>
         <Grid container spacing={3}>
@@ -86,28 +83,21 @@ class StoreProfile extends React.Component {
             handleFormField={this.handleFormField}
           />
           <ProfileDataDisplay
-            gridSize={6}
-            title="Store Hours Opening"
-            content={store.openingTime}
+            gridSize={12}
+            title="Store Type"
+            content={store.type}
             edit={this.state.edit}
             setEdit={this.setEdit}
-            name="openTime"
-            label="Opening Time"
-            type="time"
-            value={this.state.openTime}
-            handleFormField={this.handleFormField}
-          />
-          <ProfileDataDisplay
-            gridSize={6}
-            title="Store Hours Closing"
-            content={store.closingTime}
-            edit={this.state.edit}
-            setEdit={this.setEdit}
-            name="closeTime"
-            label="Closing Time"
-            type="time"
-            value={this.state.closeTime}
-            handleFormField={this.handleFormField}
+            editComponent={
+              <FormSelectField
+                name="storeType"
+                label="Store Type"
+                handleFormField={this.handleFormField}
+                value={this.state.storeType}
+                useIndex={false}
+                menuItems={Object.keys(StoreTypes)}
+              />
+            }
           />
         </Grid>
         <br/>
@@ -122,4 +112,4 @@ class StoreProfile extends React.Component {
   }
 }
 
-export default withStyles(styles)(StoreProfile);
+export default StoreProfile;

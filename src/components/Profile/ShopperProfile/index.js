@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from '../../Nav/navbar';
 import SearchHistory from './SearchHistory.js';
 import QueueHistory from './QueueHistory.js';
-import UserProfile from './UserProfile.js';
+import UserProfile from './ShopperProfile.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Drawer from '@material-ui/core/Drawer';

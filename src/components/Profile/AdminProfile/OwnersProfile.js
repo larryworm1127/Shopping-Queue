@@ -4,8 +4,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import StoreSettings from '../OwnerProfile/storeSettings';
-import StoreProfile from '../OwnerProfile/storeProfile';
+import StoreSettings from '../OwnerProfile/StoreSettings';
+import StoreProfile from '../OwnerProfile/StoreProfile';
 
 class OwnersProfile extends React.Component {
   constructor(props) {

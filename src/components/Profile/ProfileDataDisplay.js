@@ -33,10 +33,11 @@ class ProfileDataDisplay extends React.Component {
       setEdit,
       handleFormField,
       contentComponent,
+      editComponent,
       type
     } = this.props;
 
-    if (contentComponent !== undefined) {
+    if (!edit && contentComponent !== undefined) {
       return (
         <React.Fragment>
           {contentComponent}
@@ -47,6 +48,10 @@ class ProfileDataDisplay extends React.Component {
           </div>
         </React.Fragment>
       );
+    }
+
+    if (edit && editComponent !== undefined) {
+      return editComponent;
     }
 
     return (edit) ? (

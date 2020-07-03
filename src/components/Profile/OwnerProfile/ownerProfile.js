@@ -10,8 +10,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HistoryIcon from '@material-ui/icons/History';
 import {getStoreByUsername, Store} from '../../../utils/stores';
-import StoreProfile from './storeProfile';
-import StoreSettings from './storeSettings';
+import StoreProfile from './StoreProfile';
+import StoreSettings from './StoreSettings';
 import store from "store";
 import PropTypes from 'prop-types';
 import { styles } from './styles';
@@ -44,7 +44,6 @@ class OwnerPage extends React.Component {
   };
 
   profileSettings = (storeProp) => {
-    console.log(store.get('user'));
     const currentStore = (storeProp === undefined) ? getStoreByUsername(store.get('user')) : storeProp;
 
     switch (this.state.setting) {
