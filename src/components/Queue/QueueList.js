@@ -22,15 +22,15 @@ class StudentList extends React.Component {
         <TableBody>
           <TableRow component="th" scope="row">
             <TableCell component="th" scope="row">
-              {<strong>Store</strong>}
+                     Store
             </TableCell>
 
             <TableCell component="th" scope="row">
-              {<strong>Position in queue</strong>}
+                  Position in queue
             </TableCell>
 
             <TableCell component="th" scope="row">
-              {<strong>Arrive by</strong>}
+                    Arrive by
             </TableCell>
           </TableRow>
           { /* Grocery stores that user is in queue for */}
