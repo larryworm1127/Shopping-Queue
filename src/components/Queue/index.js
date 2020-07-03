@@ -9,6 +9,7 @@ import NavBar from '../Nav/navbar';
 import { getBookings } from '../../utils/queue';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withRouter } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
 
 class Queue extends React.Component {
 
@@ -24,7 +25,9 @@ class Queue extends React.Component {
           title="My Queues"
           subtitle="Below are the grocery stores you've queued for."
         />
-        <BookingList bookings={this.state.bookings} queueComponent={this}/>
+        <Container>
+            <BookingList bookings={this.state.bookings} queueComponent={this}/>
+        </Container>
       </div>
     );
   }

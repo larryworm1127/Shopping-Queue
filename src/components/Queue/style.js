@@ -47,14 +47,14 @@ export const styles = theme => ({
     color: 'white',
     textAlign: 'center',
     cursor: 'pointer',
-    fontSize: '16px',
+    fontSize: '14px',
     margin: '0 0 0 20px',
   },
-  student: {
+  booking: {
     marginBottom: '5px',
     fontSize: '150%'
   },
-  studentList: {
+  bookingList: {
     marginTop: theme.spacing(4)
   },
   booking: {
