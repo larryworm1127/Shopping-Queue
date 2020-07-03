@@ -7,8 +7,7 @@ export const styles = theme => ({
     justifyContent: "center",
     className: "row"
   },
-
-  iconWrapper: {
+  iconWrapper: props => ({
     textAlign: 'center',
     margin: theme.spacing(3),
     padding: theme.spacing(3),
