@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import StoreSettings from '../OwnerProfile/StoreSettings';
 import StoreProfile from '../OwnerProfile/StoreProfile';
+import { styles } from '../style';
+import { withStyles } from '@material-ui/core';
 
 class OwnersProfile extends React.Component {
 
@@ -14,11 +16,13 @@ class OwnersProfile extends React.Component {
   };
 
   closeView(index) {
+    const { classes } = this.props;
+
     const stateView = this.state.profileViews[index];
     if (stateView !== 0) {
       return (
         <Button
-          style={{ marginRight: '8px' }}
+          className={classes.button}
           onClick={() => {
             this.handleViewChange(index, 0);
           }}
@@ -53,7 +57,7 @@ class OwnersProfile extends React.Component {
   };
 
   render() {
-    const { admin } = this.props;
+    const { admin, classes } = this.props;
 
     return (
       <React.Fragment>
@@ -72,7 +76,7 @@ class OwnersProfile extends React.Component {
                 <Typography variant='body1'>Email: {store.email}</Typography>
                 <Typography variant='body1'>Location: {store.address}</Typography>
                 <Button
-                  style={{ marginRight: '8px' }}
+                  className={classes.button}
                   onClick={() => {
                     this.handleViewChange(index, 1);
                   }}
@@ -82,7 +86,7 @@ class OwnersProfile extends React.Component {
                   Store Profile
                 </Button>
                 <Button
-                  style={{ marginRight: '8px' }}
+                  className={classes.button}
                   onClick={() => {
                     this.handleViewChange(index, 2);
                   }}
@@ -103,4 +107,4 @@ class OwnersProfile extends React.Component {
   }
 }
 
-export default OwnersProfile;
+export default withStyles(styles)(OwnersProfile);

@@ -29,5 +29,8 @@ export const styles = (theme) => ({
   },
   adminShopperProfileButton: {
     marginRight: theme.spacing(2)
+  },
+  button: {
+    marginRight: theme.spacing(2)
   }
 });
