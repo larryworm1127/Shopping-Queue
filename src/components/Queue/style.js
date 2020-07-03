@@ -17,7 +17,8 @@ export const styles = theme => ({
     right: 0,
     bottom: 0,
     margin: 'auto',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1
   },
   detailsInner: {
     position: 'absolute',
@@ -51,13 +52,21 @@ export const styles = theme => ({
     textAlign: 'center',
     cursor: 'pointer',
     fontSize: '16px',
-    margin: '0 0 0 20px'
+    margin: '0 0 0 20px',
   },
   student: {
     marginBottom: '5px',
     fontSize: '150%'
   },
-  studentForm: {
-    justifyContent: 'center'
-  }
+  studentList: {
+    marginTop: theme.spacing(4)
+  },
+  booking: {
+    marginBottom: '5px',
+    fontSize: '150%',
+    '& th': {
+      fontSize: '0.75em',
+      color: 'darkslategray'
+    }
+  },
 });

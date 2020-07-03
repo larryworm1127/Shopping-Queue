@@ -1,41 +1,28 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import Divider from "@material-ui/core/Divider";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import { removeBooking } from '../../utils/queue';
+import DetailsWindow from './Details';
+import { styles } from './style';
+import { withStyles } from '@material-ui/core';
 
-import { removeBooking } from "../../utils/queue";
-import DetailsWindow from "../Details/index";
-
-import "./styles.css";
 
 class Student extends React.Component {
-  /*  Common 'Lifecycle' methods 
-      - constructor
-      - componentDidMount
-      - componentWillUnmount
-  */
 
-  constructor(props) {
-    // When the componenet is created
-    super(props);
-    this.state = { seen: false };
-
-  }
+  state = { seen: false };
 
   toggleDetails() {
     this.setState({
-       seen: !this.state.seen
-  });
-   }
+      seen: !this.state.seen
+    });
+  }
 
   render() {
-    const { booking, queueComponent } = this.props;
+    const { booking, queueComponent, classes } = this.props;
 
     return (
-
-      <TableRow className="booking" key={booking.store}>
-
+      <TableRow className={classes.booking} key={booking.store}>
         <TableCell component="th" scope="row">
           {booking.store}
         </TableCell>
@@ -50,28 +37,28 @@ class Student extends React.Component {
 
         <TableCell component="th" scope="row">
           <Button
-            class="button"
+            className={classes.button}
             variant="contained"
             color="secondary"
             onClick={this.toggleDetails.bind(this)}
-            >
+          >
             DETAILS
           </Button>
 
           <Button
-            class="button"
+            className={classes.button}
             variant="contained"
             color="secondary"
             onClick={
-                removeBooking.bind(this, queueComponent, booking)
+              removeBooking.bind(this, queueComponent, booking)
             }
-            href={"/store/" + booking.id}
-            >
+            href={'/store/' + booking.id}
+          >
             EDIT BOOKING
           </Button>
 
           <Button
-            class="button"
+            className={classes.button}
             variant="contained"
             color="secondary"
             onClick={
@@ -82,26 +69,17 @@ class Student extends React.Component {
           </Button>
 
 
-
-        {this.state.seen ?
+          {this.state.seen ?
             <DetailsWindow
-                store={booking.store}
-                closePopup={this.toggleDetails.bind(this)}
+              store={booking.store}
+              closePopup={this.toggleDetails.bind(this)}
             />
             : null
-        }
-
-
+          }
         </TableCell>
-
       </TableRow>
-
-
-
-
     );
-
   }
 }
 
-export default Student;
+export default withStyles(styles)(Student);

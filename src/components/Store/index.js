@@ -11,69 +11,59 @@ import Grid from '@material-ui/core/Grid';
 import StoreDetailList from './StoreDetailList';
 import StoreQueueForm from './StoreQueueForm';
 import store from 'store';
-import { Queue } from '../../utils/queue';
-import { getShopper } from '../../utils/shoppers';
-
-import { addBooking, booking } from "../../utils/queue";
+import { addBooking, booking } from '../../utils/queue';
 
 
 class StoreDetail extends React.Component {
 
   state = {
-      date: new Date().toISOString().slice(0, 10),
-      est: 30,
-      num_of_shoppers: 1,
-    };
-
- /* handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-    });
+    date: new Date().toISOString().slice(0, 10),
+    est: 30,
+    num_of_shoppers: 1,
   };
-*/
 
   handleFormField = event => {
-      const target = event.target;
-      const value = target.value;
-      const name = target.name;
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
 
-      this.setState({
-        [name]: value // [name] sets the object property name to the value of the `name` variable.
-      });
-    };
+    this.setState({
+      [name]: value // [name] sets the object property name to the value of the `name` variable.
+    });
+  };
 
 
-  handleFormSubmit (){
-        /*event.preventDefault();*/
-      const newBooking = new booking(
-          store.id,
-          store.name,
-          this.state.date,
-          this.state.est,
-          this.state.num_of_shoppers
-      );
+  handleFormSubmit() {
+    /*event.preventDefault();*/
+    const newBooking = new booking(
+      store.id,
+      store.name,
+      this.state.date,
+      this.state.est,
+      this.state.num_of_shoppers
+    );
     addBooking(newBooking);
   };
 
-/*
-  handleFormSubmit = (event, selectedStore) => {
-    event.preventDefault();
+  /*
+    handleFormSubmit = (event, selectedStore) => {
+      event.preventDefault();
 
-    const { history } = this.props
-    const newQueue = new Queue(
-      store.get('user'),
-      selectedStore,
-      this.state.date,
-      this.state.shoppingTime,
-      this.state.numCustomer,
-      new Date()
-    );
-    selectedStore.addNewQueue(newQueue);
-    getShopper(store.get('user')).queueUp(newQueue);
+      const { history } = this.props
+      const newQueue = new Queue(
+        store.get('user'),
+        selectedStore,
+        this.state.date,
+        this.state.shoppingTime,
+        this.state.numCustomer,
+        new Date()
+      );
+      selectedStore.addNewQueue(newQueue);
+      getShopper(store.get('user')).queueUp(newQueue);
 
-    history.push('/queue');
-  };
-*/
+      history.push('/queue');
+    };
+  */
   render() {
     const {
       match,
