@@ -2,7 +2,7 @@ export const styles = theme => ({
   home_div: {
     margin: '5px 15px',
   },
-  iconWrapper: {
+  iconWrapper: props => ({
     textAlign: 'center',
     margin: theme.spacing(3),
     padding: theme.spacing(3),
@@ -10,8 +10,9 @@ export const styles = theme => ({
     borderStyle: 'solid',
     fontSize: '30',
     backgroundColor: 0x0000ff,
-    align: 'center'
-  },
+    align: 'center',
+    color: props.color
+  }),
   extraLargeButton: {
     fontSize: theme.typography.body1.fontSize,
     paddingTop: theme.spacing(1.5),
@@ -67,5 +68,5 @@ export const styles = theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '95%',
-  }
+  },
 });
