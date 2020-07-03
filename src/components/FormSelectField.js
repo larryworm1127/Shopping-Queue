@@ -18,7 +18,7 @@ const styles = theme => ({
   formControl: {
     width: '100%',
   }
-})
+});
 
 
 class FormSelectField extends React.Component {

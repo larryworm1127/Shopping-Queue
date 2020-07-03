@@ -8,10 +8,17 @@ import ComputerIcon from '@material-ui/icons/Computer';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
 import Clock from '@material-ui/icons/AccessTime';
+
+
+// Hardcoded help-requests data that would be replaced with
+// external API calls in phase 2
 const createRowData = (user, type, message, date) => {
   return { user, type, message, date };
 };
 
+
+// Hardcoded store recommendation data that would be replaced
+// with external API calls in phase 2.
 const createServiceData = (color, headline, text, icon) => {
   return { color, headline, text, icon };
 };
@@ -20,7 +27,7 @@ const createServiceData = (color, headline, text, icon) => {
 export const getServiceData = (id) => {
   switch (id) {
     case 0:
-      const icon0 = <LocalGroceryStore />;
+      const icon0 = <LocalGroceryStore/>;
       return {
         services: [
           createServiceData('#00C853', 'No deals', 'Only deal Grocery', icon0),
@@ -37,8 +44,8 @@ export const getServiceData = (id) => {
         secondTitle: 'Based off your Queue History',
       };
     case 1:
-      const icon1 = <People />;
-      const icon11 = <Clock />;
+      const icon1 = <People/>;
+      const icon11 = <Clock/>;
       return {
         services: [
           createServiceData('#00C853', 'Current Queue', '200 shoppers in queue', icon1),
@@ -51,7 +58,7 @@ export const getServiceData = (id) => {
         rows: undefined,
       };
     case 2:
-      const icon2 = <People />;
+      const icon2 = <People/>;
       return {
         services: [
           createServiceData('#00C853', 'End Users', '200 end users', icon2),
@@ -71,17 +78,17 @@ export const getServiceData = (id) => {
     default:
       return {
         services: [
-          createServiceData('#00C853', 'Service 1', 'Our service', <BuildIcon />),
-          createServiceData('#6200EA', 'Service 2', 'Our service', <CalendarTodayIcon />),
-          createServiceData('#0091EA', 'Service 3', 'Our service', <MessageIcon />),
-          createServiceData('#d50000', 'Service 4', 'Our service', <ComputerIcon />),
-          createServiceData('#DD2C00', 'Service 5', 'Our service', <BarChartIcon />),
-          createServiceData('#64DD17', 'Service 6', 'Our service', <HeadsetMicIcon />)
+          createServiceData('#00C853', 'Service 1', 'Our service', <BuildIcon/>),
+          createServiceData('#6200EA', 'Service 2', 'Our service', <CalendarTodayIcon/>),
+          createServiceData('#0091EA', 'Service 3', 'Our service', <MessageIcon/>),
+          createServiceData('#d50000', 'Service 4', 'Our service', <ComputerIcon/>),
+          createServiceData('#DD2C00', 'Service 5', 'Our service', <BarChartIcon/>),
+          createServiceData('#64DD17', 'Service 6', 'Our service', <HeadsetMicIcon/>)
         ],
         secondServices: [],
         rows: undefined,
         title: 'Services',
         secondTitle: ''
-      }
+      };
   }
 };

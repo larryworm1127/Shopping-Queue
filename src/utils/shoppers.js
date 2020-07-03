@@ -1,5 +1,9 @@
 import { stores } from './stores';
 
+
+// Shopper class used to store shopper user profile data.
+// For phase 2, this would be used as a middleware for transforming
+// database data into front-end readable Javascript object.
 export class Shopper {
   constructor(
     username,
@@ -28,11 +32,21 @@ export class Shopper {
     this.remindTime = remindTime;
   }
 
+  /**
+   * This function adds a <Queue> object into user profile data.
+   * It's called whenever user queues up at a store.
+   *
+   * @param queue the queue object containing info about user's new queue.
+   */
   queueUp = (queue) => {
     this.currentQueue.push(queue);
     this.queueHistory.push(queue);
   };
 
+  /**
+   * This function updates shopper user profile data using given args.
+   * It's called whenever user modifies profile data on profile page.
+   */
   updateUserProfile = (
     firstName,
     lastName,
@@ -59,6 +73,7 @@ export class Shopper {
 }
 
 
+// The array of shopper objects would be replaced by database in phase 2.
 export const shoppers = [
   new Shopper(
     'user',
@@ -96,6 +111,7 @@ export const shoppers = [
   )
 ];
 
+// The getShopper() function would be replaced by a database query in phase 2.
 export const getShopper = (username) => {
   for (let i = 0; i < shoppers.length; i++) {
     if (shoppers[i].username === username) {
@@ -104,7 +120,8 @@ export const getShopper = (username) => {
   }
 };
 
-
+// The addShopper() function would be replaced by a database query in phase 2.
+// Currently called whenever a new shopper is registered on website.
 export const addShopper = (
   username,
   firstName,

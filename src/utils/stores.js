@@ -1,3 +1,6 @@
+// Store class used to store store owner user profile data.
+// For phase 2, this would be used as a middleware for transforming
+// database data into front-end readable Javascript object.
 class Store {
   constructor(
     id,
@@ -29,12 +32,23 @@ class Store {
     this.currentQueue = [];
   }
 
+  /**
+   * This function adds a <Queue> object into store queue list.
+   * It's called whenever a user queues up at current store.
+   *
+   * @param queue the queue object containing info about the new queue.
+   */
   addNewQueue = (queue) => {
     this.currentQueue.push(queue);
   };
 }
 
 
+/**
+ * A Enum object that contains all store types.
+ *
+ * @type {{CLOTHING: string, ACCESSORY: string, DEPARTMENT: string, GROCERY: string}}
+ */
 export const StoreTypes = {
   GROCERY: 'Grocery',
   DEPARTMENT: 'Department',
@@ -43,6 +57,7 @@ export const StoreTypes = {
 };
 
 
+// The array of store objects would be replaced by database in phase 2.
 export const stores = [
   new Store(
     0,
@@ -99,6 +114,7 @@ export const stores = [
 ];
 
 
+// The getStore() function would be replaced by a database query in phase 2.
 export const getStore = (storeId) => {
   for (let i = 0; i < stores.length; i++) {
     if (stores[i].id === parseInt(storeId)) {
@@ -108,6 +124,8 @@ export const getStore = (storeId) => {
 };
 
 
+// The addStore() function would be replaced by a database query in phase 2.
+// Currently called whenever a new store owner is registered on website.
 export const addStore = (
   name,
   username,
