@@ -116,10 +116,10 @@ shoppers. After filling out the queue information, shopper must press
  
 Note: currently "add to queue" does not update the queue itself as it requires a database which will be implemented in phase 2.
  
-### User, Store, and Admin Profiles
+### Shopper, Store Owner, and Admin Profiles
  
-## User
-Once logging in with the correct credentials for a user, you can now visit your own profile page! In this profile page, you will be greeted initially with your own information!
+#### Shopper
+Once logging in with the correct credentials for a shopper, you can now visit your own profile page! In this profile page, you will be greeted initially with your own information!
  
 This will give you your name, email, and location, as well as your favourite stores that you use, and what your notification settings are for the app to remind you of your bookings.
  
@@ -131,12 +131,12 @@ Another interaction you can do on this page is edit your information! Once click
  
 ![user_profile](/assets/user_profile_editing_screenshot.PNG)
  
-The user profile page is also accompanied by the search and queue history pages. These pages provide you with the stores that you have queued and searched for. The items in these tables can also be removed from your history on click of the ‘REMOVED’ button. Of course these changes will not save until the phase 2 functionality is present.
+The shopper profile page is also accompanied by the search and queue history pages. These pages provide you with the stores that you have queued and searched for. The items in these tables can also be removed from your history on click of the ‘REMOVED’ button. Of course these changes will not save until the phase 2 functionality is present.
  
 ![user_profile](/assets/user_profile_search_history_screenshot.PNG)
 ![user_profile](/assets/user_profile_queue_history_screenshot.PNG)
  
-## Store
+#### Store Owner
  
 Once logging in with the correct credentials for a store owner, you can now visit your store profile page. In this profile page, you will be greeted initially with the information of the store!
  
@@ -148,7 +148,7 @@ The store profile page is also accompanied by the store settings page that allow
  
 ![store_profile](/assets/store_settings_screenshot.PNG)
  
-## Admin
+#### Admin
  
 Once logging in with the correct credentials for an admin, you can now visit your own profile page. This page gives you basic information about yourself.
  
