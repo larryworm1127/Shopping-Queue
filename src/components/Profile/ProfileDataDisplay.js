@@ -32,7 +32,8 @@ class ProfileDataDisplay extends React.Component {
       label,
       setEdit,
       handleFormField,
-      contentComponent
+      contentComponent,
+      type
     } = this.props;
 
     if (contentComponent !== undefined) {
@@ -55,6 +56,7 @@ class ProfileDataDisplay extends React.Component {
         name={name}
         label={label}
         value={value}
+        type={type}
         handleFormField={handleFormField}
       />
     ) : (

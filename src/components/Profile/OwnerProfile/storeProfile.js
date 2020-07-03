@@ -1,63 +1,122 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import { styles } from './styles';
 import { withStyles } from '@material-ui/core';
+import ProfileDataDisplay from '../ProfileDataDisplay';
+import ProfileEditButtons from '../ProfileEditButtons';
+import { stores } from '../../../utils/stores';
+
 
 class StoreProfile extends React.Component {
+
+  constructor(props) {
+    super(props);
+    const { store } = this.props;
+    this.state = {
+      edit: false,
+      storeName: store.name,
+      email: store.email,
+      address: store.address,
+      openTime: store.openingTime,
+      closeTime: store.closingTime
+    };
+  }
+
+  setEdit = (val) => {
+    this.setState({ edit: val });
+  };
+
+  handleFormField = (field, event) => {
+    this.setState({
+      [field]: event.target.value,
+    });
+  };
+
+  handleSave = (event) => {
+    event.preventDefault();
+
+    const { store } = this.props;
+    this.setEdit(false);
+    store.updateUserProfile(
+      this.state.storeName,
+      this.state.email,
+      this.state.address,
+      this.state.openTime,
+      this.state.closeTime,
+    );
+    console.log(stores);
+  };
+
   render() {
-    const { classes, store } = this.props;
+    const { store } = this.props;
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>
-              <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Store Name
-              </Typography>
-              <Typography component="p" variant="h6">
-                {`${store.name}`}
-              </Typography>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>
-              <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Store Email
-              </Typography>
-              <Typography component="p" variant="h6">
-                {store.email}
-              </Typography>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Store Location
-              </Typography>
-              <Typography component="p" variant="h6">
-                {store.address}
-              </Typography>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Store Hours
-              </Typography>
-              <Typography component="p" variant="h6">
-                Opening {store.openingTime}
-              </Typography>
-              <Typography component="p" variant="h6">
-                Closing {store.closingTime}
-              </Typography>
-            </Paper>
-          </Grid>
+          <ProfileDataDisplay
+            gridSize={6}
+            title="Store Name"
+            content={store.name}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="storeName"
+            label="Store Name"
+            value={this.state.storeName}
+            handleFormField={this.handleFormField}
+          />
+          <ProfileDataDisplay
+            gridSize={6}
+            title="Store Email"
+            content={store.email}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="email"
+            label="Email"
+            value={this.state.email}
+            handleFormField={this.handleFormField}
+          />
+          <ProfileDataDisplay
+            gridSize={12}
+            title="Store Location"
+            content={store.address}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="address"
+            label="Address"
+            value={this.state.address}
+            handleFormField={this.handleFormField}
+          />
+          <ProfileDataDisplay
+            gridSize={6}
+            title="Store Hours Opening"
+            content={store.openingTime}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="openTime"
+            label="Opening Time"
+            type="time"
+            value={this.state.openTime}
+            handleFormField={this.handleFormField}
+          />
+          <ProfileDataDisplay
+            gridSize={6}
+            title="Store Hours Closing"
+            content={store.closingTime}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="closeTime"
+            label="Closing Time"
+            type="time"
+            value={this.state.closeTime}
+            handleFormField={this.handleFormField}
+          />
         </Grid>
+        <br/>
+
+        <ProfileEditButtons
+          edit={this.state.edit}
+          setEdit={this.setEdit}
+          handleSave={this.handleSave}
+        />
       </React.Fragment>
     );
   }

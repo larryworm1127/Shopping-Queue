@@ -6,6 +6,7 @@ import ProfileDataDisplay from '../ProfileDataDisplay';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
 import { styles } from './style';
+import ProfileEditButtons from '../ProfileEditButtons';
 
 
 class UserProfile extends React.Component {
@@ -14,6 +15,7 @@ class UserProfile extends React.Component {
     super(props);
     const { shopper } = this.props;
     this.state = {
+      edit: false,
       firstName: shopper.firstName,
       lastName: shopper.lastName,
       email: shopper.email,
@@ -22,6 +24,10 @@ class UserProfile extends React.Component {
       remindTime: shopper.remindTime
     };
   }
+
+  setEdit = (val) => {
+    this.setState({ edit: val });
+  };
 
   handleFormField = (field, event) => {
     this.setState({
@@ -47,7 +53,7 @@ class UserProfile extends React.Component {
     ));
   };
 
-  getFavStoreEditComponent = (shopper) => {
+  getFavStoreEditComponent = () => {
     return this.state.favoriteStores.map((store, index) => (
       <Grid item md={4} key={uid(index)}>
         <StoreCards
@@ -73,8 +79,8 @@ class UserProfile extends React.Component {
   handleSave = (event) => {
     event.preventDefault();
 
-    const { setEdit, shopper } = this.props;
-    setEdit(false);
+    const { shopper } = this.props;
+    this.setEdit(false);
     shopper.updateUserProfile(
       this.state.firstName,
       this.state.lastName,
@@ -86,7 +92,7 @@ class UserProfile extends React.Component {
   };
 
   render() {
-    const { classes, shopper, setEdit, edit } = this.props;
+    const { shopper } = this.props;
 
     return (
       <React.Fragment>
@@ -95,8 +101,8 @@ class UserProfile extends React.Component {
             gridSize={3}
             title="Your First Name"
             content={shopper.firstName}
-            edit={edit}
-            setEdit={setEdit}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
             name="firstName"
             label="First Name"
             value={this.state.firstName}
@@ -106,8 +112,8 @@ class UserProfile extends React.Component {
             gridSize={3}
             title="Your Last Name"
             content={shopper.lastName}
-            edit={edit}
-            setEdit={setEdit}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
             name="lastName"
             label="Last Name"
             value={this.state.lastName}
@@ -117,8 +123,8 @@ class UserProfile extends React.Component {
             gridSize={6}
             title="Your Email"
             content={shopper.email}
-            edit={edit}
-            setEdit={setEdit}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
             name="email"
             label="Email"
             value={this.state.email}
@@ -128,8 +134,8 @@ class UserProfile extends React.Component {
             gridSize={12}
             title="Your Location"
             content={shopper.address}
-            edit={edit}
-            setEdit={setEdit}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
             name="address"
             label="Address"
             value={this.state.address}
@@ -141,21 +147,21 @@ class UserProfile extends React.Component {
             contentComponent={
               <Grid container spacing={3}>
                 {
-                  (edit) ?
-                  this.getFavStoreEditComponent(shopper) :
-                  this.getFavStoreDisplayComponent(shopper)
+                  (this.state.edit) ?
+                    this.getFavStoreEditComponent(shopper) :
+                    this.getFavStoreDisplayComponent(shopper)
                 }
               </Grid>
             }
-            edit={edit}
-            setEdit={setEdit}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
           />
           <ProfileDataDisplay
             gridSize={12}
             title="Notification Settings"
             content={`Remind me ${shopper.remindTime} minutes before my booking.`}
-            edit={edit}
-            setEdit={setEdit}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
             name="remindTime"
             label="Minutes before my booking to remind me."
             value={this.state.remindTime}
@@ -164,29 +170,11 @@ class UserProfile extends React.Component {
         </Grid>
         <br/>
 
-        {edit && (
-          <Grid item xs={12}>
-            <Button
-              className={classes.bottomButton}
-              variant="contained"
-              color="primary"
-              onClick={this.handleSave}
-            >
-              Save
-            </Button>
-
-            <Button
-              className={classes.bottomButton}
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                setEdit(false);
-              }}
-            >
-              Cancel
-            </Button>
-          </Grid>
-        )}
+        <ProfileEditButtons
+          edit={this.state.edit}
+          setEdit={this.setEdit}
+          handleSave={this.handleSave}
+        />
       </React.Fragment>
     );
   }

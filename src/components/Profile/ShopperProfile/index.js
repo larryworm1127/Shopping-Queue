@@ -39,15 +39,10 @@ class Profile extends React.Component {
 
   state = {
     setting: 0,
-    editing: false
   };
 
   setSetting = (val) => {
     this.setState({ setting: val });
-  };
-
-  setEdit = (val) => {
-    this.setState({ editing: val });
   };
 
   profileSettings = (propShopper) => {
@@ -55,7 +50,7 @@ class Profile extends React.Component {
 
     switch (this.state.setting) {
       case 0:
-        return <UserProfile shopper={shopper} setEdit={this.setEdit} edit={this.state.editing}/>;
+        return <UserProfile shopper={shopper}/>;
       case 1:
         return <SearchHistory shopper={shopper}/>;
       case 2:

@@ -6,6 +6,7 @@ import { styles } from './styles';
 import { withStyles } from '@material-ui/core';
 
 class StoreSettings extends React.Component {
+
   render() {
     const { classes, store } = this.props;
     return (

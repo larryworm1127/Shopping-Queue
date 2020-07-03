@@ -38,6 +38,24 @@ export class Store {
   addNewQueue = (queue) => {
     this.currentQueue.push(queue);
   };
+
+  /**
+   * This function updates store owner user profile data using given args.
+   * It's called whenever user modifies profile data on profile page.
+   */
+  updateUserProfile = (
+    name,
+    email,
+    address,
+    openingTime,
+    closingTime
+  ) => {
+    this.name = name;
+    this.email = email;
+    this.address = address;
+    this.openingTime = openingTime;
+    this.closingTime = closingTime;
+  };
 }
 
 
