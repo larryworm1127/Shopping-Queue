@@ -8,28 +8,35 @@ import StoreSettings from '../OwnerProfile/StoreSettings';
 import StoreProfile from '../OwnerProfile/StoreProfile';
 
 class OwnersProfile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      profileViews : new Array(this.props.admin.viewableStores.length).fill(0)
-    }
+
+  state = {
+    profileViews: new Array(this.props.admin.viewableStores.length).fill(0)
   };
 
   closeView(index) {
     const stateView = this.state.profileViews[index];
     if (stateView !== 0) {
-      return (<Button style={{marginRight: '8px'}} onClick={() => {this.handleViewChange(index, 0)}} variant="contained" color="primary">
-                Close
-              </Button>);
+      return (
+        <Button
+          style={{ marginRight: '8px' }}
+          onClick={() => {
+            this.handleViewChange(index, 0);
+          }}
+          variant="contained"
+          color="primary"
+        >
+          Close
+        </Button>
+      );
     }
   };
-  
+
   handleViewChange(index, newProfileView) {
     let shallowCopyViewsOpen = [...this.state.profileViews];
-    let shallowItem = {...shallowCopyViewsOpen[index]};
+    let shallowItem = { ...shallowCopyViewsOpen[index] };
     shallowItem = newProfileView;
     shallowCopyViewsOpen[index] = shallowItem;
-    this.setState({profileViews: shallowCopyViewsOpen});
+    this.setState({ profileViews: shallowCopyViewsOpen });
   };
 
   getView(index) {
@@ -54,22 +61,37 @@ class OwnersProfile extends React.Component {
           <Box m={2}>
             <Card>
               <CardContent>
-                <Typography 
-                component="h2" 
-                variant="h5"
-                color="primary"
-                gutterBottom
+                <Typography
+                  component="h2"
+                  variant="h5"
+                  color="primary"
+                  gutterBottom
                 >
                   {store.name}
                 </Typography>
                 <Typography variant='body1'>Email: {store.email}</Typography>
                 <Typography variant='body1'>Location: {store.address}</Typography>
-                <Button style={{marginRight: '8px'}} onClick={() => {this.handleViewChange(index, 1)}} variant="contained" color="primary">
+                <Button
+                  style={{ marginRight: '8px' }}
+                  onClick={() => {
+                    this.handleViewChange(index, 1);
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
                   Store Profile
                 </Button>
-                <Button style={{marginRight: '8px'}} onClick={() => {this.handleViewChange(index, 2)}} variant="contained" color="primary">
+                <Button
+                  style={{ marginRight: '8px' }}
+                  onClick={() => {
+                    this.handleViewChange(index, 2);
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
                   Store Settings
                 </Button>
+
                 {this.closeView(index)}
                 {this.getView(index)}
               </CardContent>
