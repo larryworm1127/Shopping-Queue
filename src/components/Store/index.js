@@ -13,7 +13,6 @@ import StoreQueueForm from './StoreQueueForm';
 import store from 'store';
 import { addBooking, Queue } from '../../utils/queue';
 
-
 class StoreDetail extends React.Component {
 
   state = {
@@ -28,15 +27,14 @@ class StoreDetail extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value // [name] sets the object property name to the value of the `name` variable.
+      [name]: value
     });
   };
 
 
   handleFormSubmit() {
-    /*event.preventDefault();*/
     const newQueue = new Queue(
-      'user;',
+      'user;',  /*default username for now*/
       store,
       this.state.date,
       this.state.est,
@@ -46,25 +44,6 @@ class StoreDetail extends React.Component {
     addBooking(newQueue);
   };
 
-  /*
-    handleFormSubmit = (event, selectedStore) => {
-      event.preventDefault();
-
-      const { history } = this.props
-      const newQueue = new Queue(
-        store.get('user'),
-        selectedStore,
-        this.state.date,
-        this.state.shoppingTime,
-        this.state.numCustomer,
-        new Date()
-      );
-      selectedStore.addNewQueue(newQueue);
-      getShopper(store.get('user')).queueUp(newQueue);
-
-      history.push('/queue');
-    };
-  */
   render() {
     const {
       match,
@@ -77,7 +56,6 @@ class StoreDetail extends React.Component {
     } = this.props;
     const store = getStore(match.params.id);
 
-
     return (
       <React.Fragment>
         <NavBar/>
@@ -89,13 +67,11 @@ class StoreDetail extends React.Component {
               {store.name}
             </Typography>
             <br/>
-
             <Grid container>
               <Grid item xs={7}>
                 <Typography variant="h6" gutterBottom>
                   Store details
                 </Typography>
-
                 <StoreDetailList store={store}/>
               </Grid>
               <Grid item xs={5}>
@@ -109,7 +85,6 @@ class StoreDetail extends React.Component {
                   date={(date === undefined) ? this.state.date : date}
                   shoppingTime={(shoppingTime === undefined) ? this.state.shoppingTime : shoppingTime}
                   numCustomer={(numCustomer === undefined) ? this.state.numCustomer : numCustomer}
-                  /*handleFormSubmit={(handleFormSubmit === undefined) ? this.handleFormSubmit : handleFormSubmit}*/
                   handleFormSubmit={this.handleFormSubmit()}
                   handleFormField={(handleFormField === undefined) ? this.handleFormField : handleFormField}
                 />
