@@ -2,9 +2,11 @@ import { stores } from './stores';
 import { Queue } from './queue';
 
 
-// Shopper class used to store shopper user profile data.
-// For phase 2, this would be used as a middleware for transforming
-// database data into front-end readable Javascript object.
+/**
+ * Shopper class used to store shopper user profile data.
+ * For phase 2, this would be used as a middleware for transforming
+ * database data into front-end readable Javascript object.
+ */
 export class Shopper {
   constructor(
     username,

@@ -2,9 +2,11 @@ import { shoppers } from './shoppers';
 import { stores } from './stores';
 
 
-// Admin class used to store admin user profile data.
-// For phase 2, this would be used as a middleware for transforming
-// database data into front-end readable Javascript object.
+/**
+ * Admin class used to store admin user profile data.
+ * For phase 2, this would be used as a middleware for transforming
+ * database data into front-end readable Javascript object.
+ */
 export class Admin {
   constructor(
     username,

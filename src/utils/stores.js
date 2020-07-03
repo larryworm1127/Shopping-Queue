@@ -1,3 +1,8 @@
+/**
+ * Store class used to store owner user profile data.
+ * For phase 2, this would be used as a middleware for transforming
+ * database data into front-end readable Javascript object.
+ */
 export class Store {
   constructor(
     id,
@@ -74,9 +79,8 @@ export class Store {
 
 
 /**
- * A Enum object that contains all store types.
- *
- * @type {{CLOTHING: string, ACCESSORY: string, DEPARTMENT: string, GROCERY: string}}
+ * Types of stores.
+ * @enum {string}
  */
 export const StoreTypes = {
   GROCERY: 'Grocery',
