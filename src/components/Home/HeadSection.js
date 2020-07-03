@@ -11,15 +11,15 @@ class HeadSection extends React.Component {
       mainText: 'Welcome ' + store.get('user'),
       buttonText: 'Your Profile',
       subText: '',
-      buttonUrl: (store.get('loginAs') === 0 ? '/profile' : 
-                 (store.get('loginAs') === 1 ? '/owner-profile' : 
-                 '/admin-profile'))
+      buttonUrl: (store.get('loginAs') === 0 ? '/profile' :
+        (store.get('loginAs') === 1 ? '/owner-profile' :
+          '/admin-profile'))
     } : {
-      mainText: 'Shopping Queue Manager',
-      buttonText: 'Signup',
-      subText: 'Now you don\'t need to risk your health for shopping',
-      buttonUrl: '/register'
-    };
+        mainText: 'Shopping Queue Manager',
+        buttonText: 'Signup',
+        subText: 'Now you don\'t need to risk your health for shopping!',
+        buttonUrl: '/register'
+      };
   };
 
   render() {
@@ -29,11 +29,9 @@ class HeadSection extends React.Component {
     return (
       <React.Fragment>
         <div className={classes.wrapper}>
-          <Box display="flex" justifyContent="center" className="row">
+          <Box className={classes.services_box}>
             <Card
               className={classes.card}
-              data-aos-delay="200"
-              data-aos="zoom-in"
             >
               <Typography variant={'h3'}>
                 {headerTexts.mainText}
