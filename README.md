@@ -115,6 +115,18 @@ shoppers. After filling out the queue information, shopper must press
 "add to queue" in order to queue up at the store.
  
 Note: currently "add to queue" does not update the queue itself as it requires a database which will be implemented in phase 2.
+
+
+### My Queues
+ 
+This page is where the user can view and manage all the queues that they are currently in.
+ 
+![store_queue](/assets/my_queues_screenshot.PNG)
+ 
+The user can view details about the store they are queued for. The user can also choose to edit the day, time, and # of shoppers for their queue. If the user no longer wants to go to a store, they can simply leave the queue.
+
+![store_queue](/assets/my_queues_detail_screenshot.PNG)
+
  
 ### Shopper, Store Owner, and Admin Profiles
  
