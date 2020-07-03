@@ -66,13 +66,13 @@ Once a user fills out profile information, they can begin using the website.
 Note that for phase 1, the registered account would not work when used to login.
 This will be implemented in phase 2 alongside the database.
  
-###Home
+### Home
  
-####Before Login
+#### Before Login
 ![Home](/assets/home_before_screenshot.PNG)
 This is the landing page of the website, it shows a signup button for easy access to the new users. It also lists various value added services provided by the website.
  
-####After Login
+#### After Login
 Home page is the first page shown after the login.
 Shoppers will see recommendations and Queue history.
 ![Home](/assets/home_shopper_screenshot.PNG)
