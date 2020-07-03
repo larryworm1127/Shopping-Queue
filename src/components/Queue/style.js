@@ -52,5 +52,12 @@ export const styles = theme => ({
     cursor: 'pointer',
     fontSize: '16px',
     margin: '0 0 0 20px'
+  },
+  student: {
+    marginBottom: '5px',
+    fontSize: '150%'
+  },
+  studentForm: {
+    justifyContent: 'center'
   }
 });
