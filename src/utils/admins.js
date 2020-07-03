@@ -1,6 +1,10 @@
 import { shoppers } from './shoppers';
 import { stores } from './stores';
 
+
+// Admin class used to store admin user profile data.
+// For phase 2, this would be used as a middleware for transforming
+// database data into front-end readable Javascript object.
 export class Admin {
   constructor(
     username,
@@ -19,8 +23,25 @@ export class Admin {
     this.viewableShoppers = viewableShoppers;
     this.viewableStores = viewableStores;
   };
+
+  /**
+   * This function updates admin user profile data using given args.
+   * It's called whenever user modifies profile data on profile page.
+   */
+  updateUserProfile = (
+    firstName,
+    lastName,
+    address,
+    email,
+  ) => {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address = address;
+    this.email = email;
+  };
 }
 
+// The array of admin objects would be replaced by database in phase 2.
 const admins = [
   new Admin(
     'admin',
@@ -33,6 +54,7 @@ const admins = [
   )
 ];
 
+// The getAdmin() function would be replaced by a database query in phase 2.
 export const getAdmin = (adminUsername) => {
   for (let i = 0; i < admins.length; i++) {
     if (admins[i].username === adminUsername) {

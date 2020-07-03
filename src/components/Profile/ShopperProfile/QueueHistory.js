@@ -7,14 +7,34 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
-import { styles } from './style';
+import Button from '@material-ui/core/Button';
+import { uid } from 'react-uid';
 
 
-class SearchHistory extends React.Component {
+class QueueHistory extends React.Component {
+
+  constructor(props) {
+    super(props);
+    const { shopper } = this.props;
+    this.state = {
+      queueHistory: shopper.queueHistory
+    };
+  }
+
+  handleRemoveQueueHistory = (event, index) => {
+    event.preventDefault();
+
+    const { shopper } = this.props;
+    shopper.queueHistory.splice(index, 1);
+    this.setState({
+      queueHistory: shopper.queueHistory
+    });
+  };
 
   render() {
-    const { classes, shopper } = this.props;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
@@ -22,33 +42,41 @@ class SearchHistory extends React.Component {
           <Grid item xs={12}>
             <Paper className={classes.paper}>
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Shop Search History
+                Queueing History
               </Typography>
-
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell>Shop Name</TableCell>
                     <TableCell>Address</TableCell>
-                    <TableCell>Shop Type</TableCell>
-                    <TableCell>Date Searched</TableCell>
+                    <TableCell>Date Booked</TableCell>
+                    <TableCell>Queued For</TableCell>
+                    <TableCell/>
                   </TableRow>
                 </TableHead>
-
                 <TableBody>
-                  {shopper.searchHistory.map((search, index) => (
-                    <TableRow key={index}>
+                  {this.state.queueHistory.map((queueRow, index) => (
+                    <TableRow key={uid(index)}>
                       <TableCell component="th" scope="row">
-                        {search.store.name}
+                        {queueRow.store.name}
                       </TableCell>
                       <TableCell align="left">
-                        {search.store.address}
+                        {queueRow.store.address}
                       </TableCell>
                       <TableCell align="left">
-                        {search.store.type}
+                        {queueRow.getTimeQueued()}
                       </TableCell>
                       <TableCell align="left">
-                        {search.date}
+                        {queueRow.date}
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          onClick={(event => this.handleRemoveQueueHistory(event, index))}
+                        >
+                          Remove
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -62,4 +90,4 @@ class SearchHistory extends React.Component {
   }
 }
 
-export default withStyles(styles)(SearchHistory);
+export default withStyles(styles)(QueueHistory);

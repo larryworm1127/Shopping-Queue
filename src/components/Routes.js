@@ -3,8 +3,9 @@ import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-route
 import Home from './Home/';
 import Queue from './Queue';
 import Login from './Auth/Login';
-import Profile from './Profile';
-import AdminProfile from './AdminProfile';
+import ShopperProfile from './Profile/ShopperProfile';
+import AdminProfile from './Profile/AdminProfile';
+import OwnerPage from './Profile/OwnerProfile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
 import store from 'store';
@@ -19,7 +20,8 @@ export default () => {
         <Route exact path='/' component={Home}/>
         <AuthenRoute exact path='/map' component={StoreMap}/>
         <AuthenRoute exact path='/queue' component={Queue}/>
-        <AuthenRoute exact path='/profile' component={Profile}/>
+        <AuthenRoute exact path='/profile' component={ShopperProfile}/>
+        <AuthenRoute exact path='/owner-profile' component={OwnerPage}/>
         <AuthenRoute exact path='/admin-profile' component={AdminProfile}/>
         <Route exact path='/login' component={Login}/>
         <Route exact path='/register' component={RegisterRedirect}/>

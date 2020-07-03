@@ -1,31 +1,19 @@
 import React from 'react';
-import NavBar from '../Nav/navbar';
-import AdminPage from './AdminProfile.js';
-import ShoppersProfile from './ShoppersProfile.js';
-import OwnersProfile from './OwnersProfile.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import withStyles from '@material-ui/core/styles/withStyles';
+import NavBar from '../Nav/navbar';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import PersonIcon from '@material-ui/icons/Person';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import HistoryIcon from '@material-ui/icons/History';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
+import PersonIcon from '@material-ui/icons/Person';
+import HistoryIcon from '@material-ui/icons/History';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { styles } from './style';
-import { getAdmin, Admin } from '../../utils/admins';
-import store from 'store';
-import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core';
 
-
-const tabs = [
-  'Profile',
-  'User Profiles',
-  'Shop Owner Profiles'
-];
 
 const tabIcons = [
   <PersonIcon/>,
@@ -33,7 +21,8 @@ const tabIcons = [
   <ShoppingCartIcon/>
 ];
 
-class AdminProfile extends React.Component {
+class ProfileBase extends React.Component {
+
   state = {
     setting: 0,
   };
@@ -42,28 +31,13 @@ class AdminProfile extends React.Component {
     this.setState({ setting: val });
   };
 
-  profileSettings = (adminProp) => {
-    const admin = (adminProp === undefined) ? getAdmin(store.get('user')) : adminProp;
-
-    switch (this.state.setting) {
-      case 0:
-        return <AdminPage admin={admin}/>;
-      case 1:
-        return <ShoppersProfile admin={admin}/>;
-      case 2:
-        return <OwnersProfile admin={admin}/>;
-      default:
-        return Error('Unknown case');
-    }
-  };
-
   render() {
-    const { classes, admin } = this.props;
+    const { classes, user, tabs, profileSettings, location } = this.props;
 
     return (
       <React.Fragment>
         <CssBaseline/>
-        <NavBar currentPath={this.props.location.pathname}/>
+        <NavBar currentPath={location.pathname}/>
 
         <Drawer
           className={classes.drawer}
@@ -86,16 +60,11 @@ class AdminProfile extends React.Component {
         </Drawer>
 
         <Container className={classes.container}>
-          {this.profileSettings(admin)}
+          {profileSettings(user, this.state.setting)}
         </Container>
       </React.Fragment>
     );
   }
 }
 
-AdminProfile.propTypes = {
-  classes: PropTypes.object.isRequired,
-  shopper: PropTypes.objectOf(Admin)
-};
-
-export default withStyles(styles)(AdminProfile);
+export default withStyles(styles)(ProfileBase);

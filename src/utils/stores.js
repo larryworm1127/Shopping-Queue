@@ -1,4 +1,4 @@
-class Store {
+export class Store {
   constructor(
     id,
     name,
@@ -29,12 +29,55 @@ class Store {
     this.currentQueue = [];
   }
 
+  /**
+   * This function adds a <Queue> object into store queue list.
+   * It's called whenever a user queues up at current store.
+   *
+   * @param queue the queue object containing info about the new queue.
+   */
   addNewQueue = (queue) => {
     this.currentQueue.push(queue);
+  };
+
+  /**
+   * This function updates store owner user profile data using given args.
+   * It's called whenever user modifies profile data on profile page.
+   */
+  updateUserProfile = (
+    name,
+    email,
+    address,
+    storeType
+  ) => {
+    this.name = name;
+    this.email = email;
+    this.address = address;
+    this.type = storeType;
+  };
+
+  /**
+   * This function updates store owner store setting data using given args.
+   * It's called whenever user modifies profile data on profile page.
+   */
+  updateStoreSettings = (
+    customerLimit,
+    customerShopTime,
+    openingTime,
+    closingTime
+  ) => {
+    this.customerLimit = customerLimit;
+    this.customerShopTime = customerShopTime;
+    this.openingTime = openingTime;
+    this.closingTime = closingTime;
   };
 }
 
 
+/**
+ * A Enum object that contains all store types.
+ *
+ * @type {{CLOTHING: string, ACCESSORY: string, DEPARTMENT: string, GROCERY: string}}
+ */
 export const StoreTypes = {
   GROCERY: 'Grocery',
   DEPARTMENT: 'Department',
@@ -43,6 +86,7 @@ export const StoreTypes = {
 };
 
 
+// The array of store objects would be replaced by database in phase 2.
 export const stores = [
   new Store(
     0,
@@ -99,6 +143,7 @@ export const stores = [
 ];
 
 
+// The getStore() function would be replaced by a database query in phase 2.
 export const getStore = (storeId) => {
   for (let i = 0; i < stores.length; i++) {
     if (stores[i].id === parseInt(storeId)) {
@@ -107,7 +152,17 @@ export const getStore = (storeId) => {
   }
 };
 
+export const getStoreByUsername = (username) => {
+  for (let i = 0; i < stores.length; i++) {
+    if (stores[i].username === username) {
+      return stores[i];
+    }
+  }
+};
 
+
+// The addStore() function would be replaced by a database query in phase 2.
+// Currently called whenever a new store owner is registered on website.
 export const addStore = (
   name,
   username,

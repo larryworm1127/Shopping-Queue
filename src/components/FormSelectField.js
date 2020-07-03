@@ -18,15 +18,17 @@ const styles = theme => ({
   formControl: {
     width: '100%',
   }
-})
+});
 
 
 class FormSelectField extends React.Component {
 
   renderMenuItems(items) {
+    const { useIndex } = this.props;
+
     return items.map((item, index) => (
       <MenuItem
-        value={index}
+        value={(useIndex === undefined) ? index : item}
         key={uid(item)}
       >
         {item}

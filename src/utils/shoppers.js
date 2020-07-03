@@ -1,5 +1,10 @@
 import { stores } from './stores';
+import { Queue } from './queue';
 
+
+// Shopper class used to store shopper user profile data.
+// For phase 2, this would be used as a middleware for transforming
+// database data into front-end readable Javascript object.
 export class Shopper {
   constructor(
     username,
@@ -28,11 +33,21 @@ export class Shopper {
     this.remindTime = remindTime;
   }
 
+  /**
+   * This function adds a <Queue> object into user profile data.
+   * It's called whenever user queues up at a store.
+   *
+   * @param queue the queue object containing info about user's new queue.
+   */
   queueUp = (queue) => {
     this.currentQueue.push(queue);
     this.queueHistory.push(queue);
   };
 
+  /**
+   * This function updates shopper user profile data using given args.
+   * It's called whenever user modifies profile data on profile page.
+   */
   updateUserProfile = (
     firstName,
     lastName,
@@ -48,17 +63,10 @@ export class Shopper {
     this.remindTime = remindTime;
     this.favoriteStores = [...favoriteStores];
   };
-
-  clearQueueHistory = () => {
-    this.queueHistory = [];
-  };
-
-  clearSearchHistory = () => {
-    this.searchHistory = [];
-  };
 }
 
 
+// The array of shopper objects would be replaced by database in phase 2.
 export const shoppers = [
   new Shopper(
     'user',
@@ -74,12 +82,15 @@ export const shoppers = [
       { store: stores[0], date: '08-05-2020' },
       { store: stores[1], date: '15-05-2020' }
     ],
-    []
+    [
+      new Queue('user', stores[0], '05-07-2020', 30, 1, new Date()),
+      new Queue('user', stores[2], '08-07-2020', 20, 2, new Date())
+    ]
   ),
   new Shopper(
     'user2',
-    'John',
     'Doe',
+    'John',
     '123 Test Street, Toronto, ON',
     'user2@test.com',
     45,
@@ -96,6 +107,7 @@ export const shoppers = [
   )
 ];
 
+// The getShopper() function would be replaced by a database query in phase 2.
 export const getShopper = (username) => {
   for (let i = 0; i < shoppers.length; i++) {
     if (shoppers[i].username === username) {
@@ -104,7 +116,8 @@ export const getShopper = (username) => {
   }
 };
 
-
+// The addShopper() function would be replaced by a database query in phase 2.
+// Currently called whenever a new shopper is registered on website.
 export const addShopper = (
   username,
   firstName,

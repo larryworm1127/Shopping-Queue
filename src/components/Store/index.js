@@ -31,8 +31,11 @@ class StoreDetail extends React.Component {
 
   handleFormSubmit = (event, selectedStore) => {
     event.preventDefault();
+
+    const { history } = this.props
     const newQueue = new Queue(
       store.get('user'),
+      selectedStore,
       this.state.date,
       this.state.shoppingTime,
       this.state.numCustomer,
@@ -40,6 +43,8 @@ class StoreDetail extends React.Component {
     );
     selectedStore.addNewQueue(newQueue);
     getShopper(store.get('user')).queueUp(newQueue);
+
+    history.push('/queue');
   };
 
   render() {
@@ -53,7 +58,6 @@ class StoreDetail extends React.Component {
       handleFormField
     } = this.props;
     const store = getStore(match.params.id);
-    console.log(store)
 
     return (
       <React.Fragment>

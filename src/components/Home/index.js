@@ -16,12 +16,12 @@ class Home extends React.Component {
     const serviceData = getServiceData((store.get('loggedIn')) ? store.get('loginAs') : -1);
 
     return (
-      <div>
-        <NavBar currentPath={location.pathname}/>
-        <CssBaseline/>
-        <HeadSection classes={classes}/>
-        <Services classes={classes} serviceData={serviceData}/>
-        <Footer classes={classes}/>
+      <div className={classes.home_div}>
+        <NavBar currentPath={location.pathname} />
+        <CssBaseline />
+        <HeadSection classes={classes} />
+        <Services classes={classes} serviceData={serviceData} />
+        <Footer classes={classes} />
       </div>
     );
   }
