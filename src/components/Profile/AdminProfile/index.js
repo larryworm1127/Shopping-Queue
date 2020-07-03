@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../Nav/navbar';
+import NavBar from '../../Nav/navbar';
 import AdminPage from './AdminProfile.js';
 import ShoppersProfile from './ShoppersProfile.js';
 import OwnersProfile from './OwnersProfile.js';
@@ -16,7 +16,7 @@ import HistoryIcon from '@material-ui/icons/History';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
 import { styles } from './style';
-import { getAdmin, Admin } from '../../utils/admins';
+import { getAdmin, Admin } from '../../../utils/admins';
 import store from 'store';
 import PropTypes from 'prop-types';
 

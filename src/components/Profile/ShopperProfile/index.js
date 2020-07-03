@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../Nav/navbar';
+import NavBar from '../../Nav/navbar';
 import SearchHistory from './SearchHistory.js';
 import QueueHistory from './QueueHistory.js';
 import UserProfile from './UserProfile.js';
@@ -17,7 +17,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
 import { withRouter } from 'react-router-dom';
 import { styles } from './style';
-import { getShopper, Shopper } from '../../utils/shoppers';
+import { getShopper, Shopper } from '../../../utils/shoppers';
 import store from 'store';
 import PropTypes from 'prop-types';
 

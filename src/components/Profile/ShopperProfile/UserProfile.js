@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import StoreCards from '../StoreCards';
+import StoreCards from '../../StoreCards';
 import { uid } from 'react-uid';
-import ProfileDataDisplay from './ProfileDataDisplay';
+import ProfileDataDisplay from '../ProfileDataDisplay';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
 import { styles } from './style';

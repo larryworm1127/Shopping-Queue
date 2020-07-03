@@ -4,9 +4,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import UserProfile from '../Profile/UserProfile';
-import SearchHistory from '../Profile/SearchHistory';
-import QueueHistory from '../Profile/QueueHistory';
+import UserProfile from '../ShopperProfile/UserProfile';
+import SearchHistory from '../ShopperProfile/SearchHistory';
+import QueueHistory from '../ShopperProfile/QueueHistory';
 
 
 class ShoppersProfile extends React.Component {

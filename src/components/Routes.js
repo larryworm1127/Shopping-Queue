@@ -3,9 +3,9 @@ import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-route
 import Home from './Home/';
 import Queue from './Queue';
 import Login from './Auth/Login';
-import Profile from './Profile';
-import AdminProfile from './AdminProfile';
-import OwnerPage from './OwnerProfile/ownerProfile';
+import Profile from './Profile/ShopperProfile';
+import AdminProfile from './Profile/AdminProfile';
+import OwnerPage from './Profile/OwnerProfile/ownerProfile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
 import store from 'store';

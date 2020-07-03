@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from '../Nav/navbar';
+import NavBar from '../../Nav/navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
@@ -9,7 +9,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HistoryIcon from '@material-ui/icons/History';
-import {getStoreByUsername, Store} from '../../utils/stores';
+import {getStoreByUsername, Store} from '../../../utils/stores';
 import StoreProfile from './storeProfile';
 import StoreSettings from './storeSettings';
 import store from "store";
