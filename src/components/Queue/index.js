@@ -14,8 +14,6 @@ class Queue extends React.Component {
 
   state = { bookings: getBookings() };
 
-  // Each section of the Queue has its own componenet, cleaning up the
-  // JSX a lot.
   render() {
     return (
       <div>
@@ -26,17 +24,6 @@ class Queue extends React.Component {
           title="My Queues"
           subtitle="Below are the grocery stores you've queued for."
         />
-
-        {/* Student Form component with text and function props.
-        <StudentForm
-          studentName={this.state.studentName}
-          studentCourse={this.state.studentCourse}
-          position={this.state.position}
-          handleChange={this.handleInputChange}
-          addStudent={() => addStudent(this)}
-        />
-        */}
-        {/* The Student List */}
         <StudentList bookings={this.state.bookings} queueComponent={this}/>
       </div>
     );
