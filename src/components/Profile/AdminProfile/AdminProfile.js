@@ -1,53 +1,106 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { styles } from './style';
-import { withStyles } from '@material-ui/core';
+import ProfileDataDisplay from '../ProfileDataDisplay';
+import ProfileEditButtons from '../ProfileEditButtons';
+
 
 class AdminPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    const { admin } = this.props;
+    this.state = {
+      edit: false,
+      firstName: admin.firstName,
+      lastName: admin.lastName,
+      email: admin.email,
+      address: admin.address,
+    };
+  }
+
+  setEdit = (val) => {
+    this.setState({ edit: val });
+  };
+
+  handleFormField = (field, event) => {
+    this.setState({
+      [field]: event.target.value,
+    });
+  };
+
+  handleSave = (event) => {
+    event.preventDefault();
+
+    const { admin } = this.props;
+    this.setEdit(false);
+    admin.updateUserProfile(
+      this.state.firstName,
+      this.state.lastName,
+      this.state.address,
+      this.state.email,
+    );
+  };
+
   render() {
-    const {classes, admin } = this.props;
+    const { admin } = this.props;
 
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>
-              <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Your Name
-              </Typography>
-              <Typography component="p" variant="h6">
-                {`${admin.firstName} ${admin.lastName}`}
-              </Typography>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>
-              <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Your Email
-              </Typography>
-              <Typography component="p" variant="h6">
-                {admin.email}
-              </Typography>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Your Location
-              </Typography>
-              <Typography component="p" variant="h6">
-                {admin.address}
-              </Typography>
-            </Paper>
-          </Grid>
+          <ProfileDataDisplay
+            gridSize={3}
+            title="Your First Name"
+            content={admin.firstName}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="firstName"
+            label="First Name"
+            value={this.state.firstName}
+            handleFormField={this.handleFormField}
+          />
+          <ProfileDataDisplay
+            gridSize={3}
+            title="Your Last Name"
+            content={admin.lastName}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="lastName"
+            label="Last Name"
+            value={this.state.lastName}
+            handleFormField={this.handleFormField}
+          />
+          <ProfileDataDisplay
+            gridSize={6}
+            title="Your Email"
+            content={admin.email}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="email"
+            label="Email"
+            value={this.state.email}
+            handleFormField={this.handleFormField}
+          />
+          <ProfileDataDisplay
+            gridSize={12}
+            title="Your Location"
+            content={admin.address}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="address"
+            label="Address"
+            value={this.state.address}
+            handleFormField={this.handleFormField}
+          />
         </Grid>
+
+        <ProfileEditButtons
+          edit={this.state.edit}
+          setEdit={this.setEdit}
+          handleSave={this.handleSave}
+        />
       </React.Fragment>
     );
   }
 }
 
-export default withStyles(styles)(AdminPage);
+export default AdminPage;

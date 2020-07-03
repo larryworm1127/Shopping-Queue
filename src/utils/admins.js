@@ -23,6 +23,22 @@ export class Admin {
     this.viewableShoppers = viewableShoppers;
     this.viewableStores = viewableStores;
   };
+
+  /**
+   * This function updates admin user profile data using given args.
+   * It's called whenever user modifies profile data on profile page.
+   */
+  updateUserProfile = (
+    firstName,
+    lastName,
+    address,
+    email,
+  ) => {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address = address;
+    this.email = email;
+  };
 }
 
 // The array of admin objects would be replaced by database in phase 2.
