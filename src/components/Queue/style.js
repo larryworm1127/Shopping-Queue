@@ -4,10 +4,6 @@ export const styles = theme => ({
     marginBottom: '40px',
     textAlign: 'center'
   },
-  storeInfo: {
-    margin: '20px 0 0 20px',
-    fontSize: '20px',
-  },
   details: {
     position: 'fixed',
     width: '100%',
@@ -40,7 +36,7 @@ export const styles = theme => ({
     textAlign: 'center',
     cursor: 'pointer',
     fontSize: '16px',
-    margin: '20px 0 0 225px',
+    margin: '20px 0 0 250px',
   },
   button: {
     padding: '5px 15px',
