@@ -61,12 +61,10 @@ as seen in screenshot below.
 
 ![register_profile](/assets/register_profile_screenshot.PNG)
 
-Once user filled out profile information, they can begin using the website by logging 
-into their account they just registered.
+Once user filled out profile information, they can begin using the website.
 
-Note that for phase 1, the registered account would only last as long as the server
-running for the website. Restarting the server would result in lose of all registration
-data.
+Note that for phase 1, the registered account would not work when used to login.
+This will be implemented in phase 2 alongside database.
 
 
 ### User Profile
