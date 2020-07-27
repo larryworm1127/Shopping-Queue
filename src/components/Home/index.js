@@ -17,11 +17,14 @@ class Home extends React.Component {
 
     return (
       <div className={classes.home_div}>
-        <NavBar currentPath={location.pathname} />
-        <CssBaseline />
-        <HeadSection classes={classes} />
-        <Services classes={classes} serviceData={serviceData} />
-        <Footer classes={classes} />
+        <NavBar currentPath={location.pathname}/>
+        <CssBaseline/>
+        <HeadSection classes={classes}/>
+        <Services classes={classes} serviceData={serviceData}/>
+
+        {store.get('loggedIn') && (store.get('loginAs') !== 2) &&
+        <Footer classes={classes}/>
+        }
       </div>
     );
   }

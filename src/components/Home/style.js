@@ -65,7 +65,8 @@ export const styles = theme => ({
     color: theme.palette.common.white
   },
   inputField: {
-    backgroundColor: theme.palette.common.white
+    backgroundColor: theme.palette.common.white,
+    marginBottom: theme.spacing(1)
   },
   table: {
     marginTop: theme.spacing(5),

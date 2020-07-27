@@ -16,15 +16,24 @@ class Footer extends React.Component {
             <Grid item xs={12} md={6} lg={4}>
               <form>
                 <Typography variant="h3" paragraph className={classes.bigFont}>
-                  Contact Us
+                  Contact Admin
                 </Typography>
                 <Box display="flex" flexDirection="column">
                   <Box mb={1}>
                     <TextField
                       variant="outlined"
                       multiline
-                      placeholder="Contact us"
-                      rows={4}
+                      placeholder="Question"
+                      rows={1}
+                      className={classes.inputField}
+                      fullWidth
+                      required
+                    />
+                    <TextField
+                      variant="outlined"
+                      multiline
+                      placeholder="Description"
+                      rows={3}
                       className={classes.inputField}
                       fullWidth
                       required
