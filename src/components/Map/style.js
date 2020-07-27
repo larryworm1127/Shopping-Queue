@@ -1,16 +1,20 @@
-export const styles = theme => ({
+export const styles = () => ({
   mapStyles: {
-    position: 'absolute',
-    left: '1px',
+    position: 'fixed',
+    right: '1px',
     top: '64px',
     width: '100%',
-    height: '100%',
+    height: '93%',
   },
   cardStyles: {
-    position: 'absolute',
-    right: 0,
+    position: 'relative',
     top: '65px',
     width: '30%',
-    height: '100%'
+    height: '100%',
+  },
+  storeCard: {
+    borderTop: '1px solid black',
+    borderLeft: '1px solid black',
+    borderRight: '1px solid black'
   }
 });

@@ -50,7 +50,7 @@ class StoreMap extends React.Component {
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} position={'fixed'}/>
         <CssBaseline/>
 
         <Grid container>
@@ -81,22 +81,24 @@ class StoreMap extends React.Component {
             </Card>
 
             {stores.map((store, index) => (
-              <StoreCards
-                secondButton={(
-                  <Button
-                    type="button"
-                    color="primary"
-                    onClick={() => {
-                      this.handleHighlight(index);
-                    }}
-                  >
-                    Highlight on Map
-                  </Button>
-                )}
-                store={store}
-                index={index}
-                key={index}
-              />
+              <div className={classes.storeCard}>
+                <StoreCards
+                  secondButton={(
+                    <Button
+                      type="button"
+                      color="primary"
+                      onClick={() => {
+                        this.handleHighlight(index);
+                      }}
+                    >
+                      Highlight on Map
+                    </Button>
+                  )}
+                  store={store}
+                  index={index}
+                  key={index}
+                />
+              </div>
             ))}
           </Grid>
         </Grid>

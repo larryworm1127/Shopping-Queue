@@ -49,12 +49,13 @@ class NavBar extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, position } = this.props;
 
     return (
       <AppBar
         color="default"
         className={classes.appBar}
+        position={(position) ? position : 'relative'}
       >
         <Toolbar>
           <Grid item xs={12} className={classes.flex}>
@@ -94,6 +95,6 @@ class NavBar extends React.Component {
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired
-}
+};
 
 export default withStyles(styles)(NavBar);

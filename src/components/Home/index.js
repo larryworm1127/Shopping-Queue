@@ -16,7 +16,7 @@ class Home extends React.Component {
     const serviceData = getServiceData((store.get('loggedIn')) ? store.get('loginAs') : -1);
 
     return (
-      <div className={classes.home_div}>
+      <React.Fragment>
         <NavBar currentPath={location.pathname}/>
         <CssBaseline/>
         <HeadSection classes={classes}/>
@@ -25,7 +25,7 @@ class Home extends React.Component {
         {store.get('loggedIn') && (store.get('loginAs') !== 2) &&
         <Footer classes={classes}/>
         }
-      </div>
+      </React.Fragment>
     );
   }
 }
