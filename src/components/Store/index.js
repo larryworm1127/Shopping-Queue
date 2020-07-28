@@ -51,7 +51,6 @@ class StoreDetail extends React.Component {
       date,
       shoppingTime,
       numCustomer,
-      handleFormSubmit,
       handleFormField
     } = this.props;
     const store = getStore(match.params.id);

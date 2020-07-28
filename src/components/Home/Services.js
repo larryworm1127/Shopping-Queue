@@ -49,6 +49,7 @@ class Services extends React.Component {
                 color={element.color}
                 headline={element.headline}
                 text={element.text}
+                link={element.link}
               />
             </Grid>
           ))
@@ -71,6 +72,7 @@ class Services extends React.Component {
                 color={element.color}
                 headline={element.headline}
                 text={element.text}
+                link={element.link}
               />
             </Grid>
           ))

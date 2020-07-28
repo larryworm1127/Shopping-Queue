@@ -13,7 +13,7 @@ import { CssBaseline, withStyles } from '@material-ui/core';
 class Home extends React.Component {
   render() {
     const { location, classes } = this.props;
-    const serviceData = getServiceData((store.get('loggedIn')) ? store.get('loginAs') : -1);
+    const serviceData = getServiceData((store.get('loggedIn')) ? store.get('loginAs') : -1, store.get('user'));
 
     return (
       <React.Fragment>
