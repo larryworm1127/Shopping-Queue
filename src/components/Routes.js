@@ -10,8 +10,8 @@ import StoreMap from './Map';
 import StoreDetail from './Store';
 import store from 'store';
 import Register from './Auth/Register';
-import AllQueues from './Store/AllQueues';
-import AllShoppers from './Store/AllShoppers';
+import StoreQueues from './Store/StoreQueues';
+import StoreShoppers from './Store/StoreShoppers';
 
 
 export default () => {
@@ -19,19 +19,19 @@ export default () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/' component={Home} />
-        <AuthenRoute exact path='/map' component={StoreMap} />
-        <AuthenRoute exact path='/queue' component={Queue} />
-        <AuthenRoute exact path='/profile' component={ShopperProfile} />
-        <AuthenRoute exact path='/store/profile' component={OwnerPage} />
-        <AuthenRoute exact path='/admin/profile' component={AdminProfile} />
-        <AuthenRoute exact path='/store/queues' component={AllQueues} />
-        <AuthenRoute exact path='/store/shoppers' component={AllShoppers} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/register' component={RegisterRedirect} />
-        <Route exact path='/logout' component={SignOutRedirect} />
-        <Route exact path='/store/:id' component={StoreDetail} />
-        <Route path='*' component={NoMatch} />
+        <Route exact path='/' component={Home}/>
+        <ShopperRoute exact path='/map' component={StoreMap}/>
+        <AuthenRoute exact path='/queue' component={Queue}/>
+        <ShopperRoute exact path='/profile' component={ShopperProfile}/>
+        <StoreRoute exact path='/store/profile' component={OwnerPage}/>
+        <AdminRoute exact path='/admin/profile' component={AdminProfile}/>
+        <StoreRoute exact path='/store/queues' component={StoreQueues}/>
+        <StoreRoute exact path='/store/shoppers' component={StoreShoppers}/>
+        <Route exact path='/login' component={Login}/>
+        <Route exact path='/register' component={RegisterRedirect}/>
+        <Route exact path='/logout' component={SignOutRedirect}/>
+        <Route exact path='/store/:id' component={StoreDetail}/>
+        <Route path='*' component={NoMatch}/>
       </Switch>
     </BrowserRouter>
   );
@@ -41,13 +41,43 @@ const SignOutRedirect = () => {
   store.remove('loggedIn');
   store.remove('user');
   store.remove('loginAs');
-  return <Redirect to={{ pathname: '/login' }} />;
+  return <Redirect to={{ pathname: '/login' }}/>;
 };
 
 
 const RegisterRedirect = () => {
-  return store.get('loggedIn') ? <Redirect to={{ pathname: '/profile' }} /> : <Register />;
+  return store.get('loggedIn') ? <Redirect to={{ pathname: '/profile' }}/> : <Register/>;
 };
+
+
+const ShopperRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (store.get('loggedIn') && store.get('loginAs') === 0) ?
+      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
+    }
+  />
+);
+
+
+const StoreRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (store.get('loggedIn') && store.get('loginAs') === 1) ?
+      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
+    }
+  />
+);
+
+
+const AdminRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (store.get('loggedIn') && store.get('loginAs') === 2) ?
+      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
+    }
+  />
+);
 
 
 const AuthenRoute = ({ component: Component, ...rest }) => {
@@ -55,7 +85,7 @@ const AuthenRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props => !!store.get('loggedIn') ?
-        <Component {...props} /> : <Redirect to={{ pathname: '/login' }} />
+        <Component {...props} /> : <Redirect to={{ pathname: '/login' }}/>
       }
     />
   );
