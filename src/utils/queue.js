@@ -20,16 +20,18 @@ export class Queue {
 
   getTimeQueued = () => {
     return this.dateTimeQueued.toLocaleString();
-  }
+  };
 }
 
-export let bookings = [new Queue('user', stores[2], "Friday, June 26th @ 7pm", 30, 1, new Date()),
-                         new Queue('user', stores[0], "Monday, June 29th @ 10am", 50, 2, new Date()),
-                         new Queue('user', stores[1], "Thursday, July 3rd @ 10am", 10, 1, new Date())];
+export let bookings = [
+  new Queue('user', stores[2], 'Friday, June 26th @ 7pm', 30, 1, new Date()),
+  new Queue('user', stores[0], 'Monday, June 29th @ 10am', 50, 2, new Date()),
+  new Queue('user', stores[1], 'Thursday, July 3rd @ 10am', 10, 1, new Date())
+];
 
-export const getBookings = () =>{
-    return bookings;
-}
+export const getBookings = () => {
+  return bookings;
+};
 
 export const addBooking = b => {
   bookings.push(b);
