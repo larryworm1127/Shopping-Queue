@@ -13,16 +13,19 @@ import { CssBaseline, withStyles } from '@material-ui/core';
 class Home extends React.Component {
   render() {
     const { location, classes } = this.props;
-    const serviceData = getServiceData((store.get('loggedIn')) ? store.get('loginAs') : -1);
+    const serviceData = getServiceData((store.get('loggedIn')) ? store.get('loginAs') : -1, store.get('user'));
 
     return (
-      <div className={classes.home_div}>
-        <NavBar currentPath={location.pathname} />
-        <CssBaseline />
-        <HeadSection classes={classes} />
-        <Services classes={classes} serviceData={serviceData} />
-        <Footer classes={classes} />
-      </div>
+      <React.Fragment>
+        <NavBar currentPath={location.pathname}/>
+        <CssBaseline/>
+        <HeadSection classes={classes}/>
+        <Services classes={classes} serviceData={serviceData}/>
+
+        {store.get('loggedIn') && (store.get('loginAs') !== 2) &&
+        <Footer classes={classes}/>
+        }
+      </React.Fragment>
     );
   }
 }

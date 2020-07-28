@@ -8,6 +8,18 @@ import ComputerIcon from '@material-ui/icons/Computer';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
 import Clock from '@material-ui/icons/AccessTime';
+import { stores } from './stores';
+import { getShopper } from './shoppers';
+
+
+const getColor = (index) => {
+  const colors = [
+    '#00C853',
+    '#6200EA',
+    '#0091EA'
+  ];
+  return colors[index];
+};
 
 
 // Hardcoded help-requests data that would be replaced with
@@ -19,37 +31,44 @@ const createRowData = (user, type, message, date) => {
 
 // Hardcoded store recommendation data that would be replaced
 // with external API calls in phase 2.
-const createServiceData = (color, headline, text, icon) => {
-  return { color, headline, text, icon };
+const createServiceData = (color, headline, text, icon, link) => {
+  return { color, headline, text, icon, link };
 };
 
 
-export const getServiceData = (id) => {
+export const getServiceData = (id, username) => {
   switch (id) {
     case 0:
-      const icon0 = <LocalGroceryStore />;
       return {
-        services: [
-          createServiceData('#00C853', 'No deals', 'Only deal Grocery', icon0),
-          createServiceData('#6200EA', 'Bestco', 'Your one stop shop', icon0),
-          createServiceData('#0091EA', 'Tesco Restaurants', 'Chain restaurant for Soul Food', icon0)
-        ],
-        secondServices: [
-          createServiceData('#00C853', 'BallMart', 'Biggest Box store', icon0),
-          createServiceData('#6200EA', 'Canadian wire', 'We got All the wires and more', icon0),
-          createServiceData('#0091EA', 'Bow\'s', 'We got all your bows', icon0)
-        ],
+        services: stores.slice(0, 3).map((store, index) => {
+          return createServiceData(
+            getColor(index),
+            store.name,
+            store.type,
+            <LocalGroceryStore/>,
+            `/store/${store.id}`
+          );
+        }),
+        secondServices: getShopper(username).queueHistory.slice(0, 3).map((queue, index) => {
+          return createServiceData(
+            getColor(index),
+            queue.store.name,
+            queue.store.type,
+            <LocalGroceryStore/>,
+            `/store/${queue.store.id}`
+          );
+        }),
         rows: undefined,
         title: 'Recommended Stores',
-        secondTitle: 'Based off your Queue History',
+        secondTitle: 'Queue History',
       };
     case 1:
-      const icon1 = <People />;
-      const icon11 = <Clock />;
+      const icon1 = <People/>;
+      const icon11 = <Clock/>;
       return {
         services: [
-          createServiceData('#00C853', 'Current Queue', '200 shoppers in queue', icon1),
-          createServiceData('#6200EA', 'Total Shoppers', '500 total shoppers', icon1),
+          createServiceData('#00C853', 'Current Queue', '200 shoppers in queue', icon1, 'store/queues'),
+          createServiceData('#6200EA', 'Total Shoppers', '500 total shoppers', icon1, 'store/shoppers'),
           createServiceData('#0091EA', 'Average wait time', '10 minutes', icon11)
         ],
         title: 'Shoppers Stats',
@@ -58,7 +77,7 @@ export const getServiceData = (id) => {
         rows: undefined,
       };
     case 2:
-      const icon2 = <People />;
+      const icon2 = <People/>;
       return {
         services: [
           createServiceData('#00C853', 'End Users', '200 end users', icon2),
@@ -78,12 +97,12 @@ export const getServiceData = (id) => {
     default:
       return {
         services: [
-          createServiceData('#00C853', 'Queue Management', 'Broader queue Management', <BuildIcon />),
-          createServiceData('#6200EA', 'Advanced Schedule', 'Schedule queue in advance', <CalendarTodayIcon />),
-          createServiceData('#0091EA', 'B2C communication', 'Notify queueing shoppers', <MessageIcon />),
-          createServiceData('#d50000', 'Access Everywhere', 'Access your queue settings', <ComputerIcon />),
-          createServiceData('#DD2C00', 'User stats', 'Every user has access to their stats', <BarChartIcon />),
-          createServiceData('#64DD17', 'Customer service', '24/7 support', <HeadsetMicIcon />)
+          createServiceData('#00C853', 'Queue Management', 'Broader queue Management', <BuildIcon/>),
+          createServiceData('#6200EA', 'Advanced Schedule', 'Schedule queue in advance', <CalendarTodayIcon/>),
+          createServiceData('#0091EA', 'B2C communication', 'Notify queueing shoppers', <MessageIcon/>),
+          createServiceData('#d50000', 'Access Everywhere', 'Access your queue settings', <ComputerIcon/>),
+          createServiceData('#DD2C00', 'User stats', 'Every user has access to their stats', <BarChartIcon/>),
+          createServiceData('#64DD17', 'Customer service', '24/7 support', <HeadsetMicIcon/>)
         ],
         secondServices: [],
         rows: undefined,

@@ -50,10 +50,6 @@ export const styles = theme => ({
     fontSize: '14px',
     margin: '0 0 0 20px',
   },
-  booking: {
-    marginBottom: '5px',
-    fontSize: '150%'
-  },
   bookingList: {
     marginTop: theme.spacing(4)
   },

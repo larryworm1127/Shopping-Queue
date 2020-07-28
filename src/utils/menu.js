@@ -2,20 +2,31 @@ import store from 'store';
 
 export default function Menu() {
   if (!!store.get('loggedIn')) {
-    return (store.get('loginAs') === 0) ?
-      [
-        { label: 'Home', pathname: '/' },
-        { label: 'Profile', pathname: '/profile' },
-        { label: 'Map', pathname: '/map' },
-        { label: 'My Queues', pathname: '/queue' },
-        { label: 'Logout', pathname: '/logout' }
-      ] :
-      [
-        // Hide Map and My Queues tabs from shop owners and admin
-        { label: 'Home', pathname: '/' },
-        { label: 'Profile', pathname: (store.get('loginAs') === 1 ? '/owner-profile' : '/admin-profile') },
-        { label: 'Logout', pathname: '/logout' },
-      ];
+    switch (store.get('loginAs')) {
+      case 0:
+        return [
+          { label: 'Home', pathname: '/' },
+          { label: 'Profile', pathname: '/profile' },
+          { label: 'Map', pathname: '/map' },
+          { label: 'My Queues', pathname: '/queue' },
+          { label: 'Logout', pathname: '/logout' }
+        ];
+      case 1:
+        return [
+          // Hide Map and My Queues tabs from shop owners and admin
+          { label: 'Home', pathname: '/' },
+          { label: 'Profile', pathname: '/store/profile' },
+          { label: 'Current Queues', pathname: '/store/queues' },
+          { label: 'Current Shoppers', pathname: '/store/shoppers' },
+          { label: 'Logout', pathname: '/logout' },
+        ];
+      case 2:
+        return [
+          { label: 'Home', pathname: '/' },
+          { label: 'Profile', pathname: '/admin/profile' },
+          { label: 'Logout', pathname: '/logout' },
+        ];
+    }
   } else {
     return [
       { label: 'Home', pathname: '/' },

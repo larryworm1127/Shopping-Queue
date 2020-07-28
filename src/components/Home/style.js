@@ -1,11 +1,8 @@
 export const styles = theme => ({
-  home_div: {
-    margin: '0.5px 8px',
-  },
   services_box: {
-    display: "flex",
-    justifyContent: "center",
-    className: "row"
+    display: 'flex',
+    justifyContent: 'center',
+    className: 'row'
   },
   iconWrapper: props => ({
     textAlign: 'center',
@@ -65,7 +62,8 @@ export const styles = theme => ({
     color: theme.palette.common.white
   },
   inputField: {
-    backgroundColor: theme.palette.common.white
+    backgroundColor: theme.palette.common.white,
+    marginBottom: theme.spacing(1)
   },
   table: {
     marginTop: theme.spacing(5),

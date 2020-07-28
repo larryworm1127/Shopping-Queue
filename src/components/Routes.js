@@ -10,6 +10,8 @@ import StoreMap from './Map';
 import StoreDetail from './Store';
 import store from 'store';
 import Register from './Auth/Register';
+import AllQueues from './Store/AllQueues';
+import AllShoppers from './Store/AllShoppers';
 
 
 export default () => {
@@ -21,8 +23,10 @@ export default () => {
         <AuthenRoute exact path='/map' component={StoreMap} />
         <AuthenRoute exact path='/queue' component={Queue} />
         <AuthenRoute exact path='/profile' component={ShopperProfile} />
-        <AuthenRoute exact path='/owner-profile' component={OwnerPage} />
-        <AuthenRoute exact path='/admin-profile' component={AdminProfile} />
+        <AuthenRoute exact path='/store/profile' component={OwnerPage} />
+        <AuthenRoute exact path='/admin/profile' component={AdminProfile} />
+        <AuthenRoute exact path='/store/queues' component={AllQueues} />
+        <AuthenRoute exact path='/store/shoppers' component={AllShoppers} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={RegisterRedirect} />
         <Route exact path='/logout' component={SignOutRedirect} />
