@@ -55,7 +55,7 @@ export const getServiceData = (id, username) => {
             queue.store.name,
             queue.store.type,
             <LocalGroceryStore/>,
-              `/store/${queue.store.id}`
+            `/store/${queue.store.id}`
           );
         }),
         rows: undefined,
@@ -67,8 +67,8 @@ export const getServiceData = (id, username) => {
       const icon11 = <Clock/>;
       return {
         services: [
-          createServiceData('#00C853', 'Current Queue', '200 shoppers in queue', icon1),
-          createServiceData('#6200EA', 'Total Shoppers', '500 total shoppers', icon1),
+          createServiceData('#00C853', 'Current Queue', '200 shoppers in queue', icon1, 'store/queues'),
+          createServiceData('#6200EA', 'Total Shoppers', '500 total shoppers', icon1, 'store/shoppers'),
           createServiceData('#0091EA', 'Average wait time', '10 minutes', icon11)
         ],
         title: 'Shoppers Stats',
