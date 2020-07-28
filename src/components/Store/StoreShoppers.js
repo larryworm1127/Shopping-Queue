@@ -3,7 +3,7 @@ import NavBar from '../Nav/navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 
-class AllQueues extends React.Component {
+class StoreShoppers extends React.Component {
 
   render() {
     const { location } = this.props;
@@ -17,4 +17,4 @@ class AllQueues extends React.Component {
   }
 }
 
-export default AllQueues
+export default StoreShoppers;

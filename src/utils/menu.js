@@ -20,7 +20,7 @@ export default function Menu() {
           { label: 'Current Shoppers', pathname: '/store/shoppers' },
           { label: 'Logout', pathname: '/logout' },
         ];
-      case 2:
+      default:
         return [
           { label: 'Home', pathname: '/' },
           { label: 'Profile', pathname: '/admin/profile' },
