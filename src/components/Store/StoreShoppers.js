@@ -17,4 +17,4 @@ class StoreShoppers extends React.Component {
   }
 }
 
-export default StoreShoppers
+export default StoreShoppers;

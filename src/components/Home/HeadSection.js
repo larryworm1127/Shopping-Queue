@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, Button, Card, Typography } from '@material-ui/core';
+import { Box, Button, Card, Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import store from 'store';
+import { styles } from './style';
 
 
 class HeadSection extends React.Component {
@@ -15,11 +16,11 @@ class HeadSection extends React.Component {
         (store.get('loginAs') === 1 ? '/owner-profile' :
           '/admin-profile'))
     } : {
-        mainText: 'Shopping Queue Manager',
-        buttonText: 'Signup',
-        subText: 'Now you don\'t need to risk your health for shopping!',
-        buttonUrl: '/register'
-      };
+      mainText: 'Shopping Queue Manager',
+      buttonText: 'Signup',
+      subText: 'Now you don\'t need to risk your health for shopping!',
+      buttonUrl: '/register'
+    };
   };
 
   render() {
@@ -65,4 +66,4 @@ HeadSection.propTypes = {
   classes: PropTypes.object,
 };
 
-export default HeadSection;
+export default withStyles(styles)(HeadSection);

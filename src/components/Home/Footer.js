@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
+import { Box, Button, Grid, TextField, Typography, withStyles } from '@material-ui/core';
+import { styles } from './style';
 
 
 class Footer extends React.Component {
@@ -75,4 +76,4 @@ Footer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default Footer;
+export default withStyles(styles)(Footer);

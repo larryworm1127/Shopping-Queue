@@ -7,6 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import Button from '@material-ui/core/Button';
 import TableCell from '@material-ui/core/TableCell';
+import { styles } from './style';
 
 
 class Services extends React.Component {
@@ -115,4 +116,4 @@ class Services extends React.Component {
   }
 }
 
-export default Services;
+export default withStyles(styles)(Services);
