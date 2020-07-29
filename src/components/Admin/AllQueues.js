@@ -11,7 +11,7 @@ import {
   Typography,
   withStyles
 } from '@material-ui/core';
-import { styles } from './style';
+import { styles } from '../Queue/style';
 import TableCell from '@material-ui/core/TableCell';
 import { stores } from '../../utils/stores';
 import QueueTableRow from './QueueTableRow';

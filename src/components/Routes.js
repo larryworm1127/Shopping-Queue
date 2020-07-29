@@ -12,7 +12,7 @@ import store from 'store';
 import Register from './Auth/Register';
 import StoreQueues from './Store/StoreQueues';
 import StoreShoppers from './Store/StoreShoppers';
-import AllQueues from './Queue/AllQueues';
+import AllQueues from './Admin/AllQueues';
 
 
 export default () => {

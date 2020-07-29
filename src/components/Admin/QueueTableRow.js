@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { withStyles } from '@material-ui/core';
-import { styles } from './style';
+import { styles } from '../Queue/style';
 import StoreQueuesTable from '../Store/StoreQueuesTable';
 
 

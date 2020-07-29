@@ -79,7 +79,7 @@ export const getServiceData = (id, username) => {
         services: [
           createServiceData('#00C853', 'End Users', '200 end users', <People/>),
           createServiceData('#6200EA', 'Online Users', '100 online users', <People/>),
-          createServiceData('#0091EA', 'Shop Owners', '100 Shop owners', <People/>)
+          createServiceData('#0091EA', 'Shop Owners', '100 Shop owners', <People/>, 'admin/queues')
         ],
         secondServices: [],
         rows: [
