@@ -23,4 +23,27 @@ export const styles = theme => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
+  table: {
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(6),
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '80%',
+  },
+  titleText: {
+    marginTop: theme.spacing(5)
+  },
+  paperStats: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
+  container: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(4),
+  },
+  secondaryText: {
+    flex: 1,
+  },
 });

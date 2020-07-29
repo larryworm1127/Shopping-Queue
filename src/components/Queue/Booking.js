@@ -68,14 +68,12 @@ class Booking extends React.Component {
             LEAVE QUEUE
           </Button>
 
-
-          {this.state.seen ?
+          {this.state.seen && (
             <DetailsWindow
-              store={booking.store}
+              storeName={booking.store.name}
               closePopup={this.toggleDetails.bind(this)}
             />
-            : null
-          }
+          )}
         </TableCell>
       </TableRow>
     );
