@@ -12,6 +12,8 @@ import store from 'store';
 import Register from './Auth/Register';
 import StoreQueues from './Store/StoreQueues';
 import StoreShoppers from './Store/StoreShoppers';
+import AllQueues from './Admin/AllQueues';
+import UserSupport from './Admin/UserSupport';
 
 
 export default () => {
@@ -25,6 +27,8 @@ export default () => {
         <ShopperRoute exact path='/profile' component={ShopperProfile}/>
         <StoreRoute exact path='/store/profile' component={OwnerPage}/>
         <AdminRoute exact path='/admin/profile' component={AdminProfile}/>
+        <AdminRoute exact path='/admin/queues' component={AllQueues}/>
+        <AdminRoute exact path='/admin/messages' component={UserSupport}/>
         <StoreRoute exact path='/store/queues' component={StoreQueues}/>
         <StoreRoute exact path='/store/shoppers' component={StoreShoppers}/>
         <Route exact path='/login' component={Login}/>

@@ -63,4 +63,40 @@ export const getAdmin = (adminUsername) => {
       return admins[i];
     }
   }
-}
+};
+
+
+const createSupportMessage = (user, type, message, date, description) => {
+  return { user, type, message, date, description };
+};
+
+export const supportMessages = [
+  createSupportMessage(
+    'Jon Chavez',
+    'end user',
+    'Issue with queuing',
+    'Today 2:30PM',
+    'Filler text'
+  ),
+  createSupportMessage(
+    'No deals',
+    'Shop owner',
+    'Issue with deleting user',
+    'Today 4:30PM',
+    'Filler text'
+  ),
+  createSupportMessage(
+    'Bestco',
+    'Shop owner',
+    'Issue with deleting seeing queue',
+    'Yesterday 4:30PM',
+    'Filler text'
+  ),
+  createSupportMessage(
+    'Jim Joy',
+    'end user',
+    'Issue with deleting user',
+    '06/20/2020',
+    'Filler text'
+  )
+];

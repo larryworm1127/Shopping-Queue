@@ -22,13 +22,6 @@ const getColor = (index) => {
 };
 
 
-// Hardcoded help-requests data that would be replaced with
-// external API calls in phase 2
-const createRowData = (user, type, message, date) => {
-  return { user, type, message, date };
-};
-
-
 // Hardcoded store recommendation data that would be replaced
 // with external API calls in phase 2.
 const createServiceData = (color, headline, text, icon, link) => {
@@ -58,7 +51,6 @@ export const getServiceData = (id, username) => {
             `/store/${queue.store.id}`
           );
         }),
-        rows: undefined,
         title: 'Recommended Stores',
         secondTitle: 'Queue History',
       };
@@ -72,24 +64,17 @@ export const getServiceData = (id, username) => {
         title: 'Shoppers Stats',
         secondTitle: '',
         secondServices: [],
-        rows: undefined,
       };
     case 2:
       return {
         services: [
-          createServiceData('#00C853', 'End Users', '200 end users', <People/>),
+          createServiceData('#00C853', 'Issues Messages', '4 issues', <MessageIcon/>, 'admin/messages'),
           createServiceData('#6200EA', 'Online Users', '100 online users', <People/>),
-          createServiceData('#0091EA', 'Shop Owners', '100 Shop owners', <People/>)
+          createServiceData('#0091EA', 'Shop Owners', '100 Shop owners', <People/>, 'admin/queues')
         ],
         secondServices: [],
-        rows: [
-          createRowData('Jon Chavez', 'end user', 'Issue with queuing', 'Today 2:30PM'),
-          createRowData('No deals', 'Shop owner', 'Issue with deleting user', 'Today 4:30PM'),
-          createRowData('Bestco', 'Shop owner', 'Issue with deleting seeing queue', 'Yesterday 4:30PM'),
-          createRowData('Jim Joy', 'end user', 'Issue with deleting user', '06/20/2020')
-        ],
         title: 'User Stats',
-        secondTitle: 'User Support Messages'
+        secondTitle: ''
       };
     default:
       return {
@@ -102,7 +87,6 @@ export const getServiceData = (id, username) => {
           createServiceData('#64DD17', 'Customer service', '24/7 support', <HeadsetMicIcon/>)
         ],
         secondServices: [],
-        rows: undefined,
         title: 'Services',
         secondTitle: ''
       };
