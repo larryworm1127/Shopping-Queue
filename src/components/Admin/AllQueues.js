@@ -11,7 +11,7 @@ import {
   Typography,
   withStyles
 } from '@material-ui/core';
-import { styles } from '../Queue/style';
+import { styles } from './style';
 import TableCell from '@material-ui/core/TableCell';
 import { stores } from '../../utils/stores';
 import QueueTableRow from './QueueTableRow';
@@ -32,7 +32,7 @@ class AllQueues extends React.Component {
           All Store Queues
         </Typography>
 
-        <TableContainer component={Paper} className={classes.tableContainer}>
+        <TableContainer component={Paper} className={classes.table}>
           <Table>
             <TableHead>
               <TableRow>

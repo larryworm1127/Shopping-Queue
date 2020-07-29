@@ -1,36 +1,13 @@
 import React from 'react';
 import { Grid, Typography, withStyles } from '@material-ui/core';
 import IconCard from './IconCard';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableBody from '@material-ui/core/TableBody';
-import Button from '@material-ui/core/Button';
-import TableCell from '@material-ui/core/TableCell';
 import { styles } from './style';
 
 
 class Services extends React.Component {
 
   render() {
-    const { classes, serviceData } = this.props;
-
-    const StyledTableCell = withStyles((theme) => ({
-      head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-      },
-      body: {
-        fontSize: 14,
-      },
-    }))(TableCell);
-    const StyledTableRow = withStyles((theme) => ({
-      root: {
-        '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.action.hover,
-        },
-      },
-    }))(TableRow);
+    const { serviceData } = this.props;
 
     return (
       <React.Fragment>
@@ -79,38 +56,6 @@ class Services extends React.Component {
           ))
           }
         </Grid>
-
-        {serviceData.rows !== undefined && (
-          <Table className={classes.table} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>User</StyledTableCell>
-                <StyledTableCell align="center">User Type</StyledTableCell>
-                <StyledTableCell align="center">Messages</StyledTableCell>
-                <StyledTableCell align="center">Date</StyledTableCell>
-                <StyledTableCell align="center">Reply</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {serviceData.rows.map((row) => (
-                <StyledTableRow key={row.user}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.user}
-                  </StyledTableCell>
-
-                  <StyledTableCell align="center">{row.type}</StyledTableCell>
-                  <StyledTableCell align="center">{row.message}</StyledTableCell>
-                  <StyledTableCell align="center">{row.date}</StyledTableCell>
-                  <StyledTableCell align="center">
-                    <Button variant="contained" color="secondary">
-                      Reply
-                    </Button>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        )}
       </React.Fragment>
     );
   }
