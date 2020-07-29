@@ -33,45 +33,17 @@ export const getBookings = () => {
   return bookings;
 };
 
+
+// Function to add a booking
 export const addBooking = b => {
   bookings.push(b);
 };
-/*
-// Function to add a booking
-export const addStudent = queue => {
-  // log("adding student");
-  const studentList = queue.state.students;
 
-  const student = {
-    name: queue.state.studentName,
-    course: queue.state.studentCourse
-  };
 
-  // Adding at a particular position
-  const position = parseInt(queue.state.position);
-
-  if (position > studentList.length || !position) {
-    // log("here");
-    studentList.push(student);
-  } else {
-    // log("here2");
-    studentList.splice(position - 1, 0, student);
-  }
-
-  queue.setState({
-    students: studentList
-  });
-};
-*/
 export const removeBooking = (queue, b) => {
-  //log(student)
-
-  // filters out the student we don't want.
   const filteredBookings = bookings.filter(s => {
     return s !== b;
   });
-
-  //log(filteredStudents)
 
   bookings = filteredBookings;
 

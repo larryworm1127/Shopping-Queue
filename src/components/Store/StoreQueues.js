@@ -36,8 +36,8 @@ const StyledTableRow = withStyles((theme) => ({
 
 class StoreQueues extends React.Component {
 
-  render() {
-    const { location, classes } = this.props;
+  constructor(props) {
+    super(props);
 
     const storeObj = getStoreByUsername(store.get('user'));
     storeObj.currentQueue = [
@@ -45,6 +45,24 @@ class StoreQueues extends React.Component {
       new Queue('user', storeObj, '08-07-2020', 20, 2, new Date()),
       new Queue('user2', storeObj, '12-07-2020', 20, 1, new Date())
     ];
+
+    this.state = {
+      queues: [...getStoreByUsername(store.get('user')).currentQueue]
+    };
+  }
+
+
+  removeQueue = (index) => {
+    const storeObj = getStoreByUsername(store.get('user'));
+    storeObj.currentQueue.splice(index, 1);
+
+    this.setState({
+      queues: [...storeObj.currentQueue]
+    });
+  };
+
+  render() {
+    const { location, classes } = this.props;
 
     return (
       <React.Fragment>
@@ -68,7 +86,7 @@ class StoreQueues extends React.Component {
             </StyledTableRow>
           </TableHead>
           <TableBody>
-            {storeObj.currentQueue.map((queue, index) => (
+            {this.state.queues.map((queue, index) => (
               <StyledTableRow key={uid(index)}>
                 <StyledTableCell component="th" scope="row">
                   {index}
@@ -83,7 +101,13 @@ class StoreQueues extends React.Component {
                   <Button variant="contained" color="secondary">
                     Modify
                   </Button>
-                  <Button variant="contained" color="secondary">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                      this.removeQueue(index);
+                    }}
+                  >
                     Remove
                   </Button>
                 </StyledTableCell>
