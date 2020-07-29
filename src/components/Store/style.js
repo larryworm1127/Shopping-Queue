@@ -32,5 +32,18 @@ export const styles = theme => ({
   },
   titleText: {
     marginTop: theme.spacing(5)
-  }
+  },
+  paperStats: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
+  container: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(4),
+  },
+  secondaryText: {
+    flex: 1,
+  },
 });

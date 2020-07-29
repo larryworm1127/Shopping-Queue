@@ -63,13 +63,11 @@ export const getServiceData = (id, username) => {
         secondTitle: 'Queue History',
       };
     case 1:
-      const icon1 = <People/>;
-      const icon11 = <Clock/>;
       return {
         services: [
-          createServiceData('#00C853', 'Current Queue', '200 shoppers in queue', icon1, 'store/queues'),
-          createServiceData('#6200EA', 'Total Shoppers', '500 total shoppers', icon1, 'store/shoppers'),
-          createServiceData('#0091EA', 'Average wait time', '10 minutes', icon11)
+          createServiceData('#00C853', 'Current Queue', '200 shoppers in queue', <People/>, 'store/queues'),
+          createServiceData('#6200EA', 'Total Shoppers', '500 total shoppers', <People/>, 'store/shoppers'),
+          createServiceData('#0091EA', 'Average wait time', '10 minutes', <Clock/>, 'store/shoppers')
         ],
         title: 'Shoppers Stats',
         secondTitle: '',
@@ -77,12 +75,11 @@ export const getServiceData = (id, username) => {
         rows: undefined,
       };
     case 2:
-      const icon2 = <People/>;
       return {
         services: [
-          createServiceData('#00C853', 'End Users', '200 end users', icon2),
-          createServiceData('#6200EA', 'Online Users', '100 online users', icon2),
-          createServiceData('#0091EA', 'Shop Owners', '100 Shop owners', icon2)
+          createServiceData('#00C853', 'End Users', '200 end users', <People/>),
+          createServiceData('#6200EA', 'Online Users', '100 online users', <People/>),
+          createServiceData('#0091EA', 'Shop Owners', '100 Shop owners', <People/>)
         ],
         secondServices: [],
         rows: [
