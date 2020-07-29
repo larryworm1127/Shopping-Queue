@@ -8,6 +8,7 @@ import StoreSettings from '../OwnerProfile/StoreSettings';
 import StoreProfile from '../OwnerProfile/StoreProfile';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class OwnersProfile extends React.Component {
 
@@ -73,8 +74,18 @@ class OwnersProfile extends React.Component {
                 >
                   {store.name}
                 </Typography>
-                <Typography variant='body1'>Email: {store.email}</Typography>
-                <Typography variant='body1'>Location: {store.address}</Typography>
+                <Typography
+                  color="textSecondary"
+                  className={classes.secondaryText}
+                >
+                  Email: {store.email}
+                </Typography>
+                <Typography
+                  color="textSecondary"
+                  className={classes.secondaryText}
+                >
+                  Location: {store.address}
+                </Typography>
                 <Button
                   className={classes.button}
                   onClick={() => {
@@ -94,6 +105,14 @@ class OwnersProfile extends React.Component {
                   color="primary"
                 >
                   Store Settings
+                </Button>
+                <Button
+                  className={classes.deleteButton}
+                  variant="contained"
+                  color="secondary"
+                  startIcon={<DeleteIcon/>}
+                >
+                  Delete User
                 </Button>
 
                 {this.closeView(index)}
