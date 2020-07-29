@@ -12,6 +12,7 @@ import store from 'store';
 import Register from './Auth/Register';
 import StoreQueues from './Store/StoreQueues';
 import StoreShoppers from './Store/StoreShoppers';
+import AllQueues from './Queue/AllQueues';
 
 
 export default () => {
@@ -25,6 +26,7 @@ export default () => {
         <ShopperRoute exact path='/profile' component={ShopperProfile}/>
         <StoreRoute exact path='/store/profile' component={OwnerPage}/>
         <AdminRoute exact path='/admin/profile' component={AdminProfile}/>
+        <AdminRoute exact path='/admin/queues' component={AllQueues}/>
         <StoreRoute exact path='/store/queues' component={StoreQueues}/>
         <StoreRoute exact path='/store/shoppers' component={StoreShoppers}/>
         <Route exact path='/login' component={Login}/>

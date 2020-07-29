@@ -24,6 +24,7 @@ export default function Menu() {
         return [
           { label: 'Home', pathname: '/' },
           { label: 'Profile', pathname: '/admin/profile' },
+          { label: 'All Queues', pathname: '/admin/queues' },
           { label: 'Logout', pathname: '/logout' },
         ];
     }
