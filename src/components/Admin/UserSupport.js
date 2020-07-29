@@ -1,6 +1,6 @@
 import React from 'react';
 import { styles } from './style';
-import { Typography, withStyles } from '@material-ui/core';
+import { Paper, TableContainer, Typography, withStyles } from '@material-ui/core';
 import NavBar from '../Nav/navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TableHead from '@material-ui/core/TableHead';
@@ -38,22 +38,24 @@ class UserSupport extends React.Component {
           User Support Messages
         </Typography>
 
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell className={classes.tableCellHead}/>
-              <TableCell className={classes.tableCellHead} align="center">User</TableCell>
-              <TableCell className={classes.tableCellHead} align="center">User Type</TableCell>
-              <TableCell className={classes.tableCellHead} align="center">Issue Title</TableCell>
-              <TableCell className={classes.tableCellHead} align="center">Date</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.state.messages.map((message) => (
-              <MessageTableRow key={uid(message)} message={message}/>
-            ))}
-          </TableBody>
-        </Table>
+        <TableContainer component={Paper} className={classes.table}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className={classes.tableCellHead}/>
+                <TableCell className={classes.tableCellHead} align="center">User</TableCell>
+                <TableCell className={classes.tableCellHead} align="center">User Type</TableCell>
+                <TableCell className={classes.tableCellHead} align="center">Issue Title</TableCell>
+                <TableCell className={classes.tableCellHead} align="center">Date</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.messages.map((message) => (
+                <MessageTableRow key={uid(message)} message={message}/>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </React.Fragment>
     );
   }
