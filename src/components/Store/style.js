@@ -23,13 +23,6 @@ export const styles = theme => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
-  table: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(6),
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: '80%',
-  },
   titleText: {
     marginTop: theme.spacing(5)
   },

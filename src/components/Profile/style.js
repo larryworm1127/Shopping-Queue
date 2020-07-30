@@ -31,6 +31,15 @@ export const styles = (theme) => ({
     marginRight: theme.spacing(2)
   },
   button: {
-    marginRight: theme.spacing(2)
-  }
+    marginRight: theme.spacing(2),
+    marginTop: theme.spacing(1)
+  },
+  deleteButton: {
+    marginRight: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    backgroundColor: 'red',
+  },
+  secondaryText: {
+    flex: 1,
+  },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import ProfileDataDisplay from '../ProfileDataDisplay';
+import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
 
 class StoreSettings extends React.Component {
@@ -46,7 +46,7 @@ class StoreSettings extends React.Component {
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={6}
             title="Store Hours Opening"
             content={store.openingTime}
@@ -58,7 +58,7 @@ class StoreSettings extends React.Component {
             value={this.state.openTime}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={6}
             title="Store Hours Closing"
             content={store.closingTime}
@@ -70,7 +70,7 @@ class StoreSettings extends React.Component {
             value={this.state.closeTime}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={12}
             title="Customer Limit"
             content={store.customerLimit}
@@ -82,7 +82,7 @@ class StoreSettings extends React.Component {
             value={this.state.customerLimit}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={12}
             title="Customer Shopping Time Limit (min)"
             content={store.customerShopTime}

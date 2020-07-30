@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import ProfileDataDisplay from '../ProfileDataDisplay';
+import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
 import { StoreTypes } from '../../../utils/stores';
 import FormSelectField from '../../FormSelectField';
@@ -49,7 +49,7 @@ class StoreProfile extends React.Component {
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={6}
             title="Store Name"
             content={store.name}
@@ -60,7 +60,7 @@ class StoreProfile extends React.Component {
             value={this.state.storeName}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={6}
             title="Store Email"
             content={store.email}
@@ -71,7 +71,7 @@ class StoreProfile extends React.Component {
             value={this.state.email}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={12}
             title="Store Location"
             content={store.address}
@@ -82,7 +82,7 @@ class StoreProfile extends React.Component {
             value={this.state.address}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={12}
             title="Store Type"
             content={store.type}

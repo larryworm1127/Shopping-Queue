@@ -13,8 +13,8 @@ class HeadSection extends React.Component {
       buttonText: 'Your Profile',
       subText: '',
       buttonUrl: (store.get('loginAs') === 0 ? '/profile' :
-        (store.get('loginAs') === 1 ? '/owner-profile' :
-          '/admin-profile'))
+        (store.get('loginAs') === 1 ? '/store/profile' :
+          '/admin/profile'))
     } : {
       mainText: 'Shopping Queue Manager',
       buttonText: 'Signup',

@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import ProfileDataDisplay from '../ProfileDataDisplay';
+import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
 
 
@@ -47,7 +47,7 @@ class AdminPage extends React.Component {
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={3}
             title="Your First Name"
             content={admin.firstName}
@@ -58,7 +58,7 @@ class AdminPage extends React.Component {
             value={this.state.firstName}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={3}
             title="Your Last Name"
             content={admin.lastName}
@@ -69,7 +69,7 @@ class AdminPage extends React.Component {
             value={this.state.lastName}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={6}
             title="Your Email"
             content={admin.email}
@@ -80,7 +80,7 @@ class AdminPage extends React.Component {
             value={this.state.email}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={12}
             title="Your Location"
             content={admin.address}
@@ -92,6 +92,7 @@ class AdminPage extends React.Component {
             handleFormField={this.handleFormField}
           />
         </Grid>
+        <br/>
 
         <ProfileEditButtons
           edit={this.state.edit}

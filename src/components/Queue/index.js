@@ -3,30 +3,49 @@
 import React from 'react';
 // Importing components
 import Header from './Header';
-import BookingList from './BookingList';
+import BookingList from './QueueList';
 import NavBar from '../Nav/navbar';
 // Importing utils/required methods
-import { getBookings } from '../../utils/queue';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withRouter } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
+import store from 'store';
+import { getShopper } from '../../utils/shoppers';
 
 class Queue extends React.Component {
 
-  state = { bookings: getBookings() };
+  constructor(props) {
+    super(props);
+
+    const { shopper } = props;
+    this.state = {
+      queues: [...getShopper((shopper === undefined) ? store.get('user') : shopper).currentQueue]
+    };
+  }
+
+  removeQueue = (index) => {
+    const { shopper } = this.props;
+    const storeObj = getShopper((shopper === undefined) ? store.get('user') : shopper);
+    storeObj.currentQueue.splice(index, 1);
+
+    this.setState({
+      queues: [...storeObj.currentQueue]
+    });
+  };
 
   render() {
+    const { location } = this.props;
+
     return (
       <div>
         <CssBaseline/>
-        <NavBar currentPath={this.props.location.pathname}/>
-        {/* Header component with text props. */}
+        <NavBar currentPath={location.pathname}/>
         <Header
           title="My Queues"
           subtitle="Below are the grocery stores you've queued for."
         />
         <Container>
-            <BookingList bookings={this.state.bookings} queueComponent={this}/>
+          <BookingList queues={this.state.queues} removeQueue={this.removeQueue}/>
         </Container>
       </div>
     );

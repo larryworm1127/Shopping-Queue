@@ -9,6 +9,7 @@ import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 class ShoppersProfile extends React.Component {
@@ -80,8 +81,8 @@ class ShoppersProfile extends React.Component {
                   >
                     {shopper.firstName} {shopper.lastName}
                   </Typography>
-                  <Typography variant='body1'>Email: {shopper.email}</Typography>
-                  <Typography variant='body1'>Location: {shopper.address}</Typography>
+                  <Typography color="textSecondary" className={classes.secondaryText}>Email: {shopper.email}</Typography>
+                  <Typography color="textSecondary" className={classes.secondaryText}>Location: {shopper.address}</Typography>
                   <Button
                     className={classes.button}
                     onClick={() => {
@@ -112,6 +113,15 @@ class ShoppersProfile extends React.Component {
                   >
                     View Queue History
                   </Button>
+                  <Button
+                    className={classes.deleteButton}
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<DeleteIcon />}
+                  >
+                    Delete User
+                  </Button>
+
                   {this.closeView(index)}
                   {this.getView(index)}
                 </CardContent>

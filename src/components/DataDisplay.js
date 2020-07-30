@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core';
-import FormTextField from '../FormTextField';
+import FormTextField from './FormTextField';
 
 
 const styles = theme => ({
@@ -20,7 +20,7 @@ const styles = theme => ({
 });
 
 
-class ProfileDataDisplay extends React.Component {
+class DataDisplay extends React.Component {
 
   getContent = () => {
     const {
@@ -101,4 +101,4 @@ class ProfileDataDisplay extends React.Component {
   }
 }
 
-export default withStyles(styles)(ProfileDataDisplay);
+export default withStyles(styles)(DataDisplay);
