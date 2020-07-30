@@ -11,37 +11,40 @@ import Grid from '@material-ui/core/Grid';
 import StoreDetailList from './StoreDetailList';
 import StoreQueueForm from './StoreQueueForm';
 import store from 'store';
-import { addBooking, Queue } from '../../utils/queue';
+import { Queue } from '../../utils/queue';
+import { getShopper } from '../../utils/shoppers';
 
 class StoreDetail extends React.Component {
 
   state = {
     date: new Date().toISOString().slice(0, 10),
     est: 30,
-    num_of_shoppers: 1,
+    numShoppers: 1,
   };
 
-  handleFormField = event => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
+  handleFormField = (field, event) => {
     this.setState({
-      [name]: value
+      [field]: event.target.value,
     });
   };
 
+  handleFormSubmit = (event, selectedStore) => {
+    event.preventDefault();
 
-  handleFormSubmit() {
+    const { history } = this.props;
     const newQueue = new Queue(
-      'user;',  /*default username for now*/
-      store,
+      store.get('user'),
+      selectedStore,
       this.state.date,
-      this.state.est,
-      this.state.num_of_shoppers,
+      this.state.shoppingTime,
+      this.state.numCustomer,
       new Date()
     );
-    addBooking(newQueue);
+    selectedStore.addNewQueue(newQueue);
+    getShopper(store.get('user')).queueUp(newQueue);
+    console.log(getShopper(store.get('user')));
+
+    history.push('/queue');
   };
 
   render() {
@@ -84,7 +87,7 @@ class StoreDetail extends React.Component {
                   date={(date === undefined) ? this.state.date : date}
                   shoppingTime={(shoppingTime === undefined) ? this.state.shoppingTime : shoppingTime}
                   numCustomer={(numCustomer === undefined) ? this.state.numCustomer : numCustomer}
-                  handleFormSubmit={this.handleFormSubmit()}
+                  handleFormSubmit={this.handleFormSubmit}
                   handleFormField={(handleFormField === undefined) ? this.handleFormField : handleFormField}
                 />
               </Grid>

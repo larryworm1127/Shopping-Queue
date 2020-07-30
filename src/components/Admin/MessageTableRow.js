@@ -41,7 +41,7 @@ class MessageTableRow extends React.Component {
           <TableCell align="center">{message.date}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <TableCell className={classes.tableCellCollapse} colSpan={6}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
               <MessageDetail message={message}/>
             </Collapse>

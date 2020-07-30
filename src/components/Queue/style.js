@@ -4,51 +4,8 @@ export const styles = theme => ({
     marginBottom: '40px',
     textAlign: 'center'
   },
-  details: {
-    position: 'fixed',
-    width: '100%',
-    height: '100%',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    margin: 'auto',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    zIndex: 1
-  },
-  detailsInner: {
-    position: 'absolute',
-    left: '35%',
-    right: '35%',
-    top: '35%',
-    bottom: '27%',
-    margin: 'auto',
-    borderRadius: '20px',
-    background: 'white'
-  },
-  button2: {
-    padding: '5px 15px',
-    outline: 'none',
-    backgroundColor: '#003d99',
-    border: 'none',
-    borderRadius: '5px',
-    color: 'white',
-    textAlign: 'center',
-    cursor: 'pointer',
-    fontSize: '16px',
-    margin: '20px 0 0 250px',
-  },
   button: {
-    padding: '5px 15px',
-    outline: 'none',
-    backgroundColor: '#003d99',
-    border: 'none',
-    borderRadius: '5px',
-    color: 'white',
-    textAlign: 'center',
-    cursor: 'pointer',
-    fontSize: '14px',
-    margin: '0 0 0 20px',
+    backgroundColor: 'red'
   },
   bookingList: {
     marginTop: theme.spacing(4)
@@ -60,5 +17,19 @@ export const styles = theme => ({
       fontSize: '0.75em',
       color: 'darkslategray'
     }
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
+  container: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(4),
+  },
+  tableCellCollapse: {
+    paddingBottom: 0,
+    paddingTop: 0
   },
 });

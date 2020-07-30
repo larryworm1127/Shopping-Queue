@@ -6,38 +6,61 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Booking from './Booking';
 import { styles } from './style';
-import { withStyles } from '@material-ui/core';
+import { Paper, TableContainer, withStyles } from '@material-ui/core';
+import TableHead from '@material-ui/core/TableHead';
+
 
 class BookingList extends React.Component {
 
   render() {
-    const { bookings, queueComponent, classes } = this.props;
+    const { queues, classes, removeQueue } = this.props;
+
+    const StyledTableCell = withStyles((theme) => ({
+      head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+      },
+      body: {
+        fontSize: 14,
+      },
+    }))(TableCell);
 
     return (
-      <Table className={classes.bookingList}>
-        <TableBody>
-          <TableRow scope="row">
-            <TableCell component="th" scope="row">
-                     Store
-            </TableCell>
+      <TableContainer component={Paper} className={classes.bookingList}>
+        <Table>
+          <TableHead>
+            <TableRow scope="row">
+              <StyledTableCell/>
+              <StyledTableCell component="th" scope="row" align='center'>
+                Shopper
+              </StyledTableCell>
+              <StyledTableCell component="th" scope="row" align='center'>
+                Store
+              </StyledTableCell>
+              <StyledTableCell component="th" scope="row" align='center'>
+                Arrive by
+              </StyledTableCell>
+              <StyledTableCell component="th" scope="row" align='center'>
+                Time Booked
+              </StyledTableCell>
+              <StyledTableCell component="th" scope="row" align='center'>
+                Actions
+              </StyledTableCell>
+            </TableRow>
+          </TableHead>
 
-            <TableCell component="th" scope="row">
-                  Position in queue
-            </TableCell>
-
-            <TableCell component="th" scope="row">
-                    Arrive by
-            </TableCell>
-          </TableRow>
-          {bookings.map(booking => (
-            <Booking
-              key={uid(booking)}
-              booking={booking}
-              queueComponent={queueComponent}
-            />
-          ))}
-        </TableBody>
-      </Table>
+          <TableBody>
+            {queues.map((booking, index) => (
+              <Booking
+                key={uid(booking)}
+                queue={booking}
+                removeQueue={removeQueue}
+                index={index}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     );
   }
 }

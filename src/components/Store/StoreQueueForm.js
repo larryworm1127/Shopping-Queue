@@ -16,7 +16,7 @@ class StoreQueueForm extends React.Component {
       handleFormSubmit,
       handleFormField
     } = this.props;
-/*onSubmit={(event) => {handleFormSubmit(event, store)}}*/
+
     return (
       <form>
         <Grid container spacing={3}>
@@ -27,11 +27,9 @@ class StoreQueueForm extends React.Component {
               label="Date"
               type="date"
               value={date}
-             /* onChange={(event) => {
+              onChange={(event) => {
                 handleFormField('date', event);
               }}
-              */
-              onChange={handleFormField}
             />
           </Grid>
           <Grid item xs={12}>
@@ -42,25 +40,22 @@ class StoreQueueForm extends React.Component {
               type="number"
               max={store.customerShopTime}
               value={shoppingTime}
-             /* onChange={(event) => {
+              onChange={(event) => {
                 handleFormField('shoppingTime', event);
               }}
-              */
-              onChange={handleFormField}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              name="num_of_shoppers"
+              name="numCustomer"
               label="Number of Shopper"
               type="number"
               max={store.customerLimit}
               value={numCustomer}
-              /*onChange={(event) => {
+              onChange={(event) => {
                 handleFormField('numCustomer', event);
-              }}*/
-              onChange={handleFormField}
+              }}
             />
           </Grid>
         </Grid>
@@ -72,7 +67,7 @@ class StoreQueueForm extends React.Component {
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={handleFormSubmit}
+            onClick={(event) => {handleFormSubmit(event, store)}}
             href='/queue'
           >
             Add to queue

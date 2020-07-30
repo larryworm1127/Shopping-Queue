@@ -1,5 +1,3 @@
-import { stores } from './stores';
-
 export class Queue {
   constructor(
     username,
@@ -21,36 +19,10 @@ export class Queue {
   getTimeQueued = () => {
     return this.dateTimeQueued.toLocaleString();
   };
+
+  updateQueue = (date, shopTime, numCustomer) => {
+    this.date = date;
+    this.shopTime = shopTime;
+    this.numCustomer = numCustomer;
+  };
 }
-
-export let bookings = [
-  new Queue('user', stores[2], 'Friday, June 26th @ 7pm', 30, 1, new Date()),
-  new Queue('user', stores[0], 'Monday, June 29th @ 10am', 50, 2, new Date()),
-  new Queue('user', stores[1], 'Thursday, July 3rd @ 10am', 10, 1, new Date())
-];
-
-export const getBookings = () => {
-  return bookings;
-};
-
-
-// Function to add a booking
-export const addBooking = b => {
-  bookings.push(b);
-};
-
-
-export const removeBooking = (queue, b) => {
-  const filteredBookings = bookings.filter(s => {
-    return s !== b;
-  });
-
-  bookings = filteredBookings;
-
-  queue.setState({
-    bookings: filteredBookings
-  });
-};
-
-
-

@@ -77,7 +77,10 @@ export const shoppers = [
     '123 Test Street, Toronto, ON',
     'user@test.com',
     30,
-    [],
+    [
+      new Queue('user', stores[0], '05-07-2020', 30, 1, new Date()),
+      new Queue('user', stores[2], '08-07-2020', 20, 2, new Date())
+    ],
     [stores[0], stores[1]],
     [
       { store: stores[0], date: '02-05-2020' },
@@ -85,8 +88,10 @@ export const shoppers = [
       { store: stores[1], date: '15-05-2020' }
     ],
     [
+      new Queue('user', stores[1], '12-11-2019', 20, 2, new Date()),
       new Queue('user', stores[0], '05-07-2020', 30, 1, new Date()),
-      new Queue('user', stores[2], '08-07-2020', 20, 2, new Date())
+      new Queue('user', stores[2], '08-07-2020', 20, 2, new Date()),
+      new Queue('user', stores[0], '05-07-2020', 30, 1, new Date())
     ]
   ),
   new Shopper(
