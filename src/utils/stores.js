@@ -34,9 +34,9 @@ export class Store {
     this.customerLimit = customerLimit;
     this.customerShopTime = customerShopTime;
     this.currentQueue = [
-      new Queue('user', this, '05-07-2020', 30, 1, new Date()),
-      new Queue('user', this, '08-07-2020', 20, 2, new Date()),
-      new Queue('user2', this, '12-07-2020', 20, 1, new Date())
+      new Queue('user', this, '2020-05-07', 30, 1, new Date()),
+      new Queue('user', this, '2020-08-07', 20, 2, new Date()),
+      new Queue('user2', this, '2020-12-07', 20, 1, new Date())
     ];
   }
 

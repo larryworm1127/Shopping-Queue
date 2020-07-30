@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core';
 import { getStoreByUsername } from '../../utils/stores';
 import store from 'store';
 import { styles } from './style';
-import BookingList from '../Queue/BookingList';
+import BookingList from '../Queue/QueueList';
 import Container from '@material-ui/core/Container';
 
 

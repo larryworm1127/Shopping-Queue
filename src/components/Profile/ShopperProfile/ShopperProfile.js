@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import StoreCards from '../../StoreCards';
 import { uid } from 'react-uid';
-import ProfileDataDisplay from '../ProfileDataDisplay';
+import DataDisplay from '../../DataDisplay';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
 import { styles } from '../style';
@@ -97,7 +97,7 @@ class ShopperProfile extends React.Component {
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={3}
             title="Your First Name"
             content={shopper.firstName}
@@ -108,7 +108,7 @@ class ShopperProfile extends React.Component {
             value={this.state.firstName}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={3}
             title="Your Last Name"
             content={shopper.lastName}
@@ -119,7 +119,7 @@ class ShopperProfile extends React.Component {
             value={this.state.lastName}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={6}
             title="Your Email"
             content={shopper.email}
@@ -130,7 +130,7 @@ class ShopperProfile extends React.Component {
             value={this.state.email}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={12}
             title="Your Location"
             content={shopper.address}
@@ -141,7 +141,7 @@ class ShopperProfile extends React.Component {
             value={this.state.address}
             handleFormField={this.handleFormField}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={12}
             title="Your Favorite Stores"
             contentComponent={
@@ -157,7 +157,7 @@ class ShopperProfile extends React.Component {
             edit={this.state.edit}
             setEdit={this.setEdit}
           />
-          <ProfileDataDisplay
+          <DataDisplay
             gridSize={12}
             title="Notification Settings"
             content={`Remind me ${shopper.remindTime} minutes before my booking.`}

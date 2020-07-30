@@ -3,11 +3,11 @@ import { styles } from './style';
 import { withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import ProfileDataDisplay from '../Profile/ProfileDataDisplay';
+import DataDisplay from '../DataDisplay';
 import ProfileEditButtons from '../Profile/ProfileEditButtons';
 
 
-class BookingDetails extends React.Component {
+class QueueDetails extends React.Component {
 
   constructor(props) {
     super(props);
@@ -49,17 +49,17 @@ class BookingDetails extends React.Component {
       <React.Fragment>
         <Container className={classes.container}>
           <Grid container spacing={3}>
-            <ProfileDataDisplay
+            <DataDisplay
               gridSize={6}
               title="Store Name"
               content={booking.store.name}
             />
-            <ProfileDataDisplay
+            <DataDisplay
               gridSize={6}
               title="Date Queued"
               content={booking.getTimeQueued()}
             />
-            <ProfileDataDisplay
+            <DataDisplay
               gridSize={4}
               title="Queued For Date"
               content={booking.date}
@@ -67,10 +67,11 @@ class BookingDetails extends React.Component {
               setEdit={this.setEdit}
               name="date"
               label="Date"
+              type="date"
               value={this.state.date}
               handleFormField={this.handleFormField}
             />
-            <ProfileDataDisplay
+            <DataDisplay
               gridSize={4}
               title="Shop Time (min)"
               content={booking.shopTime}
@@ -79,9 +80,10 @@ class BookingDetails extends React.Component {
               name="shopTime"
               label="Shop Time (min)"
               value={this.state.shopTime}
+              type="number"
               handleFormField={this.handleFormField}
             />
-            <ProfileDataDisplay
+            <DataDisplay
               gridSize={4}
               title="Number of Customers"
               content={booking.numCustomer}
@@ -89,6 +91,7 @@ class BookingDetails extends React.Component {
               setEdit={this.setEdit}
               name="numCustomer"
               label="Number of Customers"
+              type="number"
               value={this.state.numCustomer}
               handleFormField={this.handleFormField}
             />
@@ -106,4 +109,4 @@ class BookingDetails extends React.Component {
   }
 }
 
-export default withStyles(styles)(BookingDetails);
+export default withStyles(styles)(QueueDetails);

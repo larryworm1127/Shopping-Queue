@@ -8,10 +8,10 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
-import BookingDetails from './BookingDetails';
+import BookingDetails from './QueueDetails';
 
 
-class Booking extends React.Component {
+class QueueRow extends React.Component {
 
   state = {
     open: false
@@ -82,4 +82,4 @@ class Booking extends React.Component {
   }
 }
 
-export default withStyles(styles)(Booking);
+export default withStyles(styles)(QueueRow);

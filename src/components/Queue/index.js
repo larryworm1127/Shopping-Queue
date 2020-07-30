@@ -3,7 +3,7 @@
 import React from 'react';
 // Importing components
 import Header from './Header';
-import BookingList from './BookingList';
+import BookingList from './QueueList';
 import NavBar from '../Nav/navbar';
 // Importing utils/required methods
 import CssBaseline from '@material-ui/core/CssBaseline';
