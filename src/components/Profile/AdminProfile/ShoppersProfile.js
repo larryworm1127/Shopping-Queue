@@ -68,6 +68,7 @@ class ShoppersProfile extends React.Component {
 
     return (
       <React.Fragment>
+        <div className={classes.profile}>
         <Grid container spacing={3}>
           {admin.viewableShoppers.map((shopper, index) => (
             <Grid item xs={12} key={index}>
@@ -129,6 +130,7 @@ class ShoppersProfile extends React.Component {
             </Grid>
           ))}
         </Grid>
+        </div>
       </React.Fragment>
     );
   }

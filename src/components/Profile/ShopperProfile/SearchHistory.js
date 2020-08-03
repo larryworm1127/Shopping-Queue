@@ -37,6 +37,7 @@ class SearchHistory extends React.Component {
 
     return (
       <React.Fragment>
+        <div className={classes.profile}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
@@ -86,6 +87,7 @@ class SearchHistory extends React.Component {
             </Paper>
           </Grid>
         </Grid>
+        </div>
       </React.Fragment>
     );
   }

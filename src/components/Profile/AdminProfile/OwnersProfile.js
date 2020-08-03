@@ -62,6 +62,7 @@ class OwnersProfile extends React.Component {
 
     return (
       <React.Fragment>
+        <div className={classes.profile}>
         {admin.viewableStores.map((store, index) => (
           <Box m={2}>
             <Card>
@@ -121,6 +122,7 @@ class OwnersProfile extends React.Component {
             </Card>
           </Box>
         ))}
+        </div>
       </React.Fragment>
     );
   }

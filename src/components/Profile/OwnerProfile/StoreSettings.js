@@ -2,6 +2,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
+import { styles } from '../style';
+import { withStyles } from '@material-ui/core';
 
 class StoreSettings extends React.Component {
 
@@ -41,10 +43,11 @@ class StoreSettings extends React.Component {
   };
 
   render() {
-    const { store } = this.props;
+    const { classes,store } = this.props;
 
     return (
       <React.Fragment>
+        <div className={classes.profile}>
         <Grid container spacing={3}>
           <DataDisplay
             gridSize={6}
@@ -95,6 +98,7 @@ class StoreSettings extends React.Component {
             handleFormField={this.handleFormField}
           />
         </Grid>
+        </div>
         <br/>
 
         <ProfileEditButtons
@@ -107,4 +111,4 @@ class StoreSettings extends React.Component {
   }
 }
 
-export default StoreSettings;
+export default withStyles(styles)(StoreSettings);
