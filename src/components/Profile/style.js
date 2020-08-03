@@ -3,17 +3,16 @@ export const styles = (theme) => ({
   root: {
     display: 'flex',
   },
-  profile:{
-    marginLeft:'15%',
+  profile: {
+    // marginLeft: '15%',
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    
+    position: 'relative'
   },
   drawerPaper: {
     width: drawerWidth,
-    
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -31,6 +30,8 @@ export const styles = (theme) => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+    marginLeft: drawerWidth + 60,
+    display: 'inline-block',
   },
   adminShopperProfileButton: {
     marginRight: theme.spacing(2)

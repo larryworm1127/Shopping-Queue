@@ -2,8 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
-import { withStyles } from '@material-ui/core';
-import { styles } from '../style';
+
 
 class AdminPage extends React.Component {
 
@@ -43,11 +42,10 @@ class AdminPage extends React.Component {
   };
 
   render() {
-    const { classes,admin } = this.props;
+    const { admin } = this.props;
 
     return (
       <React.Fragment>
-        <div className={classes.profile}>
         <Grid container spacing={3}>
           <DataDisplay
             gridSize={3}
@@ -101,10 +99,9 @@ class AdminPage extends React.Component {
           setEdit={this.setEdit}
           handleSave={this.handleSave}
         />
-        </div>
       </React.Fragment>
     );
   }
 }
 
-export default withStyles(styles)(AdminPage);
+export default AdminPage;

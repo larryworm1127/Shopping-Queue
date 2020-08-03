@@ -4,8 +4,6 @@ import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
 import { StoreTypes } from '../../../utils/stores';
 import FormSelectField from '../../FormSelectField';
-import { withStyles } from '@material-ui/core';
-import { styles } from '../style';
 
 class StoreProfile extends React.Component {
 
@@ -45,11 +43,10 @@ class StoreProfile extends React.Component {
   };
 
   render() {
-    const { classes,store } = this.props;
+    const { store } = this.props;
 
     return (
       <React.Fragment>
-        <div className={classes.profile}>
         <Grid container spacing={3}>
           <DataDisplay
             gridSize={6}
@@ -109,10 +106,9 @@ class StoreProfile extends React.Component {
           setEdit={this.setEdit}
           handleSave={this.handleSave}
         />
-        </div>
       </React.Fragment>
     );
   }
 }
 
-export default withStyles(styles)(StoreProfile);
+export default StoreProfile;

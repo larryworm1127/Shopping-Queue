@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
+import { uid } from 'react-uid';
 
 
 class StoreMap extends React.Component {
@@ -81,7 +82,7 @@ class StoreMap extends React.Component {
             </Card>
 
             {stores.map((store, index) => (
-              <div className={classes.storeCard}>
+              <div className={classes.storeCard} key={uid(store)}>
                 <StoreCards
                   secondButton={(
                     <Button
