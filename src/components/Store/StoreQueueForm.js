@@ -3,9 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-
 class StoreQueueForm extends React.Component {
-
+  
   render() {
     const {
       classes,
@@ -14,7 +13,7 @@ class StoreQueueForm extends React.Component {
       shoppingTime,
       numCustomer,
       handleFormSubmit,
-      handleFormField
+      handleFormField,
     } = this.props;
 
     return (
@@ -59,7 +58,7 @@ class StoreQueueForm extends React.Component {
             />
           </Grid>
         </Grid>
-        <br/>
+        <br />
 
         <div className={classes.buttons}>
           <Button
@@ -67,7 +66,7 @@ class StoreQueueForm extends React.Component {
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={(event) => {handleFormSubmit(event, store)}}
+            onClick={(event) => { handleFormSubmit(event, store) }}
             href='/queue'
           >
             Add to queue

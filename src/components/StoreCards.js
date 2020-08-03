@@ -5,8 +5,10 @@ import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
-
-
+import Star from '@material-ui/icons/Star';
+import EmptyStar from '@material-ui/icons/StarBorder';
+import  {addToFavorite,removeFavorite}  from '../utils/shoppers';
+// import Parser from 'html-react-parser';
 const styles = () => ({
   title: {
     fontSize: 14,
@@ -16,8 +18,14 @@ const styles = () => ({
   },
 });
 
-
 class StoreCards extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isCardView: false,
+    }
+  } 
+  
 
   render() {
     const { classes, store, index, secondButton, disableQueue } = this.props;
@@ -36,9 +44,9 @@ class StoreCards extends React.Component {
           </Typography>
           <Typography variant="body2" component="p">
             Open from <b>{store.openingTime}</b> to <b>{store.closingTime}</b>
-            <br/>
+            <br />
             <b>Customer limit:</b> {store.customerLimit}
-            <br/>
+            <br />
             <b>Customer Shop Time Limit:</b> {store.customerShopTime} min
           </Typography>
         </CardContent>
@@ -51,6 +59,17 @@ class StoreCards extends React.Component {
           >
             Queue Here
           </Button>
+          <Button color="primary" className="btn btn-primary" onClick={
+        (event)=>{this.setState(
+          { isCardView: !this.state.isCardView});this.state.isCardView
+          ? removeFavorite(event,store)
+          : addToFavorite(event,store)
+         }}>
+        { this.state.isCardView
+          ? <Star />
+          : <EmptyStar />
+        }
+      </Button>
           {secondButton}
         </CardActions>
       </Card>

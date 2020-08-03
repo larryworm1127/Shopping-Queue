@@ -1,6 +1,6 @@
 import { stores } from './stores';
 import { Queue } from './queue';
-
+import store from 'store';
 
 /**
  * Shopper class used to store shopper user profile data.
@@ -65,9 +65,30 @@ export class Shopper {
     this.remindTime = remindTime;
     this.favoriteStores = [...favoriteStores];
   };
+  
+
 }
 
 
+export const addToFavorite = (event, selectedStore) => {
+  event.preventDefault();
+  // console.log(getShopper(store.get('user')).favoriteStores)
+  getShopper(store.get('user')).favoriteStores.push(selectedStore);
+  console.log(getShopper(store.get('user')).favoriteStores)
+};
+
+export const removeFavorite = (event,selectedStore) => {
+  event.preventDefault();
+  // var list = getShopper(store.get('user')).favoriteStores
+    for (var i = 0; i < getShopper(store.get('user')).favoriteStores.length; i++) {
+        if (getShopper(store.get('user')).favoriteStores[i].id === selectedStore.id) {
+          getShopper(store.get('user')).favoriteStores.splice(i, 1);
+          break;
+        }
+    }
+    console.log("remove")
+    console.log(getShopper(store.get('user')).favoriteStores)
+};
 // The array of shopper objects would be replaced by database in phase 2.
 export const shoppers = [
   new Shopper(
