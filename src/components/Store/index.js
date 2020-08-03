@@ -71,7 +71,8 @@ class StoreDetail extends React.Component {
           <Button 
           size="small"
           className={classes.button}
-           onClick={() => this.props.history.goBack()}><BackArrow/></Button>
+          color="primary"
+           onClick={() => this.props.history.goBack()}><BackArrow/>Back</Button>
 
           
             <Typography component="h1" variant="h4" align="center">
