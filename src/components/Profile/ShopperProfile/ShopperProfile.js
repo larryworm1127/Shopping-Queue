@@ -45,10 +45,20 @@ class ShopperProfile extends React.Component {
     });
   };
 
+
+  addNewFav = (Fav) => {
+    this.state.favoriteStores.push(Fav);
+  }
+
+  // handleFavorite = (event, selectedStore) => {
+  //   event.preventDefault();
+  //   ShopperProfile.addNewFav(selectedStore);
+
+  // };
   getFavStoreDisplayComponent = (shopper) => {
     return shopper.favoriteStores.map((store, index) => (
       <Grid item md={4} key={uid(index)}>
-        <StoreCards store={store} index={index}/>
+        <StoreCards store={store} index={index} />
       </Grid>
     ));
   };
@@ -92,10 +102,11 @@ class ShopperProfile extends React.Component {
   };
 
   render() {
-    const { shopper } = this.props;
+    const { classes,shopper } = this.props;
 
     return (
       <React.Fragment>
+        <div className={classes.profile}>
         <Grid container spacing={3}>
           <DataDisplay
             gridSize={3}
@@ -169,14 +180,15 @@ class ShopperProfile extends React.Component {
             handleFormField={this.handleFormField}
           />
         </Grid>
-        <br/>
+        <br />
 
         <ProfileEditButtons
           edit={this.state.edit}
           setEdit={this.setEdit}
           handleSave={this.handleSave}
         />
-      </React.Fragment>
+        </div>
+      </React.Fragment >
     );
   }
 }

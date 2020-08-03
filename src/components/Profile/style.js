@@ -3,6 +3,9 @@ export const styles = (theme) => ({
   root: {
     display: 'flex',
   },
+  profile:{
+    marginLeft:'15%',
+  },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
