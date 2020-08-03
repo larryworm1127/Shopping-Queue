@@ -13,6 +13,8 @@ import StoreQueueForm from './StoreQueueForm';
 import store from 'store';
 import { Queue } from '../../utils/queue';
 import { getShopper } from '../../utils/shoppers';
+import BackArrow from '@material-ui/icons/ArrowBackIos';
+import Button from '@material-ui/core/Button';
 
 class StoreDetail extends React.Component {
 
@@ -47,6 +49,7 @@ class StoreDetail extends React.Component {
     history.push('/queue');
   };
 
+
   render() {
     const {
       match,
@@ -60,21 +63,27 @@ class StoreDetail extends React.Component {
 
     return (
       <React.Fragment>
-        <NavBar/>
-        <CssBaseline/>
-
+        <NavBar />
+        <CssBaseline />
+      
         <div className={classes.layout}>
           <Paper className={classes.paper}>
+          <Button 
+          size="small"
+          className={classes.button}
+           onClick={() => this.props.history.goBack()}><BackArrow/></Button>
+
+          
             <Typography component="h1" variant="h4" align="center">
               {store.name}
             </Typography>
-            <br/>
+            <br />
             <Grid container>
               <Grid item xs={7}>
                 <Typography variant="h6" gutterBottom>
                   Store details
                 </Typography>
-                <StoreDetailList store={store}/>
+                <StoreDetailList store={store} />
               </Grid>
               <Grid item xs={5}>
                 <Typography variant="h6" gutterBottom>
