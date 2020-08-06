@@ -27,7 +27,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    expires: 60000,
+    expires: 3600000,
     httpOnly: true
   }
 }));
@@ -42,7 +42,7 @@ app.post('/api/login', (req, res) => {
     .then((user) => {
       req.session.userId = user._id;
       req.session.userType = user.userType;
-      req.session.user = user.username;
+      req.session.username = user.username;
       res.send({ currentUser: user.username, userType: user.userType });
 
     })
@@ -66,8 +66,8 @@ app.get('/api/logout', (req, res) => {
 
 // A route to check if a use is logged in on the session cookie
 app.get('/api/check-session', (req, res) => {
-  if (req.session.user) {
-    res.send({ currentUser: req.session.username });
+  if (req.session.username) {
+    res.send({ currentUser: req.session.username, userType: req.session.userType });
   } else {
     res.status(401).send();
   }

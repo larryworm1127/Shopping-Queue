@@ -19,11 +19,11 @@ class Login extends React.Component {
   }
 
   render() {
-    const { classes, location, currentUser, loginAs, app } = this.props;
+    const { classes, location, currentUser, userType, app } = this.props;
 
-    return store.get('loggedIn') ? (<Redirect to={{ pathname: '/' }}/>) : (
+    return (currentUser !== null) ? (<Redirect to={{ pathname: '/' }}/>) : (
       <React.Fragment>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} userType={userType}/>
 
         <Container component="main" maxWidth="xs">
           <CssBaseline/>

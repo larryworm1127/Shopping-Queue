@@ -21,16 +21,16 @@ export default props => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/' component={Home}/>
-        <ShopperRoute exact path='/map' component={StoreMap}/>
-        <AuthenRoute exact path='/queue' component={Queue}/>
-        <ShopperRoute exact path='/profile' component={ShopperProfile}/>
-        <StoreRoute exact path='/store/profile' component={OwnerPage}/>
-        <AdminRoute exact path='/admin/profile' component={AdminProfile}/>
-        <AdminRoute exact path='/admin/queues' component={AllQueues}/>
-        <AdminRoute exact path='/admin/messages' component={UserSupport}/>
-        <StoreRoute exact path='/store/queues' component={StoreQueues}/>
-        <StoreRoute exact path='/store/shoppers' component={StoreShoppers}/>
+        <Route exact path='/' render={() => <Home {...props}/>}/>
+        <ShopperRoute exact path='/map' props={props} component={StoreMap}/>
+        <AuthenRoute exact path='/queue' props={props} component={Queue}/>
+        <ShopperRoute exact path='/profile' props={props} component={ShopperProfile}/>
+        <StoreRoute exact path='/store/profile' props={props} component={OwnerPage}/>
+        <AdminRoute exact path='/admin/profile' props={props} component={AdminProfile}/>
+        <AdminRoute exact path='/admin/queues' props={props} component={AllQueues}/>
+        <AdminRoute exact path='/admin/messages' props={props} component={UserSupport}/>
+        <StoreRoute exact path='/store/queues' props={props} component={StoreQueues}/>
+        <StoreRoute exact path='/store/shoppers' props={props} component={StoreShoppers}/>
         <Route exact path='/login' render={() => <Login {...props}/>}/>
         <Route exact path='/register' component={RegisterRedirect}/>
         <Route exact path='/logout' component={SignOutRedirect}/>
@@ -54,41 +54,43 @@ const RegisterRedirect = () => {
 };
 
 
-const ShopperRoute = ({ component: Component, ...rest }) => (
+const ShopperRoute = ({ component: Component, props, ...rest }) => {
+  console.log('shopper route');
+  console.log(props);
+  return (<Route
+    {...rest}
+    render={() => (store.get('loggedIn') && store.get('loginAs') === 0) ?
+      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
+    }
+  />);
+};
+
+
+const StoreRoute = ({ component: Component, props, ...rest }) => (
   <Route
     {...rest}
-    render={props => (store.get('loggedIn') && store.get('loginAs') === 0) ?
+    render={() => (store.get('loggedIn') && store.get('loginAs') === 1) ?
       <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
     }
   />
 );
 
 
-const StoreRoute = ({ component: Component, ...rest }) => (
+const AdminRoute = ({ component: Component, props, ...rest }) => (
   <Route
     {...rest}
-    render={props => (store.get('loggedIn') && store.get('loginAs') === 1) ?
+    render={() => (store.get('loggedIn') && store.get('loginAs') === 2) ?
       <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
     }
   />
 );
 
 
-const AdminRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => (store.get('loggedIn') && store.get('loginAs') === 2) ?
-      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
-    }
-  />
-);
-
-
-const AuthenRoute = ({ component: Component, ...rest }) => {
+const AuthenRoute = ({ component: Component, props, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props => !!store.get('loggedIn') ?
+      render={() => !!store.get('loggedIn') ?
         <Component {...props} /> : <Redirect to={{ pathname: '/login' }}/>
       }
     />

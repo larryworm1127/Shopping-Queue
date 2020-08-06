@@ -13,7 +13,10 @@ export const readCookie = (app) => {
     })
     .then(json => {
       if (json && json.currentUser) {
-        app.setState({ currentUser: json.currentUser });
+        app.setState({
+          currentUser: json.currentUser,
+          userType: json.userType
+        });
       }
     })
     .catch(error => {

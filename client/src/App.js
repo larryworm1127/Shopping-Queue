@@ -40,10 +40,12 @@ class App extends React.Component {
   };
 
   render() {
+    const { history } = this.props
+
     return (
       <div>
         <ThemeProvider theme={theme}>
-          <Routes {...this.state} app={this}/>
+          <Routes {...this.state} app={this} history={history}/>
         </ThemeProvider>
       </div>
     );

@@ -3,30 +3,34 @@ import NavBar from '../Nav/navbar';
 import HeadSection from './HeadSection';
 import Footer from './Footer';
 import { getServiceData } from '../../utils/services';
-import store from 'store';
 import Services from './Services';
 import { CssBaseline } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
 
 
 /* Component for the Home page */
 class Home extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.props.history.push('/')
+  }
+
   render() {
-    const { location } = this.props;
-    const serviceData = getServiceData((store.get('loggedIn')) ? store.get('loginAs') : -1, store.get('user'));
+    const { location, userType, currentUser } = this.props;
+    const serviceData = getServiceData((userType !== null) ? userType : -1, currentUser);
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} userType={userType}/>
         <CssBaseline/>
-        <HeadSection/>
+        <HeadSection userType={userType} currentUser={currentUser}/>
         <Services serviceData={serviceData}/>
 
-        {store.get('loggedIn') && (store.get('loginAs') !== 2) &&
-        <Footer/>
-        }
+        {userType !== 2 && <Footer/>}
       </React.Fragment>
     );
   }
 }
 
-export default Home;
+export default withRouter(Home);
