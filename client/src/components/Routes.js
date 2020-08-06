@@ -16,7 +16,7 @@ import AllQueues from './Admin/AllQueues';
 import UserSupport from './Admin/UserSupport';
 
 
-export default () => {
+export default (props) => {
 
   return (
     <BrowserRouter>

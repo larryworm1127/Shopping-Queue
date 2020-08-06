@@ -7,6 +7,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import indigo from '@material-ui/core/colors/indigo';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import { readCookie } from './actions/auth';
 
 const theme = createMuiTheme({
   palette: {
@@ -28,11 +29,23 @@ const theme = createMuiTheme({
 
 class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+    readCookie(this);
+  }
+
+  state = {
+    currentUser: null,
+    loginAs: null
+  };
+
   render() {
+    const { currentUser, loginAs } = this.state;
+
     return (
       <div>
         <ThemeProvider theme={theme}>
-          <Routes/>
+          <Routes currentUser={currentUser} loginAs={loginAs}/>
         </ThemeProvider>
       </div>
     );

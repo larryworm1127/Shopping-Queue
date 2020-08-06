@@ -59,7 +59,7 @@ app.use(session({
 }));
 
 // A route to login and create a session
-app.post('/login', mongoChecker, (req, res) => {
+app.post('api/login', mongoChecker, (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   const type = req.body.type;
@@ -89,7 +89,7 @@ app.post('/login', mongoChecker, (req, res) => {
 });
 
 // A route to logout a user
-app.get('/logout', (req, res) => {
+app.get('api/logout', (req, res) => {
   // Remove the session
   req.session.destroy((error) => {
     if (error) {
@@ -101,7 +101,7 @@ app.get('/logout', (req, res) => {
 });
 
 //Register a new user
-app.post('/register', mongoChecker, (req, res) => {
+app.post('api/register', mongoChecker, (req, res) => {
   //New user is a shop owner
   if (req.body.type === 'Owner') {
     const user = new Owner({
@@ -141,7 +141,7 @@ app.post('/register', mongoChecker, (req, res) => {
 });
 
 //Get profile for shopper, owner or admin
-app.get('/profile', mongoChecker, (req, res) => {
+app.get('api/profile', mongoChecker, (req, res) => {
 
   const id = req.body.id;
   const type = req.body.type;
@@ -192,7 +192,7 @@ app.get('/profile', mongoChecker, (req, res) => {
 
 
 // Get queues for shopper or queues for owners store
-app.get('/queues', mongoChecker, (req, res) => {
+app.get('api/queues', mongoChecker, (req, res) => {
 
   const id = req.body.id;
   const type = req.body.type;
@@ -237,9 +237,23 @@ app.use(express.static(__dirname + '/client/build'));
 // All routes other than above will go to index.html
 app.get('*', (req, res) => {
   // check for page routes that we expect in the frontend to provide correct status code.
-  const goodPageRoutes = ['/', '/login', '/dashboard'];
+  const goodPageRoutes = [
+    '/',
+    '/map',
+    '/queue',
+    '/profile',
+    '/store/profile',
+    '/admin/profile',
+    '/admin/queues',
+    '/admin/messages',
+    '/store/queues',
+    '/store/shoppers',
+    '/login',
+    '/register',
+    '/logout',
+    '/store/:id'
+  ];
   if (!goodPageRoutes.includes(req.url)) {
-    // if url not in expected page routes, set status to 404.
     res.status(404);
   }
 
