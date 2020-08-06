@@ -19,11 +19,11 @@ const { Admin } = require("./models/admin");
 const { ObjectID } = require('mongodb');
 
 // body-parser: middleware for parsing HTTP JSON body into a usable object
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 // express-session for managing user sessions
-const session = require("express-session");
+const session = require('express-session');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -31,9 +31,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // an active user on the session cookie (indicating a logged in user.)
 const sessionChecker = (req, res, next) => {
   if (!req.session.user) {
-    res.redirect('/login'); // redirect to login if not logged in.
+    res.redirect('/login');
   } else {
-    next(); // next() moves on to the route.
+    next();
   }
 };
 
@@ -232,21 +232,24 @@ app.get('/queues', mongoChecker, (req, res) => {
 
 /*** Webpage routes below **********************************/
 // Serve the build
-app.use(express.static(__dirname + "/client/build"));
+app.use(express.static(__dirname + '/client/build'));
 
 // All routes other than above will go to index.html
-app.get("*", (req, res) => {
+app.get('*', (req, res) => {
   // check for page routes that we expect in the frontend to provide correct status code.
-  const goodPageRoutes = ["/", "/login", "/dashboard"];
+  const goodPageRoutes = ['/', '/login', '/dashboard'];
   if (!goodPageRoutes.includes(req.url)) {
     // if url not in expected page routes, set status to 404.
     res.status(404);
   }
 
   // send index.html
-  res.sendFile(__dirname + "/client/build/index.html");
+  res.sendFile(__dirname + '/client/build/index.html');
 });
 
+
+/*************************************************/
+// Express server listening...
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
