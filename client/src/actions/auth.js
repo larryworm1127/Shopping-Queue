@@ -34,8 +34,7 @@ export const updateLoginForm = (loginComp, field) => {
 
 // A function to send a POST request with the user to be logged in
 export const login = (loginComp, app) => {
-  // Create our request constructor with all the parameters we need
-  const request = new Request('/auth/login', {
+  const request = new Request('/api/login', {
     method: 'post',
     body: JSON.stringify(loginComp.state),
     headers: {

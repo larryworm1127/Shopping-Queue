@@ -1,54 +1,23 @@
 'use strict';
-import { Shopper } from './client/src/utils/shoppers';
 
+// External libraries import
 const express = require('express');
-
-const app = express();
-
-//app.use(express.static(__dirname + '/')) //change later
-
-// mongoose and mongo connection
-const { mongoose } = require('mongoose');
-
-/*
-// To be implemented
-const { Shopper } = require("./models/shopper");
-const { Owner } = require("./models/owner");
-const { Admin } = require("./models/admin");
-*/
-
-// to validate object IDs
+const bodyParser = require('body-parser');
+const session = require('express-session');
 const { ObjectID } = require('mongodb');
 
-// body-parser: middleware for parsing HTTP JSON body into a usable object
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
+// Models import
+const { User } = require('./models/user');
+const { Shopper } = require('./models/shopper');
+const { Store } = require('./models/store');
+const { Admin } = require('./models/admin')
 
-// express-session for managing user sessions
-const session = require('express-session');
-const { Owner } = require('./models/store');
+
+// Create main express app
+const app = express();
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-// Our own express middleware to check for
-// an active user on the session cookie (indicating a logged in user.)
-const sessionChecker = (req, res, next) => {
-  if (!req.session.user) {
-    res.redirect('/login');
-  } else {
-    next();
-  }
-};
-
-// middleware for mongo connection error for routes that need it
-const mongoChecker = (req, res, next) => {
-  // check mongoose connection established.
-  if (mongoose.connection.readyState !== 1) {
-    res.status(500).send('Internal server error');
-  } else {
-    next();
-  }
-};
 
 // Create a session cookie
 app.use(session({
@@ -62,38 +31,30 @@ app.use(session({
 }));
 
 // A route to login and create a session
-app.post('api/login', mongoChecker, (req, res) => {
+app.post('api/login', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   const type = req.body.type;
 
-  // Use the static method on the User model to find a user
-  // by their email and password
-  User.findByUsernamePassword(username, password).then((user) => { //need to create function
-    if (!user) {
-      res.redirect('/login');
-    } else {
-      // Add the user's id to the session cookie.
-      // We can check later if this exists to ensure we are logged in.
-      req.session.user = user._id;
-      req.session.type = user.type;
-      req.session.email = user.email;
-      res.redirect('/');
-    }
-  }).catch((error) => {
-    // redirect to login if can't login for any reason
-    if (isMongoError(error)) {
-      res.status(500).redirect('/login');
-    } else {
+  User.verifyCredential(username, password, type)
+    .then((user) => {
+      if (!user) {
+        res.redirect('/login');
+      } else {
+        req.session.userId = user._id;
+        req.session.type = user.type;
+        req.session.user = user.username;
+        res.redirect('/');
+      }
+    })
+    .catch(() => {
       res.status(400).redirect('/login');
-    }
-
-  });
+    });
 });
+
 
 // A route to logout a user
 app.get('api/logout', (req, res) => {
-  // Remove the session
   req.session.destroy((error) => {
     if (error) {
       res.status(500).send(error);
@@ -104,11 +65,11 @@ app.get('api/logout', (req, res) => {
 });
 
 //Register a new user
-app.post('api/register', mongoChecker, (req, res) => {
+app.post('api/register', (req, res) => {
 
   const user = (req.body.type === 'Owner') ?
     // New user is a shopper
-    new Owner({
+    new Store({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
@@ -141,7 +102,7 @@ app.post('api/register', mongoChecker, (req, res) => {
 });
 
 //Get profile for shopper, owner or admin
-app.get('api/profile', mongoChecker, (req, res) => {
+app.get('api/profile', (req, res) => {
 
   const id = req.body.id;
   const type = req.body.type;
@@ -152,7 +113,7 @@ app.get('api/profile', mongoChecker, (req, res) => {
   }
 
   if (type === 'Owner') {
-    Owner.findById(id)
+    Store.findById(id)
       .then(owner => {
         if (!owner) {
           res.status(404).send();
@@ -192,7 +153,7 @@ app.get('api/profile', mongoChecker, (req, res) => {
 
 
 // Get queues for shopper or queues for owners store
-app.get('api/queues', mongoChecker, (req, res) => {
+app.get('api/queues', (req, res) => {
 
   const id = req.body.id;
   const type = req.body.type;
@@ -203,7 +164,7 @@ app.get('api/queues', mongoChecker, (req, res) => {
   }
 
   if (type === 'Owner') {
-    Owner.findById(id)
+    Store.findById(id)
       .then(owner => {
         if (!owner) {
           res.status(404).send();

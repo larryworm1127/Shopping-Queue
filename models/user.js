@@ -1,21 +1,26 @@
 /* User model */
 'use strict';
 
-const mongoose = require('mongoose');
-const validator = require('validator');
+const { model, Schema } = require('mongoose');
+const { isAlphanumeric } = require('validator');
 const bcrypt = require('bcryptjs');
 
-// Making a Mongoose model a little differently: a Mongoose Schema
-// Allows us to add additional functionality.
-const UserSchema = new mongoose.Schema({
+
+const UserTypes = {
+  Shopper: 0,
+  Store: 1,
+  Admin: 2
+};
+
+
+const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
     minlength: 1,
     trim: true,
-    unique: true,
     validate: {
-      validator: validator.isAlphanumeric,
+      validator: isAlphanumeric,
       message: 'Not valid username'
     }
   },
@@ -23,12 +28,16 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 6
+  },
+  userType: {
+    type: Number,
+    required: true
   }
 });
 
-// An example of Mongoose middleware.
-// This function will run immediately prior to saving the document
-// in the database.
+UserSchema.index({ username: 1, userType: 1 }, { unique: true });
+
+
 UserSchema.pre('save', function (next) {
   const user = this; // binds this to User document instance
 
@@ -44,28 +53,26 @@ UserSchema.pre('save', function (next) {
   }
 });
 
-// A static method on the document model.
-// Allows us to find a User document by comparing the hashed password
-// to a given one, for example when logging in.
-UserSchema.statics.findByUsernamePassword = function (username, password) {
-  const User = this; // binds this to the User model
 
-  return User.findOne({ username: username }).then((user) => {
+UserSchema.statics.verifyCredential = function (username, password, type) {
+  const User = this;
+
+  return User.findOne({ username: username, userType: type }).then((user) => {
     if (!user) {
       return Promise.reject();
     }
     return new Promise((resolve, reject) => {
       bcrypt.compare(password, user.password, (err, result) => {
-        if (result) {
-          resolve(user);
-        } else {
-          reject();
-        }
+        (result) ? resolve(user) : reject();
       });
     });
   });
 };
 
-// make a model using the User schema
-const User = mongoose.model('User', UserSchema);
-module.exports = { User };
+
+const User = model('User', UserSchema);
+
+module.exports = {
+  UserTypes,
+  User
+}

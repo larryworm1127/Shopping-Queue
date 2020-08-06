@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 
-export const Shopper = mongoose.model('Shopper', {
+const Shopper = mongoose.model('Shopper', {
   firstName: {
     type: String,
     required: true,
@@ -37,3 +37,8 @@ export const Shopper = mongoose.model('Shopper', {
   searchHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }],
   queueHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }]
 });
+
+
+module.export = {
+  Shopper
+}

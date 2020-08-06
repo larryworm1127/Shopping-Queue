@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 
-export const Store = mongoose.model('Store', {
+const Store = mongoose.model('Store', {
   storeName: {
     type: String,
     required: true,
@@ -54,3 +54,8 @@ export const Store = mongoose.model('Store', {
     required: true
   }
 });
+
+
+module.export = {
+  Store
+}
