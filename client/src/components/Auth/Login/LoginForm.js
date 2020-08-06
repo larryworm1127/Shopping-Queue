@@ -1,20 +1,22 @@
 // React imports
 import React from 'react';
 // Material UI imports
-import { Button, Checkbox, FormControlLabel } from '@material-ui/core';
+import { Button, Checkbox, FormControlLabel, withStyles } from '@material-ui/core';
 // User JS imports
 import FormTextField from '../../FormTextField';
 import FormSelectField from '../../FormSelectField';
 import { loginVerify } from '../../../utils/verifyAuth';
 import { withRouter } from 'react-router-dom';
 import store from 'store';
+import { login } from '../../../actions/auth';
+import { styles } from './style';
 
 
 class LoginForm extends React.Component {
 
   state = {
-    username: '',
-    password: '',
+    username: null,
+    password: null,
     loginAs: 0,
     displayError: false,
     errorMessage: ''
@@ -50,17 +52,24 @@ class LoginForm extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, app } = this.props;
+    const { displayError, errorMessage, loginAs } = this.state;
 
     return (
       <React.Fragment>
-        <form className={classes.form} onSubmit={this.handleLoginSubmit}>
+        <form
+          className={classes.form}
+          onSubmit={() => {
+            // login(this, app);
+            this.handleLoginSubmit();
+          }}
+        >
           <FormTextField
             variant="outlined"
             margin="normal"
             name="username"
             label="Username"
-            displayError={this.state.displayError}
+            displayError={displayError}
             handleFormField={this.handleFormField}
           />
           <FormTextField
@@ -69,8 +78,8 @@ class LoginForm extends React.Component {
             name="password"
             label="Password"
             type="password"
-            errorMessage={this.state.errorMessage}
-            displayError={this.state.displayError}
+            errorMessage={errorMessage}
+            displayError={displayError}
             handleFormField={this.handleFormField}
           />
 
@@ -78,13 +87,13 @@ class LoginForm extends React.Component {
             name="loginAs"
             label="Login As"
             variant="outlined"
-            value={this.state.loginAs}
+            value={loginAs}
             handleFormField={this.handleFormField}
             menuItems={['Shopper', 'Shop Owner', 'Admin']}
           />
 
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" color="primary"/>}
             label="Remember me"
           />
 
@@ -103,4 +112,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default withRouter(LoginForm);
+export default withRouter(withStyles(styles)(LoginForm));

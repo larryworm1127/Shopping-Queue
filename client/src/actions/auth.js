@@ -2,7 +2,7 @@
 
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
-  const url = '/auth/check-session';
+  const url = '/api/check-session';
 
   fetch(url)
     .then(res => {
@@ -18,17 +18,6 @@ export const readCookie = (app) => {
     .catch(error => {
       console.log(error);
     });
-};
-
-
-// A function to update the login form state
-export const updateLoginForm = (loginComp, field) => {
-  const value = field.value;
-  const name = field.name;
-
-  loginComp.setState({
-    [name]: value
-  });
 };
 
 

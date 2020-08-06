@@ -16,7 +16,7 @@ import AllQueues from './Admin/AllQueues';
 import UserSupport from './Admin/UserSupport';
 
 
-export default (props) => {
+export default props => {
 
   return (
     <BrowserRouter>
@@ -31,7 +31,7 @@ export default (props) => {
         <AdminRoute exact path='/admin/messages' component={UserSupport}/>
         <StoreRoute exact path='/store/queues' component={StoreQueues}/>
         <StoreRoute exact path='/store/shoppers' component={StoreShoppers}/>
-        <Route exact path='/login' component={Login}/>
+        <Route exact path='/login' render={() => <Login {...props}/>}/>
         <Route exact path='/register' component={RegisterRedirect}/>
         <Route exact path='/logout' component={SignOutRedirect}/>
         <Route exact path='/store/:id' component={StoreDetail}/>

@@ -14,24 +14,24 @@ import store from 'store';
 class Login extends React.Component {
 
   render() {
-    const { classes, location } = this.props;
+    const { classes, location, currentUser, loginAs, app } = this.props;
 
-    return store.get('loggedIn') ? (<Redirect to={{ pathname: '/' }} />) : (
+    return store.get('loggedIn') ? (<Redirect to={{ pathname: '/' }}/>) : (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} />
+        <NavBar currentPath={location.pathname}/>
 
         <Container component="main" maxWidth="xs">
-          <CssBaseline />
+          <CssBaseline/>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
+              <LockOutlinedIcon/>
             </Avatar>
 
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
 
-            <LoginForm classes={classes} />
+            <LoginForm app={app}/>
 
             <Grid container>
               <Grid item xs>

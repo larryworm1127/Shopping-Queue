@@ -40,12 +40,10 @@ class App extends React.Component {
   };
 
   render() {
-    const { currentUser, loginAs } = this.state;
-
     return (
       <div>
         <ThemeProvider theme={theme}>
-          <Routes currentUser={currentUser} loginAs={loginAs}/>
+          <Routes {...this.state} app={this}/>
         </ThemeProvider>
       </div>
     );
