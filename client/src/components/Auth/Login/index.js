@@ -13,6 +13,11 @@ import store from 'store';
 
 class Login extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.props.history.push('/login');
+  }
+
   render() {
     const { classes, location, currentUser, loginAs, app } = this.props;
 

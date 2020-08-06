@@ -5,12 +5,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const { ObjectID } = require('mongodb');
+const { mongoose } = require('./db/mongoose');
+mongoose.set('useFindAndModify', false);
 
 // Models import
 const { User } = require('./models/user');
 const { Shopper } = require('./models/shopper');
 const { Store } = require('./models/store');
-const { Admin } = require('./models/admin')
+const { Admin } = require('./models/admin');
 
 
 // Create main express app
@@ -31,30 +33,27 @@ app.use(session({
 }));
 
 // A route to login and create a session
-app.post('api/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  const type = req.body.type;
+  const userType = req.body.userType;
 
-  User.verifyCredential(username, password, type)
+  User.verifyCredential(username, password, userType)
     .then((user) => {
-      if (!user) {
-        res.redirect('/login');
-      } else {
-        req.session.userId = user._id;
-        req.session.type = user.type;
-        req.session.user = user.username;
-        res.redirect('/');
-      }
+      req.session.userId = user._id;
+      req.session.userType = user.userType;
+      req.session.user = user.username;
+      res.send({ currentUser: user.username, userType: user.userType });
+
     })
     .catch(() => {
-      res.status(400).redirect('/login');
+      res.status(400).send();
     });
 });
 
 
 // A route to logout a user
-app.get('api/logout', (req, res) => {
+app.get('/api/logout', (req, res) => {
   req.session.destroy((error) => {
     if (error) {
       res.status(500).send(error);
@@ -64,31 +63,44 @@ app.get('api/logout', (req, res) => {
   });
 });
 
-//Register a new user
-app.post('api/register', (req, res) => {
 
-  const user = (req.body.type === 'Owner') ?
-    // New user is a shopper
-    new Store({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      storeName: req.body.storeName,
-      location: req.body.location,
-      customerLimit: req.body.customerLimit,
-      customerShopTime: req.body.customerShopTime,
-      openingTime: req.body.openingTime,
-      closingTime: req.body.closingTime,
-      storeType: req.body.storeType
-    }) :
-    // New user is a store owner
-    new Shopper({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      address: req.body.address,
-      remindTime: req.body.remindTime
-    });
+// A route to check if a use is logged in on the session cookie
+app.get('/api/check-session', (req, res) => {
+  if (req.session.user) {
+    res.send({ currentUser: req.session.username });
+  } else {
+    res.status(401).send();
+  }
+});
+
+
+//Register a new user
+app.post('/api/register', (req, res) => {
+
+  // const user = (req.body.type === 'Owner') ?
+  //   // New user is a shopper
+  //   new Store({
+  //     email: req.body.email,
+  //     storeName: req.body.storeName,
+  //     location: req.body.location,
+  //     customerLimit: req.body.customerLimit,
+  //     customerShopTime: req.body.customerShopTime,
+  //     openingTime: req.body.openingTime,
+  //     closingTime: req.body.closingTime,
+  //     storeType: req.body.storeType
+  //   }) :
+  //   // New user is a store owner
+  //   new Shopper({
+  //     email: req.body.email,
+  //     address: req.body.address,
+  //     remindTime: req.body.remindTime
+  //   });
+
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password,
+    userType: req.body.userType
+  });
 
   // Save the user
   user.save().then(
@@ -102,7 +114,7 @@ app.post('api/register', (req, res) => {
 });
 
 //Get profile for shopper, owner or admin
-app.get('api/profile', (req, res) => {
+app.get('/api/profile', (req, res) => {
 
   const id = req.body.id;
   const type = req.body.type;
@@ -153,7 +165,7 @@ app.get('api/profile', (req, res) => {
 
 
 // Get queues for shopper or queues for owners store
-app.get('api/queues', (req, res) => {
+app.get('/api/queues', (req, res) => {
 
   const id = req.body.id;
   const type = req.body.type;

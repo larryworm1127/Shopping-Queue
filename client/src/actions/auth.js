@@ -1,6 +1,7 @@
 // Functions to help with user actions.
 
 // A function to check if a user is logged in on the session cookie
+
 export const readCookie = (app) => {
   const url = '/api/check-session';
 
@@ -41,7 +42,10 @@ export const login = (loginComp, app) => {
     })
     .then(json => {
       if (json.currentUser !== undefined) {
-        app.setState({ currentUser: json.currentUser });
+        app.setState({
+          currentUser: json.currentUser,
+          userType: json.userType
+        });
       }
     })
     .catch(error => {
@@ -52,7 +56,7 @@ export const login = (loginComp, app) => {
 
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
-  const url = '/auth/logout';
+  const url = '/api/logout';
 
   fetch(url)
     .then(() => {

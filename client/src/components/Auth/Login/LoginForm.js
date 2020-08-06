@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
   state = {
     username: null,
     password: null,
-    loginAs: 0,
+    userType: 0,
     displayError: false,
     errorMessage: ''
   };
@@ -40,10 +40,10 @@ class LoginForm extends React.Component {
   handleLoginSubmit = (event) => {
     event.preventDefault();
     const { history } = this.props;
-    const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
+    const verify = loginVerify(this.state.username, this.state.password, this.state.userType);
     if (verify === true) {
       store.set('loggedIn', true);
-      store.set('loginAs', this.state.loginAs);
+      store.set('loginAs', this.state.userType);
       store.set('user', this.state.username);
       history.push('/');
     } else {
@@ -53,17 +53,11 @@ class LoginForm extends React.Component {
 
   render() {
     const { classes, app } = this.props;
-    const { displayError, errorMessage, loginAs } = this.state;
+    const { displayError, errorMessage, userType } = this.state;
 
     return (
       <React.Fragment>
-        <form
-          className={classes.form}
-          onSubmit={() => {
-            // login(this, app);
-            this.handleLoginSubmit();
-          }}
-        >
+        <div className={classes.form}>
           <FormTextField
             variant="outlined"
             margin="normal"
@@ -84,10 +78,10 @@ class LoginForm extends React.Component {
           />
 
           <FormSelectField
-            name="loginAs"
+            name="userType"
             label="Login As"
             variant="outlined"
-            value={loginAs}
+            value={userType}
             handleFormField={this.handleFormField}
             menuItems={['Shopper', 'Shop Owner', 'Admin']}
           />
@@ -98,7 +92,7 @@ class LoginForm extends React.Component {
           />
 
           <Button
-            type="submit"
+            onClick={() => {login(this, app)}}
             fullWidth
             variant="contained"
             color="primary"
@@ -106,7 +100,7 @@ class LoginForm extends React.Component {
           >
             Sign In
           </Button>
-        </form>
+        </div>
       </React.Fragment>
     );
   }
