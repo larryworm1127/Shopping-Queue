@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-router-dom';
-import Home from './Home/';
+import Home from './Home';
 import Queue from './Queue';
 import Login from './Auth/Login';
 import ShopperProfile from './Profile/ShopperProfile';
