@@ -15,4 +15,4 @@ const HelpMessage = mongoose.model('HelpMessage', {
   }
 });
 
-module.exports = { HelpMessage }
+module.exports = { HelpMessage };
