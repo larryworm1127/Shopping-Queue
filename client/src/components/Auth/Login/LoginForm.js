@@ -5,9 +5,7 @@ import { Button, Checkbox, FormControlLabel, withStyles } from '@material-ui/cor
 // User JS imports
 import FormTextField from '../../FormTextField';
 import FormSelectField from '../../FormSelectField';
-import { loginVerify } from '../../../utils/verifyAuth';
 import { withRouter } from 'react-router-dom';
-import store from 'store';
 import { login } from '../../../actions/auth';
 import { styles } from './style';
 
@@ -37,19 +35,19 @@ class LoginForm extends React.Component {
     });
   };
 
-  handleLoginSubmit = (event) => {
-    event.preventDefault();
-    const { history } = this.props;
-    const verify = loginVerify(this.state.username, this.state.password, this.state.userType);
-    if (verify === true) {
-      store.set('loggedIn', true);
-      store.set('loginAs', this.state.userType);
-      store.set('user', this.state.username);
-      history.push('/');
-    } else {
-      this.displayError(verify);
-    }
-  };
+  // handleLoginSubmit = (event) => {
+  //   event.preventDefault();
+  //   const { history } = this.props;
+  //   const verify = loginVerify(this.state.username, this.state.password, this.state.userType);
+  //   if (verify === true) {
+  //     store.set('loggedIn', true);
+  //     store.set('loginAs', this.state.userType);
+  //     store.set('user', this.state.username);
+  //     history.push('/');
+  //   } else {
+  //     this.displayError(verify);
+  //   }
+  // };
 
   render() {
     const { classes, app } = this.props;
@@ -92,7 +90,9 @@ class LoginForm extends React.Component {
           />
 
           <Button
-            onClick={() => {login(this, app)}}
+            onClick={() => {
+              login(this, app);
+            }}
             fullWidth
             variant="contained"
             color="primary"
