@@ -1,13 +1,18 @@
+'use strict';
 
 const mongoose = require('mongoose');
-const Shopper = require('./user');
-const Owner = require('./owner');
+const validator = require('validator');
 
-const Admin = mongoose.model('Admin', {
-  username: {
+
+export const Admin = mongoose.model('Admin', {
+  email: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    validate: {
+      validator: validator.isEmail,
+      message: 'Not valid email'
+    }
   },
   firstName: {
     type: String,
@@ -25,8 +30,6 @@ const Admin = mongoose.model('Admin', {
     trim: true
   },
   // email 
-  viewableShoppers: [{type: mongoose.Schema.Types.ObjectId, ref: 'Shopper'}],
-  viewableStores: [{type: mongoose.Schema.Types.ObjectId, ref: 'Owner'}]
+  viewableShoppers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Shopper' }],
+  viewableStores: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }]
 });
-
-module.exports = { Admin };

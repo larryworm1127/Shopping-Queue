@@ -1,12 +1,10 @@
-const mongoose = require('mongoose');
-const Owner = require('./owner');
+'use strict';
 
-const User = mongoose.model('User', {
-  username: {
-    type: String,
-    required: true,
-    trim: true
-  },
+const mongoose = require('mongoose');
+const validator = require('validator');
+
+
+export const Shopper = mongoose.model('Shopper', {
   firstName: {
     type: String,
     required: true,
@@ -22,17 +20,20 @@ const User = mongoose.model('User', {
     required: true,
     trim: true
   },
-  // email: {
-  //   type: String,
-  //   required: true
-  // },
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    validate: {
+      validator: validator.isEmail,
+      message: 'Not valid email'
+    }
+  },
   remindTime: {
     type: Number,
     required: true
   },
-  favouriteStores: [{type: mongoose.Schema.Types.ObjectId, ref: 'Owner'}],
-  searchHistory: [{type: mongoose.Schema.Types.ObjectId, ref: 'Owner', searchDate: {type: String, required: true}}],
-  queueHistory: [{type: mongoose.Schema.Types.ObjectId, ref: 'Owner', searchDate: {type: String, required: true}}]
+  favouriteStores: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }],
+  searchHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }],
+  queueHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }]
 });
-
-module.exports = { User };

@@ -1,27 +1,35 @@
-const mongoose = require('mongoose');
+'use strict';
 
-const Owner = mongoose.model('Owner', {
-  storeId: {
-    type: Number,
-    required: true
-  },
+const mongoose = require('mongoose');
+const validator = require('validator');
+
+
+export const Store = mongoose.model('Store', {
   storeName: {
-    type: String,
-    required: true,
-    trime: true
-  },
-  username: {
     type: String,
     required: true,
     trim: true
   },
-  // email.
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    validate: {
+      validator: validator.isEmail,
+      message: 'Not valid email'
+    }
+  },
   address: {
     type: String,
     required: true,
     trim: true
   },
-  coordinate: {type: [Number], validate: [lengthTwo]},
+  coordinate: {
+    type: [Number],
+    validate: [(arr) => {
+      return (arr.length === 2);
+    }]
+  },
   type: {
     type: String,
     required: true,
@@ -45,8 +53,4 @@ const Owner = mongoose.model('Owner', {
     type: Number,
     required: true
   }
-})
-
-function lengthTwo(arr) { return (arr.length === 2); }
-
-module.exports = { Owner };
+});

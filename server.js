@@ -1,4 +1,6 @@
 'use strict';
+import { Shopper } from './client/src/utils/shoppers';
+
 const express = require('express');
 
 const app = express();
@@ -24,6 +26,7 @@ app.use(bodyParser.json());
 
 // express-session for managing user sessions
 const session = require('express-session');
+const { Owner } = require('./models/store');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -102,42 +105,39 @@ app.get('api/logout', (req, res) => {
 
 //Register a new user
 app.post('api/register', mongoChecker, (req, res) => {
-  //New user is a shop owner
-  if (req.body.type === 'Owner') {
-    const user = new Owner({
+
+  const user = (req.body.type === 'Owner') ?
+    // New user is a shopper
+    new Owner({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       storeName: req.body.storeName,
       location: req.body.location,
-      custMaxNum: req.body.custMaxNum,
-      custMaxTime: req.body.custMaxTime,
+      customerLimit: req.body.customerLimit,
+      customerShopTime: req.body.customerShopTime,
       openingTime: req.body.openingTime,
-      clostingTime: req.body.clostingTime,
+      closingTime: req.body.closingTime,
       storeType: req.body.storeType
-    });
-  }
-  //New user is a shopper
-  else {
-    const user = new Shopper({
+    }) :
+    // New user is a store owner
+    new Shopper({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       address: req.body.address,
       remindTime: req.body.remindTime
     });
-  }
+
   // Save the user
-  user.save().then((user) => {
-    res.send(user);
-  })
-    .catch((error) => {
-      if (isMongoError(error)) { // check for if mongo server suddenly disconnected before this request.
-        res.status(500).send('Internal server error');
-      } else {
-        res.status(400).send('Bad Request'); // bad request for registering a user.
-      }
-    });
+  user.save().then(
+    (user) => {
+      res.send(user);
+    },
+    (error) => {
+      res.status(400).send(error);
+    }
+  );
 });
 
 //Get profile for shopper, owner or admin
