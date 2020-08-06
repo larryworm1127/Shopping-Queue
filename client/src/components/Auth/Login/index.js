@@ -1,6 +1,6 @@
 // React imports
 import React from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 // Material UI imports
 import { Avatar, Container, CssBaseline, Grid, Link, Typography, withStyles } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -20,7 +20,7 @@ class Login extends React.Component {
   render() {
     const { classes, location, userType, isLoggedIn, app } = this.props;
 
-    return (isLoggedIn) ? (<Redirect to={{ pathname: '/' }}/>) : (
+    return (
       <React.Fragment>
         <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
 

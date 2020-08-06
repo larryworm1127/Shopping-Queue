@@ -32,12 +32,12 @@ class ProfileBase extends React.Component {
   };
 
   render() {
-    const { classes, user, tabs, profileSettings, location } = this.props;
+    const { classes, user, tabs, profileSettings, location, currentUser, userType, isLoggedIn } = this.props;
 
     return (
       <React.Fragment>
         <CssBaseline/>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
 
         <Drawer
           className={classes.drawer}
@@ -60,7 +60,7 @@ class ProfileBase extends React.Component {
         </Drawer>
 
         <Container className={classes.container}>
-          {profileSettings(user, this.state.setting)}
+          {profileSettings(user, this.state.setting, currentUser)}
         </Container>
       </React.Fragment>
     );

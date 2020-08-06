@@ -57,19 +57,23 @@ const RegisterRedirect = () => {
 const ShopperRoute = ({ component: Component, props, ...rest }) => {
   console.log('shopper route');
   console.log(props);
-  return (<Route
-    {...rest}
-    render={() => (store.get('loggedIn') && store.get('loginAs') === 0) ?
-      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
-    }
-  />);
+  const { isLoggedIn, userType } = props;
+
+  return (
+    <Route
+      {...rest}
+      render={() => (isLoggedIn && userType === 0) ?
+        <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
+      }
+    />
+  );
 };
 
 
 const StoreRoute = ({ component: Component, props, ...rest }) => (
   <Route
     {...rest}
-    render={() => (store.get('loggedIn') && store.get('loginAs') === 1) ?
+    render={() => (props.isLoggedIn && props.userType === 1) ?
       <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
     }
   />
@@ -79,7 +83,7 @@ const StoreRoute = ({ component: Component, props, ...rest }) => (
 const AdminRoute = ({ component: Component, props, ...rest }) => (
   <Route
     {...rest}
-    render={() => (store.get('loggedIn') && store.get('loginAs') === 2) ?
+    render={() => (props.isLoggedIn && props.userType === 2) ?
       <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
     }
   />
