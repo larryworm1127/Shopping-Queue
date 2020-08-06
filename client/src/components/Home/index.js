@@ -17,12 +17,12 @@ class Home extends React.Component {
   }
 
   render() {
-    const { location, userType, currentUser } = this.props;
-    const serviceData = getServiceData((userType !== null) ? userType : -1, currentUser);
+    const { location, userType, currentUser, isLoggedIn } = this.props;
+    const serviceData = getServiceData((isLoggedIn) ? userType : -1, currentUser);
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} userType={userType}/>
+        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
         <CssBaseline/>
         <HeadSection userType={userType} currentUser={currentUser}/>
         <Services serviceData={serviceData}/>

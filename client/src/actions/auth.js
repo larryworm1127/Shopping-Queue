@@ -15,7 +15,8 @@ export const readCookie = (app) => {
       if (json && json.currentUser) {
         app.setState({
           currentUser: json.currentUser,
-          userType: json.userType
+          userType: json.userType,
+          isLoggedIn: true
         });
       }
     })
@@ -47,7 +48,8 @@ export const login = (loginComp, app) => {
       if (json.currentUser !== undefined) {
         app.setState({
           currentUser: json.currentUser,
-          userType: json.userType
+          userType: json.userType,
+          isLoggedIn: true,
         });
       }
     })
@@ -65,6 +67,8 @@ export const logout = (app) => {
     .then(() => {
       app.setState({
         currentUser: null,
+        userType: null,
+        isLoggedIn: false,
         message: { type: '', body: '' }
       });
     })

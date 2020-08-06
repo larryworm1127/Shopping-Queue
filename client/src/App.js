@@ -36,7 +36,8 @@ class App extends React.Component {
 
   state = {
     currentUser: null,
-    userType: null
+    userType: null,
+    isLoggedIn: false
   };
 
   render() {

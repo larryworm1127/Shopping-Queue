@@ -49,7 +49,7 @@ class NavBar extends React.Component {
   };
 
   render() {
-    const { classes, position, userType } = this.props;
+    const { classes, position, userType, isLoggedIn } = this.props;
 
     return (
       <AppBar
@@ -76,7 +76,7 @@ class NavBar extends React.Component {
                 textColor="primary"
                 onChange={this.handleTabChange}
               >
-                {Menu(userType).map((item, index) => (
+                {Menu(userType, isLoggedIn).map((item, index) => (
                   <Tab
                     key={index}
                     classes={{ root: classes.tabItem }}
@@ -95,7 +95,8 @@ class NavBar extends React.Component {
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  userTYpe: PropTypes.number
+  userType: PropTypes.number,
+  isLoggedIn: PropTypes.bool
 };
 
 export default withStyles(styles)(NavBar);

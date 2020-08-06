@@ -8,7 +8,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import NavBar from '../../Nav/navbar';
 import { styles } from './style';
 import LoginForm from './LoginForm';
-import store from 'store';
 
 
 class Login extends React.Component {
@@ -19,11 +18,11 @@ class Login extends React.Component {
   }
 
   render() {
-    const { classes, location, currentUser, userType, app } = this.props;
+    const { classes, location, userType, isLoggedIn, app } = this.props;
 
-    return (currentUser !== null) ? (<Redirect to={{ pathname: '/' }}/>) : (
+    return (isLoggedIn) ? (<Redirect to={{ pathname: '/' }}/>) : (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} userType={userType}/>
+        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
 
         <Container component="main" maxWidth="xs">
           <CssBaseline/>

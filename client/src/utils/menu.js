@@ -1,7 +1,7 @@
 import store from 'store';
 
-export default function Menu(userType) {
-  if (userType !== null) {
+export default function Menu(userType, isLoggedIn) {
+  if (isLoggedIn) {
     switch (userType) {
       case 0:
         return [
