@@ -44,10 +44,9 @@ app.post('/api/login', (req, res) => {
       req.session.userType = user.userType;
       req.session.username = user.username;
       res.send({ currentUser: user.username, userType: user.userType });
-
     })
-    .catch(() => {
-      res.status(400).send();
+    .catch(errorMsg => {
+      res.status(400).send({ message: errorMsg });
     });
 });
 
