@@ -77,25 +77,6 @@ app.get('/api/check-session', (req, res) => {
 //Register a new user
 app.post('/api/register', (req, res) => {
 
-  // const user = (req.body.type === 'Owner') ?
-  //   // New user is a shopper
-  //   new Store({
-  //     email: req.body.email,
-  //     storeName: req.body.storeName,
-  //     location: req.body.location,
-  //     customerLimit: req.body.customerLimit,
-  //     customerShopTime: req.body.customerShopTime,
-  //     openingTime: req.body.openingTime,
-  //     closingTime: req.body.closingTime,
-  //     storeType: req.body.storeType
-  //   }) :
-  //   // New user is a store owner
-  //   new Shopper({
-  //     email: req.body.email,
-  //     address: req.body.address,
-  //     remindTime: req.body.remindTime
-  //   });
-
   const user = new User({
     username: req.body.username,
     password: req.body.password,
@@ -122,7 +103,10 @@ app.post('/api/shopper', (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       address: req.body.address,
-      remindTime: req.body.remindTime
+      remindTime: req.body.remindTime,
+      favouriteStores: [],
+      searchHistory: [],
+      queueHistory: []
     });
 
   // Save the user
@@ -171,8 +155,10 @@ app.post('/api/admin', (req, res) => {
     new Admin({
       email: req.body.email,
       firstName: req.body.firstName,
-      lastName: req.body.lasatName,
-      address: req.body.address
+      lastName: req.body.lastName,
+      address: req.body.address,
+      viewableShoppers: [],
+      viewableStores: []
     });
 
   // Save the user
@@ -306,7 +292,7 @@ app.patch('api/store/profile', (req, res) => {
 //Get profile for admin
 app.get('api/admin/profile', (req, res) => {
 
-  const id = req.body.id;
+  const id = req.body.id
 
   if (!ObjectID.isValid(id)) {
     res.status(404).send(); // if invalid id, definitely can't find resource, 404.

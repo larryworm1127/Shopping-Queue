@@ -39,6 +39,6 @@ const Shopper = mongoose.model('Shopper', {
 });
 
 
-module.export = {
+module.exports = {
   Shopper
 }

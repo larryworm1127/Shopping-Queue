@@ -56,6 +56,6 @@ const Store = mongoose.model('Store', {
 });
 
 
-module.export = {
+module.exports = {
   Store
 }
