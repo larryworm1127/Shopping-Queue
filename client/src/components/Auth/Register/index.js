@@ -126,7 +126,7 @@ class Register extends React.Component {
             {...this.state}
           />;
       case 2:
-        return <ReviewRegister {...this.state} handleRegister={this.handleRegister}/>;
+        return <ReviewRegister registerComp={this}/>;
       default:
         return Error('Unknown step');
     }
@@ -149,12 +149,12 @@ class Register extends React.Component {
   };
 
   render() {
-    const { classes, location } = this.props;
+    const { classes, location, userType, isLoggedIn } = this.props;
 
     return (
       <React.Fragment>
         <CssBaseline/>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
 
         <div className={classes.layout}>
           <Paper className={classes.paper}>

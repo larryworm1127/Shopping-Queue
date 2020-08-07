@@ -9,12 +9,12 @@ const { mongoose } = require('./db/mongoose');
 mongoose.set('useFindAndModify', false);
 
 // Models import
-const { User } = require('./models/user');
+const { User, UserTypes } = require('./models/user');
 const { Shopper } = require('./models/shopper');
 const { Store } = require('./models/store');
-const { Admin } = require('./models/admin')
-const { Queue } = require('./models/queue')
-const { HelpMessage } = require('./models/helpMessage')
+const { Admin } = require('./models/admin');
+const { Queue } = require('./models/queue');
+const { HelpMessage } = require('./models/helpMessage');
 
 // Create main express app
 const app = express();
@@ -74,76 +74,21 @@ app.get('/api/check-session', (req, res) => {
 });
 
 
-//Register a new user
+// Register a new user
 app.post('/api/register', (req, res) => {
 
-  // const user = (req.body.type === 'Owner') ?
-  //   // New user is a shopper
-  //   new Store({
-  //     email: req.body.email,
-  //     storeName: req.body.storeName,
-  //     location: req.body.location,
-  //     customerLimit: req.body.customerLimit,
-  //     customerShopTime: req.body.customerShopTime,
-  //     openingTime: req.body.openingTime,
-  //     closingTime: req.body.closingTime,
-  //     storeType: req.body.storeType
-  //   }) :
-  //   // New user is a store owner
-  //   new Shopper({
-  //     email: req.body.email,
-  //     address: req.body.address,
-  //     remindTime: req.body.remindTime
-  //   });
-
+  console.log(req.body);
   const user = new User({
     username: req.body.username,
     password: req.body.password,
-    userType: req.body.userType
+    userType: req.body.registerAs
   });
 
-  // Save the user
-  user.save().then(
-    (user) => {
-      res.send(user);
-    },
-    (error) => {
-      res.status(400).send(error);
-    }
-  );
-});
-
-//Create a new shopper
-app.post('/api/shopper', (req, res) => {
-
-  const user =
-    new Shopper({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      address: req.body.address,
-      remindTime: req.body.remindTime
-    });
-
-  // Save the user
-  user.save().then(
-    (user) => {
-      res.send(user);
-    },
-    (error) => {
-      res.status(400).send(error);
-    }
-  );
-});
-
-//Create a new store
-app.post('/api/store', (req, res) => {
-
-  const user =
-    new Shopper({
+  const profile = (req.body.type === UserTypes.Store) ?
+    // New user is a shopper
+    new Store({
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password,
       storeName: req.body.storeName,
       location: req.body.location,
       customerLimit: req.body.customerLimit,
@@ -151,43 +96,39 @@ app.post('/api/store', (req, res) => {
       openingTime: req.body.openingTime,
       closingTime: req.body.closingTime,
       storeType: req.body.storeType
-    });
-
-  // Save the user
-  user.save().then(
-    (user) => {
-      res.send(user);
-    },
-    (error) => {
-      res.status(400).send(error);
-    }
-  );
-});
-
-//Create a new admin
-app.post('/api/admin', (req, res) => {
-
-  const user =
-    new Admin({
-      email: req.body.email,
+    }) :
+    // New user is a store owner
+    new Shopper({
+      username: req.body.username,
       firstName: req.body.firstName,
-      lastName: req.body.lasatName,
-      address: req.body.address
+      lastName: req.body.lastName,
+      address: req.body.address,
+      email: req.body.email,
+      remindTime: req.body.remindTime,
+      favouriteStores: [],
+      searchHistory: [],
+      queueHistory: []
     });
 
-  // Save the user
-  user.save().then(
-    (user) => {
-      res.send(user);
-    },
-    (error) => {
-      res.status(400).send(error);
-    }
-  );
+  // Save the user and profile
+  user.save()
+    .then((user) => {
+      profile.save().then((profile) => {
+        res.send({ profile: profile, user: user });
+      }).catch((error) => {
+        console.log(error);
+        res.status(400).send({ message: error });
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(400).send({ message: error });
+    });
 });
+
 
 //Get profile for shopper
-app.get('api/profile', (req, res) => {
+app.get('/api/profile', (req, res) => {
 
   const id = req.body.id;
 
@@ -209,41 +150,43 @@ app.get('api/profile', (req, res) => {
     });
 });
 
-//Update profile for shopper
-app.patch('api/profile', (req, res) => {
 
-    const id = req.body.id
+// Update profile for shopper
+app.patch('/api/profile', (req, res) => {
 
-    if (!ObjectID.isValid(id)) {
+  const id = req.body.id;
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  // get the updated store profile.
+  const user = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    address: req.body.address,
+    remindTime: req.body.remindTime
+  };
+
+  // Update the admin by its id.
+  Shopper.findByIdAndUpdate(id, { $set: body }, { new: true })
+    .then(shopper => {
+      if (!shopper) {
         res.status(404).send();
-        return;
-    }
-
-    // get the updated store profile.
-    const user = {
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          email: req.body.email,
-          address: req.body.address,
-          remindTime: req.body.remindTime
-    };
-
-    // Update the admin by its id.
-    Shopper.findByIdAndUpdate(id, { $set: body }, { new: true })
-        .then(shopper => {
-            if (!shopper) {
-                res.status(404).send();
-            } else {
-                res.send(shopper);
-            }
-        })
-        .catch(error => {
-            res.status(400).send(); // bad request for changing the student.
-        });
+      } else {
+        res.send(shopper);
+      }
+    })
+    .catch(error => {
+      res.status(400).send(); // bad request for changing the student.
+    });
 });
 
+
 //Get profile for store owner
-app.get('api/store/profile', (req, res) => {
+app.get('/api/store/profile', (req, res) => {
 
   const id = req.body.id;
 
@@ -265,46 +208,48 @@ app.get('api/store/profile', (req, res) => {
     });
 });
 
+
 //Update store owner profile
-app.patch('api/store/profile', (req, res) => {
+app.patch('/api/store/profile', (req, res) => {
 
-    const id = req.body.id
+  const id = req.body.id;
 
-    if (!ObjectID.isValid(id)) {
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  // get the updated store profile.
+  const body = {
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    storeName: req.body.storeName,
+    location: req.body.location,
+    customerLimit: req.body.customerLimit,
+    customerShopTime: req.body.customerShopTime,
+    openingTime: req.body.openingTime,
+    closingTime: req.body.closingTime,
+    storeType: req.body.storeType
+  };
+
+  // Update the store by its id.
+  Store.findByIdAndUpdate(id, { $set: body }, { new: true })
+    .then(store => {
+      if (!store) {
         res.status(404).send();
-        return;
-    }
-
-    // get the updated store profile.
-    const body = {
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        storeName: req.body.storeName,
-        location: req.body.location,
-        customerLimit: req.body.customerLimit,
-        customerShopTime: req.body.customerShopTime,
-        openingTime: req.body.openingTime,
-        closingTime: req.body.closingTime,
-        storeType: req.body.storeType
-    };
-
-    // Update the store by its id.
-    Store.findByIdAndUpdate(id, { $set: body }, { new: true })
-        .then(store => {
-            if (!store) {
-                res.status(404).send();
-            } else {
-                res.send(store);
-            }
-        })
-        .catch(error => {
-            res.status(400).send(); // bad request for changing the student.
-        });
+      } else {
+        res.send(store);
+      }
+    })
+    .catch(error => {
+      res.status(400).send(); // bad request for changing the student.
+    });
 });
 
+
 //Get profile for admin
-app.get('api/admin/profile', (req, res) => {
+app.get('/api/admin/profile', (req, res) => {
 
   const id = req.body.id;
 
@@ -326,40 +271,42 @@ app.get('api/admin/profile', (req, res) => {
     });
 });
 
+
 //Update admin profile
-app.patch('api/admin/profile', (req, res) => {
+app.patch('/api/admin/profile', (req, res) => {
 
-    const id = req.body.id
+  const id = req.body.id;
 
-    if (!ObjectID.isValid(id)) {
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  // get the updated store profile.
+  const body = {
+    email: req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lasatName,
+    address: req.body.address
+  };
+
+  // Update the admin by its id.
+  Admin.findByIdAndUpdate(id, { $set: body }, { new: true })
+    .then(admin => {
+      if (!admin) {
         res.status(404).send();
-        return;
-    }
-
-    // get the updated store profile.
-    const body = {
-        email: req.body.email,
-        firstName: req.body.firstName,
-        lastName: req.body.lasatName,
-        address: req.body.address
-    };
-
-    // Update the admin by its id.
-    Admin.findByIdAndUpdate(id, { $set: body }, { new: true })
-        .then(admin => {
-            if (!admin) {
-                res.status(404).send();
-            } else {
-                res.send(admin);
-            }
-        })
-        .catch(error => {
-            res.status(400).send(); // bad request for changing the student.
-        });
+      } else {
+        res.send(admin);
+      }
+    })
+    .catch(error => {
+      res.status(400).send(); // bad request for changing the student.
+    });
 });
 
+
 // Get queues for shopper
-app.get('api/queues', (req, res) => {
+app.get('/api/queues', (req, res) => {
 
   const id = req.body.id;
 
@@ -382,8 +329,9 @@ app.get('api/queues', (req, res) => {
 
 });
 
+
 // Get queues for store owner
-app.get('api/store/queues', (req, res) => {
+app.get('/api/store/queues', (req, res) => {
 
   const id = req.body.id;
 
@@ -406,8 +354,9 @@ app.get('api/store/queues', (req, res) => {
 
 });
 
+
 // Get queues for admin
-app.get('api/admin/queues', (req, res) => {
+app.get('/api/admin/queues', (req, res) => {
 
   const id = req.body.id;
 
@@ -430,8 +379,9 @@ app.get('api/admin/queues', (req, res) => {
 
 });
 
+
 // Get all stores for map
-app.get('api/map', (req, res) => {
+app.get('/api/map', (req, res) => {
 
   Store.find()
     .then(store => {
@@ -442,8 +392,9 @@ app.get('api/map', (req, res) => {
     });
 });
 
+
 // Get all messages
-app.get('api/admin/messages', (req, res) => {
+app.get('/api/admin/messages', (req, res) => {
 
   HelpMessage.find()
     .then(message => {
@@ -474,7 +425,7 @@ app.get('*', (req, res) => {
     '/store/shoppers',
     '/login',
     '/register',
-    '/logout',         
+    '/logout',
     '/store/:id'
   ];
   if (!goodPageRoutes.includes(req.url)) {

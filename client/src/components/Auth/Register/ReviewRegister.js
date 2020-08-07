@@ -1,11 +1,12 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import { register } from '../../../actions/auth';
 
 
 class ReviewRegister extends React.Component {
 
   render() {
-    const { handleRegister } = this.props;
+    const { registerComp } = this.props;
 
     return (
       <React.Fragment>
@@ -13,7 +14,7 @@ class ReviewRegister extends React.Component {
         <Button
           variant="contained"
           color="primary"
-          onClick={handleRegister}
+          onClick={() => register(registerComp)}
         >
           Register
         </Button>
