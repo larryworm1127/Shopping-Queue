@@ -1,5 +1,3 @@
-import store from 'store';
-
 export default function Menu(userType, isLoggedIn) {
   if (isLoggedIn) {
     switch (userType) {

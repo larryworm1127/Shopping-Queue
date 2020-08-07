@@ -5,7 +5,7 @@ import Queue from './Queue';
 import Login from './Auth/Login';
 import ShopperProfile from './Profile/ShopperProfile';
 import AdminProfile from './Profile/AdminProfile';
-import OwnerPage from './Profile/OwnerProfile';
+import StoreProfile from './Profile/StoreProfile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
 import StoreQueues from './Store/StoreQueues';
@@ -23,18 +23,18 @@ export default props => {
     <BrowserRouter>
       <Switch>
         <Route exact path='/' render={() => <Home {...props}/>}/>
-        <Route exact path='/store/:id' component={StoreDetail}/>
         <ShopperRoute exact path='/map' props={props} component={StoreMap}/>
         <ShopperRoute exact path='/queue' props={props} component={Queue}/>
         <ShopperRoute exact path='/profile' props={props} component={ShopperProfile}/>
         <AdminRoute exact path='/admin/profile' props={props} component={AdminProfile}/>
         <AdminRoute exact path='/admin/queues' props={props} component={AllQueues}/>
         <AdminRoute exact path='/admin/messages' props={props} component={UserSupport}/>
-        <StoreRoute exact path='/store/profile' props={props} component={OwnerPage}/>
+        <StoreRoute exact path='/store/profile' props={props} component={StoreProfile}/>
         <StoreRoute exact path='/store/queues' props={props} component={StoreQueues}/>
         <StoreRoute exact path='/store/shoppers' props={props} component={StoreShoppers}/>
         <AuthRoute exact path='/login' props={props} component={Login}/>
         <AuthRoute exact path='/register' props={props} component={Register}/>
+        <Route exact path='/store/:id' component={StoreDetail}/>
         <Route exact path='/logout' component={() => SignOut(props)}/>
         <Route path='*' component={NoMatch}/>
       </Switch>

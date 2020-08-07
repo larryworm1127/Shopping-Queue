@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import ProfileEditButtons from '../ProfileEditButtons';
 
 
-class ShopperProfile extends React.Component {
+class UserProfile extends React.Component {
 
   constructor(props) {
     super(props);
@@ -189,4 +189,4 @@ class ShopperProfile extends React.Component {
   }
 }
 
-export default ShopperProfile;
+export default UserProfile;

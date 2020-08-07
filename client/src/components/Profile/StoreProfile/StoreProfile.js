@@ -2,18 +2,21 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
+import { StoreTypes } from '../../../utils/stores';
+import FormSelectField from '../../FormSelectField';
 
-class StoreSettings extends React.Component {
+
+class UserProfile extends React.Component {
 
   constructor(props) {
     super(props);
     const { store } = this.props;
     this.state = {
       edit: false,
-      openTime: store.openingTime,
-      closeTime: store.closingTime,
-      customerLimit: store.customerLimit,
-      customerShopTime: store.customerShopTime
+      storeName: store.name,
+      email: store.email,
+      address: store.address,
+      storeType: store.type
     };
   }
 
@@ -32,11 +35,11 @@ class StoreSettings extends React.Component {
 
     const { store } = this.props;
     this.setEdit(false);
-    store.updateStoreSettings(
-      this.state.customerLimit,
-      this.state.customerShopTime,
-      this.state.openTime,
-      this.state.closeTime,
+    store.updateUserProfile(
+      this.state.storeName,
+      this.state.email,
+      this.state.address,
+      this.state.storeType
     );
   };
 
@@ -48,51 +51,53 @@ class StoreSettings extends React.Component {
         <Grid container spacing={3}>
           <DataDisplay
             gridSize={6}
-            title="Store Hours Opening"
-            content={store.openingTime}
+            title="Store Name"
+            content={store.name}
             edit={this.state.edit}
             setEdit={this.setEdit}
-            name="openTime"
-            label="Opening Time"
-            type="time"
-            value={this.state.openTime}
+            name="storeName"
+            label="Store Name"
+            value={this.state.storeName}
             handleFormField={this.handleFormField}
           />
           <DataDisplay
             gridSize={6}
-            title="Store Hours Closing"
-            content={store.closingTime}
+            title="Store Email"
+            content={store.email}
             edit={this.state.edit}
             setEdit={this.setEdit}
-            name="closeTime"
-            label="Closing Time"
-            type="time"
-            value={this.state.closeTime}
+            name="email"
+            label="Email"
+            value={this.state.email}
             handleFormField={this.handleFormField}
           />
           <DataDisplay
             gridSize={12}
-            title="Customer Limit"
-            content={store.customerLimit}
+            title="Store Location"
+            content={store.address}
             edit={this.state.edit}
             setEdit={this.setEdit}
-            name="customerLimit"
-            label="Customer Limit"
-            type="number"
-            value={this.state.customerLimit}
+            name="address"
+            label="Address"
+            value={this.state.address}
             handleFormField={this.handleFormField}
           />
           <DataDisplay
             gridSize={12}
-            title="Customer Shopping Time Limit (min)"
-            content={store.customerShopTime}
+            title="Store Type"
+            content={store.type}
             edit={this.state.edit}
             setEdit={this.setEdit}
-            name="customerShopTime"
-            label="Customer Shopping Time Limit (min)"
-            type="number"
-            value={this.state.customerShopTime}
-            handleFormField={this.handleFormField}
+            editComponent={
+              <FormSelectField
+                name="storeType"
+                label="Store Type"
+                handleFormField={this.handleFormField}
+                value={this.state.storeType}
+                useIndex={false}
+                menuItems={Object.keys(StoreTypes)}
+              />
+            }
           />
         </Grid>
         <br/>
@@ -107,4 +112,4 @@ class StoreSettings extends React.Component {
   }
 }
 
-export default StoreSettings;
+export default UserProfile;

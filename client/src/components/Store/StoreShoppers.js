@@ -6,16 +6,17 @@ import { Typography, withStyles } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { withRouter } from 'react-router-dom';
 
 
 class StoreShoppers extends React.Component {
 
   render() {
-    const { classes, location } = this.props;
+    const { classes, location, userType, isLoggedIn } = this.props;
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
         <CssBaseline/>
 
         <Typography variant='h3' align='center' className={classes.titleText}>
@@ -110,4 +111,4 @@ class StoreShoppers extends React.Component {
   }
 }
 
-export default withStyles(styles)(StoreShoppers);
+export default withStyles(styles)(withRouter(StoreShoppers));

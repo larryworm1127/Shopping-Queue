@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
 import { getStoreByUsername } from '../../utils/stores';
-import store from 'store';
 import { styles } from './style';
 import BookingList from '../Queue/QueueList';
 import Container from '@material-ui/core/Container';
@@ -12,15 +11,15 @@ class StoreQueuesTable extends React.Component {
   constructor(props) {
     super(props);
 
-    const { storeName } = props;
+    const { storeName, currentUser } = props;
     this.state = {
-      queues: [...getStoreByUsername((storeName === undefined) ? store.get('user') : storeName).currentQueue]
+      queues: [...getStoreByUsername((storeName === undefined) ? currentUser : storeName).currentQueue]
     };
   }
 
   removeQueue = (index) => {
-    const { storeName } = this.props;
-    const storeObj = getStoreByUsername((storeName === undefined) ? store.get('user') : storeName);
+    const { storeName, currentUser } = this.props;
+    const storeObj = getStoreByUsername((storeName === undefined) ? currentUser : storeName);
     storeObj.currentQueue.splice(index, 1);
 
     this.setState({

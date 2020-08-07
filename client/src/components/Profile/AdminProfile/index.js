@@ -3,8 +3,8 @@ import AdminPage from './AdminProfile.js';
 import ShoppersProfile from './ShoppersProfile.js';
 import OwnersProfile from './OwnersProfile.js';
 import { getAdmin } from '../../../utils/admins';
-import store from 'store';
 import ProfileBase from '../ProfileBase';
+import { withRouter } from 'react-router-dom';
 
 
 const tabs = [
@@ -15,8 +15,8 @@ const tabs = [
 
 class AdminProfile extends React.Component {
 
-  profileSettings = (adminProp, setting) => {
-    const admin = (adminProp === undefined) ? getAdmin(store.get('user')) : adminProp;
+  profileSettings = (adminProp, setting, currentUser) => {
+    const admin = (adminProp === undefined) ? getAdmin(currentUser) : adminProp;
 
     switch (setting) {
       case 0:
@@ -31,17 +31,17 @@ class AdminProfile extends React.Component {
   };
 
   render() {
-    const { admin, location } = this.props;
+    const { admin } = this.props;
 
     return (
       <ProfileBase
+        {...this.props}
         user={admin}
         tabs={tabs}
         profileSettings={this.profileSettings}
-        location={location}
       />
     );
   }
 }
 
-export default AdminProfile;
+export default withRouter(AdminProfile);

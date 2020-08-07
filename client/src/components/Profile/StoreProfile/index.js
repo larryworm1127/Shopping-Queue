@@ -1,9 +1,9 @@
 import React from 'react';
 import { getStoreByUsername } from '../../../utils/stores';
-import StoreProfile from './StoreProfile';
+import UserProfile from './StoreProfile';
 import StoreSettings from './StoreSettings';
-import store from 'store';
 import ProfileBase from '../ProfileBase';
+import { withRouter } from 'react-router-dom';
 
 
 const tabs = [
@@ -11,14 +11,20 @@ const tabs = [
   'Store Settings'
 ];
 
-class OwnerPage extends React.Component {
 
-  profileSettings = (storeProp, setting) => {
-    const currentStore = (storeProp === undefined) ? getStoreByUsername(store.get('user')) : storeProp;
+class StoreProfile extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.props.history.push('/store/profile');
+  }
+
+  profileSettings = (storeProp, setting, currentUser) => {
+    const currentStore = (storeProp === undefined) ? getStoreByUsername(currentUser) : storeProp;
 
     switch (setting) {
       case 0:
-        return <StoreProfile store={currentStore}/>;
+        return <UserProfile store={currentStore}/>;
       case 1:
         return <StoreSettings store={currentStore}/>;
       default:
@@ -27,17 +33,17 @@ class OwnerPage extends React.Component {
   };
 
   render() {
-    const { currentStore, location } = this.props;
+    const { currentStore } = this.props;
 
     return (
       <ProfileBase
+        {...this.props}
         user={currentStore}
         tabs={tabs}
         profileSettings={this.profileSettings}
-        location={location}
       />
     );
   }
 }
 
-export default OwnerPage;
+export default withRouter(StoreProfile);

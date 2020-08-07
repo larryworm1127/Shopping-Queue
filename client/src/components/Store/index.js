@@ -10,11 +10,11 @@ import { styles } from './style';
 import Grid from '@material-ui/core/Grid';
 import StoreDetailList from './StoreDetailList';
 import StoreQueueForm from './StoreQueueForm';
-import store from 'store';
 import { Queue } from '../../utils/queue';
 import { getShopper } from '../../utils/shoppers';
 import BackArrow from '@material-ui/icons/ArrowBackIos';
 import Button from '@material-ui/core/Button';
+
 
 class StoreDetail extends React.Component {
 
@@ -33,58 +33,51 @@ class StoreDetail extends React.Component {
   handleFormSubmit = (event, selectedStore) => {
     event.preventDefault();
 
-    const { history } = this.props;
+    const { history, currentUser } = this.props;
     const newQueue = new Queue(
-      store.get('user'),
+      currentUser,
       selectedStore,
       this.state.date,
-      this.state.shoppingTime,
-      this.state.numCustomer,
+      this.state.est,
+      this.state.numShoppers,
       new Date()
     );
     selectedStore.addNewQueue(newQueue);
-    getShopper(store.get('user')).queueUp(newQueue);
-    console.log(getShopper(store.get('user')));
-
+    getShopper(currentUser).queueUp(newQueue);
     history.push('/queue');
   };
 
 
   render() {
-    const {
-      match,
-      classes,
-      date,
-      shoppingTime,
-      numCustomer,
-      handleFormField
-    } = this.props;
+    const { match, classes, date, shoppingTime, numCustomer, handleFormField, history } = this.props;
     const store = getStore(match.params.id);
 
     return (
       <React.Fragment>
-        <NavBar />
-        <CssBaseline />
-      
+        <NavBar/>
+        <CssBaseline/>
+
         <div className={classes.layout}>
           <Paper className={classes.paper}>
-          <Button 
-          size="small"
-          className={classes.button}
-          color="primary"
-           onClick={() => this.props.history.goBack()}><BackArrow/>Back</Button>
+            <Button
+              size="small"
+              className={classes.button}
+              color="primary"
+              onClick={() => history.goBack()}
+            >
+              <BackArrow/>Back
+            </Button>
 
-          
             <Typography component="h1" variant="h4" align="center">
               {store.name}
             </Typography>
-            <br />
+            <br/>
             <Grid container>
               <Grid item xs={7}>
                 <Typography variant="h6" gutterBottom>
                   Store details
                 </Typography>
-                <StoreDetailList store={store} />
+                <StoreDetailList store={store}/>
               </Grid>
               <Grid item xs={5}>
                 <Typography variant="h6" gutterBottom>
@@ -95,8 +88,8 @@ class StoreDetail extends React.Component {
                   classes={classes}
                   store={store}
                   date={(date === undefined) ? this.state.date : date}
-                  shoppingTime={(shoppingTime === undefined) ? this.state.shoppingTime : shoppingTime}
-                  numCustomer={(numCustomer === undefined) ? this.state.numCustomer : numCustomer}
+                  shoppingTime={(shoppingTime === undefined) ? this.state.est : shoppingTime}
+                  numCustomer={(numCustomer === undefined) ? this.state.numShoppers : numCustomer}
                   handleFormSubmit={this.handleFormSubmit}
                   handleFormField={(handleFormField === undefined) ? this.handleFormField : handleFormField}
                 />
