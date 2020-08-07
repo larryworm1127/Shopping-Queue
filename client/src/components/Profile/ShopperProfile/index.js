@@ -3,8 +3,8 @@ import SearchHistory from './SearchHistory.js';
 import QueueHistory from './QueueHistory.js';
 import UserProfile from './ShopperProfile.js';
 import { getShopper } from '../../../utils/shoppers';
-import store from 'store';
 import ProfileBase from '../ProfileBase';
+import { withRouter } from 'react-router-dom';
 
 
 const tabs = [
@@ -15,8 +15,13 @@ const tabs = [
 
 class ShopperProfile extends React.Component {
 
-  profileSettings = (propShopper, setting) => {
-    const shopper = (propShopper === undefined) ? getShopper(store.get('user')) : propShopper;
+  constructor(props) {
+    super(props);
+    this.props.history.push('/profile');
+  }
+
+  profileSettings = (propShopper, setting, currentUser) => {
+    const shopper = (propShopper === undefined) ? getShopper(currentUser) : propShopper;
 
     switch (setting) {
       case 0:
@@ -31,17 +36,14 @@ class ShopperProfile extends React.Component {
   };
 
   render() {
-    const { location, shopper } = this.props;
-
     return (
       <ProfileBase
-        user={shopper}
+        {...this.props}
         tabs={tabs}
         profileSettings={this.profileSettings}
-        location={location}
       />
     );
   }
 }
 
-export default ShopperProfile;
+export default withRouter(ShopperProfile);

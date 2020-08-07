@@ -16,16 +16,17 @@ import TableCell from '@material-ui/core/TableCell';
 import { stores } from '../../utils/stores';
 import QueueTableRow from './QueueTableRow';
 import { uid } from 'react-uid';
+import { withRouter } from 'react-router-dom';
 
 
 class AllQueues extends React.Component {
 
   render() {
-    const { location, classes } = this.props;
+    const { location, classes, isLoggedIn, userType } = this.props;
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} isLoggedIn={isLoggedIn} userType={userType}/>
         <CssBaseline/>
 
         <Typography variant='h3' align='center' className={classes.titleText}>
@@ -56,4 +57,4 @@ class AllQueues extends React.Component {
   }
 }
 
-export default withStyles(styles)(AllQueues);
+export default withStyles(styles)(withRouter(AllQueues));

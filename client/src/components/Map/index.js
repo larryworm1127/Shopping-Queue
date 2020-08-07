@@ -30,34 +30,33 @@ class StoreMap extends React.Component {
   };
 
   renderMarkers = () => {
-    if (this.state.currStore !== null) {
+    const { currStore, showMarker } = this.state;
+
+    if (currStore !== null) {
       return (
         <Marker
           position={{
-            lat: this.state.currStore.coordinate[0],
-            lng: this.state.currStore.coordinate[1]
+            lat: currStore.coordinate[0],
+            lng: currStore.coordinate[1]
           }}
-          visible={this.state.showMarker}
+          visible={showMarker}
         />
       );
     }
   };
 
   render() {
-    const {
-      classes,
-      location
-    } = this.props;
+    const { classes, location, google, isLoggedIn, userType } = this.props;
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} position={'fixed'}/>
+        <NavBar currentPath={location.pathname} position='fixed' userType={userType} isLoggedIn={isLoggedIn}/>
         <CssBaseline/>
 
         <Grid container>
           <Grid item xs={9} className={classes.mapStyles}>
             <Map
-              google={this.props.google}
+              google={google}
               zoom={16}
               initialCenter={{ lat: 43.662410, lng: -79.395424 }}
             >
@@ -97,7 +96,6 @@ class StoreMap extends React.Component {
                   )}
                   store={store}
                   index={index}
-                  key={index}
                 />
               </div>
             ))}

@@ -9,6 +9,7 @@ import indigo from '@material-ui/core/colors/indigo';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { readCookie } from './actions/auth';
 
+
 const theme = createMuiTheme({
   palette: {
     secondary: {
@@ -27,6 +28,7 @@ const theme = createMuiTheme({
   }
 });
 
+
 class App extends React.Component {
 
   constructor(props) {
@@ -36,16 +38,17 @@ class App extends React.Component {
 
   state = {
     currentUser: null,
-    loginAs: null
+    userType: null,
+    isLoggedIn: false,
+    isReadingCookie: true
   };
 
   render() {
-    const { currentUser, loginAs } = this.state;
 
     return (
       <div>
         <ThemeProvider theme={theme}>
-          <Routes currentUser={currentUser} loginAs={loginAs}/>
+          <Routes {...this.state} app={this}/>
         </ThemeProvider>
       </div>
     );

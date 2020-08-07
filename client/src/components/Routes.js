@@ -5,99 +5,103 @@ import Queue from './Queue';
 import Login from './Auth/Login';
 import ShopperProfile from './Profile/ShopperProfile';
 import AdminProfile from './Profile/AdminProfile';
-import OwnerPage from './Profile/OwnerProfile';
+import StoreProfile from './Profile/StoreProfile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
-import store from 'store';
-import Register from './Auth/Register';
 import StoreQueues from './Store/StoreQueues';
 import StoreShoppers from './Store/StoreShoppers';
 import AllQueues from './Admin/AllQueues';
 import UserSupport from './Admin/UserSupport';
+import Loading from './Loading';
+import Register from './Auth/Register';
+import { logout } from '../actions/auth';
 
 
-export default (props) => {
+export default props => {
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/' component={Home}/>
-        <ShopperRoute exact path='/map' component={StoreMap}/>
-        <AuthenRoute exact path='/queue' component={Queue}/>
-        <ShopperRoute exact path='/profile' component={ShopperProfile}/>
-        <StoreRoute exact path='/store/profile' component={OwnerPage}/>
-        <AdminRoute exact path='/admin/profile' component={AdminProfile}/>
-        <AdminRoute exact path='/admin/queues' component={AllQueues}/>
-        <AdminRoute exact path='/admin/messages' component={UserSupport}/>
-        <StoreRoute exact path='/store/queues' component={StoreQueues}/>
-        <StoreRoute exact path='/store/shoppers' component={StoreShoppers}/>
-        <Route exact path='/login' component={Login}/>
-        <Route exact path='/register' component={RegisterRedirect}/>
-        <Route exact path='/logout' component={SignOutRedirect}/>
+        <Route exact path='/' render={() => <Home {...props}/>}/>
+        <ShopperRoute exact path='/map' props={props} component={StoreMap}/>
+        <ShopperRoute exact path='/queue' props={props} component={Queue}/>
+        <ShopperRoute exact path='/profile' props={props} component={ShopperProfile}/>
+        <AdminRoute exact path='/admin/profile' props={props} component={AdminProfile}/>
+        <AdminRoute exact path='/admin/queues' props={props} component={AllQueues}/>
+        <AdminRoute exact path='/admin/messages' props={props} component={UserSupport}/>
+        <StoreRoute exact path='/store/profile' props={props} component={StoreProfile}/>
+        <StoreRoute exact path='/store/queues' props={props} component={StoreQueues}/>
+        <StoreRoute exact path='/store/shoppers' props={props} component={StoreShoppers}/>
+        <AuthRoute exact path='/login' props={props} component={Login}/>
+        <AuthRoute exact path='/register' props={props} component={Register}/>
         <Route exact path='/store/:id' component={StoreDetail}/>
+        <Route exact path='/logout' component={() => SignOut(props)}/>
         <Route path='*' component={NoMatch}/>
       </Switch>
     </BrowserRouter>
   );
 }
 
-const SignOutRedirect = () => {
-  store.remove('loggedIn');
-  store.remove('user');
-  store.remove('loginAs');
+const SignOut = (props) => {
+  logout(props.app);
   return <Redirect to={{ pathname: '/login' }}/>;
 };
 
 
-const RegisterRedirect = () => {
-  return store.get('loggedIn') ? <Redirect to={{ pathname: '/profile' }}/> : <Register/>;
-};
+const AuthRoute = ({ component: Component, props, ...rest }) => {
+  const { isLoggedIn } = props;
 
-
-const ShopperRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => (store.get('loggedIn') && store.get('loginAs') === 0) ?
-      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
-    }
-  />
-);
-
-
-const StoreRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => (store.get('loggedIn') && store.get('loginAs') === 1) ?
-      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
-    }
-  />
-);
-
-
-const AdminRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => (store.get('loggedIn') && store.get('loginAs') === 2) ?
-      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
-    }
-  />
-);
-
-
-const AuthenRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props => !!store.get('loggedIn') ?
-        <Component {...props} /> : <Redirect to={{ pathname: '/login' }}/>
-      }
+      render={({ history }) => {
+        return isLoggedIn ?
+          <Redirect to={{ pathname: '/' }}/> :
+          <Component history={history} {...props}/>;
+      }}
+    />
+  );
+};
+
+
+const ShopperRoute = ({ component: Component, props, ...rest }) => (
+  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={0}/>
+);
+
+
+const StoreRoute = ({ component: Component, props, ...rest }) => (
+  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={1}/>
+);
+
+
+const AdminRoute = ({ component: Component, props, ...rest }) => (
+  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={2}/>
+);
+
+
+const AuthenticateRoute = ({ component: Component, props, authUserType, ...rest }) => {
+  const { isLoggedIn, userType, isReadingCookie } = props;
+
+  return (
+    <Route
+      {...rest}
+      render={({ history }) => {
+        if (!isLoggedIn && !isReadingCookie) {
+          return <Redirect to={{ pathname: '/login' }}/>;
+        } else if (isReadingCookie) {
+          return <Loading/>;
+        }
+        return (userType === authUserType) ?
+          <Component {...props} history={history}/> :
+          <Redirect to={{ pathname: '/' }}/>;
+      }}
     />
   );
 };
 
 
 const NoMatch = () => {
-  let location = useLocation();
+  const location = useLocation();
 
   return (
     <div>

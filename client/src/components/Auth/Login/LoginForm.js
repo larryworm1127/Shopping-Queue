@@ -1,21 +1,21 @@
 // React imports
 import React from 'react';
 // Material UI imports
-import { Button, Checkbox, FormControlLabel } from '@material-ui/core';
+import { Button, Checkbox, FormControlLabel, withStyles } from '@material-ui/core';
 // User JS imports
 import FormTextField from '../../FormTextField';
 import FormSelectField from '../../FormSelectField';
-import { loginVerify } from '../../../utils/verifyAuth';
 import { withRouter } from 'react-router-dom';
-import store from 'store';
+import { login } from '../../../actions/auth';
+import { styles } from './style';
 
 
 class LoginForm extends React.Component {
 
   state = {
-    username: '',
-    password: '',
-    loginAs: 0,
+    username: null,
+    password: null,
+    userType: 0,
     displayError: false,
     errorMessage: ''
   };
@@ -35,32 +35,33 @@ class LoginForm extends React.Component {
     });
   };
 
-  handleLoginSubmit = (event) => {
-    event.preventDefault();
-    const { history } = this.props;
-    const verify = loginVerify(this.state.username, this.state.password, this.state.loginAs);
-    if (verify === true) {
-      store.set('loggedIn', true);
-      store.set('loginAs', this.state.loginAs);
-      store.set('user', this.state.username);
-      history.push('/');
-    } else {
-      this.displayError(verify);
-    }
-  };
+  // handleLoginSubmit = (event) => {
+  //   event.preventDefault();
+  //   const { history } = this.props;
+  //   const verify = loginVerify(this.state.username, this.state.password, this.state.userType);
+  //   if (verify === true) {
+  //     store.set('loggedIn', true);
+  //     store.set('loginAs', this.state.userType);
+  //     store.set('user', this.state.username);
+  //     history.push('/');
+  //   } else {
+  //     this.displayError(verify);
+  //   }
+  // };
 
   render() {
-    const { classes } = this.props;
+    const { classes, app } = this.props;
+    const { displayError, errorMessage, userType } = this.state;
 
     return (
       <React.Fragment>
-        <form className={classes.form} onSubmit={this.handleLoginSubmit}>
+        <div className={classes.form}>
           <FormTextField
             variant="outlined"
             margin="normal"
             name="username"
             label="Username"
-            displayError={this.state.displayError}
+            displayError={displayError}
             handleFormField={this.handleFormField}
           />
           <FormTextField
@@ -69,27 +70,29 @@ class LoginForm extends React.Component {
             name="password"
             label="Password"
             type="password"
-            errorMessage={this.state.errorMessage}
-            displayError={this.state.displayError}
+            errorMessage={errorMessage}
+            displayError={displayError}
             handleFormField={this.handleFormField}
           />
 
           <FormSelectField
-            name="loginAs"
+            name="userType"
             label="Login As"
             variant="outlined"
-            value={this.state.loginAs}
+            value={userType}
             handleFormField={this.handleFormField}
             menuItems={['Shopper', 'Shop Owner', 'Admin']}
           />
 
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" color="primary"/>}
             label="Remember me"
           />
 
           <Button
-            type="submit"
+            onClick={() => {
+              login(this, app);
+            }}
             fullWidth
             variant="contained"
             color="primary"
@@ -97,10 +100,10 @@ class LoginForm extends React.Component {
           >
             Sign In
           </Button>
-        </form>
+        </div>
       </React.Fragment>
     );
   }
 }
 
-export default withRouter(LoginForm);
+export default withRouter(withStyles(styles)(LoginForm));

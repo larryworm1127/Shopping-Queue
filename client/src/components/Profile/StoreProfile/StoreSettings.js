@@ -2,20 +2,19 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
-import { StoreTypes } from '../../../utils/stores';
-import FormSelectField from '../../FormSelectField';
 
-class StoreProfile extends React.Component {
+
+class StoreSettings extends React.Component {
 
   constructor(props) {
     super(props);
     const { store } = this.props;
     this.state = {
       edit: false,
-      storeName: store.name,
-      email: store.email,
-      address: store.address,
-      storeType: store.type
+      openTime: store.openingTime,
+      closeTime: store.closingTime,
+      customerLimit: store.customerLimit,
+      customerShopTime: store.customerShopTime
     };
   }
 
@@ -34,11 +33,11 @@ class StoreProfile extends React.Component {
 
     const { store } = this.props;
     this.setEdit(false);
-    store.updateUserProfile(
-      this.state.storeName,
-      this.state.email,
-      this.state.address,
-      this.state.storeType
+    store.updateStoreSettings(
+      this.state.customerLimit,
+      this.state.customerShopTime,
+      this.state.openTime,
+      this.state.closeTime,
     );
   };
 
@@ -50,53 +49,51 @@ class StoreProfile extends React.Component {
         <Grid container spacing={3}>
           <DataDisplay
             gridSize={6}
-            title="Store Name"
-            content={store.name}
+            title="Store Hours Opening"
+            content={store.openingTime}
             edit={this.state.edit}
             setEdit={this.setEdit}
-            name="storeName"
-            label="Store Name"
-            value={this.state.storeName}
+            name="openTime"
+            label="Opening Time"
+            type="time"
+            value={this.state.openTime}
             handleFormField={this.handleFormField}
           />
           <DataDisplay
             gridSize={6}
-            title="Store Email"
-            content={store.email}
+            title="Store Hours Closing"
+            content={store.closingTime}
             edit={this.state.edit}
             setEdit={this.setEdit}
-            name="email"
-            label="Email"
-            value={this.state.email}
+            name="closeTime"
+            label="Closing Time"
+            type="time"
+            value={this.state.closeTime}
             handleFormField={this.handleFormField}
           />
           <DataDisplay
             gridSize={12}
-            title="Store Location"
-            content={store.address}
+            title="Customer Limit"
+            content={store.customerLimit}
             edit={this.state.edit}
             setEdit={this.setEdit}
-            name="address"
-            label="Address"
-            value={this.state.address}
+            name="customerLimit"
+            label="Customer Limit"
+            type="number"
+            value={this.state.customerLimit}
             handleFormField={this.handleFormField}
           />
           <DataDisplay
             gridSize={12}
-            title="Store Type"
-            content={store.type}
+            title="Customer Shopping Time Limit (min)"
+            content={store.customerShopTime}
             edit={this.state.edit}
             setEdit={this.setEdit}
-            editComponent={
-              <FormSelectField
-                name="storeType"
-                label="Store Type"
-                handleFormField={this.handleFormField}
-                value={this.state.storeType}
-                useIndex={false}
-                menuItems={Object.keys(StoreTypes)}
-              />
-            }
+            name="customerShopTime"
+            label="Customer Shopping Time Limit (min)"
+            type="number"
+            value={this.state.customerShopTime}
+            handleFormField={this.handleFormField}
           />
         </Grid>
         <br/>
@@ -111,4 +108,4 @@ class StoreProfile extends React.Component {
   }
 }
 
-export default StoreProfile;
+export default StoreSettings;

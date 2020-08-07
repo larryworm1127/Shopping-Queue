@@ -19,6 +19,12 @@ import { addStore } from '../../../utils/stores';
 const steps = ['Account Details', 'Profile Details', 'Review'];
 
 class Register extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.props.history.push('/register')
+  }
+
   state = {
     activeStep: 0,
     // account info states

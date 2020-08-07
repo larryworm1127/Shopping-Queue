@@ -1,20 +1,19 @@
 import React from 'react';
 import { Box, Button, Card, Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import store from 'store';
 import { styles } from './style';
 
 
 class HeadSection extends React.Component {
 
-  getText = () => {
-    return (store.get('loggedIn')) ? {
-      mainText: 'Welcome ' + store.get('user'),
+  getText = (userType, currentUser) => {
+    return (currentUser !== null) ? {
+      mainText: `Welcome ${currentUser}`,
       buttonText: 'Your Profile',
       subText: '',
-      buttonUrl: (store.get('loginAs') === 0 ? '/profile' :
-        (store.get('loginAs') === 1 ? '/store/profile' :
-          '/admin/profile'))
+      buttonUrl: (userType === 0 ? '/profile' :
+          (userType === 1 ? '/store/profile' : '/admin/profile')
+      )
     } : {
       mainText: 'Shopping Queue Manager',
       buttonText: 'Signup',
@@ -24,8 +23,8 @@ class HeadSection extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const headerTexts = this.getText();
+    const { classes, userType, currentUser } = this.props;
+    const headerTexts = this.getText(userType, currentUser);
 
     return (
       <React.Fragment>
@@ -64,6 +63,8 @@ class HeadSection extends React.Component {
 
 HeadSection.propTypes = {
   classes: PropTypes.object,
+  userType: PropTypes.number,
+  currentUser: PropTypes.string
 };
 
 export default withStyles(styles)(HeadSection);

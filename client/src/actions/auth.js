@@ -2,7 +2,7 @@
 
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
-  const url = '/auth/check-session';
+  const url = '/api/check-session';
 
   fetch(url)
     .then(res => {
@@ -12,23 +12,21 @@ export const readCookie = (app) => {
     })
     .then(json => {
       if (json && json.currentUser) {
-        app.setState({ currentUser: json.currentUser });
+        app.setState({
+          currentUser: json.currentUser,
+          userType: json.userType,
+          isLoggedIn: true,
+          isReadingCookie: false
+        });
+      } else {
+        app.setState({
+          isReadingCookie: false
+        });
       }
     })
     .catch(error => {
       console.log(error);
     });
-};
-
-
-// A function to update the login form state
-export const updateLoginForm = (loginComp, field) => {
-  const value = field.value;
-  const name = field.name;
-
-  loginComp.setState({
-    [name]: value
-  });
 };
 
 
@@ -52,7 +50,11 @@ export const login = (loginComp, app) => {
     })
     .then(json => {
       if (json.currentUser !== undefined) {
-        app.setState({ currentUser: json.currentUser });
+        app.setState({
+          currentUser: json.currentUser,
+          userType: json.userType,
+          isLoggedIn: true,
+        });
       }
     })
     .catch(error => {
@@ -63,13 +65,14 @@ export const login = (loginComp, app) => {
 
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
-  const url = '/auth/logout';
+  const url = '/api/logout';
 
   fetch(url)
     .then(() => {
       app.setState({
         currentUser: null,
-        message: { type: '', body: '' }
+        userType: null,
+        isLoggedIn: false,
       });
     })
     .catch(error => {

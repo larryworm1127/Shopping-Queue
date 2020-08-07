@@ -13,6 +13,7 @@ import HistoryIcon from '@material-ui/icons/History';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { styles } from './style';
 import { withStyles } from '@material-ui/core';
+import { uid } from 'react-uid';
 
 
 const tabIcons = [
@@ -32,12 +33,13 @@ class ProfileBase extends React.Component {
   };
 
   render() {
-    const { classes, user, tabs, profileSettings, location } = this.props;
+    const { classes, user, tabs, profileSettings, location, currentUser, userType, isLoggedIn } = this.props;
+    const { setting } = this.state;
 
     return (
       <React.Fragment>
         <CssBaseline/>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
 
         <Drawer
           className={classes.drawer}
@@ -51,7 +53,7 @@ class ProfileBase extends React.Component {
           <Divider/>
           <List>
             {tabs.map((label, index) => (
-              <ListItem button key={label} onClick={() => this.setSetting(index)}>
+              <ListItem button key={uid(label)} onClick={() => this.setSetting(index)}>
                 <ListItemIcon>{tabIcons[index]}</ListItemIcon>
                 <ListItemText primary={label}/>
               </ListItem>
@@ -60,7 +62,7 @@ class ProfileBase extends React.Component {
         </Drawer>
 
         <Container className={classes.container}>
-          {profileSettings(user, this.state.setting)}
+          {profileSettings(user, setting, currentUser)}
         </Container>
       </React.Fragment>
     );

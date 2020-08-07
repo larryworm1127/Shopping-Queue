@@ -1,6 +1,6 @@
 // React imports
 import React from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 // Material UI imports
 import { Avatar, Container, CssBaseline, Grid, Link, Typography, withStyles } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -8,30 +8,29 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import NavBar from '../../Nav/navbar';
 import { styles } from './style';
 import LoginForm from './LoginForm';
-import store from 'store';
 
 
 class Login extends React.Component {
 
   render() {
-    const { classes, location } = this.props;
+    const { classes, location, userType, isLoggedIn, app } = this.props;
 
-    return store.get('loggedIn') ? (<Redirect to={{ pathname: '/' }} />) : (
+    return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} />
+        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
 
         <Container component="main" maxWidth="xs">
-          <CssBaseline />
+          <CssBaseline/>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
+              <LockOutlinedIcon/>
             </Avatar>
 
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
 
-            <LoginForm classes={classes} />
+            <LoginForm app={app}/>
 
             <Grid container>
               <Grid item xs>

@@ -1,8 +1,6 @@
-import store from 'store';
-
-export default function Menu() {
-  if (!!store.get('loggedIn')) {
-    switch (store.get('loginAs')) {
+export default function Menu(userType, isLoggedIn) {
+  if (isLoggedIn) {
+    switch (userType) {
       case 0:
         return [
           { label: 'Home', pathname: '/' },
@@ -37,5 +35,3 @@ export default function Menu() {
     ];
   }
 }
-
-// pathname: (store.get('loginAs') === 0 ? '/profile' : (store.get('loginAs') === 1 ? 'owner-profile' : 'admin-profile'))
