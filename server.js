@@ -156,12 +156,12 @@ app.patch('api/profile', (req, res) => {
     };
 
     // Update the admin by its id.
-    Admin.findByIdAndUpdate(id, { $set: body }, { new: true })
-        .then(admin => {
-            if (!admin) {
+    Shopper.findByIdAndUpdate(id, { $set: body }, { new: true })
+        .then(shopper => {
+            if (!shopper) {
                 res.status(404).send();
             } else {
-                res.send(admin);
+                res.send(shopper);
             }
         })
         .catch(error => {
@@ -380,9 +380,6 @@ app.get('api/admin/messages', (req, res) => {
       res.status(500).send(error); // server error
     });
 });
-
-
-
 
 /*** Webpage routes below **********************************/
 // Serve the build
