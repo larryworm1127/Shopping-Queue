@@ -11,6 +11,8 @@ const { User } = require('./models/user');
 const { Shopper } = require('./models/shopper');
 const { Store } = require('./models/store');
 const { Admin } = require('./models/admin')
+const { Queue } = require('./models/queue')
+const { HelpMessage } = require('./models/helpMessage')
 
 
 // Create main express app
@@ -68,7 +70,7 @@ app.get('api/logout', (req, res) => {
 app.post('api/register', (req, res) => {
 
   const user = (req.body.type === 'Owner') ?
-    // New user is a shopper
+    // New user is a store owner
     new Store({
       username: req.body.username,
       email: req.body.email,
@@ -81,7 +83,7 @@ app.post('api/register', (req, res) => {
       closingTime: req.body.closingTime,
       storeType: req.body.storeType
     }) :
-    // New user is a store owner
+    // New user is a shopper
     new Shopper({
       username: req.body.username,
       email: req.body.email,
@@ -101,94 +103,276 @@ app.post('api/register', (req, res) => {
   );
 });
 
-//Get profile for shopper, owner or admin
+//Get profile for shopper
 app.get('api/profile', (req, res) => {
 
   const id = req.body.id;
-  const type = req.body.type;
 
   if (!ObjectID.isValid(id)) {
     res.status(404).send(); // if invalid id, definitely can't find resource, 404.
     return;
   }
 
-  if (type === 'Owner') {
-    Store.findById(id)
-      .then(owner => {
-        if (!owner) {
-          res.status(404).send();
-        } else {
-          res.send(owner);
-        }
-      })
-      .catch(error => {
-        res.status(500).send(); // server error
-      });
-  } else if (type === 'Shopper') {
-    Shopper.findById(id)
-      .then(shopper => {
-        if (!shopper) {
-          res.status(404).send();
-        } else {
-          res.send(shopper);
-        }
-      })
-      .catch(error => {
-        res.status(500).send(); // server error
-      });
-  } else {
-    Admin.findById(id)
-      .then(admin => {
-        if (!admin) {
-          res.status(404).send();
-        } else {
-          res.send(admin);
-        }
-      })
-      .catch(error => {
-        res.status(500).send(); // server error
-      });
+  Shopper.findById(id)
+    .then(shopper => {
+      if (!shopper) {
+        res.status(404).send();
+      } else {
+        res.send(shopper);
+      }
+    })
+    .catch(error => {
+      res.status(500).send(); // server error
+    });
+});
+
+//Update profile for shopper
+app.patch('api/profile', (req, res) => {
+
+    const id = req.body.id
+
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send();
+        return;
+    }
+
+    // get the updated store profile.
+    const body = {
+        'firstName': req.body.firstName,
+        'lastName': req.body.lasatName,
+        'address': req.body.address,
+        'email': req.body.email,
+        'remindTime': req.body.remindTime
+    };
+
+    // Update the admin by its id.
+    Admin.findByIdAndUpdate(id, { $set: body }, { new: true })
+        .then(admin => {
+            if (!admin) {
+                res.status(404).send();
+            } else {
+                res.send(admin);
+            }
+        })
+        .catch(error => {
+            res.status(400).send(); // bad request for changing the student.
+        });
+});
+
+//Get profile for store owner
+app.get('api/store/profile', (req, res) => {
+
+  const id = req.body.id;
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
+    return;
   }
+
+  Store.findById(id)
+    .then(store => {
+      if (!store) {
+        res.status(404).send();
+      } else {
+        res.send(store);
+      }
+    })
+    .catch(error => {
+      res.status(500).send(); // server error
+    });
+});
+
+//Update store owner profile
+app.patch('api/store/profile', (req, res) => {
+
+    const id = req.body.id
+
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send();
+        return;
+    }
+
+    // get the updated store profile.
+    const body = {
+        'username': req.body.username,
+        'email': req.body.email,
+        'password': req.body.password,
+        'storeName': req.body.storeName,
+        'location': req.body.location,
+        'customerLimit': req.body.customerLimit,
+        'customerShopTime': req.body.customerShopTime,
+        'openingTime': req.body.openingTime,
+        'closingTime': req.body.closingTime,
+        'storeType': req.body.storeType
+    };
+
+    // Update the store by its id.
+    Store.findByIdAndUpdate(id, { $set: body }, { new: true })
+        .then(store => {
+            if (!store) {
+                res.status(404).send();
+            } else {
+                res.send(store);
+            }
+        })
+        .catch(error => {
+            res.status(400).send(); // bad request for changing the student.
+        });
+});
+
+//Get profile for admin
+app.get('api/admin/profile', (req, res) => {
+
+  const id = req.body.id;
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
+    return;
+  }
+
+  Admin.findById(id)
+    .then(admin => {
+      if (!admin) {
+        res.status(404).send();
+      } else {
+        res.send(admin);
+      }
+    })
+    .catch(error => {
+      res.status(500).send(); // server error
+    });
+});
+
+//Update admin profile
+app.patch('api/admin/profile', (req, res) => {
+
+    const id = req.body.id
+
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send();
+        return;
+    }
+
+    // get the updated store profile.
+    const body = {
+        'email': req.body.email,
+        'firstName': req.body.firstName,
+        'lastName': req.body.lasatName,
+        'address': req.body.address
+    };
+
+    // Update the admin by its id.
+    Admin.findByIdAndUpdate(id, { $set: body }, { new: true })
+        .then(admin => {
+            if (!admin) {
+                res.status(404).send();
+            } else {
+                res.send(admin);
+            }
+        })
+        .catch(error => {
+            res.status(400).send(); // bad request for changing the student.
+        });
 });
 
 
-// Get queues for shopper or queues for owners store
+// Get queues for shopper
 app.get('api/queues', (req, res) => {
 
   const id = req.body.id;
-  const type = req.body.type;
 
   if (!ObjectID.isValid(id)) {
     res.status(404).send(); // if invalid id, definitely can't find resource, 404.
     return;
   }
 
-  if (type === 'Owner') {
-    Store.findById(id)
-      .then(owner => {
-        if (!owner) {
-          res.status(404).send();
-        } else {
-          res.send(owner.currentQueues);
-        }
-      })
-      .catch(error => {
-        res.status(500).send(); // server error
-      });
-  } else {
-    Shopper.findById(id)
-      .then(shopper => {
-        if (!shopper) {
-          res.status(404).send();
-        } else {
-          res.send(shopper.currentQueues);
-        }
-      })
-      .catch(error => {
-        res.status(500).send(); // server error
-      });
-  }
+  Shopper.findById(id)
+    .then(shopper => {
+      if (!shopper) {
+        res.status(404).send();
+      } else {
+        res.send(shopper.currentQueues);
+      }
+    })
+    .catch(error => {
+      res.status(500).send(); // server error
+    });
+
 });
+
+// Get queues for store owner
+app.get('api/store/queues', (req, res) => {
+
+  const id = req.body.id;
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
+    return;
+  }
+
+  Store.findById(id)
+    .then(store => {
+      if (!store) {
+        res.status(404).send();
+      } else {
+        res.send(store.currentQueues);
+      }
+    })
+    .catch(error => {
+      res.status(500).send(); // server error
+    });
+
+});
+
+// Get queues for admin
+app.get('api/admin/queues', (req, res) => {
+
+  const id = req.body.id;
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
+    return;
+  }
+
+  Admin.findById(id)
+    .then(admin => {
+      if (!admin) {
+        res.status(404).send();
+      } else {
+        res.send(admin.currentQueues);
+      }
+    })
+    .catch(error => {
+      res.status(500).send(); // server error
+    });
+
+});
+
+// Get all stores for map
+app.get('api/map', (req, res) => {
+
+  Store.find()
+    .then(store => {
+      res.send(store);
+    })
+    .catch(error => {
+      res.status(500).send(error); // server error
+    });
+});
+
+// Get all messages
+app.get('api/admin/messages', (req, res) => {
+
+  HelpMessage.find()
+    .then(message => {
+      res.send(message);
+    })
+    .catch(error => {
+      res.status(500).send(error); // server error
+    });
+});
+
+
 
 
 /*** Webpage routes below **********************************/
@@ -211,7 +395,7 @@ app.get('*', (req, res) => {
     '/store/shoppers',
     '/login',
     '/register',
-    '/logout',
+    '/logout',         
     '/store/:id'
   ];
   if (!goodPageRoutes.includes(req.url)) {
