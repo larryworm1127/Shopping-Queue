@@ -11,6 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import { supportMessages } from '../../utils/admins';
 import MessageTableRow from './MessageTableRow';
 import { uid } from 'react-uid';
+import { withRouter } from 'react-router-dom';
 
 
 class UserSupport extends React.Component {
@@ -27,11 +28,11 @@ class UserSupport extends React.Component {
   };
 
   render() {
-    const { location, classes } = this.props;
+    const { location, classes, isLoggedIn, userType } = this.props;
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname}/>
+        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
         <CssBaseline/>
 
         <Typography variant='h3' align='center' className={classes.titleText}>
@@ -61,4 +62,4 @@ class UserSupport extends React.Component {
   }
 }
 
-export default withStyles(styles)(UserSupport);
+export default withStyles(styles)(withRouter(UserSupport));
