@@ -1,10 +1,27 @@
 'use strict';
 
-const mongoose = require('mongoose');
-const validator = require('validator');
+const { model, Schema } = require('mongoose');
+const { isAlphanumeric, isEmail } = require('validator');
+const { Store } = require('./store')
 
 
-const Shopper = mongoose.model('Shopper', {
+const HistorySchema = new Schema({
+  store: { type: Schema.Types.ObjectId, ref: 'Store' },
+  searchDate: { type: String, required: true }
+})
+
+
+const ShopperSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    minlength: 1,
+    trim: true,
+    validate: {
+      validator: isAlphanumeric,
+      message: 'Not valid username'
+    }
+  },
   firstName: {
     type: String,
     required: true,
@@ -25,7 +42,7 @@ const Shopper = mongoose.model('Shopper', {
     required: true,
     trim: true,
     validate: {
-      validator: validator.isEmail,
+      validator: isEmail,
       message: 'Not valid email'
     }
   },
@@ -33,12 +50,14 @@ const Shopper = mongoose.model('Shopper', {
     type: Number,
     required: true
   },
-  favouriteStores: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }],
-  searchHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }],
-  queueHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }]
+  favouriteStores: [{ type: Schema.Types.ObjectId, ref: 'Store' }],
+  searchHistory: [{ type: Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }],
+  queueHistory: [{ type: Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }]
 });
 
 
-module.export = {
+const Shopper = model('Shopper', ShopperSchema)
+
+module.exports = {
   Shopper
-}
+};

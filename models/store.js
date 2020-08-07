@@ -1,10 +1,20 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const validator = require('validator');
+const { isAlphanumeric, isEmail } = require('validator');
 
 
 const Store = mongoose.model('Store', {
+  username: {
+    type: String,
+    required: true,
+    minlength: 1,
+    trim: true,
+    validate: {
+      validator: isAlphanumeric,
+      message: 'Not valid username'
+    }
+  },
   storeName: {
     type: String,
     required: true,
@@ -15,7 +25,7 @@ const Store = mongoose.model('Store', {
     required: true,
     trim: true,
     validate: {
-      validator: validator.isEmail,
+      validator: isEmail,
       message: 'Not valid email'
     }
   },
@@ -56,6 +66,6 @@ const Store = mongoose.model('Store', {
 });
 
 
-module.export = {
+module.exports = {
   Store
 }

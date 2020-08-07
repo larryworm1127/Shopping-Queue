@@ -68,6 +68,38 @@ export const login = (loginComp, app) => {
 };
 
 
+// A function to send a POST request with the new user info
+export const register = (registerComp) => {
+  const request = new Request('/api/register', {
+    method: 'post',
+    body: JSON.stringify(registerComp.state),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  // Send the request with fetch()
+  fetch(request)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json.message !== undefined) {
+        registerComp.setState({
+          displayError: true,
+          errorMessage: json.message
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
   const url = '/api/logout';

@@ -9,7 +9,7 @@ const { mongoose } = require('./db/mongoose');
 mongoose.set('useFindAndModify', false);
 
 // Models import
-const { User } = require('./models/user');
+const { User, UserTypes } = require('./models/user');
 const { Shopper } = require('./models/shopper');
 const { Store } = require('./models/store');
 const { Admin } = require('./models/admin');
@@ -73,46 +73,60 @@ app.get('/api/check-session', (req, res) => {
 });
 
 
-//Register a new user
+// Register a new user
 app.post('/api/register', (req, res) => {
 
-  // const user = (req.body.type === 'Owner') ?
-  //   // New user is a shopper
-  //   new Store({
-  //     email: req.body.email,
-  //     storeName: req.body.storeName,
-  //     location: req.body.location,
-  //     customerLimit: req.body.customerLimit,
-  //     customerShopTime: req.body.customerShopTime,
-  //     openingTime: req.body.openingTime,
-  //     closingTime: req.body.closingTime,
-  //     storeType: req.body.storeType
-  //   }) :
-  //   // New user is a store owner
-  //   new Shopper({
-  //     email: req.body.email,
-  //     address: req.body.address,
-  //     remindTime: req.body.remindTime
-  //   });
-
+  console.log(req.body);
   const user = new User({
     username: req.body.username,
     password: req.body.password,
-    userType: req.body.userType
+    userType: req.body.registerAs
   });
 
-  // Save the user
-  user.save().then(
-    (user) => {
-      res.send(user);
-    },
-    (error) => {
-      res.status(400).send(error);
-    }
-  );
+  const profile = (req.body.type === UserTypes.Store) ?
+    // New user is a shopper
+    new Store({
+      username: req.body.username,
+      email: req.body.email,
+      storeName: req.body.storeName,
+      location: req.body.location,
+      customerLimit: req.body.customerLimit,
+      customerShopTime: req.body.customerShopTime,
+      openingTime: req.body.openingTime,
+      closingTime: req.body.closingTime,
+      storeType: req.body.storeType
+    }) :
+    // New user is a store owner
+    new Shopper({
+      username: req.body.username,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      address: req.body.address,
+      email: req.body.email,
+      remindTime: req.body.remindTime,
+      favouriteStores: [],
+      searchHistory: [],
+      queueHistory: []
+    });
+
+  // Save the user and profile
+  user.save()
+    .then((user) => {
+      profile.save().then((profile) => {
+        res.send({ profile: profile, user: user });
+      }).catch((error) => {
+        console.log(error);
+        res.status(400).send({ message: error });
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(400).send({ message: error });
+    });
 });
 
-//Get profile for shopper, owner or admin
+
+// Get profile for shopper, owner or admin
 app.get('/api/profile', (req, res) => {
 
   const id = req.body.id;
