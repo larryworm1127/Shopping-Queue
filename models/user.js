@@ -3,7 +3,7 @@
 
 const { model, Schema } = require('mongoose');
 const { isAlphanumeric } = require('validator');
-const bcrypt = require('bcryptjs');
+const { genSalt, hash, compare } = require('bcryptjs');
 
 
 const UserTypes = {
@@ -11,6 +11,10 @@ const UserTypes = {
   Store: 1,
   Admin: 2
 };
+
+// Error messages
+const incorrectCred = 'Incorrect username or password!';
+const notRegistered = 'User is not registered!';
 
 
 const UserSchema = new Schema({
@@ -42,8 +46,8 @@ UserSchema.pre('save', function (next) {
   const user = this; // binds this to User document instance
 
   if (user.isModified('password')) {
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(user.password, salt, (err, hash) => {
+    genSalt(10, (err, salt) => {
+      hash(user.password, salt, (err, hash) => {
         user.password = hash;
         next();
       });
@@ -59,11 +63,11 @@ UserSchema.statics.verifyCredential = function (username, password, type) {
 
   return User.findOne({ username: username, userType: type }).then((user) => {
     if (!user) {
-      return Promise.reject();
+      return Promise.reject(notRegistered);
     }
     return new Promise((resolve, reject) => {
-      bcrypt.compare(password, user.password, (err, result) => {
-        (result) ? resolve(user) : reject();
+      compare(password, user.password, (err, result) => {
+        (result) ? resolve(user) : reject(incorrectCred);
       });
     });
   });
@@ -75,4 +79,4 @@ const User = model('User', UserSchema);
 module.exports = {
   UserTypes,
   User
-}
+};

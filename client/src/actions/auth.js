@@ -55,6 +55,11 @@ export const login = (loginComp, app) => {
           userType: json.userType,
           isLoggedIn: true,
         });
+      } else if (json.message !== undefined) {
+        loginComp.setState({
+          displayError: true,
+          errorMessage: json.message
+        });
       }
     })
     .catch(error => {

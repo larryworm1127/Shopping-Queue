@@ -17,37 +17,16 @@ class LoginForm extends React.Component {
     password: null,
     userType: 0,
     displayError: false,
-    errorMessage: ''
+    errorMessage: null
   };
 
   handleFormField = (field, event) => {
     this.setState({
       [field]: event.target.value,
       displayError: false,
-      errorMessage: ''
+      errorMessage: null
     });
   };
-
-  displayError = (message) => {
-    this.setState({
-      displayError: true,
-      errorMessage: message
-    });
-  };
-
-  // handleLoginSubmit = (event) => {
-  //   event.preventDefault();
-  //   const { history } = this.props;
-  //   const verify = loginVerify(this.state.username, this.state.password, this.state.userType);
-  //   if (verify === true) {
-  //     store.set('loggedIn', true);
-  //     store.set('loginAs', this.state.userType);
-  //     store.set('user', this.state.username);
-  //     history.push('/');
-  //   } else {
-  //     this.displayError(verify);
-  //   }
-  // };
 
   render() {
     const { classes, app } = this.props;
@@ -64,6 +43,7 @@ class LoginForm extends React.Component {
             displayError={displayError}
             handleFormField={this.handleFormField}
           />
+
           <FormTextField
             variant="outlined"
             margin="normal"
