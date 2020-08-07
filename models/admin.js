@@ -44,6 +44,6 @@ const Admin = mongoose.model('Admin', {
 });
 
 
-module.export = {
+module.exports = {
   Admin
 }
