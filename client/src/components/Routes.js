@@ -9,11 +9,12 @@ import OwnerPage from './Profile/OwnerProfile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
 import store from 'store';
-import Register from './Auth/Register';
 import StoreQueues from './Store/StoreQueues';
 import StoreShoppers from './Store/StoreShoppers';
 import AllQueues from './Admin/AllQueues';
 import UserSupport from './Admin/UserSupport';
+import Loading from './Loading';
+import Register from './Auth/Register';
 
 
 export default props => {
@@ -23,16 +24,16 @@ export default props => {
       <Switch>
         <Route exact path='/' render={() => <Home {...props}/>}/>
         <ShopperRoute exact path='/map' props={props} component={StoreMap}/>
-        <AuthenRoute exact path='/queue' props={props} component={Queue}/>
+        <ShopperRoute exact path='/queue' props={props} component={Queue}/>
         <ShopperRoute exact path='/profile' props={props} component={ShopperProfile}/>
-        <StoreRoute exact path='/store/profile' props={props} component={OwnerPage}/>
         <AdminRoute exact path='/admin/profile' props={props} component={AdminProfile}/>
         <AdminRoute exact path='/admin/queues' props={props} component={AllQueues}/>
         <AdminRoute exact path='/admin/messages' props={props} component={UserSupport}/>
+        <StoreRoute exact path='/store/profile' props={props} component={OwnerPage}/>
         <StoreRoute exact path='/store/queues' props={props} component={StoreQueues}/>
         <StoreRoute exact path='/store/shoppers' props={props} component={StoreShoppers}/>
-        <Route exact path='/login' render={() => <Login {...props}/>}/>
-        <Route exact path='/register' component={RegisterRedirect}/>
+        <AuthRoute exact path='/login' props={props} component={Login}/>
+        <AuthRoute exact path='/register' props={props} component={Register}/>
         <Route exact path='/logout' component={SignOutRedirect}/>
         <Route exact path='/store/:id' component={StoreDetail}/>
         <Route path='*' component={NoMatch}/>
@@ -49,61 +50,60 @@ const SignOutRedirect = () => {
 };
 
 
-const RegisterRedirect = () => {
-  return store.get('loggedIn') ? <Redirect to={{ pathname: '/profile' }}/> : <Register/>;
-};
-
-
-const ShopperRoute = ({ component: Component, props, ...rest }) => {
-  console.log('shopper route');
-  console.log(props);
-  const { isLoggedIn, userType } = props;
+const AuthRoute = ({ component: Component, props, ...rest }) => {
+  const { isLoggedIn } = props;
 
   return (
     <Route
       {...rest}
-      render={() => (isLoggedIn && userType === 0) ?
-        <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
-      }
+      render={({ history }) => {
+        return isLoggedIn ?
+          <Redirect to={{ pathname: '/' }}/> :
+          <Component history={history} {...props}/>;
+      }}
     />
   );
 };
 
 
+const ShopperRoute = ({ component: Component, props, ...rest }) => (
+  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={0}/>
+);
+
+
 const StoreRoute = ({ component: Component, props, ...rest }) => (
-  <Route
-    {...rest}
-    render={() => (props.isLoggedIn && props.userType === 1) ?
-      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
-    }
-  />
+  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={1}/>
 );
 
 
 const AdminRoute = ({ component: Component, props, ...rest }) => (
-  <Route
-    {...rest}
-    render={() => (props.isLoggedIn && props.userType === 2) ?
-      <Component {...props} /> : <Redirect to={{ pathname: '/' }}/>
-    }
-  />
+  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={2}/>
 );
 
 
-const AuthenRoute = ({ component: Component, props, ...rest }) => {
+const AuthenticateRoute = ({ component: Component, props, authUserType, ...rest }) => {
+  const { isLoggedIn, userType, isReadingCookie } = props;
+
   return (
     <Route
       {...rest}
-      render={() => !!store.get('loggedIn') ?
-        <Component {...props} /> : <Redirect to={{ pathname: '/login' }}/>
-      }
+      render={({ history }) => {
+        if (!isLoggedIn && !isReadingCookie) {
+          return <Redirect to={{ pathname: '/login' }}/>;
+        } else if (isReadingCookie) {
+          return <Loading/>;
+        }
+        return (userType === authUserType) ?
+          <Component {...props} history={history}/> :
+          <Redirect to={{ pathname: '/' }}/>;
+      }}
     />
   );
 };
 
 
 const NoMatch = () => {
-  let location = useLocation();
+  const location = useLocation();
 
   return (
     <div>

@@ -1,7 +1,6 @@
 // Functions to help with user actions.
 
 // A function to check if a user is logged in on the session cookie
-
 export const readCookie = (app) => {
   const url = '/api/check-session';
 
@@ -16,7 +15,12 @@ export const readCookie = (app) => {
         app.setState({
           currentUser: json.currentUser,
           userType: json.userType,
-          isLoggedIn: true
+          isLoggedIn: true,
+          isReadingCookie: false
+        });
+      } else {
+        app.setState({
+          isReadingCookie: false
         });
       }
     })

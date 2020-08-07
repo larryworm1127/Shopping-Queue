@@ -12,11 +12,6 @@ import LoginForm from './LoginForm';
 
 class Login extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.props.history.push('/login');
-  }
-
   render() {
     const { classes, location, userType, isLoggedIn, app } = this.props;
 

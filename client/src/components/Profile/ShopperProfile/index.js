@@ -4,6 +4,7 @@ import QueueHistory from './QueueHistory.js';
 import UserProfile from './ShopperProfile.js';
 import { getShopper } from '../../../utils/shoppers';
 import ProfileBase from '../ProfileBase';
+import { withRouter } from 'react-router-dom';
 
 
 const tabs = [
@@ -35,7 +36,6 @@ class ShopperProfile extends React.Component {
   };
 
   render() {
-
     return (
       <ProfileBase
         {...this.props}
@@ -46,4 +46,4 @@ class ShopperProfile extends React.Component {
   }
 }
 
-export default ShopperProfile;
+export default withRouter(ShopperProfile);
