@@ -113,6 +113,79 @@ app.post('/api/register', (req, res) => {
   );
 });
 
+//Create a new shopper
+app.post('/api/shopper', (req, res) => {
+
+  const user =
+    new Shopper({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      address: req.body.address,
+      remindTime: req.body.remindTime
+    });
+
+  // Save the user
+  user.save().then(
+    (user) => {
+      res.send(user);
+    },
+    (error) => {
+      res.status(400).send(error);
+    }
+  );
+});
+
+//Create a new store
+app.post('/api/store', (req, res) => {
+
+  const user =
+    new Shopper({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      storeName: req.body.storeName,
+      location: req.body.location,
+      customerLimit: req.body.customerLimit,
+      customerShopTime: req.body.customerShopTime,
+      openingTime: req.body.openingTime,
+      closingTime: req.body.closingTime,
+      storeType: req.body.storeType
+    });
+
+  // Save the user
+  user.save().then(
+    (user) => {
+      res.send(user);
+    },
+    (error) => {
+      res.status(400).send(error);
+    }
+  );
+});
+
+//Create a new admin
+app.post('/api/admin', (req, res) => {
+
+  const user =
+    new Admin({
+      email: req.body.email,
+      firstName: req.body.firstName,
+      lastName: req.body.lasatName,
+      address: req.body.address
+    });
+
+  // Save the user
+  user.save().then(
+    (user) => {
+      res.send(user);
+    },
+    (error) => {
+      res.status(400).send(error);
+    }
+  );
+});
+
 //Get profile for shopper
 app.get('api/profile', (req, res) => {
 
@@ -147,12 +220,12 @@ app.patch('api/profile', (req, res) => {
     }
 
     // get the updated store profile.
-    const body = {
-        'firstName': req.body.firstName,
-        'lastName': req.body.lasatName,
-        'address': req.body.address,
-        'email': req.body.email,
-        'remindTime': req.body.remindTime
+    const user = {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          address: req.body.address,
+          remindTime: req.body.remindTime
     };
 
     // Update the admin by its id.
@@ -204,16 +277,16 @@ app.patch('api/store/profile', (req, res) => {
 
     // get the updated store profile.
     const body = {
-        'username': req.body.username,
-        'email': req.body.email,
-        'password': req.body.password,
-        'storeName': req.body.storeName,
-        'location': req.body.location,
-        'customerLimit': req.body.customerLimit,
-        'customerShopTime': req.body.customerShopTime,
-        'openingTime': req.body.openingTime,
-        'closingTime': req.body.closingTime,
-        'storeType': req.body.storeType
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        storeName: req.body.storeName,
+        location: req.body.location,
+        customerLimit: req.body.customerLimit,
+        customerShopTime: req.body.customerShopTime,
+        openingTime: req.body.openingTime,
+        closingTime: req.body.closingTime,
+        storeType: req.body.storeType
     };
 
     // Update the store by its id.
@@ -265,10 +338,10 @@ app.patch('api/admin/profile', (req, res) => {
 
     // get the updated store profile.
     const body = {
-        'email': req.body.email,
-        'firstName': req.body.firstName,
-        'lastName': req.body.lasatName,
-        'address': req.body.address
+        email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lasatName,
+        address: req.body.address
     };
 
     // Update the admin by its id.
