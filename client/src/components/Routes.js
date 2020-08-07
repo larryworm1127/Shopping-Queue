@@ -8,13 +8,13 @@ import AdminProfile from './Profile/AdminProfile';
 import OwnerPage from './Profile/OwnerProfile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
-import store from 'store';
 import StoreQueues from './Store/StoreQueues';
 import StoreShoppers from './Store/StoreShoppers';
 import AllQueues from './Admin/AllQueues';
 import UserSupport from './Admin/UserSupport';
 import Loading from './Loading';
 import Register from './Auth/Register';
+import { logout } from '../actions/auth';
 
 
 export default props => {
@@ -23,6 +23,7 @@ export default props => {
     <BrowserRouter>
       <Switch>
         <Route exact path='/' render={() => <Home {...props}/>}/>
+        <Route exact path='/store/:id' component={StoreDetail}/>
         <ShopperRoute exact path='/map' props={props} component={StoreMap}/>
         <ShopperRoute exact path='/queue' props={props} component={Queue}/>
         <ShopperRoute exact path='/profile' props={props} component={ShopperProfile}/>
@@ -34,18 +35,15 @@ export default props => {
         <StoreRoute exact path='/store/shoppers' props={props} component={StoreShoppers}/>
         <AuthRoute exact path='/login' props={props} component={Login}/>
         <AuthRoute exact path='/register' props={props} component={Register}/>
-        <Route exact path='/logout' component={SignOutRedirect}/>
-        <Route exact path='/store/:id' component={StoreDetail}/>
+        <Route exact path='/logout' component={() => SignOut(props)}/>
         <Route path='*' component={NoMatch}/>
       </Switch>
     </BrowserRouter>
   );
 }
 
-const SignOutRedirect = () => {
-  store.remove('loggedIn');
-  store.remove('user');
-  store.remove('loginAs');
+const SignOut = (props) => {
+  logout(props.app);
   return <Redirect to={{ pathname: '/login' }}/>;
 };
 

@@ -73,7 +73,6 @@ export const logout = (app) => {
         currentUser: null,
         userType: null,
         isLoggedIn: false,
-        message: { type: '', body: '' }
       });
     })
     .catch(error => {
