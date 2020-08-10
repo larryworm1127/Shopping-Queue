@@ -24,44 +24,43 @@ class ShopperProfile extends React.Component {
 
     return (
       <React.Fragment>
-        <form onSubmit={handleNext}>
-          <Typography variant="h6" gutterBottom>
-            Profile details
-          </Typography>
-          <Grid container spacing={3}>
-            <FormTextField
-              name="firstName"
-              label="First name"
-              value={firstName}
-              handleFormField={handleFormField}
-            />
-            <FormTextField
-              name="lastName"
-              label="Last name"
-              value={lastName}
-              handleFormField={handleFormField}
-            />
-            <FormTextField
-              name="address"
-              label="Address"
-              value={address}
-              handleFormField={handleFormField}
-            />
-            <FormTextField
-              name="remindTime"
-              label="Remind Time (min)"
-              value={remindTime}
-              type="number"
-              handleFormField={handleFormField}
-            />
-          </Grid>
-
-          <RegisterFormButtons
-            activeStep={activeStep}
-            classes={classes}
-            handleBack={handleBack}
+        <Typography variant="h6" gutterBottom>
+          Profile details
+        </Typography>
+        <Grid container spacing={3}>
+          <FormTextField
+            name="firstName"
+            label="First name"
+            value={firstName}
+            handleFormField={handleFormField}
           />
-        </form>
+          <FormTextField
+            name="lastName"
+            label="Last name"
+            value={lastName}
+            handleFormField={handleFormField}
+          />
+          <FormTextField
+            name="address"
+            label="Address"
+            value={address}
+            handleFormField={handleFormField}
+          />
+          <FormTextField
+            name="remindTime"
+            label="Remind Time (min)"
+            value={remindTime}
+            type="number"
+            handleFormField={handleFormField}
+          />
+        </Grid>
+
+        <RegisterFormButtons
+          activeStep={activeStep}
+          classes={classes}
+          handleBack={handleBack}
+          onClick={handleNext}
+        />
       </React.Fragment>
     );
   }

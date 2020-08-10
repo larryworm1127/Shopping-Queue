@@ -74,6 +74,42 @@ app.get('/api/check-session', (req, res) => {
 });
 
 
+// Verify register account info
+app.post('/api/verifyRegister', ((req, res) => {
+
+  const passwordTooShot = 'Password too short! (minimum 4 characters)';
+  const confirmPassFails = 'Password don\'t match';
+  const dupUsername = 'Username already taken!';
+
+  const { username, password, confirmPassword, userType } = req.body;
+
+  // Check password length
+  if (password.length < 4) {
+    res.status(400).send({ message: passwordTooShot });
+    return;
+  }
+
+  // Check confirmPassword and password
+  if (password !== confirmPassword) {
+    res.status(400).send({ message: confirmPassFails });
+    return;
+  }
+
+  // Check duplicate username
+  User.findOne({ username: username, userType: userType })
+    .then(shopper => {
+      if (shopper) {
+        res.status(400).send({ message: dupUsername });
+      } else {
+        res.send({})
+      }
+    })
+    .catch(error => {
+      res.status(400).send({ message: error });
+    });
+}));
+
+
 // Register a new user
 app.post('/api/register', (req, res) => {
 

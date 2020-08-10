@@ -68,6 +68,34 @@ export const login = (loginComp, app) => {
 };
 
 
+// A function that verifies account detail before allowing user to enter profile info
+export const registerVerify = (username, password, confirmPassword, userType, setError, handleNext) => {
+  const request = new Request('/api/verifyRegister', {
+    method: 'post',
+    body: JSON.stringify({ username, password, confirmPassword, userType }),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  fetch(request)
+    .then(res => {
+      return res.json();
+    })
+    .then(json => {
+      if (json.message !== undefined) {
+        setError(json.message);
+      } else {
+        handleNext();
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
 // A function to send a POST request with the new user info
 export const register = (registerComp) => {
   const request = new Request('/api/register', {

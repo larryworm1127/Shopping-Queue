@@ -13,7 +13,7 @@ class RegisterFormButtons extends React.Component {
   };
 
   render() {
-    const { activeStep, classes, handleBack } = this.props;
+    const { activeStep, classes, handleBack, onClick } = this.props;
 
     return (
       <React.Fragment>
@@ -24,10 +24,10 @@ class RegisterFormButtons extends React.Component {
             </Button>
           )}
           <Button
-            type='submit'
             variant="contained"
             color="primary"
             className={classes.button}
+            onClick={onClick}
           >
             Next
           </Button>
