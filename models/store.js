@@ -68,4 +68,4 @@ const Store = mongoose.model('Store', {
 
 module.exports = {
   Store
-}
+};
