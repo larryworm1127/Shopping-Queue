@@ -83,53 +83,9 @@ app.post('/api/register', (req, res) => {
     userType: req.body.registerAs
   });
 
-/*
   const profile = (req.body.type === UserTypes.Store) ?
     // New user is a shopper
     new Store({
-*/
-  // Save the user
-  user.save().then(
-    (user) => {
-      res.send(user);
-    },
-    (error) => {
-      res.status(400).send(error);
-    }
-  );
-});
-
-//Create a new shopper
-app.post('/api/shopper', (req, res) => {
-
-  const user =
-    new Shopper({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      address: req.body.address,
-      remindTime: req.body.remindTime,
-      favouriteStores: [],
-      searchHistory: [],
-      queueHistory: []
-    });
-
-  // Save the user
-  user.save().then(
-    (user) => {
-      res.send(user);
-    },
-    (error) => {
-      res.status(400).send(error);
-    }
-  );
-});
-
-//Create a new store
-app.post('/api/store', (req, res) => {
-
-  const user =
-    new Shopper({
       username: req.body.username,
       email: req.body.email,
       storeName: req.body.storeName,
@@ -159,12 +115,10 @@ app.post('/api/store', (req, res) => {
       profile.save().then((profile) => {
         res.send({ profile: profile, user: user });
       }).catch((error) => {
-        console.log(error);
         res.status(400).send({ message: error });
       });
     })
     .catch((error) => {
-      console.log(error);
       res.status(400).send({ message: error });
     });
 });
@@ -188,7 +142,7 @@ app.get('/api/profile', (req, res) => {
         res.send(shopper);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(500).send(); // server error
     });
 });
@@ -214,7 +168,7 @@ app.patch('/api/profile', (req, res) => {
   };
 
   // Update the admin by its id.
-  Shopper.findByIdAndUpdate(id, { $set: body }, { new: true })
+  Shopper.findByIdAndUpdate(id, { $set: user }, { new: true })
     .then(shopper => {
       if (!shopper) {
         res.status(404).send();
@@ -222,7 +176,7 @@ app.patch('/api/profile', (req, res) => {
         res.send(shopper);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(400).send(); // bad request for changing the student.
     });
 });
@@ -246,7 +200,7 @@ app.get('/api/store/profile', (req, res) => {
         res.send(store);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(500).send(); // server error
     });
 });
@@ -285,7 +239,7 @@ app.patch('/api/store/profile', (req, res) => {
         res.send(store);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(400).send(); // bad request for changing the student.
     });
 });
@@ -294,7 +248,7 @@ app.patch('/api/store/profile', (req, res) => {
 //Get profile for admin
 app.get('/api/admin/profile', (req, res) => {
 
-  const id = req.body.id
+  const id = req.body.id;
 
   if (!ObjectID.isValid(id)) {
     res.status(404).send(); // if invalid id, definitely can't find resource, 404.
@@ -309,7 +263,7 @@ app.get('/api/admin/profile', (req, res) => {
         res.send(admin);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(500).send(); // server error
     });
 });
@@ -329,7 +283,7 @@ app.patch('/api/admin/profile', (req, res) => {
   const body = {
     email: req.body.email,
     firstName: req.body.firstName,
-    lastName: req.body.lasatName,
+    lastName: req.body.lastName,
     address: req.body.address
   };
 
@@ -342,7 +296,7 @@ app.patch('/api/admin/profile', (req, res) => {
         res.send(admin);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(400).send(); // bad request for changing the student.
     });
 });
@@ -366,7 +320,7 @@ app.get('/api/queues', (req, res) => {
         res.send(shopper.currentQueues);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(500).send(); // server error
     });
 
@@ -391,7 +345,7 @@ app.get('/api/store/queues', (req, res) => {
         res.send(store.currentQueues);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(500).send(); // server error
     });
 
@@ -416,7 +370,7 @@ app.get('/api/admin/queues', (req, res) => {
         res.send(admin.currentQueues);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(500).send(); // server error
     });
 
@@ -447,6 +401,7 @@ app.get('/api/admin/messages', (req, res) => {
       res.status(500).send(error); // server error
     });
 });
+
 
 /*** Webpage routes below **********************************/
 // Serve the build

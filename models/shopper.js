@@ -2,13 +2,6 @@
 
 const { model, Schema } = require('mongoose');
 const { isAlphanumeric, isEmail } = require('validator');
-const { Store } = require('./store')
-
-
-const HistorySchema = new Schema({
-  store: { type: Schema.Types.ObjectId, ref: 'Store' },
-  searchDate: { type: String, required: true }
-})
 
 
 const ShopperSchema = new Schema({
@@ -52,11 +45,12 @@ const ShopperSchema = new Schema({
   },
   favouriteStores: [{ type: Schema.Types.ObjectId, ref: 'Store' }],
   searchHistory: [{ type: Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }],
-  queueHistory: [{ type: Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }]
+  queueHistory: [{ type: Schema.Types.ObjectId, ref: 'Queue', searchDate: { type: String, required: true } }],
+  currentQueues: [{ type: Schema.Types.ObjectId, ref: 'Queue' }]
 });
 
 
-const Shopper = model('Shopper', ShopperSchema)
+const Shopper = model('Shopper', ShopperSchema);
 
 module.exports = {
   Shopper
