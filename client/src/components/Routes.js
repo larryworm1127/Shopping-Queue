@@ -10,11 +10,12 @@ import StoreMap from './Map';
 import StoreDetail from './Store';
 import StoreQueues from './Store/StoreQueues';
 import StoreShoppers from './Store/StoreShoppers';
-import AllQueues from './Admin/AllQueues';
+import AllStoreQueues from './Admin/AllStoreQueues';
 import UserSupport from './Admin/UserSupport';
 import Loading from './Loading';
 import Register from './Auth/Register';
 import { logout } from '../actions/auth';
+import AllShopperQueues from './Admin/AllShopperQueues';
 
 
 export default props => {
@@ -27,7 +28,8 @@ export default props => {
         <ShopperRoute exact path='/queue' props={props} component={Queue}/>
         <ShopperRoute exact path='/profile' props={props} component={ShopperProfile}/>
         <AdminRoute exact path='/admin/profile' props={props} component={AdminProfile}/>
-        <AdminRoute exact path='/admin/queues' props={props} component={AllQueues}/>
+        <AdminRoute exact path='/admin/store/queues' props={props} component={AllStoreQueues}/>
+        <AdminRoute exact path='/admin/shopper/queues' props={props} component={AllShopperQueues}/>
         <AdminRoute exact path='/admin/messages' props={props} component={UserSupport}/>
         <StoreRoute exact path='/store/profile' props={props} component={StoreProfile}/>
         <StoreRoute exact path='/store/queues' props={props} component={StoreQueues}/>

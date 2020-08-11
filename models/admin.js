@@ -38,9 +38,7 @@ const Admin = mongoose.model('Admin', {
     type: String,
     required: true,
     trim: true
-  },
-  viewableShoppers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Shopper' }],
-  viewableStores: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }]
+  }
 });
 
 

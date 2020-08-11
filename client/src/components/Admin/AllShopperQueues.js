@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import NavBar from '../Nav/navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {
@@ -11,15 +12,14 @@ import {
   Typography,
   withStyles
 } from '@material-ui/core';
-import { styles } from './style';
 import TableCell from '@material-ui/core/TableCell';
-import { stores } from '../../utils/stores';
 import QueueTableRow from './QueueTableRow';
 import { uid } from 'react-uid';
-import { withRouter } from 'react-router-dom';
+import { shoppers } from '../../utils/shoppers';
+import { styles } from './style';
 
 
-class AllQueues extends React.Component {
+class AllShopperQueues extends React.Component {
 
   render() {
     const { location, classes, isLoggedIn, userType } = this.props;
@@ -38,16 +38,16 @@ class AllQueues extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell/>
-                <TableCell align='center'>Store Name</TableCell>
-                <TableCell align='center'>Store Type</TableCell>
-                <TableCell align='center'>Store Email</TableCell>
+                <TableCell align='center'>Username</TableCell>
+                <TableCell align='center'>Shopper name</TableCell>
+                <TableCell align='center'>Shopper Email</TableCell>
                 <TableCell align='center'>Current Queue Size</TableCell>
               </TableRow>
             </TableHead>
 
             <TableBody>
-              {stores.map((store) => (
-                <QueueTableRow key={uid(store)} store={store}/>
+              {shoppers.map((shopper) => (
+                <QueueTableRow key={uid(shopper)} shopper={shopper}/>
               ))}
             </TableBody>
           </Table>
@@ -57,4 +57,4 @@ class AllQueues extends React.Component {
   }
 }
 
-export default withStyles(styles)(withRouter(AllQueues));
+export default withStyles(styles)(withRouter(AllShopperQueues));

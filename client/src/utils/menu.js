@@ -22,7 +22,8 @@ export default function Menu(userType, isLoggedIn) {
         return [
           { label: 'Home', pathname: '/' },
           { label: 'Profile', pathname: '/admin/profile' },
-          { label: 'All Queues', pathname: '/admin/queues' },
+          { label: 'All Store Queues', pathname: '/admin/store/queues' },
+          { label: 'All Shopper Queues', pathname: '/admin/shopper/queues' },
           { label: 'User Support', pathname: '/admin/messages' },
           { label: 'Logout', pathname: '/logout' },
         ];

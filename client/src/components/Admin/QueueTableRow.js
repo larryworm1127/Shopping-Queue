@@ -8,6 +8,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { withStyles } from '@material-ui/core';
 import { styles } from '../Queue/style';
 import StoreQueuesTable from '../Store/StoreQueuesTable';
+import ShopperQueuesTable from '../Queue/ShopperQueuesTable';
 
 
 class QueueTableRow extends React.Component {
@@ -23,9 +24,9 @@ class QueueTableRow extends React.Component {
   };
 
   render() {
-    const { classes, store } = this.props;
+    const { classes, store, shopper } = this.props;
 
-    return (
+    return (store !== undefined) ? (
       <React.Fragment>
         <TableRow className={classes.root}>
           <TableCell>
@@ -33,9 +34,8 @@ class QueueTableRow extends React.Component {
               {this.state.open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
             </IconButton>
           </TableCell>
-          <TableCell component="th" scope="row" align='center'>
-            {store.name}
-          </TableCell>
+          <TableCell align='center'>{store.username}</TableCell>
+          <TableCell align='center'>{store.name}</TableCell>
           <TableCell align="center">{store.type}</TableCell>
           <TableCell align='center'>{store.email}</TableCell>
           <TableCell align='center'>{store.currentQueue.length}</TableCell>
@@ -44,6 +44,27 @@ class QueueTableRow extends React.Component {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
               <StoreQueuesTable storeName={store.username}/>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </React.Fragment>
+    ) : (
+      <React.Fragment>
+        <TableRow className={classes.root}>
+          <TableCell>
+            <IconButton size="small" onClick={() => this.setOpen(!this.state.open)}>
+              {this.state.open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+            </IconButton>
+          </TableCell>
+          <TableCell align='center'>{shopper.username}</TableCell>
+          <TableCell align='center'>`${shopper.firstName} ${shopper.lastName}`</TableCell>
+          <TableCell align='center'>{shopper.email}</TableCell>
+          <TableCell align='center'>{shopper.currentQueue.length}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+              <ShopperQueuesTable shopper={shopper.username}/>
             </Collapse>
           </TableCell>
         </TableRow>

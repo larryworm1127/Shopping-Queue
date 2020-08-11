@@ -111,6 +111,39 @@ app.post('/api/verifyRegister', ((req, res) => {
 }));
 
 
+// Register a new admin
+// (requires secret passcode which will be embedded in env var in production)
+app.post('/api/register/admin', (req, res) => {
+  const { username, password, passcode } = req.body;
+  if (passcode === 'team21') {
+    const user = new User({
+      username: username,
+      password: password,
+      userType: 2
+    });
+
+    const { firstName, lastName, email, address } = req.body;
+    const profile = new Admin({ username, firstName, lastName, email, address });
+
+    user.save()
+      .then(newUser => {
+        profile.save()
+          .then(newProfile => {
+            res.send({ user: newUser, profile: newProfile });
+          })
+          .catch((error) => {
+            res.status(400).send(error);
+          });
+      })
+      .catch((error) => {
+        res.status(400).send(error);
+      });
+  } else {
+    res.status(404).send();
+  }
+});
+
+
 // Register a new user
 app.post('/api/register', (req, res) => {
 
@@ -456,7 +489,8 @@ app.get('*', (req, res) => {
     '/profile',
     '/store/profile',
     '/admin/profile',
-    '/admin/queues',
+    '/admin/store/queues',
+    '/admin/shopper/queues',
     '/admin/messages',
     '/store/queues',
     '/store/shoppers',

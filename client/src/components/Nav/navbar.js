@@ -37,12 +37,14 @@ class NavBar extends React.Component {
       case '/map':
       case '/register':
       case '/store/queues':
-      case '/admin/queues':
+      case '/admin/store/queues':
         return 2;
       case '/queue':
       case '/store/shoppers':
-      case '/admin/messages':
+      case '/admin/shopper/queues':
         return 3;
+      case '/admin/messages':
+        return 4;
       default:
         return 0;
     }

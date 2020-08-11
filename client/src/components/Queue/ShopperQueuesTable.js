@@ -1,23 +1,23 @@
 import React from 'react';
-import { getStoreByUsername } from '../../utils/stores';
-import QueueList from '../Queue/QueueList';
+import QueueList from './QueueList';
 import Container from '@material-ui/core/Container';
+import { getShopper } from '../../utils/shoppers';
 
 
-class StoreQueuesTable extends React.Component {
+class ShopperQueuesTable extends React.Component {
 
   constructor(props) {
     super(props);
 
-    const { storeName, currentUser } = props;
+    const { shopper, currentUser } = props;
     this.state = {
-      queues: [...getStoreByUsername((storeName === undefined) ? currentUser : storeName).currentQueue]
+      queues: [...getShopper((shopper === undefined) ? currentUser : shopper).currentQueue]
     };
   }
 
   removeQueue = (index) => {
-    const { storeName, currentUser } = this.props;
-    const storeObj = getStoreByUsername((storeName === undefined) ? currentUser : storeName);
+    const { shopper, currentUser } = this.props;
+    const storeObj = getShopper((shopper === undefined) ? currentUser : shopper);
     storeObj.currentQueue.splice(index, 1);
 
     this.setState({
@@ -36,4 +36,4 @@ class StoreQueuesTable extends React.Component {
   }
 }
 
-export default StoreQueuesTable;
+export default ShopperQueuesTable

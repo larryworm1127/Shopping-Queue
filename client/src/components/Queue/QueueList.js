@@ -4,7 +4,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Booking from './QueueRow';
+import QueueRow from './QueueRow';
 import { styles } from './style';
 import { Paper, TableContainer, withStyles } from '@material-ui/core';
 import TableHead from '@material-ui/core/TableHead';
@@ -51,7 +51,7 @@ class QueueList extends React.Component {
 
           <TableBody>
             {queues.map((booking, index) => (
-              <Booking
+              <QueueRow
                 key={uid(booking)}
                 queue={booking}
                 removeQueue={removeQueue}
