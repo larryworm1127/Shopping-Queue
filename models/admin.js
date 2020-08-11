@@ -10,6 +10,7 @@ const Admin = mongoose.model('Admin', {
     required: true,
     minlength: 1,
     trim: true,
+    unique: true,
     validate: {
       validator: isAlphanumeric,
       message: 'Not valid username'

@@ -15,6 +15,9 @@ const UserTypes = {
 // Error messages
 const incorrectCred = 'Incorrect username or password!';
 const notRegistered = 'User is not registered!';
+const passwordTooShot = 'Password too short! (minimum 4 characters)';
+const confirmPassFails = 'Password don\'t match';
+const dupUsername = 'Username already taken!';
 
 
 const UserSchema = new Schema({
@@ -71,6 +74,31 @@ UserSchema.statics.verifyCredential = function (username, password, type) {
       });
     });
   });
+};
+
+
+UserSchema.statics.verifyRegister = function (username, password, confirmPassword, userType) {
+  const User = this;
+
+  // Check password length
+  if (password.length < 4) {
+    return Promise.reject(passwordTooShot);
+  }
+
+  // Check confirmPassword and password
+  if (password !== confirmPassword) {
+    return Promise.reject(confirmPassFails);
+  }
+
+  // Check duplicate username
+  return User.findOne({ username: username, userType: userType })
+    .then(shopper => {
+      if (shopper) {
+        return Promise.reject(dupUsername);
+      } else {
+        return Promise.resolve();
+      }
+    });
 };
 
 

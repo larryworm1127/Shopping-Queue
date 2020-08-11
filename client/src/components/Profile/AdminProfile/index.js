@@ -20,7 +20,7 @@ class AdminProfile extends React.Component {
 
     switch (setting) {
       case 0:
-        return <AdminPage admin={admin}/>;
+        return <AdminPage {...this.props}/>;
       case 1:
         return <ShoppersProfile admin={admin}/>;
       case 2:

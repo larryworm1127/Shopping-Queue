@@ -36,9 +36,7 @@ app.use(session({
 
 // A route to login and create a session
 app.post('/api/login', (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  const userType = req.body.userType;
+  const { username, password, userType } = req.body;
 
   User.verifyCredential(username, password, userType)
     .then((user) => {
@@ -77,37 +75,11 @@ app.get('/api/check-session', (req, res) => {
 
 // Verify register account info
 app.post('/api/verifyRegister', ((req, res) => {
-
-  const passwordTooShot = 'Password too short! (minimum 4 characters)';
-  const confirmPassFails = 'Password don\'t match';
-  const dupUsername = 'Username already taken!';
-
   const { username, password, confirmPassword, userType } = req.body;
 
-  // Check password length
-  if (password.length < 4) {
-    res.status(400).send({ message: passwordTooShot });
-    return;
-  }
-
-  // Check confirmPassword and password
-  if (password !== confirmPassword) {
-    res.status(400).send({ message: confirmPassFails });
-    return;
-  }
-
-  // Check duplicate username
-  User.findOne({ username: username, userType: userType })
-    .then(shopper => {
-      if (shopper) {
-        res.status(400).send({ message: dupUsername });
-      } else {
-        res.send({});
-      }
-    })
-    .catch(error => {
-      res.status(400).send({ message: error });
-    });
+  User.verifyRegister(username, password, confirmPassword, userType)
+    .then(() => res.send())
+    .catch(errorMsg => res.status(400).send({ message: errorMsg }));
 }));
 
 
@@ -196,17 +168,12 @@ app.post('/api/register', (req, res) => {
 });
 
 
-//Get profile for shopper
-app.get('/api/profile', (req, res) => {
+// Get profile for shopper
+app.get('/api/shopper/:username', (req, res) => {
 
-  const id = req.body.id;
+  const username = req.body.username;
 
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-    return;
-  }
-
-  Shopper.findById(id)
+  Shopper.findById({ username })
     .then(shopper => {
       if (!shopper) {
         res.status(404).send();
@@ -255,16 +222,10 @@ app.patch('/api/profile', (req, res) => {
 
 
 //Get profile for store owner
-app.get('/api/store/profile', (req, res) => {
+app.get('/api/store/:username', (req, res) => {
+  const username = req.params.username;
 
-  const id = req.body.id;
-
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-    return;
-  }
-
-  Store.findById(id)
+  Store.findOne({ username })
     .then(store => {
       if (!store) {
         res.status(404).send();
@@ -318,16 +279,10 @@ app.patch('/api/store/profile', (req, res) => {
 
 
 //Get profile for admin
-app.get('/api/admin/profile', (req, res) => {
+app.get('/api/admin/:username', (req, res) => {
+  const username = req.params.username;
 
-  const id = req.body.id;
-
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-    return;
-  }
-
-  Admin.findById(id)
+  Admin.findOne({ username })
     .then(admin => {
       if (!admin) {
         res.status(404).send();

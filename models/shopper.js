@@ -10,6 +10,7 @@ const ShopperSchema = new Schema({
     required: true,
     minlength: 1,
     trim: true,
+    unique: true,
     validate: {
       validator: isAlphanumeric,
       message: 'Not valid username'

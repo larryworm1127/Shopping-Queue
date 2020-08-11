@@ -1,4 +1,4 @@
-// Functions to help with user actions.
+// Functions to help with user authentication actions.
 
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {

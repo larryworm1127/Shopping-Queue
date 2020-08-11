@@ -2,21 +2,23 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
+import { getAdminProfile } from '../../../actions/admin';
 
 
 class AdminPage extends React.Component {
 
   constructor(props) {
     super(props);
-    const { admin } = this.props;
-    this.state = {
-      edit: false,
-      firstName: admin.firstName,
-      lastName: admin.lastName,
-      email: admin.email,
-      address: admin.address,
-    };
+    getAdminProfile(this.props.currentUser, this);
   }
+
+  state = {
+    edit: false,
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+  };
 
   setEdit = (val) => {
     this.setState({ edit: val });
@@ -31,18 +33,10 @@ class AdminPage extends React.Component {
   handleSave = (event) => {
     event.preventDefault();
 
-    const { admin } = this.props;
     this.setEdit(false);
-    admin.updateUserProfile(
-      this.state.firstName,
-      this.state.lastName,
-      this.state.address,
-      this.state.email,
-    );
   };
 
   render() {
-    const { admin } = this.props;
 
     return (
       <React.Fragment>
@@ -50,18 +44,19 @@ class AdminPage extends React.Component {
           <DataDisplay
             gridSize={3}
             title="Your First Name"
-            content={admin.firstName}
+            content={this.state.firstName}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="firstName"
             label="First Name"
+            {/*{ TODO: remove value prop and replace it with content }*/}
             value={this.state.firstName}
             handleFormField={this.handleFormField}
           />
           <DataDisplay
             gridSize={3}
             title="Your Last Name"
-            content={admin.lastName}
+            content={this.state.lastName}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="lastName"
@@ -72,7 +67,7 @@ class AdminPage extends React.Component {
           <DataDisplay
             gridSize={6}
             title="Your Email"
-            content={admin.email}
+            content={this.state.email}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="email"
@@ -83,7 +78,7 @@ class AdminPage extends React.Component {
           <DataDisplay
             gridSize={12}
             title="Your Location"
-            content={admin.address}
+            content={this.state.address}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="address"

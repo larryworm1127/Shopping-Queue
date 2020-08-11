@@ -1,7 +1,3 @@
-import { shoppers } from './shoppers';
-import { stores } from './stores';
-
-
 /**
  * Admin class used to store admin user profile data.
  * For phase 2, this would be used as a middleware for transforming
