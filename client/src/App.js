@@ -33,7 +33,9 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    readCookie(this);
+    if (!['/login', '/register'].includes(window.location.pathname)) {
+      readCookie(this);
+    }
   }
 
   state = {
