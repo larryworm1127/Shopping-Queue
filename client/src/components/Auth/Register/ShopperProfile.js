@@ -3,15 +3,12 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import FormTextField from '../../FormTextField';
 import RegisterFormButtons from './RegisterFormButtons';
-import { styles } from './style';
-import { withStyles } from '@material-ui/core';
 
 
 class ShopperProfile extends React.Component {
 
   render() {
     const {
-      classes,
       handleNext,
       activeStep,
       handleBack,
@@ -65,4 +62,4 @@ class ShopperProfile extends React.Component {
   }
 }
 
-export default withStyles(styles)(ShopperProfile);
+export default ShopperProfile;

@@ -1,10 +1,9 @@
 import React from 'react';
-import { Grid, Typography, withStyles } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import FormTextField from '../../FormTextField';
 import FormSelectField from '../../FormSelectField';
 import RegisterFormButtons from './RegisterFormButtons';
 import { registerVerify } from '../../../actions/auth';
-import { styles } from './style';
 
 
 class AccountDetail extends React.Component {
@@ -95,4 +94,4 @@ class AccountDetail extends React.Component {
   }
 }
 
-export default withStyles(styles)(AccountDetail);
+export default AccountDetail;

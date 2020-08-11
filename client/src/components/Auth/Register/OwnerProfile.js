@@ -5,15 +5,12 @@ import FormTextField from '../../FormTextField';
 import FormSelectField from '../../FormSelectField';
 import { StoreTypes } from '../../../utils/stores';
 import RegisterFormButtons from './RegisterFormButtons';
-import { styles } from './style';
-import { withStyles } from '@material-ui/core';
 
 
 class OwnerProfile extends React.Component {
 
   render() {
     const {
-      classes,
       handleNext,
       handleFormField,
       activeStep,
@@ -93,4 +90,4 @@ class OwnerProfile extends React.Component {
   }
 }
 
-export default withStyles(styles)(OwnerProfile);
+export default OwnerProfile;
