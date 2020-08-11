@@ -29,18 +29,18 @@ router.get('/api/shopper/profile/:username', (req, res) => {
 
 
 // Update profile info for shopper
-router.patch('/api/shopper/profile', (req, res) => {
+router.patch('/api/shopper/profile/:username', (req, res) => {
 
-  const id = req.body.id;
+  const username = req.params.username;
 
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send();
-    return;
-  }
+  // if (!ObjectID.isValid(id)) {
+  //   res.status(404).send();
+  //   return;
+  // }
 
   // get the updated shopper profile.
   const shopper = {
-    username: req.body.username,
+    // username: req.body.username,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -48,9 +48,8 @@ router.patch('/api/shopper/profile', (req, res) => {
     remindTime: req.body.remindTime
   };
 
-
-  // Update the shopper by its id.
-  Shopper.findByIdAndUpdate(id, { $set: shopper }, { new: true })
+  // Update the shopper by its username.
+  Shopper.findOneAndUpdate({username}, { $set: shopper }, { new: true })
     .then(shopper => {
       if (!shopper) {
         res.status(404).send();
