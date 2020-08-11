@@ -81,6 +81,7 @@ class AccountDetail extends React.Component {
               handleFormField={handleFormField}
               value={registerAs}
               menuItems={['Shopper', 'Shop Owner']}
+              useIndex
             />
           </Grid>
 

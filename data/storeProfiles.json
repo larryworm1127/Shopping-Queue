@@ -1,0 +1,62 @@
+[
+  {
+    "coordinate": [
+      43,
+      -79
+    ],
+    "username": "store1",
+    "storeName": "Floort Mart",
+    "email": "store1@test.com",
+    "address": "123 Street, Toronto, ON",
+    "type": "Clothing",
+    "openingTime": "10:00",
+    "closingTime": "18:30",
+    "customerLimit": 10,
+    "customerShopTime": 30
+  },
+  {
+    "coordinate": [
+      43,
+      -79
+    ],
+    "username": "store2",
+    "storeName": "Shoppers Not Drug Mart",
+    "email": "store2@test.com",
+    "address": "456 Test Street, Toronto, ON",
+    "type": "Department",
+    "openingTime": "11:00",
+    "closingTime": "19:30",
+    "customerLimit": 15,
+    "customerShopTime": 50
+  },
+  {
+    "coordinate": [
+      43,
+      -79
+    ],
+    "username": "store3",
+    "storeName": "Yes Frills",
+    "email": "store3@test.com",
+    "address": "789 Test Street, Toronto, ON",
+    "type": "Grocery",
+    "openingTime": "08:00",
+    "closingTime": "20:30",
+    "customerLimit": 30,
+    "customerShopTime": 40
+  },
+  {
+    "coordinate": [
+      43,
+      -79
+    ],
+    "username": "store4",
+    "storeName": "Unfreshco",
+    "email": "store4@test.com",
+    "address": "100 Test Street, Toronto, ON",
+    "type": "Grocery",
+    "openingTime": "07:00",
+    "closingTime": "21:00",
+    "customerLimit": 20,
+    "customerShopTime": 30
+  }
+]
