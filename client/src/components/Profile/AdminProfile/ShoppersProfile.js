@@ -10,14 +10,13 @@ import { withStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { shoppers } from '../../../utils/shoppers';
 
 
 class ShoppersProfile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      profileViews: new Array(this.props.admin.viewableShoppers.length).fill(0)
-    };
+
+  state = {
+    profileViews: new Array(shoppers.length).fill(0)
   };
 
   closeView(index) {
@@ -28,9 +27,7 @@ class ShoppersProfile extends React.Component {
       return (
         <Button
           className={classes.button}
-          onClick={() => {
-            this.handleViewChange(index, 0);
-          }}
+          onClick={() => this.handleViewChange(index, 0)}
           variant="contained"
           color="primary"
         >
@@ -41,15 +38,16 @@ class ShoppersProfile extends React.Component {
   };
 
   handleViewChange(index, newProfileView) {
-    let shallowCopyViewsOpen = [...this.state.profileViews];
-    let shallowItem = { ...shallowCopyViewsOpen[index] };
-    shallowItem = newProfileView;
-    shallowCopyViewsOpen[index] = shallowItem;
-    this.setState({ profileViews: shallowCopyViewsOpen });
+    const viewsOpen = [...this.state.profileViews];
+    viewsOpen[index] = newProfileView;
+
+    this.setState({
+      profileViews: viewsOpen
+    });
   };
 
   getView(index) {
-    const shopper = this.props.admin.viewableShoppers[index];
+    const shopper = shoppers[index];
     const stateView = this.state.profileViews[index];
     switch (stateView) {
       case 1:
@@ -64,12 +62,12 @@ class ShoppersProfile extends React.Component {
   };
 
   render() {
-    const { admin, classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          {admin.viewableShoppers.map((shopper, index) => (
+          {shoppers.map((shopper, index) => (
             <Grid item xs={12} key={index}>
               <Card>
                 <CardContent>
@@ -81,13 +79,15 @@ class ShoppersProfile extends React.Component {
                   >
                     {shopper.firstName} {shopper.lastName}
                   </Typography>
-                  <Typography color="textSecondary" className={classes.secondaryText}>Email: {shopper.email}</Typography>
-                  <Typography color="textSecondary" className={classes.secondaryText}>Location: {shopper.address}</Typography>
+                  <Typography color="textSecondary" className={classes.secondaryText}>
+                    Email: {shopper.email}
+                  </Typography>
+                  <Typography color="textSecondary" className={classes.secondaryText}>
+                    Location: {shopper.address}
+                  </Typography>
                   <Button
                     className={classes.button}
-                    onClick={() => {
-                      this.handleViewChange(index, 1);
-                    }}
+                    onClick={() => this.handleViewChange(index, 1)}
                     variant="contained"
                     color="primary"
                   >
@@ -95,9 +95,7 @@ class ShoppersProfile extends React.Component {
                   </Button>
                   <Button
                     className={classes.button}
-                    onClick={() => {
-                      this.handleViewChange(index, 2);
-                    }}
+                    onClick={() => this.handleViewChange(index, 2)}
                     variant="contained"
                     color="primary"
                   >
@@ -105,9 +103,7 @@ class ShoppersProfile extends React.Component {
                   </Button>
                   <Button
                     className={classes.button}
-                    onClick={() => {
-                      this.handleViewChange(index, 3);
-                    }}
+                    onClick={() => this.handleViewChange(index, 3)}
                     variant="contained"
                     color="primary"
                   >
@@ -117,13 +113,18 @@ class ShoppersProfile extends React.Component {
                     className={classes.deleteButton}
                     variant="contained"
                     color="secondary"
-                    startIcon={<DeleteIcon />}
+                    startIcon={<DeleteIcon/>}
                   >
                     Delete User
                   </Button>
 
                   {this.closeView(index)}
-                  {this.getView(index)}
+
+                  {(this.state.profileViews[index] !== 0) && (
+                    <div className={classes.adminUserProfile}>
+                      {this.getView(index)}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </Grid>

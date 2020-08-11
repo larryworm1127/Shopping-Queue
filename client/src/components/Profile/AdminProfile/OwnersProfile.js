@@ -9,24 +9,24 @@ import StoreProfile from '../StoreProfile/StoreProfile';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { stores } from '../../../utils/stores';
+
 
 class OwnersProfile extends React.Component {
 
   state = {
-    profileViews: new Array(this.props.admin.viewableStores.length).fill(0)
+    profileViews: new Array(stores.length).fill(0)
   };
 
   closeView(index) {
+    const stateView = this.state.profileViews[index];
     const { classes } = this.props;
 
-    const stateView = this.state.profileViews[index];
     if (stateView !== 0) {
       return (
         <Button
           className={classes.button}
-          onClick={() => {
-            this.handleViewChange(index, 0);
-          }}
+          onClick={() => this.handleViewChange(index, 0)}
           variant="contained"
           color="primary"
         >
@@ -37,15 +37,16 @@ class OwnersProfile extends React.Component {
   };
 
   handleViewChange(index, newProfileView) {
-    let shallowCopyViewsOpen = [...this.state.profileViews];
-    let shallowItem = { ...shallowCopyViewsOpen[index] };
-    shallowItem = newProfileView;
-    shallowCopyViewsOpen[index] = shallowItem;
-    this.setState({ profileViews: shallowCopyViewsOpen });
+    const viewsOpen = [...this.state.profileViews];
+    viewsOpen[index] = newProfileView;
+
+    this.setState({
+      profileViews: viewsOpen
+    });
   };
 
   getView(index) {
-    const store = this.props.admin.viewableStores[index];
+    const store = stores[index];
     const stateView = this.state.profileViews[index];
     switch (stateView) {
       case 1:
@@ -58,11 +59,11 @@ class OwnersProfile extends React.Component {
   };
 
   render() {
-    const { admin, classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
-        {admin.viewableStores.map((store, index) => (
+        {stores.map((store, index) => (
           <Box m={2}>
             <Card>
               <CardContent>
@@ -88,9 +89,7 @@ class OwnersProfile extends React.Component {
                 </Typography>
                 <Button
                   className={classes.button}
-                  onClick={() => {
-                    this.handleViewChange(index, 1);
-                  }}
+                  onClick={() => this.handleViewChange(index, 1)}
                   variant="contained"
                   color="primary"
                 >
@@ -98,9 +97,7 @@ class OwnersProfile extends React.Component {
                 </Button>
                 <Button
                   className={classes.button}
-                  onClick={() => {
-                    this.handleViewChange(index, 2);
-                  }}
+                  onClick={() => this.handleViewChange(index, 2)}
                   variant="contained"
                   color="primary"
                 >
@@ -116,7 +113,12 @@ class OwnersProfile extends React.Component {
                 </Button>
 
                 {this.closeView(index)}
-                {this.getView(index)}
+
+                {(this.state.profileViews[index] !== 0) && (
+                  <div className={classes.adminUserProfile}>
+                    {this.getView(index)}
+                  </div>
+                )}
               </CardContent>
             </Card>
           </Box>

@@ -14,16 +14,12 @@ export class Admin {
     lastName,
     address,
     email,
-    viewableShoppers,
-    viewableStores,
   ) {
     this.username = username;
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
     this.email = email;
-    this.viewableShoppers = viewableShoppers;
-    this.viewableStores = viewableStores;
   };
 
   /**
@@ -51,8 +47,6 @@ const admins = [
     'Doe',
     '123 Admin Street, Toronto, ON',
     'admin@test.com',
-    shoppers,
-    stores
   )
 ];
 
