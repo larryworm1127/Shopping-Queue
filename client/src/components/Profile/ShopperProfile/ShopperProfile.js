@@ -5,6 +5,7 @@ import { uid } from 'react-uid';
 import DataDisplay from '../../DataDisplay';
 import Button from '@material-ui/core/Button';
 import ProfileEditButtons from '../ProfileEditButtons';
+import { getShopperProfile, updateShopperProfile } from '../../../actions/shopper';
 
 
 class UserProfile extends React.Component {
