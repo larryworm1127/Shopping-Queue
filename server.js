@@ -139,7 +139,7 @@ app.post('/api/register', (req, res) => {
       customerLimit: req.body.customerLimit,
       customerShopTime: req.body.customerShopTime
     })
-     :
+    :
     // New user is a store
     new Shopper({
       username: req.body.username,
@@ -151,7 +151,7 @@ app.post('/api/register', (req, res) => {
       favouriteStores: [],
       searchHistory: [],
       queueHistory: []
-     });
+    });
 
   // Save the user and profile
   user.save()
@@ -294,9 +294,9 @@ app.patch('/api/profile/favorites', (req, res) => {
   const storeID = req.body.storeID; //id of store you want to add to favorites
 
   if (!ObjectID.isValid(shopperID)) {
-      res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-      return;
-    }
+    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
+    return;
+  }
 
   if (!ObjectID.isValid(storeID)) {
     res.status(404).send(); // if invalid id, definitely can't find resource, 404.
@@ -309,19 +309,19 @@ app.patch('/api/profile/favorites', (req, res) => {
         res.status(404).send();
       } else {
         Shopper.updateOne(
-            { "_id": shopperID },
-            {$push: {"favouriteStores": store}
+          { '_id': shopperID },
+          {
+            $push: { 'favouriteStores': store }
 
-        }).then(result => {
-            if (!result) {
-                res.status(404).send('Resource not found')
-            }
-            else{
-                Shopper.findById(shopperID).then(shopper => {
-                    res.send(shopper)
-                })
-            }
-        })
+          }).then(result => {
+          if (!result) {
+            res.status(404).send('Resource not found');
+          } else {
+            Shopper.findById(shopperID).then(shopper => {
+              res.send(shopper);
+            });
+          }
+        });
       }
     })
     .catch(error => {
@@ -336,57 +336,57 @@ app.delete('/api/profile/favorites', (req, res) => {
   const storeID = req.body.storeID; //id of store you want to add to favorites
 
   if (!ObjectID.isValid(shopperID)) {
-      res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-      return;
-    }
+    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
+    return;
+  }
 
   if (!ObjectID.isValid(storeID)) {
     res.status(404).send(); // if invalid id, definitely can't find resource, 404.
     return;
   }
 
-    // Delete the store from favorites
-    Store.findById(storeID)
+  // Delete the store from favorites
+  Store.findById(storeID)
     .then(store => {
-        Shopper.updateOne(
-            {"_id": shopperID},
-            {$pull: {"favouriteStores": store._id}}
-        ).then(result => {
-            Shopper.findById(shopperID).then(shopper => {
-                res.send(shopper)
-            })
-        })
+      Shopper.updateOne(
+        { '_id': shopperID },
+        { $pull: { 'favouriteStores': store._id } }
+      ).then(result => {
+        Shopper.findById(shopperID).then(shopper => {
+          res.send(shopper);
+        });
+      });
     }).catch(error => {
-        res.status(500).send(); // server error
-    });
+    res.status(500).send(); // server error
+  });
 
 });
 
 //Delete a shoppers account
 app.delete('/api/profile', (req, res) => {
-    const id = req.body.id;
+  const id = req.body.id;
 
-    // Validate id
-    if (!ObjectID.isValid(id)) {
+  // Validate id
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  // Delete the shopper and the user attached to the shopper
+  Shopper.findByIdAndRemove(id)
+    .then(shopper => {
+      if (!shopper) {
         res.status(404).send();
-        return;
-    }
-
-    // Delete the shopper and the user attached to the shopper
-    Shopper.findByIdAndRemove(id)
-        .then(shopper => {
-            if (!shopper) {
-                res.status(404).send();
-            } else {
-                User.remove({ username: shopper.username })
-                .then(user => {
-                    res.send({"Shopper": shopper});
-                })
-            }
-        })
-        .catch(error => {
-            res.status(500).send(); // server error, could not delete.
-        });
+      } else {
+        User.remove({ username: shopper.username })
+          .then(user => {
+            res.send({ 'Shopper': shopper });
+          });
+      }
+    })
+    .catch(error => {
+      res.status(500).send(); // server error, could not delete.
+    });
 });
 
 
@@ -448,29 +448,29 @@ app.patch('/api/store/profile', (req, res) => {
 
 //Delete a store owners account
 app.delete('/api/store/profile', (req, res) => {
-    const id = req.body.id;
+  const id = req.body.id;
 
-    // Validate id
-    if (!ObjectID.isValid(id)) {
+  // Validate id
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  // Delete the store and the user attached to the store
+  Store.findByIdAndRemove(id)
+    .then(store => {
+      if (!store) {
         res.status(404).send();
-        return;
-    }
-
-    // Delete the store and the user attached to the store
-    Store.findByIdAndRemove(id)
-        .then(store => {
-            if (!store) {
-                res.status(404).send();
-            } else {
-                User.remove({ username: store.username })
-                .then(user => {
-                    res.send({"Store": store});
-                })
-            }
-        })
-        .catch(error => {
-            res.status(500).send(); // server error, could not delete.
-        });
+      } else {
+        User.remove({ username: store.username })
+          .then(user => {
+            res.send({ 'Store': store });
+          });
+      }
+    })
+    .catch(error => {
+      res.status(500).send(); // server error, could not delete.
+    });
 });
 
 
@@ -492,15 +492,9 @@ app.get('/api/admin/:username', (req, res) => {
 });
 
 
-//Update profile info for admin
-app.patch('/api/admin/profile', (req, res) => {
-
-  const id = req.body.id;
-
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send();
-    return;
-  }
+// Update profile info for admin
+app.patch('/api/admin/:username', (req, res) => {
+  const username = req.params.username;
 
   // get the updated store profile.
   const body = {
@@ -511,8 +505,7 @@ app.patch('/api/admin/profile', (req, res) => {
     address: req.body.address
   };
 
-  // Update the admin by its id.
-  Admin.findByIdAndUpdate(id, { $set: body }, { new: true })
+  Admin.findOneAndUpdate({ username }, { $set: body }, { new: true, runValidators: true })
     .then(admin => {
       if (!admin) {
         res.status(404).send();
@@ -520,68 +513,68 @@ app.patch('/api/admin/profile', (req, res) => {
         res.send(admin);
       }
     })
-    .catch(() => {
-      res.status(400).send(); // bad request for changing the student.
+    .catch(error => {
+      res.status(400).send(error);
     });
 });
 
 //Delete an admins account
 app.delete('/api/admin/profile', (req, res) => {
-    const id = req.body.id;
+  const id = req.body.id;
 
-    // Validate id
-    if (!ObjectID.isValid(id)) {
+  // Validate id
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  // Delete the admin and the user attached to the admin
+  Admin.findByIdAndRemove(id)
+    .then(admin => {
+      if (!admin) {
         res.status(404).send();
-        return;
-    }
-
-    // Delete the admin and the user attached to the admin
-    Admin.findByIdAndRemove(id)
-        .then(admin => {
-            if (!admin) {
-                res.status(404).send();
-            } else {
-                User.remove({ username: admin.username })
-                .then(user => {
-                    res.send({"Admin": admin});
-                })
-            }
-        })
-        .catch(error => {
-            res.status(500).send(); // server error, could not delete.
-        });
+      } else {
+        User.remove({ username: admin.username })
+          .then(user => {
+            res.send({ 'Admin': admin });
+          });
+      }
+    })
+    .catch(error => {
+      res.status(500).send(); // server error, could not delete.
+    });
 });
 
 //Add new booking for shopper
 app.post('/api/queue', (req, res) => {
 
-    // Create a new queue
-    const queue = new Queue({
-        username: req.body.username,
-        store: req.body.store,
-        date: req.body.date,
-        shopTime: req.body.shopTime,
-        numCustomers: req.body.numCustomers,
-        dateTimeQueued: req.body.dateTimeQueued
-    });
+  // Create a new queue
+  const queue = new Queue({
+    username: req.body.username,
+    store: req.body.store,
+    date: req.body.date,
+    shopTime: req.body.shopTime,
+    numCustomers: req.body.numCustomers,
+    dateTimeQueued: req.body.dateTimeQueued
+  });
 
-    // Save queue to the database and add to shopper queue history
-    queue.save().then(
-        result1 => {
-            Shopper.updateOne(
-            {"username": req.body.username},
-            {$push: {"queueHistory": queue}}
-            ).then((result2) => {
-                Shopper.find( {username: req.body.username} )
-                .then((result3) => {
-                    res.send({ "Shopper": result3, "Queue": result1 });
-                })
-            })
-        },
-        error => {
-            res.status(400).send(error); // 400 for bad request
-        }
-    );
+  // Save queue to the database and add to shopper queue history
+  queue.save().then(
+    result1 => {
+      Shopper.updateOne(
+        { 'username': req.body.username },
+        { $push: { 'queueHistory': queue } }
+      ).then((result2) => {
+        Shopper.find({ username: req.body.username })
+          .then((result3) => {
+            res.send({ 'Shopper': result3, 'Queue': result1 });
+          });
+      });
+    },
+    error => {
+      res.status(400).send(error); // 400 for bad request
+    }
+  );
 });
 
 
@@ -606,26 +599,26 @@ app.get('/api/queue', (req, res) => {
 
 //Remove a queue
 app.delete('/api/queue', (req, res) => {
-    const id = req.body.id;
+  const id = req.body.id;
 
-    // Validate id
-    if (!ObjectID.isValid(id)) {
+  // Validate id
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  // Delete a queue by its id
+  Queue.findByIdAndRemove(id)
+    .then(queue => {
+      if (!queue) {
         res.status(404).send();
-        return;
-    }
-
-    // Delete a queue by its id
-    Queue.findByIdAndRemove(id)
-        .then(queue => {
-            if (!queue) {
-                res.status(404).send();
-            } else {
-                res.send(queue);
-            }
-        })
-        .catch(error => {
-            res.status(500).send(); // server error, could not delete.
-        });
+      } else {
+        res.send(queue);
+      }
+    })
+    .catch(error => {
+      res.status(500).send(); // server error, could not delete.
+    });
 });
 
 // Get queues for store
@@ -680,7 +673,7 @@ app.get('/api/map', (req, res) => {
 // Get store by ID
 app.get('/api/store/:id', (req, res) => {
 
-  const id = req.params.id
+  const id = req.params.id;
 
   Store.findById(id)
     .then(store => {

@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
-import { getAdminProfile } from '../../../actions/admin';
+import { getAdminProfile, updateAdminProfile } from '../../../actions/admin';
 
 
 class AdminPage extends React.Component {
@@ -33,7 +33,7 @@ class AdminPage extends React.Component {
   handleSave = (event) => {
     event.preventDefault();
 
-    this.setEdit(false);
+    updateAdminProfile(this.props.currentUser, this);
   };
 
   render() {
@@ -49,7 +49,7 @@ class AdminPage extends React.Component {
             setEdit={this.setEdit}
             name="firstName"
             label="First Name"
-            {/*{ TODO: remove value prop and replace it with content }*/}
+            // TODO: remove value prop and replace it with content
             value={this.state.firstName}
             handleFormField={this.handleFormField}
           />
