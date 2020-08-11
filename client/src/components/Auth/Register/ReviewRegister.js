@@ -1,8 +1,7 @@
 import React from 'react';
 import { register } from '../../../actions/auth';
 import RegisterFormButtons from './RegisterFormButtons';
-import { Typography, withStyles } from '@material-ui/core';
-import { styles } from './style';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import Button from '@material-ui/core/Button';
 
 
@@ -14,7 +13,7 @@ class ReviewRegister extends React.Component {
   };
 
   render() {
-    const { classes, registerComp, activeStep, handleBack, history } = this.props;
+    const { registerComp, activeStep, handleBack, history } = this.props;
     const { showLoginButton, errorMessage } = this.state;
 
     return (
@@ -22,22 +21,23 @@ class ReviewRegister extends React.Component {
         <h2>Confirm registration information from previous steps before clicking next!</h2>
 
         {(errorMessage) && (
-          <Typography color="textSecondary" component="p">
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
             {errorMessage}
-          </Typography>
+          </Alert>
         )}
 
         {showLoginButton ? (
-            <div className={classes.buttons}>
+            <Alert severity="success">
+              <AlertTitle>Register success!</AlertTitle>
               <Button
-                className={classes.button}
                 variant="contained"
                 color="primary"
                 onClick={() => history.push('/login')}
               >
                 Go to Login
               </Button>
-            </div>
+            </Alert>
           )
           : (
             <RegisterFormButtons
@@ -52,4 +52,4 @@ class ReviewRegister extends React.Component {
   }
 }
 
-export default withStyles(styles)(ReviewRegister);
+export default ReviewRegister;
