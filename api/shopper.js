@@ -10,9 +10,9 @@ const { Shopper } = require('../models/shopper');
 
 
 // Get profile for shopper
-router.get('/api/shopper/:username', (req, res) => {
+router.get('/api/shopper/profile/:username', (req, res) => {
 
-  const username = req.body.username;
+  const username = req.params.username;
 
   Shopper.findById({ username })
     .then(shopper => {
@@ -29,7 +29,7 @@ router.get('/api/shopper/:username', (req, res) => {
 
 
 // Update profile info for shopper
-router.patch('/api/profile', (req, res) => {
+router.patch('/api/shopper/profile', (req, res) => {
 
   const id = req.body.id;
 
@@ -65,7 +65,7 @@ router.patch('/api/profile', (req, res) => {
 
 
 // Add store to favorites
-router.patch('/api/profile/favorites', (req, res) => {
+router.patch('/api/shopper/profile/favorites', (req, res) => {
 
   const shopperID = req.body.shopperID; //id of shopper
   const storeID = req.body.storeID; //id of store you want to add to favorites
@@ -108,7 +108,7 @@ router.patch('/api/profile/favorites', (req, res) => {
 
 
 // Remove store from favorites
-router.delete('/api/profile/favorites', (req, res) => {
+router.delete('/api/shopper/profile/favorites', (req, res) => {
 
   const shopperID = req.body.shopperID; //id of shopper
   const storeID = req.body.storeID; //id of store you want to add to favorites
@@ -142,7 +142,7 @@ router.delete('/api/profile/favorites', (req, res) => {
 
 
 // Delete a shoppers account
-router.delete('/api/profile', (req, res) => {
+router.delete('/api/shopper/profile', (req, res) => {
   const id = req.body.id;
 
   // Validate id
