@@ -102,19 +102,19 @@ router.post('/api/register', (req, res) => {
     userType: req.body.registerAs
   });
 
-  const profile = (req.body.userType === UserTypes.Store) ?
+  const profile = (req.body.registerAs === UserTypes.Store) ?
     // New user is a store
     new Store({
       username: req.body.username,
       storeName: req.body.storeName,
       email: req.body.email,
-      address: req.body.address,
-      coordinate: req.body.coordinate,
-      type: req.body.type,
-      openingTime: req.body.openingTime,
-      closingTime: req.body.closingTime,
+      address: req.body.location,
+      coordinate: [43, -79],
+      type: req.body.storeType,
+      openingTime: req.body.openTime,
+      closingTime: req.body.closeTime,
       customerLimit: req.body.customerLimit,
-      customerShopTime: req.body.customerShopTime
+      customerShopTime: req.body.shoppingTimeLimit
     })
     :
     // New user is a store
@@ -133,11 +133,13 @@ router.post('/api/register', (req, res) => {
   // Save the user and profile
   user.save()
     .then((user) => {
-      profile.save().then((profile) => {
-        res.send({ profile: profile, user: user });
-      }).catch((error) => {
-        res.status(400).send({ message: error });
-      });
+      profile.save()
+        .then((profile) => {
+          res.send({ profile: profile, user: user });
+        })
+        .catch((error) => {
+          res.status(400).send({ message: error });
+        });
     })
     .catch((error) => {
       res.status(400).send({ message: error });
