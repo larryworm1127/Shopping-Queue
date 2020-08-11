@@ -69,7 +69,7 @@ export const login = (loginComp, app) => {
 // A function that verifies account detail before allowing user to enter profile info
 export const registerVerify = (username, password, confirmPassword, userType, setError, handleNext) => {
   const request = new Request('/api/verifyRegister', {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify({ username, password, confirmPassword, userType }),
     headers: {
       Accept: 'application/json, text/plain, */*',
@@ -79,10 +79,12 @@ export const registerVerify = (username, password, confirmPassword, userType, se
 
   fetch(request)
     .then(res => {
-      return res.json();
+      if (res.status !== 200) {
+        return res.json();
+      }
     })
     .then(json => {
-      if (json.message !== undefined) {
+      if (json && json.message !== undefined) {
         setError(json.message);
       } else {
         handleNext();

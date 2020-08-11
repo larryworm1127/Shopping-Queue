@@ -1,7 +1,7 @@
 // Functions to help with admin actions.
 
 export const getAdminProfile = (username, profileComp) => {
-  const url = `/api/admin/${username}`;
+  const url = `/api/admin/profile/${username}`;
 
   fetch(url)
     .then(res => {
@@ -26,7 +26,7 @@ export const getAdminProfile = (username, profileComp) => {
 
 
 export const updateAdminProfile = (username, profileComp) => {
-  const request = new Request(`/api/admin/${username}`, {
+  const request = new Request(`/api/admin/profile/${username}`, {
     method: 'PATCH',
     body: JSON.stringify(profileComp.state),
     headers: {
@@ -49,6 +49,28 @@ export const updateAdminProfile = (username, profileComp) => {
           email: json.email,
           address: json.address,
           edit: false
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
+export const getHelpMessages = (messageComp) => {
+  const url = '/api/admin/messages';
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        messageComp.setState({
+          messages: [...json]
         });
       }
     })

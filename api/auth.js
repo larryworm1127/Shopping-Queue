@@ -51,13 +51,13 @@ router.get('/api/check-session', (req, res) => {
 
 
 // Verify register account info
-router.post('/api/verifyRegister', ((req, res) => {
+router.post('/api/verifyRegister', (req, res) => {
   const { username, password, confirmPassword, userType } = req.body;
 
   User.verifyRegister(username, password, confirmPassword, userType)
     .then(() => res.send())
     .catch(errorMsg => res.status(400).send({ message: errorMsg }));
-}));
+});
 
 
 // Register a new admin

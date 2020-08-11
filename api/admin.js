@@ -9,7 +9,7 @@ const { HelpMessage } = require('../models/helpMessage');
 
 
 // Get profile for admin
-router.get('/api/admin/:username', (req, res) => {
+router.get('/api/admin/profile/:username', (req, res) => {
   const username = req.params.username;
 
   Admin.findOne({ username })
@@ -27,7 +27,7 @@ router.get('/api/admin/:username', (req, res) => {
 
 
 // Update profile info for admin
-router.patch('/api/admin/:username', (req, res) => {
+router.patch('/api/admin/profile/:username', (req, res) => {
   const username = req.params.username;
 
   // get the updated store profile.
@@ -84,6 +84,22 @@ router.get('/api/admin/messages', (req, res) => {
     })
     .catch(error => {
       res.status(500).send(error); // server error
+    });
+});
+
+
+// Add help message
+router.post('/api/admin/messages', (req, res) => {
+
+  const { username, userType, title, description, date } = req.body;
+  const message = new HelpMessage({ username, userType, title, description, date });
+
+  message.save()
+    .then(newMessage => {
+      res.send(newMessage);
+    })
+    .catch(error => {
+      res.status(400).send(error);
     });
 });
 

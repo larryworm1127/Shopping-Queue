@@ -1,0 +1,9 @@
+[
+  {
+    "username": "admin",
+    "firstName": "John",
+    "lastName": "Doe",
+    "address": "123 Admin Street, Toronto, ON",
+    "email:": "admin@test.com"
+  }
+]
