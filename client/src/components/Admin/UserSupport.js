@@ -8,16 +8,21 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
-import { supportMessages } from '../../utils/admins';
 import MessageTableRow from './MessageTableRow';
 import { uid } from 'react-uid';
 import { withRouter } from 'react-router-dom';
+import { getHelpMessages } from '../../actions/admin';
 
 
 class UserSupport extends React.Component {
 
+  constructor(props) {
+    super(props);
+    getHelpMessages(this);
+  }
+
   state = {
-    messages: [...supportMessages],
+    messages: [],
     open: false
   };
 
