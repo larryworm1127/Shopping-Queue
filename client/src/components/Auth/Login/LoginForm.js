@@ -13,11 +13,11 @@ import { styles } from './style';
 class LoginForm extends React.Component {
 
   state = {
-    username: null,
-    password: null,
+    username: '',
+    password: '',
     userType: 0,
     displayError: false,
-    errorMessage: null
+    errorMessage: ''
   };
 
   handleFormField = (field, event) => {
@@ -28,13 +28,19 @@ class LoginForm extends React.Component {
     });
   };
 
+  handleLoginSubmit = (event) => {
+    event.preventDefault();
+
+    login(this, this.props.app)
+  }
+
   render() {
-    const { classes, app } = this.props;
+    const { classes } = this.props;
     const { displayError, errorMessage, userType } = this.state;
 
     return (
       <React.Fragment>
-        <div className={classes.form}>
+        <form className={classes.form} onSubmit={this.handleLoginSubmit}>
           <FormTextField
             variant="outlined"
             margin="normal"
@@ -70,9 +76,7 @@ class LoginForm extends React.Component {
           />
 
           <Button
-            onClick={() => {
-              login(this, app);
-            }}
+            type="submit"
             fullWidth
             variant="contained"
             color="primary"
@@ -80,7 +84,7 @@ class LoginForm extends React.Component {
           >
             Sign In
           </Button>
-        </div>
+        </form>
       </React.Fragment>
     );
   }

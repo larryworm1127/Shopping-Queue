@@ -1,16 +1,10 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import { styles } from './style';
+import { withStyles } from '@material-ui/core';
 
 
 class RegisterFormButtons extends React.Component {
-
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-      displayError: false,
-      errorMessage: ''
-    });
-  };
 
   render() {
     const { activeStep, classes, handleBack, onClick } = this.props;
@@ -24,6 +18,7 @@ class RegisterFormButtons extends React.Component {
             </Button>
           )}
           <Button
+            type="submit"
             variant="contained"
             color="primary"
             className={classes.button}
@@ -37,4 +32,4 @@ class RegisterFormButtons extends React.Component {
   }
 }
 
-export default RegisterFormButtons;
+export default withStyles(styles)(RegisterFormButtons);

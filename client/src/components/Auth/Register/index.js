@@ -11,9 +11,6 @@ import ShopperProfile from './ShopperProfile';
 import OwnerProfile from './OwnerProfile';
 import { styles } from './style';
 import ReviewRegister from './ReviewRegister';
-import { addNewUser } from '../../../utils/verifyAuth';
-import { addShopper } from '../../../utils/shoppers';
-import { addStore } from '../../../utils/stores';
 
 
 const steps = ['Account Details', 'Profile Details', 'Review'];
@@ -22,7 +19,7 @@ class Register extends React.Component {
 
   constructor(props) {
     super(props);
-    this.props.history.push('/register')
+    this.props.history.push('/register');
   }
 
   state = {
@@ -67,6 +64,8 @@ class Register extends React.Component {
   };
 
   getStepContent = (step) => {
+    const { registerAs, activeStep } = this.state
+
     switch (step) {
       case 0:
         return (
@@ -79,7 +78,7 @@ class Register extends React.Component {
           />
         );
       case 1:
-        return (this.state.registerAs === 0) ?
+        return (registerAs === 0) ?
           <ShopperProfile
             handleNext={this.handleNext}
             handleBack={this.handleBack}
@@ -93,7 +92,14 @@ class Register extends React.Component {
             {...this.state}
           />;
       case 2:
-        return <ReviewRegister registerComp={this}/>;
+        return (
+          <ReviewRegister
+            registerComp={this}
+            handleBack={this.handleBack}
+            activeStep={activeStep}
+            history={this.props.history}
+          />
+        );
       default:
         return Error('Unknown step');
     }
@@ -117,7 +123,7 @@ class Register extends React.Component {
 
   render() {
     const { classes, location, userType, isLoggedIn } = this.props;
-    const { activeStep } = this.state
+    const { activeStep } = this.state;
 
     return (
       <React.Fragment>

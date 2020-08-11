@@ -28,10 +28,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    expires: 3600000,
+    expires: 300000,
     httpOnly: true
   }
 }));
+
 
 // A route to login and create a session
 app.post('/api/login', (req, res) => {
@@ -101,7 +102,7 @@ app.post('/api/verifyRegister', ((req, res) => {
       if (shopper) {
         res.status(400).send({ message: dupUsername });
       } else {
-        res.send({})
+        res.send({});
       }
     })
     .catch(error => {
@@ -147,12 +148,14 @@ app.post('/api/register', (req, res) => {
 
   // Save the user and profile
   user.save()
-    .then((user) => {
-      profile.save().then((profile) => {
-        res.send({ profile: profile, user: user });
-      }).catch((error) => {
-        res.status(400).send({ message: error });
-      });
+    .then(() => {
+      profile.save()
+        .then(() => {
+          res.send({});
+        })
+        .catch((error) => {
+          res.status(400).send({ message: error });
+        });
     })
     .catch((error) => {
       res.status(400).send({ message: error });

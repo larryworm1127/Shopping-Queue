@@ -85,7 +85,6 @@ class OwnerProfile extends React.Component {
 
           <RegisterFormButtons
             activeStep={activeStep}
-            classes={classes}
             handleBack={handleBack}
           />
         </form>

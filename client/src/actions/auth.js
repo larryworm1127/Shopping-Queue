@@ -44,21 +44,19 @@ export const login = (loginComp, app) => {
   // Send the request with fetch()
   fetch(request)
     .then(res => {
-      if (res.status === 200) {
-        return res.json();
-      }
+      return res.json();
     })
     .then(json => {
-      if (json.currentUser !== undefined) {
+      if (json.message !== undefined) {
+        loginComp.setState({
+          displayError: true,
+          errorMessage: json.message
+        });
+      } else {
         app.setState({
           currentUser: json.currentUser,
           userType: json.userType,
           isLoggedIn: true,
-        });
-      } else if (json.message !== undefined) {
-        loginComp.setState({
-          displayError: true,
-          errorMessage: json.message
         });
       }
     })
@@ -97,7 +95,7 @@ export const registerVerify = (username, password, confirmPassword, userType, se
 
 
 // A function to send a POST request with the new user info
-export const register = (registerComp) => {
+export const register = (registerComp, currPage) => {
   const request = new Request('/api/register', {
     method: 'post',
     body: JSON.stringify(registerComp.state),
@@ -110,15 +108,16 @@ export const register = (registerComp) => {
   // Send the request with fetch()
   fetch(request)
     .then(res => {
-      if (res.status === 200) {
-        return res.json();
-      }
+      return res.json();
     })
     .then(json => {
       if (json.message !== undefined) {
-        registerComp.setState({
-          displayError: true,
+        currPage.setState({
           errorMessage: json.message
+        });
+      } else {
+        currPage.setState({
+          showLoginButton: true
         });
       }
     })

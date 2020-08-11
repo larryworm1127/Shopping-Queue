@@ -57,7 +57,6 @@ class ShopperProfile extends React.Component {
 
         <RegisterFormButtons
           activeStep={activeStep}
-          classes={classes}
           handleBack={handleBack}
           onClick={handleNext}
         />
