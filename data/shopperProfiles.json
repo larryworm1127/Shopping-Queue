@@ -1,0 +1,35 @@
+[
+  {
+    "favouriteStores": [],
+    "searchHistory": [],
+    "queueHistory": [],
+    "username": "user",
+    "firstName": "John",
+    "lastName": "Doe",
+    "address": "123 Test Street, Toronto, ON",
+    "email": "user@mail.com",
+    "remindTime": 30
+  },
+  {
+    "favouriteStores": [],
+    "searchHistory": [],
+    "queueHistory": [],
+    "username": "user2",
+    "firstName": "Doe",
+    "lastName": "John",
+    "email": "user2@mail.com",
+    "address": "124 Test Street, Toronto, ON",
+    "remindTime": 15
+  },
+  {
+    "favouriteStores": [],
+    "searchHistory": [],
+    "queueHistory": [],
+    "username": "user3",
+    "firstName": "Dohn",
+    "lastName": "Joe",
+    "email": "user3@mail.com",
+    "address": "125 Test Street, Toronto, ON",
+    "remindTime": 60
+  }
+]
