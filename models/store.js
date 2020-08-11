@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const { isAlphanumeric, isEmail } = require('validator');
+const validator = require('validator');
 
 
 const Store = mongoose.model('Store', {
@@ -12,7 +12,7 @@ const Store = mongoose.model('Store', {
     trim: true,
     unique: true,
     validate: {
-      validator: isAlphanumeric,
+      validator: validator.isAlphanumeric,
       message: 'Not valid username'
     }
   },
@@ -26,7 +26,7 @@ const Store = mongoose.model('Store', {
     required: true,
     trim: true,
     validate: {
-      validator: isEmail,
+      validator: validator.isEmail,
       message: 'Not valid email'
     }
   },

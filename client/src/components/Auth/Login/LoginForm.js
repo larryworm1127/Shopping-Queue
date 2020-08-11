@@ -68,6 +68,7 @@ class LoginForm extends React.Component {
             value={userType}
             handleFormField={this.handleFormField}
             menuItems={['Shopper', 'Shop Owner', 'Admin']}
+            useIndex
           />
 
           <FormControlLabel

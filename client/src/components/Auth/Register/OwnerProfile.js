@@ -76,7 +76,7 @@ class OwnerProfile extends React.Component {
               label="Store Type"
               handleFormField={handleFormField}
               value={storeType}
-              menuItems={Object.keys(StoreTypes)}
+              menuItems={Object.values(StoreTypes)}
             />
           </Grid>
 

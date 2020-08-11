@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../Nav/navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { getStore } from '../../utils/stores';
+import { getStore, getStoreByUsername } from '../../utils/stores';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
@@ -50,7 +50,7 @@ class StoreDetail extends React.Component {
 
   render() {
     const { match, classes, date, shoppingTime, numCustomer, handleFormField, history } = this.props;
-    const store = getStore(match.params.id);
+    const store = getStoreByUsername(match.params.username);
 
     return (
       <React.Fragment>

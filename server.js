@@ -62,7 +62,7 @@ app.get('*', (req, res) => {
     '/login',
     '/register',
     '/logout',
-    '/store/:id'
+    '/store/:username'
   ];
   if (!goodPageRoutes.includes(req.url)) {
     res.status(404);

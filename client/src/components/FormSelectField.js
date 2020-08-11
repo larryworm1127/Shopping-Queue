@@ -28,7 +28,7 @@ class FormSelectField extends React.Component {
 
     return items.map((item, index) => (
       <MenuItem
-        value={(useIndex === undefined) ? index : item}
+        value={(useIndex !== undefined) ? index : item}
         key={uid(item)}
       >
         {item}
@@ -60,9 +60,7 @@ class FormSelectField extends React.Component {
           >
             <Select
               value={value}
-              onChange={(event) => {
-                handleFormField(name, event);
-              }}
+              onChange={(event) => handleFormField(name, event)}
               displayEmpty={true}
             >
               {this.renderMenuItems(menuItems)}
