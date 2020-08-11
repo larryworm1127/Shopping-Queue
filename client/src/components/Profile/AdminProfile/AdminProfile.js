@@ -49,7 +49,7 @@ class AdminPage extends React.Component {
             setEdit={this.setEdit}
             name="firstName"
             label="First Name"
-            {/*{ TODO: remove value prop and replace it with content }*/}
+            // {/*{ TODO: remove value prop and replace it with content }*/}
             value={this.state.firstName}
             handleFormField={this.handleFormField}
           />
@@ -87,7 +87,7 @@ class AdminPage extends React.Component {
             handleFormField={this.handleFormField}
           />
         </Grid>
-        <br/>
+        <br />
 
         <ProfileEditButtons
           edit={this.state.edit}
