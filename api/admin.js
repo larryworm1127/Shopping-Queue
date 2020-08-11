@@ -5,7 +5,7 @@ const router = express.Router();
 
 const { User } = require('../models/user');
 const { Admin } = require('../models/admin');
-const { HelperMessage } = require('../models/helpMessage');
+const { HelpMessage } = require('../models/helpMessage');
 
 
 // Get profile for admin
