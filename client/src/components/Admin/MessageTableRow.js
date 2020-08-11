@@ -8,6 +8,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { withStyles } from '@material-ui/core';
 import { styles } from '../Queue/style';
 import MessageDetail from './MessageDetail';
+import { getUserTypeText } from '../../utils/user';
 
 
 class MessageTableRow extends React.Component {
@@ -33,11 +34,9 @@ class MessageTableRow extends React.Component {
               {this.state.open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
             </IconButton>
           </TableCell>
-          <TableCell component="th" scope="row" align="center">
-            {message.user}
-          </TableCell>
-          <TableCell align="center">{message.type}</TableCell>
-          <TableCell align="center">{message.message}</TableCell>
+          <TableCell align="center">{message.username}</TableCell>
+          <TableCell align="center">{getUserTypeText(message.userType)}</TableCell>
+          <TableCell align="center">{message.title}</TableCell>
           <TableCell align="center">{message.date}</TableCell>
         </TableRow>
         <TableRow>

@@ -1,0 +1,37 @@
+[
+  {
+    "username": "user",
+    "userType": 0,
+    "title": "Issue with queuing",
+    "description": "Couldn't not queue at store1.",
+    "date": "2019-08-11"
+  },
+  {
+    "username": "store1",
+    "userType": 1,
+    "title": "Issue with deleting user from queue",
+    "description": "Couldn't not delete user2 from queue.",
+    "date": "2019-08-12"
+  },
+  {
+    "username": "store2",
+    "userType": 1,
+    "title": "Issue with modifying specific queue",
+    "description": "Couldn't not modify queue for user3 at store1.",
+    "date": "2019-08-13"
+  },
+  {
+    "username": "user2",
+    "userType": 0,
+    "title": "Issue with queuing",
+    "description": "Couldn't not queue at store2.",
+    "date": "2019-08-14"
+  },
+  {
+    "username": "user3",
+    "userType": 0,
+    "title": "Issue with queuing",
+    "description": "Couldn't not queue at store3.",
+    "date": "2019-08-14"
+  }
+]
