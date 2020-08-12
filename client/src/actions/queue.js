@@ -93,7 +93,7 @@ export const removeQueue = (id, queueComp, index) => {
 export const addQueue = (queueData) => {
   const request = new Request('/api/queue', {
     method: 'post',
-    body: JSON.stringify(queueData.state),
+    body: queueData,
     headers: {
       Accept: 'application/json, text/plain, */*',
       'Content-Type': 'application/json'
@@ -103,7 +103,7 @@ export const addQueue = (queueData) => {
   // Send the request with fetch()
   fetch(request)
     .then(res => {
-      return res.json();
+      return res;
     })
     .then(json => {
       if (json.message !== undefined) {
@@ -111,6 +111,7 @@ export const addQueue = (queueData) => {
         ;
       } else {
         console.log('Booking added')
+        // history.push('/queue');
       }
     })
     .catch(error => {
