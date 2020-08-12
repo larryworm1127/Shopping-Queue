@@ -14,7 +14,7 @@ import { Queue } from '../../utils/queue';
 import { getShopper } from '../../utils/shoppers';
 import BackArrow from '@material-ui/icons/ArrowBackIos';
 import Button from '@material-ui/core/Button';
-
+import { addQueue } from '../../actions/queue';
 
 class StoreDetail extends React.Component {
 
@@ -42,8 +42,9 @@ class StoreDetail extends React.Component {
       this.state.numShoppers,
       new Date()
     );
-    selectedStore.addNewQueue(newQueue);
-    getShopper(currentUser).queueUp(newQueue);
+    // selectedStore.addNewQueue(newQueue);
+    // getShopper(currentUser).queueUp(newQueue);
+    addQueue(newQueue.id)
     history.push('/queue');
   };
 
@@ -54,8 +55,8 @@ class StoreDetail extends React.Component {
 
     return (
       <React.Fragment>
-        <NavBar/>
-        <CssBaseline/>
+        <NavBar />
+        <CssBaseline />
 
         <div className={classes.layout}>
           <Paper className={classes.paper}>
@@ -65,19 +66,19 @@ class StoreDetail extends React.Component {
               color="primary"
               onClick={() => history.goBack()}
             >
-              <BackArrow/>Back
+              <BackArrow />Back
             </Button>
 
             <Typography component="h1" variant="h4" align="center">
               {store.name}
             </Typography>
-            <br/>
+            <br />
             <Grid container>
               <Grid item xs={7}>
                 <Typography variant="h6" gutterBottom>
                   Store details
                 </Typography>
-                <StoreDetailList store={store}/>
+                <StoreDetailList store={store} />
               </Grid>
               <Grid item xs={5}>
                 <Typography variant="h6" gutterBottom>
