@@ -31,8 +31,7 @@ const theme = createMuiTheme({
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     if (!['/login', '/register'].includes(window.location.pathname)) {
       readCookie(this);
     }
