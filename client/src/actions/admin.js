@@ -58,6 +58,46 @@ export const updateAdminProfile = (username, profileComp) => {
 };
 
 
+export const getAllShoppers = (profileComp) => {
+  const url = '/api/shoppers';
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        profileComp.setState({ shoppers: json });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
+export const getAllStores = (profileComp) => {
+  const url = '/api/stores';
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        profileComp.setState({ stores: json });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
 export const getHelpMessages = (messageComp) => {
   const url = '/api/admin/messages';
 
@@ -69,8 +109,13 @@ export const getHelpMessages = (messageComp) => {
     })
     .then(json => {
       if (json) {
+        const formattedJson = json.map((message) => {
+          const result = { ...message };
+          result.date = new Date(result.date).toLocaleString();
+          return result;
+        });
         messageComp.setState({
-          messages: [...json]
+          messages: [...formattedJson]
         });
       }
     })

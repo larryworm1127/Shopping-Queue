@@ -30,7 +30,7 @@ const HelpMessage = mongoose.model('HelpMessage', {
     required: true
   },
   date: {
-    type: String,
+    type: Date,
     required: true,
     validate: {
       validator: validator.isDate,

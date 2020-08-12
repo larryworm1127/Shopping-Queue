@@ -1,6 +1,8 @@
-'use strict'
+'use strict';
 
 const mongoose = require('mongoose');
+const validator = require('validator');
+
 
 const Queue = mongoose.model('Queue', {
   username: {
@@ -13,10 +15,14 @@ const Queue = mongoose.model('Queue', {
     required: true,
     trim: true
   },
-  date: {
-    type: String,
+  datetime: {
+    type: Date,
     required: true,
-    trim: true
+    trim: true,
+    validate: {
+      validator: validator.isDate,
+      message: 'Not valid date'
+    }
   },
   shopTime: {
     type: Number,
@@ -26,10 +32,14 @@ const Queue = mongoose.model('Queue', {
     type: Number,
     required: true
   },
-  dateTimeQueued: {
-    type: String,
+  datetimeQueued: {
+    type: Date,
     required: true,
-    trim: true
+    trim: true,
+    validate: {
+      validator: validator.isDate,
+      message: 'Not valid date'
+    }
   }
 });
 

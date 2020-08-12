@@ -4,21 +4,26 @@ import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
 import { StoreTypes } from '../../../utils/stores';
 import FormSelectField from '../../FormSelectField';
+import { getStoreProfile, updateStoreProfile } from '../../../actions/store';
 
 
 class UserProfile extends React.Component {
 
-  constructor(props) {
-    super(props);
-    const { store } = this.props;
-    this.state = {
-      edit: false,
-      storeName: store.name,
-      email: store.email,
-      address: store.address,
-      storeType: store.type
-    };
+  componentDidMount() {
+    getStoreProfile(this.props.username, this);
   }
+
+  state = {
+    edit: false,
+    storeName: '',
+    email: '',
+    address: '',
+    storeType: '',
+    openTime: '',
+    closeTime: '',
+    customerLimit: '',
+    customerShopTime: '',
+  };
 
   setEdit = (val) => {
     this.setState({ edit: val });
@@ -33,18 +38,10 @@ class UserProfile extends React.Component {
   handleSave = (event) => {
     event.preventDefault();
 
-    const { store } = this.props;
-    this.setEdit(false);
-    store.updateUserProfile(
-      this.state.storeName,
-      this.state.email,
-      this.state.address,
-      this.state.storeType
-    );
+    updateStoreProfile(this.props.username, this);
   };
 
   render() {
-    const { store } = this.props;
 
     return (
       <React.Fragment>
@@ -52,7 +49,7 @@ class UserProfile extends React.Component {
           <DataDisplay
             gridSize={6}
             title="Store Name"
-            content={store.name}
+            content={this.state.storeName}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="storeName"
@@ -63,7 +60,7 @@ class UserProfile extends React.Component {
           <DataDisplay
             gridSize={6}
             title="Store Email"
-            content={store.email}
+            content={this.state.email}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="email"
@@ -74,7 +71,7 @@ class UserProfile extends React.Component {
           <DataDisplay
             gridSize={12}
             title="Store Location"
-            content={store.address}
+            content={this.state.address}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="address"
@@ -85,7 +82,7 @@ class UserProfile extends React.Component {
           <DataDisplay
             gridSize={12}
             title="Store Type"
-            content={store.type}
+            content={this.state.storeType}
             edit={this.state.edit}
             setEdit={this.setEdit}
             editComponent={
@@ -98,6 +95,54 @@ class UserProfile extends React.Component {
                 menuItems={Object.keys(StoreTypes)}
               />
             }
+          />
+          <DataDisplay
+            gridSize={6}
+            title="Store Hours Opening"
+            content={this.state.openTime}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="openTime"
+            label="Opening Time"
+            type="time"
+            value={this.state.openTime}
+            handleFormField={this.handleFormField}
+          />
+          <DataDisplay
+            gridSize={6}
+            title="Store Hours Closing"
+            content={this.state.closeTime}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="closeTime"
+            label="Closing Time"
+            type="time"
+            value={this.state.closeTime}
+            handleFormField={this.handleFormField}
+          />
+          <DataDisplay
+            gridSize={12}
+            title="Customer Limit"
+            content={this.state.customerLimit}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="customerLimit"
+            label="Customer Limit"
+            type="number"
+            value={this.state.customerLimit}
+            handleFormField={this.handleFormField}
+          />
+          <DataDisplay
+            gridSize={12}
+            title="Customer Shopping Time Limit (min)"
+            content={this.state.customerShopTime}
+            edit={this.state.edit}
+            setEdit={this.setEdit}
+            name="customerShopTime"
+            label="Customer Shopping Time Limit (min)"
+            type="number"
+            value={this.state.customerShopTime}
+            handleFormField={this.handleFormField}
           />
         </Grid>
         <br/>

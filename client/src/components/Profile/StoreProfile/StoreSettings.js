@@ -1,6 +1,5 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
 
 
@@ -11,10 +10,7 @@ class StoreSettings extends React.Component {
     const { store } = this.props;
     this.state = {
       edit: false,
-      openTime: store.openingTime,
-      closeTime: store.closingTime,
-      customerLimit: store.customerLimit,
-      customerShopTime: store.customerShopTime
+
     };
   }
 
@@ -47,54 +43,7 @@ class StoreSettings extends React.Component {
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          <DataDisplay
-            gridSize={6}
-            title="Store Hours Opening"
-            content={store.openingTime}
-            edit={this.state.edit}
-            setEdit={this.setEdit}
-            name="openTime"
-            label="Opening Time"
-            type="time"
-            value={this.state.openTime}
-            handleFormField={this.handleFormField}
-          />
-          <DataDisplay
-            gridSize={6}
-            title="Store Hours Closing"
-            content={store.closingTime}
-            edit={this.state.edit}
-            setEdit={this.setEdit}
-            name="closeTime"
-            label="Closing Time"
-            type="time"
-            value={this.state.closeTime}
-            handleFormField={this.handleFormField}
-          />
-          <DataDisplay
-            gridSize={12}
-            title="Customer Limit"
-            content={store.customerLimit}
-            edit={this.state.edit}
-            setEdit={this.setEdit}
-            name="customerLimit"
-            label="Customer Limit"
-            type="number"
-            value={this.state.customerLimit}
-            handleFormField={this.handleFormField}
-          />
-          <DataDisplay
-            gridSize={12}
-            title="Customer Shopping Time Limit (min)"
-            content={store.customerShopTime}
-            edit={this.state.edit}
-            setEdit={this.setEdit}
-            name="customerShopTime"
-            label="Customer Shopping Time Limit (min)"
-            type="number"
-            value={this.state.customerShopTime}
-            handleFormField={this.handleFormField}
-          />
+
         </Grid>
         <br/>
 

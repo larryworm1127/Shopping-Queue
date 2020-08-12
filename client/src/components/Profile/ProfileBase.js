@@ -33,7 +33,7 @@ class ProfileBase extends React.Component {
   };
 
   render() {
-    const { classes, user, tabs, profileSettings, location, currentUser, userType, isLoggedIn } = this.props;
+    const { classes, username, tabs, profileSettings, location, currentUser, userType, isLoggedIn } = this.props;
     const { setting } = this.state;
 
     return (
@@ -62,7 +62,7 @@ class ProfileBase extends React.Component {
         </Drawer>
 
         <Container className={classes.container}>
-          {profileSettings(user, setting, currentUser)}
+          {profileSettings((username) ? username : currentUser, setting)}
         </Container>
       </React.Fragment>
     );

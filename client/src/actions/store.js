@@ -1,7 +1,7 @@
-// Functions to help with shopper actions.
 
-export const getShopperProfile = (username, profileComp) => {
-  const url = `/api/shopper/profile/${username}`;
+
+export const getStoreProfile = (username, profileComp) => {
+  const url = `/api/store/profile/${username}`;
 
   fetch(url)
     .then(res => {
@@ -12,22 +12,26 @@ export const getShopperProfile = (username, profileComp) => {
     .then(json => {
       if (json) {
         profileComp.setState({
-          firstName: json.firstName,
-          lastName: json.lastName,
+          storeName: json.storeName,
           email: json.email,
+          storeType: json.type,
           address: json.address,
-          remindTime: json.remindTime
+          openTime: json.openingTime,
+          closeTime: json.closingTime,
+          customerLimit: json.customerLimit,
+          customerShopTime: json.customerShopTime,
+          coordinate: [...json.coordinate]
         });
       }
     })
     .catch(error => {
       console.log(error);
     });
-};
+}
 
 
-export const updateShopperProfile = (username, profileComp) => {
-  const request = new Request(`/api/shopper/profile/${username}`, {
+export const updateStoreProfile = (username, profileComp) => {
+  const request = new Request(`/api/store/profile/${username}`, {
     method: 'PATCH',
     body: JSON.stringify(profileComp.state),
     headers: {
@@ -45,11 +49,14 @@ export const updateShopperProfile = (username, profileComp) => {
     .then(json => {
       if (json) {
         profileComp.setState({
-          firstName: json.firstName,
-          lastName: json.lastName,
+          storeName: json.storeName,
           email: json.email,
+          storeType: json.type,
           address: json.address,
-          remindTime: json.remindTime,
+          openTime: json.openingTime,
+          closeTime: json.closingTime,
+          customerLimit: json.customerLimit,
+          customerShopTime: json.customerShopTime,
           edit: false
         });
       }

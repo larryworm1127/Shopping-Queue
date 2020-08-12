@@ -9,7 +9,7 @@ const { Store } = require('../models/store');
 
 
 // Get profile for store owner
-router.get('/api/store/:username', (req, res) => {
+router.get('/api/store/profile/:username', (req, res) => {
   const username = req.params.username;
 
   Store.findOne({ username })
@@ -27,31 +27,24 @@ router.get('/api/store/:username', (req, res) => {
 
 
 // Update profile info for store owner
-router.patch('/api/store/profile', (req, res) => {
-
-  const id = req.body.id;
-
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send();
-    return;
-  }
+router.patch('/api/store/profile/:username', (req, res) => {
+  const username = req.params.username;
 
   // get the updated store profile.
   const store = {
-    username: req.body.username,
+    username: username,
     email: req.body.email,
     storeName: req.body.storeName,
     address: req.body.address,
     coordinate: req.body.coordinate,
-    type: req.body.type,
+    type: req.body.storeType,
     customerLimit: req.body.customerLimit,
     customerShopTime: req.body.customerShopTime,
-    openingTime: req.body.openingTime,
-    closingTime: req.body.closingTime,
+    openingTime: req.body.openTime,
+    closingTime: req.body.closeTime,
   };
 
-  // Update the store by its id.
-  Store.findByIdAndUpdate(id, { $set: store }, { new: true })
+  Store.findOneAndUpdate({ username }, { $set: store }, { new: true })
     .then(store => {
       if (!store) {
         res.status(404).send();
@@ -60,11 +53,11 @@ router.patch('/api/store/profile', (req, res) => {
       }
     })
     .catch(() => {
-      res.status(400).send(); // bad request for changing the student.
+      res.status(400).send();
     });
 });
 
-//Delete a store owners account
+// Delete a store owners account
 router.delete('/api/store/profile', (req, res) => {
   const id = req.body.id;
 
@@ -92,14 +85,12 @@ router.delete('/api/store/profile', (req, res) => {
 });
 
 
-// Get store by ID
-router.get('/api/store/:id', (req, res) => {
+// Get all stores
+router.get('/api/stores', (req, res) => {
 
-  const id = req.params.id;
-
-  Store.findById(id)
-    .then(store => {
-      res.send(store);
+  Store.find()
+    .then(stores => {
+      res.send(stores);
     })
     .catch(error => {
       res.status(500).send(error); // server error

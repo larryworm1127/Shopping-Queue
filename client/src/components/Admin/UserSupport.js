@@ -16,8 +16,7 @@ import { getHelpMessages } from '../../actions/admin';
 
 class UserSupport extends React.Component {
 
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     getHelpMessages(this);
   }
 

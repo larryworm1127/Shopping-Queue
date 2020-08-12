@@ -20,12 +20,12 @@ class ShopperProfile extends React.Component {
     this.props.history.push('/profile');
   }
 
-  profileSettings = (propShopper, setting, currentUser) => {
-    const shopper = (propShopper === undefined) ? getShopper(currentUser) : propShopper;
+  profileSettings = (username, setting) => {
+    const shopper = getShopper(username);
 
     switch (setting) {
       case 0:
-        return <UserProfile shopper={shopper}/>;
+        return <UserProfile username={username}/>;
       case 1:
         return <SearchHistory shopper={shopper}/>;
       case 2:

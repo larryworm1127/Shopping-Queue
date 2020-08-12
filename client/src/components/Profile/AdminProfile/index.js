@@ -1,8 +1,7 @@
 import React from 'react';
 import AdminPage from './AdminProfile.js';
 import ShoppersProfile from './ShoppersProfile.js';
-import OwnersProfile from './OwnersProfile.js';
-import { getAdmin } from '../../../utils/admins';
+import StoresProfile from './StoresProfile.js';
 import ProfileBase from '../ProfileBase';
 import { withRouter } from 'react-router-dom';
 
@@ -15,28 +14,23 @@ const tabs = [
 
 class AdminProfile extends React.Component {
 
-  profileSettings = (adminProp, setting, currentUser) => {
-    const admin = (adminProp === undefined) ? getAdmin(currentUser) : adminProp;
-
+  profileSettings = (username, setting) => {
     switch (setting) {
       case 0:
-        return <AdminPage {...this.props}/>;
+        return <AdminPage username={username}/>;
       case 1:
-        return <ShoppersProfile admin={admin}/>;
+        return <ShoppersProfile/>;
       case 2:
-        return <OwnersProfile admin={admin}/>;
+        return <StoresProfile/>;
       default:
         return Error('Unknown case');
     }
   };
 
   render() {
-    const { admin } = this.props;
-
     return (
       <ProfileBase
         {...this.props}
-        user={admin}
         tabs={tabs}
         profileSettings={this.profileSettings}
       />

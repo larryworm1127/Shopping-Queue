@@ -10,19 +10,19 @@ import { getShopperProfile, updateShopperProfile } from '../../../actions/shoppe
 
 class UserProfile extends React.Component {
 
-  constructor(props) {
-    super(props);
-    const { shopper } = this.props;
-    this.state = {
-      edit: false,
-      firstName: shopper.firstName,
-      lastName: shopper.lastName,
-      email: shopper.email,
-      address: shopper.address,
-      favoriteStores: shopper.favoriteStores,
-      remindTime: shopper.remindTime
-    };
+  componentDidMount() {
+    getShopperProfile(this.props.username, this);
   }
+
+  state = {
+    edit: false,
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    favoriteStores: [],
+    remindTime: 0
+  };
 
   setEdit = (val) => {
     this.setState({ edit: val });
@@ -44,18 +44,12 @@ class UserProfile extends React.Component {
     });
   };
 
-
   addNewFav = (Fav) => {
     this.state.favoriteStores.push(Fav);
   };
 
-  // handleFavorite = (event, selectedStore) => {
-  //   event.preventDefault();
-  //   ShopperProfile.addNewFav(selectedStore);
-
-  // };
-  getFavStoreDisplayComponent = (shopper) => {
-    return shopper.favoriteStores.map((store, index) => (
+  getFavStoreDisplayComponent = () => {
+    return this.state.favoriteStores.map((store, index) => (
       <Grid item md={4} key={uid(index)}>
         <StoreCards store={store} index={index}/>
       </Grid>
@@ -88,28 +82,17 @@ class UserProfile extends React.Component {
   handleSave = (event) => {
     event.preventDefault();
 
-    const { shopper } = this.props;
-    this.setEdit(false);
-    shopper.updateUserProfile(
-      this.state.firstName,
-      this.state.lastName,
-      this.state.address,
-      this.state.email,
-      this.state.remindTime,
-      this.state.favoriteStores
-    );
+    updateShopperProfile(this.props.username, this);
   };
 
   render() {
-    const { shopper } = this.props;
-
     return (
       <React.Fragment>
         <Grid container spacing={3}>
           <DataDisplay
             gridSize={3}
             title="Your First Name"
-            content={shopper.firstName}
+            content={this.state.firstName}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="firstName"
@@ -120,7 +103,7 @@ class UserProfile extends React.Component {
           <DataDisplay
             gridSize={3}
             title="Your Last Name"
-            content={shopper.lastName}
+            content={this.state.lastName}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="lastName"
@@ -131,7 +114,7 @@ class UserProfile extends React.Component {
           <DataDisplay
             gridSize={6}
             title="Your Email"
-            content={shopper.email}
+            content={this.state.email}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="email"
@@ -142,7 +125,7 @@ class UserProfile extends React.Component {
           <DataDisplay
             gridSize={12}
             title="Your Location"
-            content={shopper.address}
+            content={this.state.address}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="address"
@@ -155,12 +138,12 @@ class UserProfile extends React.Component {
             title="Your Favorite Stores"
             contentComponent={
               <Grid container spacing={3}>
-                {this.getFavStoreDisplayComponent(shopper)}
+                {this.getFavStoreDisplayComponent}
               </Grid>
             }
             editComponent={
               <Grid container spacing={3}>
-                {this.getFavStoreEditComponent(shopper)}
+                {this.getFavStoreEditComponent}
               </Grid>
             }
             edit={this.state.edit}
@@ -169,7 +152,7 @@ class UserProfile extends React.Component {
           <DataDisplay
             gridSize={12}
             title="Notification Settings"
-            content={`Remind me ${shopper.remindTime} minutes before my booking.`}
+            content={`Remind me ${this.state.remindTime} minutes before my booking.`}
             edit={this.state.edit}
             setEdit={this.setEdit}
             name="remindTime"

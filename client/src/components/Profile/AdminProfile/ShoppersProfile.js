@@ -10,24 +10,31 @@ import { withStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { shoppers } from '../../../utils/shoppers';
+import { getAllShoppers } from '../../../actions/admin';
+import { uid } from 'react-uid';
 
 
 class ShoppersProfile extends React.Component {
 
+  componentDidMount() {
+    getAllShoppers(this);
+  }
+
   state = {
-    profileViews: new Array(shoppers.length).fill(0)
+    stateView: 0,
+    profileOpenIndex: 0,
+    shoppers: []
   };
 
   closeView(index) {
-    const stateView = this.state.profileViews[index];
     const { classes } = this.props;
+    const { stateView, profileOpenIndex } = this.state;
 
-    if (stateView !== 0) {
+    if (stateView !== 0 && profileOpenIndex === index) {
       return (
         <Button
           className={classes.button}
-          onClick={() => this.handleViewChange(index, 0)}
+          onClick={() => this.setState({ stateView: 0 })}
           variant="contained"
           color="primary"
         >
@@ -37,25 +44,14 @@ class ShoppersProfile extends React.Component {
     }
   };
 
-  handleViewChange(index, newProfileView) {
-    const viewsOpen = [...this.state.profileViews];
-    viewsOpen[index] = newProfileView;
-
-    this.setState({
-      profileViews: viewsOpen
-    });
-  };
-
-  getView(index) {
-    const shopper = shoppers[index];
-    const stateView = this.state.profileViews[index];
-    switch (stateView) {
+  getView(index, username) {
+    switch (this.state.stateView) {
       case 1:
-        return <UserProfile shopper={shopper}/>;
+        return <UserProfile username={username}/>;
       case 2:
-        return <SearchHistory shopper={shopper}/>;
+        return <SearchHistory username={username}/>;
       case 3:
-        return <QueueHistory shopper={shopper}/>;
+        return <QueueHistory username={username}/>;
       default:
         return;
     }
@@ -63,12 +59,13 @@ class ShoppersProfile extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { stateView, profileOpenIndex } = this.state;
 
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          {shoppers.map((shopper, index) => (
-            <Grid item xs={12} key={index}>
+          {this.state.shoppers.map((shopper, index) => (
+            <Grid item xs={12} key={uid(shopper)}>
               <Card>
                 <CardContent>
                   <Typography
@@ -87,7 +84,7 @@ class ShoppersProfile extends React.Component {
                   </Typography>
                   <Button
                     className={classes.button}
-                    onClick={() => this.handleViewChange(index, 1)}
+                    onClick={() => this.setState({ stateView: 1, profileOpenIndex: index })}
                     variant="contained"
                     color="primary"
                   >
@@ -95,7 +92,7 @@ class ShoppersProfile extends React.Component {
                   </Button>
                   <Button
                     className={classes.button}
-                    onClick={() => this.handleViewChange(index, 2)}
+                    onClick={() => this.setState({ stateView: 2, profileOpenIndex: index })}
                     variant="contained"
                     color="primary"
                   >
@@ -103,7 +100,7 @@ class ShoppersProfile extends React.Component {
                   </Button>
                   <Button
                     className={classes.button}
-                    onClick={() => this.handleViewChange(index, 3)}
+                    onClick={() => this.setState({ stateView: 3, profileOpenIndex: index })}
                     variant="contained"
                     color="primary"
                   >
@@ -120,9 +117,9 @@ class ShoppersProfile extends React.Component {
 
                   {this.closeView(index)}
 
-                  {(this.state.profileViews[index] !== 0) && (
+                  {(stateView !== 0) && (profileOpenIndex === index) && (
                     <div className={classes.adminUserProfile}>
-                      {this.getView(index)}
+                      {this.getView(index, shopper.username)}
                     </div>
                   )}
                 </CardContent>

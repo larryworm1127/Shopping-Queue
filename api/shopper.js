@@ -11,7 +11,6 @@ const { Shopper } = require('../models/shopper');
 
 // Get profile for shopper
 router.get('/api/shopper/profile/:username', (req, res) => {
-
   const username = req.params.username;
 
   Shopper.findOne({ username })
@@ -29,28 +28,21 @@ router.get('/api/shopper/profile/:username', (req, res) => {
 
 
 // Update profile info for shopper
-router.patch('/api/shopper/profile', (req, res) => {
-
-  const id = req.body.id;
-
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send();
-    return;
-  }
+router.patch('/api/shopper/profile/:username', (req, res) => {
+  const username = req.params.username;
 
   // get the updated shopper profile.
   const shopper = {
-    username: req.body.username,
+    username: username,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     address: req.body.address,
-    remindTime: req.body.remindTime
+    remindTime: req.body.remindTime,
   };
 
-
-  // Update the shopper by its id.
-  Shopper.findByIdAndUpdate(id, { $set: shopper }, { new: true })
+  // Update the shopper by its username.
+  Shopper.findOneAndUpdate({ username }, { $set: shopper }, { new: true })
     .then(shopper => {
       if (!shopper) {
         res.status(404).send();
@@ -58,7 +50,7 @@ router.patch('/api/shopper/profile', (req, res) => {
         res.send(shopper);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(400).send();
     });
 });
@@ -169,12 +161,12 @@ router.delete('/api/shopper/profile', (req, res) => {
 });
 
 
-// Get all stores for map
-router.get('/api/map', (req, res) => {
+// Get all shoppers
+router.get('/api/shoppers', (req, res) => {
 
-  Store.find()
-    .then(store => {
-      res.send(store);
+  Shopper.find()
+    .then(shoppers => {
+      res.send(shoppers);
     })
     .catch(error => {
       res.status(500).send(error); // server error
