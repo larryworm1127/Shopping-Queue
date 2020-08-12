@@ -26,36 +26,18 @@ class QueueRow extends React.Component {
   render() {
     const { queue, classes, removeQueue, index } = this.props;
 
-    const StyledTableCell = withStyles((theme) => ({
-      head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-      },
-      body: {
-        fontSize: 14,
-      },
-    }))(TableCell);
-
-    const StyledTableRow = withStyles((theme) => ({
-      root: {
-        '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.action.hover,
-        },
-      },
-    }))(TableRow);
-
     return (
       <React.Fragment>
-        <StyledTableRow className={classes.booking}>
-          <StyledTableCell>
+        <TableRow className={classes.queueRow}>
+          <TableCell>
             <IconButton size="small" onClick={() => this.setOpen(!this.state.open)}>
               {this.state.open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
             </IconButton>
-          </StyledTableCell>
-          <StyledTableCell align='center'>{queue.username}</StyledTableCell>
-          <StyledTableCell align='center'>{queue.store}</StyledTableCell>
-          <StyledTableCell align='center'>{queue.datetimeQueued}</StyledTableCell>
-          <StyledTableCell component="th" scope="row" align='center'>
+          </TableCell>
+          <TableCell align='center'>{queue.username}</TableCell>
+          <TableCell align='center'>{queue.store}</TableCell>
+          <TableCell align='center'>{queue.datetimeQueued}</TableCell>
+          <TableCell component="th" scope="row" align='center'>
             <Button
               className={classes.button}
               variant="contained"
@@ -66,8 +48,8 @@ class QueueRow extends React.Component {
             >
               Remove Queue
             </Button>
-          </StyledTableCell>
-        </StyledTableRow>
+          </TableCell>
+        </TableRow>
 
         <TableRow>
           <TableCell className={classes.tableCellCollapse} colSpan={6}>

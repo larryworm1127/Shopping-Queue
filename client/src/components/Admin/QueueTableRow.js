@@ -7,8 +7,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { withStyles } from '@material-ui/core';
 import { styles } from '../Queue/style';
-import StoreQueuesTable from '../Store/StoreQueuesTable';
-import ShopperQueuesTable from '../Queue/ShopperQueuesTable';
+import QueuesTable from '../Queue/QueuesTable';
 
 
 class QueueTableRow extends React.Component {
@@ -43,7 +42,7 @@ class QueueTableRow extends React.Component {
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-              <StoreQueuesTable username={store.username}/>
+              <QueuesTable username={store.username} isStore={true}/>
             </Collapse>
           </TableCell>
         </TableRow>
@@ -64,7 +63,7 @@ class QueueTableRow extends React.Component {
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-              <ShopperQueuesTable shopper={shopper.username}/>
+              <QueuesTable username={shopper.username} isStore={false}/>
             </Collapse>
           </TableCell>
         </TableRow>

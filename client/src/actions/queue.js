@@ -1,5 +1,6 @@
-export const getStoreCurrentQueues = (username, queueComp) => {
-  const url = `/api/queue/store/${username}`;
+export const getCurrentQueues = (username, queueComp, isStore) => {
+  const userType = (isStore) ? 'store' : 'shopper';
+  const url = `/api/queue/${userType}/${username}`;
 
   fetch(url)
     .then(res => {
