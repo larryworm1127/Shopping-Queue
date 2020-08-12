@@ -8,14 +8,20 @@ import StoreProfile from '../StoreProfile/StoreProfile';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { stores } from '../../../utils/stores';
+import { getAllStores } from '../../../actions/admin';
+import { uid } from 'react-uid';
 
 
-class OwnersProfile extends React.Component {
+class StoresProfile extends React.Component {
+
+  componentDidMount() {
+    getAllStores(this);
+  }
 
   state = {
     isProfileOpen: false,
-    profileOpenIndex: 0
+    profileOpenIndex: 0,
+    stores: []
   };
 
   closeView(index) {
@@ -42,8 +48,8 @@ class OwnersProfile extends React.Component {
 
     return (
       <React.Fragment>
-        {stores.map((store, index) => (
-          <Box m={2}>
+        {this.state.stores.map((store, index) => (
+          <Box m={2} key={uid(store)}>
             <Card>
               <CardContent>
                 <Typography
@@ -52,7 +58,7 @@ class OwnersProfile extends React.Component {
                   color="primary"
                   gutterBottom
                 >
-                  {store.name}
+                  {store.storeName}
                 </Typography>
                 <Typography
                   color="textSecondary"
@@ -102,4 +108,4 @@ class OwnersProfile extends React.Component {
   }
 }
 
-export default withStyles(styles)(OwnersProfile);
+export default withStyles(styles)(StoresProfile);

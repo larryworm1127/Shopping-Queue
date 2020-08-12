@@ -1,7 +1,7 @@
 import React from 'react';
 import AdminPage from './AdminProfile.js';
 import ShoppersProfile from './ShoppersProfile.js';
-import OwnersProfile from './OwnersProfile.js';
+import StoresProfile from './StoresProfile.js';
 import ProfileBase from '../ProfileBase';
 import { withRouter } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ class AdminProfile extends React.Component {
       case 1:
         return <ShoppersProfile/>;
       case 2:
-        return <OwnersProfile/>;
+        return <StoresProfile/>;
       default:
         return Error('Unknown case');
     }

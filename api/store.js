@@ -57,7 +57,7 @@ router.patch('/api/store/profile/:username', (req, res) => {
     });
 });
 
-//Delete a store owners account
+// Delete a store owners account
 router.delete('/api/store/profile', (req, res) => {
   const id = req.body.id;
 
@@ -85,14 +85,12 @@ router.delete('/api/store/profile', (req, res) => {
 });
 
 
-// Get store by ID
-router.get('/api/store/:id', (req, res) => {
+// Get all stores
+router.get('/api/stores', (req, res) => {
 
-  const id = req.params.id;
-
-  Store.findById(id)
-    .then(store => {
-      res.send(store);
+  Store.find()
+    .then(stores => {
+      res.send(stores);
     })
     .catch(error => {
       res.status(500).send(error); // server error

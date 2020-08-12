@@ -161,12 +161,12 @@ router.delete('/api/shopper/profile', (req, res) => {
 });
 
 
-// Get all stores for map
-router.get('/api/map', (req, res) => {
+// Get all shoppers
+router.get('/api/shoppers', (req, res) => {
 
-  Store.find()
-    .then(store => {
-      res.send(store);
+  Shopper.find()
+    .then(shoppers => {
+      res.send(shoppers);
     })
     .catch(error => {
       res.status(500).send(error); // server error

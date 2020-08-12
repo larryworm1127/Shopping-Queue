@@ -10,14 +10,20 @@ import { withStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { shoppers } from '../../../utils/shoppers';
+import { getAllShoppers } from '../../../actions/admin';
+import { uid } from 'react-uid';
 
 
 class ShoppersProfile extends React.Component {
 
+  componentDidMount() {
+    getAllShoppers(this);
+  }
+
   state = {
     stateView: 0,
-    profileOpenIndex: 0
+    profileOpenIndex: 0,
+    shoppers: []
   };
 
   closeView(index) {
@@ -38,16 +44,14 @@ class ShoppersProfile extends React.Component {
     }
   };
 
-  getView(index, shopperUsername) {
-    const shopper = shoppers[index];
-
+  getView(index, username) {
     switch (this.state.stateView) {
       case 1:
-        return <UserProfile username={shopperUsername}/>;
+        return <UserProfile username={username}/>;
       case 2:
-        return <SearchHistory shopper={shopper}/>;
+        return <SearchHistory username={username}/>;
       case 3:
-        return <QueueHistory shopper={shopper}/>;
+        return <QueueHistory username={username}/>;
       default:
         return;
     }
@@ -60,8 +64,8 @@ class ShoppersProfile extends React.Component {
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-          {shoppers.map((shopper, index) => (
-            <Grid item xs={12} key={index}>
+          {this.state.shoppers.map((shopper, index) => (
+            <Grid item xs={12} key={uid(shopper)}>
               <Card>
                 <CardContent>
                   <Typography
