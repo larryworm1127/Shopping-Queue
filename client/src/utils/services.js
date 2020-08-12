@@ -38,7 +38,7 @@ export const getServiceData = (id, username) => {
             getColor(index),
             store.name,
             store.type,
-            <LocalGroceryStore />,
+            <LocalGroceryStore/>,
             `/store/${store.id}`
           );
         }),
@@ -47,7 +47,7 @@ export const getServiceData = (id, username) => {
             getColor(index),
             queue.store.name,
             queue.store.type,
-            <LocalGroceryStore />,
+            <LocalGroceryStore/>,
             `/store/${queue.store.id}`
           );
         }),
@@ -57,9 +57,9 @@ export const getServiceData = (id, username) => {
     case 1:
       return {
         services: [
-          createServiceData('#00C853', 'Current Queue', '200 shoppers in queue', <People />, 'store/queues'),
-          createServiceData('#6200EA', 'Total Shoppers', '500 total shoppers', <People />, 'store/shoppers'),
-          createServiceData('#0091EA', 'Average wait time', '10 minutes', <Clock />, 'store/shoppers')
+          createServiceData('#00C853', 'Current Queue', '200 shoppers in queue', <People/>, 'store/queues'),
+          createServiceData('#6200EA', 'Total Shoppers', '500 total shoppers', <People/>, 'store/shoppers'),
+          createServiceData('#0091EA', 'Average wait time', '10 minutes', <Clock/>, 'store/shoppers')
         ],
         title: 'Shoppers Stats',
         secondTitle: '',
@@ -68,9 +68,9 @@ export const getServiceData = (id, username) => {
     case 2:
       return {
         services: [
-          createServiceData('#00C853', 'Issues Messages', '4 issues', <MessageIcon />, 'admin/messages'),
-          createServiceData('#6200EA', 'Online Users', '100 online users', <People />),
-          createServiceData('#0091EA', 'Shop Owners', '100 Shop owners', <People />, 'admin/queues')
+          createServiceData('#00C853', 'Issues Messages', '4 issues', <MessageIcon/>, 'admin/messages'),
+          createServiceData('#6200EA', 'Online Users', '100 online users', <People/>, 'admin/shopper/queues'),
+          createServiceData('#0091EA', 'Shop Owners', '100 Shop owners', <People/>, 'admin/store/queues')
         ],
         secondServices: [],
         title: 'User Stats',
@@ -79,12 +79,12 @@ export const getServiceData = (id, username) => {
     default:
       return {
         services: [
-          createServiceData('#00C853', 'Queue Management', 'Broader queue Management', <BuildIcon />),
-          createServiceData('#6200EA', 'Advanced Schedule', 'Schedule queue in advance', <CalendarTodayIcon />),
-          createServiceData('#0091EA', 'B2C communication', 'Notify queueing shoppers', <MessageIcon />),
-          createServiceData('#d50000', 'Access Everywhere', 'Access your queue settings', <ComputerIcon />),
-          createServiceData('#DD2C00', 'User stats', 'Every user has access to their stats', <BarChartIcon />),
-          createServiceData('#64DD17', 'Customer service', '24/7 support', <HeadsetMicIcon />)
+          createServiceData('#00C853', 'Queue Management', 'Broader queue Management', <BuildIcon/>),
+          createServiceData('#6200EA', 'Advanced Schedule', 'Schedule queue in advance', <CalendarTodayIcon/>),
+          createServiceData('#0091EA', 'B2C communication', 'Notify queueing shoppers', <MessageIcon/>),
+          createServiceData('#d50000', 'Access Everywhere', 'Access your queue settings', <ComputerIcon/>),
+          createServiceData('#DD2C00', 'User stats', 'Every user has access to their stats', <BarChartIcon/>),
+          createServiceData('#64DD17', 'Customer service', '24/7 support', <HeadsetMicIcon/>)
         ],
         secondServices: [],
         title: 'Services',

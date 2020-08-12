@@ -42,7 +42,7 @@ router.post('/api/queue', (req, res) => {
 
 
 // Get queues for shopper
-router.get('/api/queue/:username', (req, res) => {
+router.get('/api/queue/shopper/:username', (req, res) => {
   const username = req.params.username;
 
   Queue.find({ username: username })
@@ -84,11 +84,11 @@ router.delete('/api/queue', (req, res) => {
 });
 
 
-// Get queues for store
-router.get('/api/store/queue/:username', (req, res) => {
+// Get current queues for store
+router.get('/api/queue/store/:username', (req, res) => {
   const username = req.params.username;
 
-  Queue.find({ store: username })
+  Queue.find({ store: username, datetime: { $gte: new Date().toISOString() } })
     .then(queues => {
       if (!queues) {
         res.status(404).send();
@@ -98,6 +98,36 @@ router.get('/api/store/queue/:username', (req, res) => {
     })
     .catch(() => {
       res.status(500).send(); // server error
+    });
+});
+
+
+// Update queue
+router.patch('/api/queue/:id', (req, res) => {
+  const id = req.params.id;
+
+  // Validate id
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  const queue = {
+    datetime: new Date(req.body.datetime),
+    numCustomers: req.body.numCustomers,
+    shopTime: req.body.shopTime
+  };
+
+  Queue.findByIdAndUpdate(id, { $set: queue }, { new: true })
+    .then(queue => {
+      if (!queue) {
+        res.status(404).send();
+      } else {
+        res.send(queue);
+      }
+    })
+    .catch(() => {
+      res.status(400).send();
     });
 });
 

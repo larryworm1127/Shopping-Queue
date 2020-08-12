@@ -1,23 +1,24 @@
 export const styles = theme => ({
   header: {
-    marginTop: '40px',
-    marginBottom: '40px',
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
     textAlign: 'center'
   },
   button: {
     backgroundColor: 'red'
   },
-  bookingList: {
+  queueList: {
     marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4)
+    marginBottom: theme.spacing(4),
   },
-  booking: {
+  queueRow: {
     marginBottom: '5px',
     fontSize: '150%',
     '& th': {
       fontSize: '0.75em',
       color: 'darkslategray'
-    }
+    },
+    backgroundColor: theme.palette.action.hover
   },
   paper: {
     padding: theme.spacing(2),
@@ -32,5 +33,12 @@ export const styles = theme => ({
   tableCellCollapse: {
     paddingBottom: 0,
     paddingTop: 0
+  },
+  tableCellHead: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  tableCellBody: {
+    fontSize: 14
   },
 });

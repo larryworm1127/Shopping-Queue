@@ -8,7 +8,7 @@ import AdminProfile from './Profile/AdminProfile';
 import StoreProfile from './Profile/StoreProfile';
 import StoreMap from './Map';
 import StoreDetail from './Store';
-import StoreQueues from './Store/StoreQueues';
+import StoreQueues from './Queue/StoreQueues';
 import StoreShoppers from './Store/StoreShoppers';
 import AllStoreQueues from './Admin/AllStoreQueues';
 import UserSupport from './Admin/UserSupport';
