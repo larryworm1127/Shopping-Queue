@@ -36,9 +36,7 @@ export default props => {
         <StoreRoute exact path='/store/shoppers' props={props} component={StoreShoppers} />
         <AuthRoute exact path='/login' props={props} component={Login} />
         <AuthRoute exact path='/register' props={props} component={Register} />
-        {/* <Route exact path='/store/:username' props={props} component={StoreDetail} />
-         */}
-        <Route path='/store/:username' render={(props) => <StoreDetail {...props} />} />
+        <Route path='/store/:username' render={() => <StoreDetail {...props} />} />
         <Route exact path='/logout' component={() => SignOut(props)} />
         <Route path='*' component={NoMatch} />
       </Switch>
