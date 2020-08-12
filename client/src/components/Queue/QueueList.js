@@ -38,9 +38,6 @@ class QueueList extends React.Component {
                 Store
               </StyledTableCell>
               <StyledTableCell component="th" scope="row" align='center'>
-                Arrive by
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row" align='center'>
                 Time Booked
               </StyledTableCell>
               <StyledTableCell component="th" scope="row" align='center'>

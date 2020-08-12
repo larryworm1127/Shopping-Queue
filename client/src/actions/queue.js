@@ -46,6 +46,9 @@ export const updateQueue = (id, queueComp) => {
       if (json) {
         console.log(json);
         queueComp.setState({
+          datetime: new Date(json.datetime).toLocaleString(),
+          shopTime: json.shopTime,
+          numCustomers: json.numCustomers,
           edit: false
         });
       }

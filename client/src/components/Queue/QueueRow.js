@@ -54,7 +54,6 @@ class QueueRow extends React.Component {
           </StyledTableCell>
           <StyledTableCell align='center'>{queue.username}</StyledTableCell>
           <StyledTableCell align='center'>{queue.store}</StyledTableCell>
-          <StyledTableCell align='center'>{queue.datetime}</StyledTableCell>
           <StyledTableCell align='center'>{queue.datetimeQueued}</StyledTableCell>
           <StyledTableCell component="th" scope="row" align='center'>
             <Button

@@ -102,4 +102,34 @@ router.get('/api/queue/store/:username', (req, res) => {
 });
 
 
+// Update queue
+router.patch('/api/queue/:id', (req, res) => {
+  const id = req.params.id;
+
+  // Validate id
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  const queue = {
+    datetime: new Date(req.body.datetime),
+    numCustomers: req.body.numCustomers,
+    shopTime: req.body.shopTime
+  };
+
+  Queue.findByIdAndUpdate(id, { $set: queue }, { new: true })
+    .then(queue => {
+      if (!queue) {
+        res.status(404).send();
+      } else {
+        res.send(queue);
+      }
+    })
+    .catch(() => {
+      res.status(400).send();
+    });
+});
+
+
 module.exports = router;
