@@ -20,8 +20,10 @@ class UserProfile extends React.Component {
     lastName: '',
     email: '',
     address: '',
+    remindTime: 0,
     favoriteStores: [],
-    remindTime: 0
+    searchHistory: [],
+    queueHistory: []
   };
 
   setEdit = (val) => {
@@ -42,6 +44,8 @@ class UserProfile extends React.Component {
     this.setState({
       favoriteStores: newFavoriteStores
     });
+
+    // Need to update the back-end here. Add later.
   };
 
   addNewFav = (Fav) => {
@@ -49,6 +53,8 @@ class UserProfile extends React.Component {
   };
 
   getFavStoreDisplayComponent = () => {
+    console.log('Hello');
+    console.log(this.state.favoriteStores);
     return this.state.favoriteStores.map((store, index) => (
       <Grid item md={4} key={uid(index)}>
         <StoreCards store={store} index={index}/>
@@ -57,6 +63,7 @@ class UserProfile extends React.Component {
   };
 
   getFavStoreEditComponent = () => {
+    console.log(this.state);
     return this.state.favoriteStores.map((store, index) => (
       <Grid item md={4} key={uid(index)}>
         <StoreCards
