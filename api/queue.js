@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const express = require('express');
 const { ObjectID } = require('mongodb');
@@ -15,10 +15,10 @@ router.post('/api/queue', (req, res) => {
   const queue = new Queue({
     username: req.body.username,
     store: req.body.store,
-    date: req.body.date,
+    datetime: req.body.datetime,
     shopTime: req.body.shopTime,
     numCustomers: req.body.numCustomers,
-    dateTimeQueued: req.body.dateTimeQueued
+    datetimeQueued: req.body.datetimeQueued
   });
 
   // Save queue to the database and add to shopper queue history
@@ -27,7 +27,7 @@ router.post('/api/queue', (req, res) => {
       Shopper.updateOne(
         { 'username': req.body.username },
         { $push: { 'queueHistory': queue } }
-      ).then((result2) => {
+      ).then(() => {
         Shopper.find({ username: req.body.username })
           .then((result3) => {
             res.send({ 'Shopper': result3, 'Queue': result1 });
@@ -35,7 +35,7 @@ router.post('/api/queue', (req, res) => {
       });
     },
     error => {
-      res.status(400).send(error); // 400 for bad request
+      res.status(400).send(error);  // 400 for bad request
     }
   );
 });
@@ -85,11 +85,10 @@ router.delete('/api/queue', (req, res) => {
 
 
 // Get queues for store
-router.get('/api/store/queue', (req, res) => {
+router.get('/api/store/queue/:username', (req, res) => {
+  const username = req.params.username;
 
-  const storeName = req.body.store;
-
-  Queue.find({ store: storeName })
+  Queue.find({ store: username })
     .then(queues => {
       if (!queues) {
         res.status(404).send();
@@ -103,20 +102,4 @@ router.get('/api/store/queue', (req, res) => {
 });
 
 
-// Get queues for admin (gets all queues)
-router.get('/api/admin/queue', (req, res) => {
-
-  Queue.find()
-    .then(queues => {
-      if (!queues) {
-        res.status(404).send();
-      } else {
-        res.send(queues);
-      }
-    })
-    .catch(() => {
-      res.status(500).send(); // server error
-    });
-});
-
-module.exports = router
+module.exports = router;

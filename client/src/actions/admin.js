@@ -109,8 +109,13 @@ export const getHelpMessages = (messageComp) => {
     })
     .then(json => {
       if (json) {
+        const formattedJson = json.map((message) => {
+          const result = { ...message };
+          result.date = new Date(result.date).toLocaleString();
+          return result;
+        });
         messageComp.setState({
-          messages: [...json]
+          messages: [...formattedJson]
         });
       }
     })
