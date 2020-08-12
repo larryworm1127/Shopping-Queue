@@ -35,15 +35,13 @@ class StoreDetail extends React.Component {
 
     const { history, currentUser, username } = this.props;
     var newQueue = {
-      username: "user",
+      username: currentUser,
       store: selectedStore.username,
       datetime: new Date().toISOString(),
       shopTime: this.state.est,
       numCustomers: this.state.numShoppers,
       datetimeQueued: new Date().toISOString()
     };
-    console.log(username, currentUser)
-    console.log(JSON.stringify(newQueue))
     addQueue(JSON.stringify(newQueue), history)
     // selectedStore.addNewQueue(newQueue);
     // getShopper(currentUser).queueUp(newQueue);
