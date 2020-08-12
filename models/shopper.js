@@ -44,9 +44,9 @@ const ShopperSchema = new Schema({
     type: Number,
     required: true
   },
-  favouriteStores: [{ type: Schema.Types.ObjectId, ref: 'Store' }],
-  searchHistory: [{ type: Schema.Types.ObjectId, ref: 'Store', searchDate: { type: String, required: true } }],
-  queueHistory: [{ type: Schema.Types.ObjectId, ref: 'Queue', searchDate: { type: String, required: true } }],
+  favouriteStores: [{ type: String }],
+  searchHistory: [{ store: { type: String }, searchDate: { type: String, required: true } }],
+  queueHistory: [{ store: { type: String }, searchDate: { type: String, required: true } }],
 });
 
 
