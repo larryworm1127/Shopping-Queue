@@ -2,18 +2,19 @@ import React from 'react';
 import { getStoreByUsername } from '../../utils/stores';
 import QueueList from '../Queue/QueueList';
 import Container from '@material-ui/core/Container';
+import { getStoreCurrentQueues } from '../../actions/queue';
 
 
 class StoreQueuesTable extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    const { storeName, currentUser } = props;
-    this.state = {
-      queues: [...getStoreByUsername((storeName === undefined) ? currentUser : storeName).currentQueue]
-    };
+  componentDidMount() {
+    const { username, currentUser } = this.props;
+    getStoreCurrentQueues((username) ? username : currentUser, this);
   }
+
+  state = {
+    queues: []
+  };
 
   removeQueue = (index) => {
     const { storeName, currentUser } = this.props;

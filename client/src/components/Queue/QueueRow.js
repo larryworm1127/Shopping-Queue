@@ -8,7 +8,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
-import BookingDetails from './QueueDetails';
+import QueueDetails from './QueueDetails';
 
 
 class QueueRow extends React.Component {
@@ -53,9 +53,9 @@ class QueueRow extends React.Component {
             </IconButton>
           </StyledTableCell>
           <StyledTableCell align='center'>{queue.username}</StyledTableCell>
-          <StyledTableCell align='center'>{queue.store.name}</StyledTableCell>
-          <StyledTableCell align='center'>{queue.date}</StyledTableCell>
-          <StyledTableCell align='center'>{queue.getTimeQueued()}</StyledTableCell>
+          <StyledTableCell align='center'>{queue.store}</StyledTableCell>
+          <StyledTableCell align='center'>{queue.datetime}</StyledTableCell>
+          <StyledTableCell align='center'>{queue.datetimeQueued}</StyledTableCell>
           <StyledTableCell component="th" scope="row" align='center'>
             <Button
               className={classes.button}
@@ -73,7 +73,7 @@ class QueueRow extends React.Component {
         <TableRow>
           <TableCell className={classes.tableCellCollapse} colSpan={6}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-              <BookingDetails booking={queue}/>
+              <QueueDetails queue={queue}/>
             </Collapse>
           </TableCell>
         </TableRow>

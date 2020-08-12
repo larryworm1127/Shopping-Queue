@@ -43,7 +43,7 @@ class QueueTableRow extends React.Component {
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-              <StoreQueuesTable storeName={store.username}/>
+              <StoreQueuesTable username={store.username}/>
             </Collapse>
           </TableCell>
         </TableRow>
