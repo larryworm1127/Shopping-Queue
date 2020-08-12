@@ -86,7 +86,7 @@ class AdminPage extends React.Component {
             handleFormField={this.handleFormField}
           />
         </Grid>
-        <br/>
+        <br />
 
         <ProfileEditButtons
           edit={this.state.edit}
