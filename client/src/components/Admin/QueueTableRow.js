@@ -7,8 +7,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { withStyles } from '@material-ui/core';
 import { styles } from '../Queue/style';
-import StoreQueuesTable from '../Store/StoreQueuesTable';
-import ShopperQueuesTable from '../Queue/ShopperQueuesTable';
+import QueuesTable from '../Queue/QueuesTable';
 
 
 class QueueTableRow extends React.Component {
@@ -35,15 +34,15 @@ class QueueTableRow extends React.Component {
             </IconButton>
           </TableCell>
           <TableCell align='center'>{store.username}</TableCell>
-          <TableCell align='center'>{store.name}</TableCell>
+          <TableCell align='center'>{store.storeName}</TableCell>
           <TableCell align="center">{store.type}</TableCell>
           <TableCell align='center'>{store.email}</TableCell>
-          <TableCell align='center'>{store.currentQueue.length}</TableCell>
+          <TableCell align='center'>{store.address}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <TableCell className={classes.tableCellCollapse} colSpan={6}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-              <StoreQueuesTable storeName={store.username}/>
+              <QueuesTable username={store.username} isStore={true}/>
             </Collapse>
           </TableCell>
         </TableRow>
@@ -57,14 +56,14 @@ class QueueTableRow extends React.Component {
             </IconButton>
           </TableCell>
           <TableCell align='center'>{shopper.username}</TableCell>
-          <TableCell align='center'>`${shopper.firstName} ${shopper.lastName}`</TableCell>
+          <TableCell align='center'>{`${shopper.firstName} ${shopper.lastName}`}</TableCell>
           <TableCell align='center'>{shopper.email}</TableCell>
-          <TableCell align='center'>{shopper.currentQueue.length}</TableCell>
+          <TableCell align='center'>{shopper.address}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <TableCell className={classes.tableCellCollapse} colSpan={6}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-              <ShopperQueuesTable shopper={shopper.username}/>
+              <QueuesTable username={shopper.username} isStore={false}/>
             </Collapse>
           </TableCell>
         </TableRow>

@@ -27,7 +27,7 @@ class ShopperProfile extends React.Component {
       case 0:
         return <UserProfile username={username}/>;
       case 1:
-        return <SearchHistory shopper={shopper}/>;
+        return <SearchHistory username={username}/>;
       case 2:
         return <QueueHistory shopper={shopper}/>;
       default:

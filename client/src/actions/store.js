@@ -1,5 +1,3 @@
-
-
 export const getStoreProfile = (username, profileComp) => {
   const url = `/api/store/profile/${username}`;
 
@@ -27,7 +25,7 @@ export const getStoreProfile = (username, profileComp) => {
     .catch(error => {
       console.log(error);
     });
-}
+};
 
 
 export const updateStoreProfile = (username, profileComp) => {

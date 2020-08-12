@@ -3,8 +3,8 @@ import NavBar from '../Nav/navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Typography, withStyles } from '@material-ui/core';
 import { styles } from './style';
-import StoreQueuesTable from './StoreQueuesTable';
 import { withRouter } from 'react-router-dom';
+import QueuesTable from './QueuesTable';
 
 
 class StoreQueues extends React.Component {
@@ -17,11 +17,11 @@ class StoreQueues extends React.Component {
         <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
         <CssBaseline/>
 
-        <Typography variant='h3' align='center' className={classes.titleText}>
+        <Typography variant='h3' align='center' className={classes.header}>
           Current Queues
         </Typography>
 
-        <StoreQueuesTable {...this.props}/>
+        <QueuesTable {...this.props} isStore={true}/>
       </React.Fragment>
     );
   }
