@@ -9,8 +9,7 @@ import QueueRow from './QueueRow';
 import { uid } from 'react-uid';
 import TableCell from '@material-ui/core/TableCell';
 import { styles } from './style';
-import { getCurrentQueues } from '../../actions/queue';
-import { getStoreByUsername } from '../../utils/stores';
+import { getCurrentQueues, removeQueue } from '../../actions/queue';
 
 
 class QueuesTable extends React.Component {
@@ -24,14 +23,8 @@ class QueuesTable extends React.Component {
     queues: []
   };
 
-  removeQueue = (index) => {
-    const { storeName, currentUser } = this.props;
-    const storeObj = getStoreByUsername((storeName === undefined) ? currentUser : storeName);
-    storeObj.currentQueue.splice(index, 1);
-
-    this.setState({
-      queues: [...storeObj.currentQueue]
-    });
+  removeSingleQueue = (queue, index) => {
+    removeQueue(queue._id, this, index)
   };
 
   render() {
@@ -65,7 +58,7 @@ class QueuesTable extends React.Component {
                   <QueueRow
                     key={uid(booking)}
                     queue={booking}
-                    removeQueue={this.removeQueue}
+                    removeQueue={this.removeSingleQueue}
                     index={index}
                   />
                 ))}

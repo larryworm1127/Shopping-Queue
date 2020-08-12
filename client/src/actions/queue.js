@@ -45,12 +45,42 @@ export const updateQueue = (id, queueComp) => {
     })
     .then(json => {
       if (json) {
-        console.log(json);
         queueComp.setState({
           datetime: new Date(json.datetime).toLocaleString(),
           shopTime: json.shopTime,
           numCustomers: json.numCustomers,
           edit: false
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
+export const removeQueue = (id, queueComp, index) => {
+  const request = new Request('/api/queue', {
+    method: 'delete',
+    body: JSON.stringify({ id }),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  fetch(request)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        const queues = [...queueComp.state.queues];
+        queues.splice(index, 1);
+        queueComp.setState({
+          queues: [...queues]
         });
       }
     })

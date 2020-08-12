@@ -42,9 +42,7 @@ class QueueRow extends React.Component {
               className={classes.button}
               variant="contained"
               color="secondary"
-              onClick={() => {
-                removeQueue(index);
-              }}
+              onClick={() => removeQueue(queue, index)}
             >
               Remove Queue
             </Button>
