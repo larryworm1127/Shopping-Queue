@@ -8,7 +8,6 @@ import { withRouter } from 'react-router-dom';
 
 const tabs = [
   'Profile',
-  'Store Settings'
 ];
 
 
@@ -19,26 +18,15 @@ class StoreProfile extends React.Component {
     this.props.history.push('/store/profile');
   }
 
-  profileSettings = (storeProp, setting, currentUser) => {
-    const currentStore = (storeProp === undefined) ? getStoreByUsername(currentUser) : storeProp;
-
-    switch (setting) {
-      case 0:
-        return <UserProfile store={currentStore}/>;
-      case 1:
-        return <StoreSettings store={currentStore}/>;
-      default:
-        return Error('Unknown case');
-    }
+  profileSettings = (username, setting, currentUser) => {
+    return <UserProfile username={(username) ? username : currentUser}/>;
   };
 
   render() {
-    const { currentStore } = this.props;
 
     return (
       <ProfileBase
         {...this.props}
-        user={currentStore}
         tabs={tabs}
         profileSettings={this.profileSettings}
       />

@@ -4,7 +4,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import StoreSettings from '../StoreProfile/StoreSettings';
 import StoreProfile from '../StoreProfile/StoreProfile';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
@@ -15,18 +14,19 @@ import { stores } from '../../../utils/stores';
 class OwnersProfile extends React.Component {
 
   state = {
-    profileViews: new Array(stores.length).fill(0)
+    isProfileOpen: false,
+    profileOpenIndex: 0
   };
 
   closeView(index) {
-    const stateView = this.state.profileViews[index];
     const { classes } = this.props;
+    const { isProfileOpen, profileOpenIndex } = this.state;
 
-    if (stateView !== 0) {
+    if (isProfileOpen && profileOpenIndex === index) {
       return (
         <Button
           className={classes.button}
-          onClick={() => this.handleViewChange(index, 0)}
+          onClick={() => this.setState({ isProfileOpen: false })}
           variant="contained"
           color="primary"
         >
@@ -36,30 +36,9 @@ class OwnersProfile extends React.Component {
     }
   };
 
-  handleViewChange(index, newProfileView) {
-    const viewsOpen = [...this.state.profileViews];
-    viewsOpen[index] = newProfileView;
-
-    this.setState({
-      profileViews: viewsOpen
-    });
-  };
-
-  getView(index) {
-    const store = stores[index];
-    const stateView = this.state.profileViews[index];
-    switch (stateView) {
-      case 1:
-        return <StoreProfile store={store}/>;
-      case 2:
-        return <StoreSettings store={store}/>;
-      default:
-        return;
-    }
-  };
-
   render() {
     const { classes } = this.props;
+    const { isProfileOpen, profileOpenIndex } = this.state;
 
     return (
       <React.Fragment>
@@ -89,19 +68,14 @@ class OwnersProfile extends React.Component {
                 </Typography>
                 <Button
                   className={classes.button}
-                  onClick={() => this.handleViewChange(index, 1)}
+                  onClick={() => this.setState({
+                    isProfileOpen: true,
+                    profileOpenIndex: index
+                  })}
                   variant="contained"
                   color="primary"
                 >
                   Store Profile
-                </Button>
-                <Button
-                  className={classes.button}
-                  onClick={() => this.handleViewChange(index, 2)}
-                  variant="contained"
-                  color="primary"
-                >
-                  Store Settings
                 </Button>
                 <Button
                   className={classes.deleteButton}
@@ -114,9 +88,9 @@ class OwnersProfile extends React.Component {
 
                 {this.closeView(index)}
 
-                {(this.state.profileViews[index] !== 0) && (
+                {(isProfileOpen) && (profileOpenIndex === index) && (
                   <div className={classes.adminUserProfile}>
-                    {this.getView(index)}
+                    <StoreProfile username={store.username}/>
                   </div>
                 )}
               </CardContent>

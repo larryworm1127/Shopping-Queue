@@ -7,9 +7,8 @@ import { getAdminProfile, updateAdminProfile } from '../../../actions/admin';
 
 class AdminPage extends React.Component {
 
-  constructor(props) {
-    super(props);
-    getAdminProfile(this.props.currentUser, this);
+  componentDidMount() {
+    getAdminProfile(this.props.username, this);
   }
 
   state = {
