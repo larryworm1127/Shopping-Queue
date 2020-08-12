@@ -34,18 +34,19 @@ class StoreDetail extends React.Component {
     event.preventDefault();
 
     const { history, currentUser } = this.props;
-    const newQueue = new Queue(
-      currentUser,
-      selectedStore,
-      this.state.date,
-      this.state.est,
-      this.state.numShoppers,
-      new Date()
-    );
+    const newQueue = {
+      username: 'user',
+      store: selectedStore.username,
+      date: this.state.date,
+      shopTime: this.state.est,
+      numCustomers: this.state.numShoppers,
+      dateTimeQueued: new Date().toString()
+    };
+    console.log(newQueue)
+    addQueue(newQueue)
     // selectedStore.addNewQueue(newQueue);
     // getShopper(currentUser).queueUp(newQueue);
-    addQueue(newQueue.id)
-    history.push('/queue');
+    // history.push('/queue');
   };
 
 

@@ -90,10 +90,10 @@ export const removeQueue = (id, queueComp, index) => {
 };
 
 // A function to send a POST request to add a new queue
-export const addQueue = (queueComp) => {
+export const addQueue = (queueData) => {
   const request = new Request('/api/queue', {
     method: 'post',
-    body: JSON.stringify(queueComp.state),
+    body: JSON.stringify(queueData.state),
     headers: {
       Accept: 'application/json, text/plain, */*',
       'Content-Type': 'application/json'
@@ -107,15 +107,10 @@ export const addQueue = (queueComp) => {
     })
     .then(json => {
       if (json.message !== undefined) {
-        queueData.setState({
-          displayError: true,
-          errorMessage: json.message
-        });
+        console.log(json.message);
+        ;
       } else {
-        app.setState({
-          displayError: true,
-          errorMessage: "your new booking is added"
-        });
+        console.log('Booking added')
       }
     })
     .catch(error => {
