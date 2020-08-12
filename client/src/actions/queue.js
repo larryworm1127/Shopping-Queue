@@ -90,7 +90,7 @@ export const removeQueue = (id, queueComp, index) => {
 };
 
 // A function to send a POST request to add a new queue
-export const addQueue = (queueData) => {
+export const addQueue = (queueData, history) => {
   const request = new Request('/api/queue', {
     method: 'post',
     body: queueData,
@@ -111,7 +111,7 @@ export const addQueue = (queueData) => {
         ;
       } else {
         console.log('Booking added')
-        // history.push('/queue');
+        history.push('/queue');
       }
     })
     .catch(error => {
