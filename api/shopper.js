@@ -11,7 +11,6 @@ const { Shopper } = require('../models/shopper');
 
 // Get profile for shopper
 router.get('/api/shopper/profile/:username', (req, res) => {
-
   const username = req.params.username;
 
   Shopper.findOne({ username })
@@ -30,26 +29,20 @@ router.get('/api/shopper/profile/:username', (req, res) => {
 
 // Update profile info for shopper
 router.patch('/api/shopper/profile/:username', (req, res) => {
-
   const username = req.params.username;
-
-  // if (!ObjectID.isValid(id)) {
-  //   res.status(404).send();
-  //   return;
-  // }
 
   // get the updated shopper profile.
   const shopper = {
-    // username: req.body.username,
+    username: username,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     address: req.body.address,
-    remindTime: req.body.remindTime
+    remindTime: req.body.remindTime,
   };
 
   // Update the shopper by its username.
-  Shopper.findOneAndUpdate({username}, { $set: shopper }, { new: true })
+  Shopper.findOneAndUpdate({ username }, { $set: shopper }, { new: true })
     .then(shopper => {
       if (!shopper) {
         res.status(404).send();
@@ -57,7 +50,7 @@ router.patch('/api/shopper/profile/:username', (req, res) => {
         res.send(shopper);
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(400).send();
     });
 });

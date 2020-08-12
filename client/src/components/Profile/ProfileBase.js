@@ -62,7 +62,7 @@ class ProfileBase extends React.Component {
         </Drawer>
 
         <Container className={classes.container}>
-          {profileSettings(username, setting, currentUser)}
+          {profileSettings((username) ? username : currentUser, setting)}
         </Container>
       </React.Fragment>
     );

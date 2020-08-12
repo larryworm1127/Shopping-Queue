@@ -16,18 +16,19 @@ import { shoppers } from '../../../utils/shoppers';
 class ShoppersProfile extends React.Component {
 
   state = {
-    profileViews: new Array(shoppers.length).fill(0)
+    stateView: 0,
+    profileOpenIndex: 0
   };
 
   closeView(index) {
-    const stateView = this.state.profileViews[index];
     const { classes } = this.props;
+    const { stateView, profileOpenIndex } = this.state;
 
-    if (stateView !== 0) {
+    if (stateView !== 0 && profileOpenIndex === index) {
       return (
         <Button
           className={classes.button}
-          onClick={() => this.handleViewChange(index, 0)}
+          onClick={() => this.setState({ stateView: 0 })}
           variant="contained"
           color="primary"
         >
@@ -37,21 +38,12 @@ class ShoppersProfile extends React.Component {
     }
   };
 
-  handleViewChange(index, newProfileView) {
-    const viewsOpen = [...this.state.profileViews];
-    viewsOpen[index] = newProfileView;
-
-    this.setState({
-      profileViews: viewsOpen
-    });
-  };
-
-  getView(index) {
+  getView(index, shopperUsername) {
     const shopper = shoppers[index];
-    const stateView = this.state.profileViews[index];
-    switch (stateView) {
+
+    switch (this.state.stateView) {
       case 1:
-        return <UserProfile shopper={shopper}/>;
+        return <UserProfile username={shopperUsername}/>;
       case 2:
         return <SearchHistory shopper={shopper}/>;
       case 3:
@@ -63,6 +55,7 @@ class ShoppersProfile extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { stateView, profileOpenIndex } = this.state;
 
     return (
       <React.Fragment>
@@ -87,7 +80,7 @@ class ShoppersProfile extends React.Component {
                   </Typography>
                   <Button
                     className={classes.button}
-                    onClick={() => this.handleViewChange(index, 1)}
+                    onClick={() => this.setState({ stateView: 1, profileOpenIndex: index })}
                     variant="contained"
                     color="primary"
                   >
@@ -95,7 +88,7 @@ class ShoppersProfile extends React.Component {
                   </Button>
                   <Button
                     className={classes.button}
-                    onClick={() => this.handleViewChange(index, 2)}
+                    onClick={() => this.setState({ stateView: 2, profileOpenIndex: index })}
                     variant="contained"
                     color="primary"
                   >
@@ -103,7 +96,7 @@ class ShoppersProfile extends React.Component {
                   </Button>
                   <Button
                     className={classes.button}
-                    onClick={() => this.handleViewChange(index, 3)}
+                    onClick={() => this.setState({ stateView: 3, profileOpenIndex: index })}
                     variant="contained"
                     color="primary"
                   >
@@ -120,9 +113,9 @@ class ShoppersProfile extends React.Component {
 
                   {this.closeView(index)}
 
-                  {(this.state.profileViews[index] !== 0) && (
+                  {(stateView !== 0) && (profileOpenIndex === index) && (
                     <div className={classes.adminUserProfile}>
-                      {this.getView(index)}
+                      {this.getView(index, shopper.username)}
                     </div>
                   )}
                 </CardContent>

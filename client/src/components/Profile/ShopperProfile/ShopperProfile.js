@@ -10,12 +10,10 @@ import { getShopperProfile, updateShopperProfile } from '../../../actions/shoppe
 
 class UserProfile extends React.Component {
 
-  constructor(props) {
-    super(props);
-    getShopperProfile(this.props.shopper.username, this);
+  componentDidMount() {
+    getShopperProfile(this.props.username, this);
   }
 
-  // const { shopper } = this.props;
   state = {
     edit: false,
     firstName: '',
@@ -46,16 +44,10 @@ class UserProfile extends React.Component {
     });
   };
 
-
   addNewFav = (Fav) => {
     this.state.favoriteStores.push(Fav);
   };
 
-  // handleFavorite = (event, selectedStore) => {
-  //   event.preventDefault();
-  //   ShopperProfile.addNewFav(selectedStore);
-
-  // };
   getFavStoreDisplayComponent = () => {
     return this.state.favoriteStores.map((store, index) => (
       <Grid item md={4} key={uid(index)}>
@@ -90,22 +82,10 @@ class UserProfile extends React.Component {
   handleSave = (event) => {
     event.preventDefault();
 
-    updateShopperProfile(this.props.shopper.username, this);
-    // const { shopper } = this.props;
-    // this.setEdit(false);
-    // shopper.updateUserProfile(
-    //   this.state.firstName,
-    //   this.state.lastName,
-    //   this.state.address,
-    //   this.state.email,
-    //   this.state.remindTime,
-    //   this.state.favoriteStores
-    // );
+    updateShopperProfile(this.props.username, this);
   };
 
   render() {
-    const { shopper } = this.props;
-
     return (
       <React.Fragment>
         <Grid container spacing={3}>

@@ -1,7 +1,5 @@
 import React from 'react';
-import { getStoreByUsername } from '../../../utils/stores';
 import UserProfile from './StoreProfile';
-import StoreSettings from './StoreSettings';
 import ProfileBase from '../ProfileBase';
 import { withRouter } from 'react-router-dom';
 
@@ -18,8 +16,8 @@ class StoreProfile extends React.Component {
     this.props.history.push('/store/profile');
   }
 
-  profileSettings = (username, setting, currentUser) => {
-    return <UserProfile username={(username) ? username : currentUser}/>;
+  profileSettings = (username) => {
+    return <UserProfile username={username}/>;
   };
 
   render() {

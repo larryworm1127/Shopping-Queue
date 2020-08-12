@@ -14,10 +14,10 @@ const tabs = [
 
 class AdminProfile extends React.Component {
 
-  profileSettings = (username, setting, currentUser) => {
+  profileSettings = (username, setting) => {
     switch (setting) {
       case 0:
-        return <AdminPage username={(username) ? username : currentUser}/>;
+        return <AdminPage username={username}/>;
       case 1:
         return <ShoppersProfile/>;
       case 2:
