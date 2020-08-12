@@ -33,7 +33,7 @@ class StoreDetail extends React.Component {
   handleFormSubmit = (event, selectedStore) => {
     event.preventDefault();
 
-    const { history, currentUser } = this.props;
+    const { history, currentUser, username } = this.props;
     var newQueue = {
       username: "user",
       store: selectedStore.username,
@@ -42,7 +42,7 @@ class StoreDetail extends React.Component {
       numCustomers: this.state.numShoppers,
       datetimeQueued: new Date().toISOString()
     };
-    console.log(this.props.username)
+    console.log(username, currentUser)
     console.log(JSON.stringify(newQueue))
     addQueue(JSON.stringify(newQueue), history)
     // selectedStore.addNewQueue(newQueue);
@@ -52,12 +52,11 @@ class StoreDetail extends React.Component {
 
 
   render() {
-    const { match, classes, date, shoppingTime, numCustomer, handleFormField, history } = this.props;
+    const { location, userType, isLoggedIn, match, classes, date, shoppingTime, numCustomer, handleFormField, history } = this.props;
     const store = getStoreByUsername(match.params.username);
-
     return (
       <React.Fragment>
-        <NavBar />
+        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn} />
         <CssBaseline />
 
         <div className={classes.layout}>

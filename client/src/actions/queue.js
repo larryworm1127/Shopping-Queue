@@ -111,7 +111,7 @@ export const addQueue = (queueData, history) => {
         ;
       } else {
         console.log('Booking added')
-        history.push('/queue');
+        // history.push('/queue');
       }
     })
     .catch(error => {
