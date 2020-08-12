@@ -15,11 +15,19 @@ import {
 import TableCell from '@material-ui/core/TableCell';
 import QueueTableRow from './QueueTableRow';
 import { uid } from 'react-uid';
-import { shoppers } from '../../utils/shoppers';
 import { styles } from './style';
+import { getAllShoppers } from '../../actions/admin';
 
 
 class AllShopperQueues extends React.Component {
+
+  componentDidMount() {
+    getAllShoppers(this);
+  }
+
+  state = {
+    shoppers: []
+  };
 
   render() {
     const { location, classes, isLoggedIn, userType } = this.props;
@@ -41,12 +49,12 @@ class AllShopperQueues extends React.Component {
                 <TableCell align='center'>Username</TableCell>
                 <TableCell align='center'>Shopper name</TableCell>
                 <TableCell align='center'>Shopper Email</TableCell>
-                <TableCell align='center'>Current Queue Size</TableCell>
+                <TableCell align='center'>Address</TableCell>
               </TableRow>
             </TableHead>
 
             <TableBody>
-              {shoppers.map((shopper) => (
+              {this.state.shoppers.map((shopper) => (
                 <QueueTableRow key={uid(shopper)} shopper={shopper}/>
               ))}
             </TableBody>

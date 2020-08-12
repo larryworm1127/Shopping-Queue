@@ -13,13 +13,21 @@ import {
 } from '@material-ui/core';
 import { styles } from './style';
 import TableCell from '@material-ui/core/TableCell';
-import { stores } from '../../utils/stores';
 import QueueTableRow from './QueueTableRow';
 import { uid } from 'react-uid';
 import { withRouter } from 'react-router-dom';
+import { getAllStores } from '../../actions/admin';
 
 
 class AllStoreQueues extends React.Component {
+
+  componentDidMount() {
+    getAllStores(this);
+  }
+
+  state = {
+    stores: []
+  };
 
   render() {
     const { location, classes, isLoggedIn, userType } = this.props;
@@ -42,12 +50,12 @@ class AllStoreQueues extends React.Component {
                 <TableCell align='center'>Store Name</TableCell>
                 <TableCell align='center'>Store Type</TableCell>
                 <TableCell align='center'>Store Email</TableCell>
-                <TableCell align='center'>Current Queue Size</TableCell>
+                <TableCell align='center'>Address</TableCell>
               </TableRow>
             </TableHead>
 
             <TableBody>
-              {stores.map((store) => (
+              {this.state.stores.map((store) => (
                 <QueueTableRow key={uid(store)} store={store}/>
               ))}
             </TableBody>
