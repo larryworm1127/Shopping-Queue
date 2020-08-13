@@ -176,29 +176,22 @@ router.delete('/api/shopper/profile/favorites', (req, res) => {
 
 
 // Delete a shoppers account
-router.delete('/api/shopper/profile', (req, res) => {
-  const id = req.body.id;
-
-  // Validate id
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send();
-    return;
-  }
+router.delete('/api/shopper/:username', (req, res) => {
+  const username = req.params.username;
 
   // Delete the shopper and the user attached to the shopper
-  Shopper.findByIdAndRemove(id)
+  Shopper.findOneAndRemove({ username })
     .then(shopper => {
       if (!shopper) {
         res.status(404).send();
       } else {
-        User.remove({ username: shopper.username })
-          .then(user => {
-            res.send({ 'Shopper': shopper });
-          });
+        User.findOneAndRemove({ username, userType: 0 }).then(user => {
+          res.send({ shopper, user });
+        });
       }
     })
     .catch(error => {
-      res.status(500).send(); // server error, could not delete.
+      res.status(500).send(error);
     });
 });
 

@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getAllShoppers } from '../../../actions/admin';
+import { getAllShoppers, removeShopper } from '../../../actions/admin';
 import { uid } from 'react-uid';
 import FavoriteStores from '../ShopperProfile/FavoriteStores';
 import Box from '@material-ui/core/Box';
@@ -27,7 +27,7 @@ class ShoppersProfile extends React.Component {
     shoppers: []
   };
 
-  closeView(index) {
+  closeView = (index) => {
     const { classes } = this.props;
     const { stateView, profileOpenIndex } = this.state;
 
@@ -45,7 +45,11 @@ class ShoppersProfile extends React.Component {
     }
   };
 
-  getView(index, username) {
+  handleUserDelete = (index, username) => {
+    removeShopper(username, index, this);
+  };
+
+  getView = (index, username) => {
     switch (this.state.stateView) {
       case 1:
         return <UserProfile username={username}/>;
@@ -118,6 +122,7 @@ class ShoppersProfile extends React.Component {
                 </Button>
                 <Button
                   className={classes.deleteButton}
+                  onClick={() => this.handleUserDelete(index, shopper.username)}
                   variant="contained"
                   color="secondary"
                   startIcon={<DeleteIcon/>}

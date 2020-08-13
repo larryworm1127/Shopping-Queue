@@ -123,3 +123,34 @@ export const getHelpMessages = (messageComp) => {
       console.log(error);
     });
 };
+
+
+export const removeShopper = (username, index, comp) => {
+  const request = new Request(`/api/shopper/${username}`, {
+    method: 'DELETE',
+    body: JSON.stringify({}),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  fetch(request)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        const shoppers = [...comp.state.shoppers];
+        shoppers.splice(index, 1);
+        comp.setState({
+          shoppers: [...shoppers]
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
