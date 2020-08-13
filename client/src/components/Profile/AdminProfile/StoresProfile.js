@@ -11,12 +11,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { getAllStores, removeStore } from '../../../actions/admin';
 import { uid } from 'react-uid';
 import RemoveConfirmDialog from '../../RemoveConfirmDialog';
+import TextField from '@material-ui/core/TextField';
+import CardActions from '@material-ui/core/CardActions';
+import { getSearchedStores } from '../../../actions/store';
 
 
 class StoresProfile extends React.Component {
 
   componentDidMount() {
-    getAllStores(this);
+    getSearchedStores("", this);
   }
 
   state = {
@@ -54,12 +57,31 @@ class StoresProfile extends React.Component {
     }
   };
 
+  handleOnInputChange = (event) => {
+    getSearchedStores(event.target.value, this)
+  };
+
   render() {
     const { classes } = this.props;
     const { isProfileOpen, profileOpenIndex } = this.state;
 
     return (
       <React.Fragment>
+        <Card>
+          <CardActions>
+            <TextField
+              variant="outlined"
+              label="Search..."
+              onChange={this.handleOnInputChange}
+            />
+            <Button
+              size="small"
+              color="primary"
+            >
+              Search
+            </Button>
+          </CardActions>
+        </Card>
         {this.state.stores.map((store, index) => (
           <Box m={2} key={uid(store)}>
             <Card>

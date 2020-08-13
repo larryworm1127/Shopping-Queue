@@ -13,8 +13,6 @@ import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
 import { uid } from 'react-uid';
-import { getAllStores } from '../../actions/admin';
-
 import { getSearchedStores } from '../../actions/store';
 
 class StoreMap extends React.Component {

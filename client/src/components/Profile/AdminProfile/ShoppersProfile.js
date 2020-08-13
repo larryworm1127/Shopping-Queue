@@ -14,12 +14,16 @@ import { uid } from 'react-uid';
 import FavoriteStores from '../ShopperProfile/FavoriteStores';
 import Box from '@material-ui/core/Box';
 import RemoveConfirmDialog from '../../RemoveConfirmDialog';
+import TextField from '@material-ui/core/TextField';
+import CardActions from '@material-ui/core/CardActions';
+import { getSearchedShoppers } from '../../../actions/shopper';
+
 
 
 class ShoppersProfile extends React.Component {
 
   componentDidMount() {
-    getAllShoppers(this);
+    getSearchedShoppers("", this);
   }
 
   state = {
@@ -72,12 +76,31 @@ class ShoppersProfile extends React.Component {
     }
   };
 
+  handleOnInputChange = (event) => {
+    getSearchedShoppers(event.target.value, this)
+  };
+
   render() {
     const { classes } = this.props;
     const { stateView, profileOpenIndex } = this.state;
 
     return (
       <React.Fragment>
+        <Card>
+          <CardActions>
+            <TextField
+              variant="outlined"
+              label="Search..."
+              onChange={this.handleOnInputChange}
+            />
+            <Button
+              size="small"
+              color="primary"
+            >
+              Search
+            </Button>
+          </CardActions>
+        </Card>
         {this.state.shoppers.map((shopper, index) => (
           <Box m={2} key={uid(shopper)}>
             <Card>
