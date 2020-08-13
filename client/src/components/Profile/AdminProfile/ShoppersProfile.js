@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { getAllShoppers } from '../../../actions/admin';
 import { uid } from 'react-uid';
+import FavoriteStores from '../ShopperProfile/FavoriteStores';
 
 
 class ShoppersProfile extends React.Component {
@@ -46,8 +47,10 @@ class ShoppersProfile extends React.Component {
 
   getView(index, username) {
     switch (this.state.stateView) {
-      case 1:
+      case 0:
         return <UserProfile username={username}/>;
+      case 1:
+        return <FavoriteStores username={username}/>;
       case 2:
         return <SearchHistory username={username}/>;
       case 3:
@@ -84,11 +87,19 @@ class ShoppersProfile extends React.Component {
                   </Typography>
                   <Button
                     className={classes.button}
-                    onClick={() => this.setState({ stateView: 1, profileOpenIndex: index })}
+                    onClick={() => this.setState({ stateView: 0, profileOpenIndex: index })}
                     variant="contained"
                     color="primary"
                   >
                     View Profile
+                  </Button>
+                  <Button
+                    className={classes.button}
+                    onClick={() => this.setState({ stateView: 1, profileOpenIndex: index })}
+                    variant="contained"
+                    color="primary"
+                  >
+                    View Favorite Stores
                   </Button>
                   <Button
                     className={classes.button}
