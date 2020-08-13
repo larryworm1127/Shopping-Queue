@@ -13,6 +13,7 @@ import { getAllShoppers, removeShopper } from '../../../actions/admin';
 import { uid } from 'react-uid';
 import FavoriteStores from '../ShopperProfile/FavoriteStores';
 import Box from '@material-ui/core/Box';
+import RemoveConfirmDialog from '../../RemoveConfirmDialog';
 
 
 class ShoppersProfile extends React.Component {
@@ -22,6 +23,7 @@ class ShoppersProfile extends React.Component {
   }
 
   state = {
+    alertOpen: false,
     stateView: 0,
     profileOpenIndex: 0,
     shoppers: []
@@ -47,6 +49,12 @@ class ShoppersProfile extends React.Component {
 
   handleUserDelete = (index, username) => {
     removeShopper(username, index, this);
+  };
+
+  setAlertOpen = (value) => {
+    this.setState({
+      alertOpen: value
+    });
   };
 
   getView = (index, username) => {
@@ -122,13 +130,20 @@ class ShoppersProfile extends React.Component {
                 </Button>
                 <Button
                   className={classes.deleteButton}
-                  onClick={() => this.handleUserDelete(index, shopper.username)}
+                  onClick={() => this.setAlertOpen(true)}
                   variant="contained"
                   color="secondary"
                   startIcon={<DeleteIcon/>}
                 >
                   Delete User
                 </Button>
+
+                <RemoveConfirmDialog
+                  alertOpen={this.state.alertOpen}
+                  setAlertOpen={this.setAlertOpen}
+                  removeThunk={() => this.handleUserDelete(index, shopper.username)}
+                  removeType="Shopper"
+                />
 
                 {this.closeView(index)}
 

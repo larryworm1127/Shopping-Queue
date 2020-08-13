@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { getAllStores, removeStore } from '../../../actions/admin';
 import { uid } from 'react-uid';
+import RemoveConfirmDialog from '../../RemoveConfirmDialog';
 
 
 class StoresProfile extends React.Component {
@@ -19,6 +20,7 @@ class StoresProfile extends React.Component {
   }
 
   state = {
+    alertOpen: false,
     isProfileOpen: false,
     profileOpenIndex: 0,
     stores: []
@@ -26,6 +28,12 @@ class StoresProfile extends React.Component {
 
   handleUserDelete = (index, username) => {
     removeStore(username, index, this);
+  };
+
+  setAlertOpen = (value) => {
+    this.setState({
+      alertOpen: value
+    });
   };
 
   closeView(index) {
@@ -89,13 +97,20 @@ class StoresProfile extends React.Component {
                 </Button>
                 <Button
                   className={classes.deleteButton}
-                  onClick={() => this.handleUserDelete(index, store.username)}
+                  onClick={() => this.setAlertOpen(true)}
                   variant="contained"
                   color="secondary"
                   startIcon={<DeleteIcon/>}
                 >
                   Delete User
                 </Button>
+
+                <RemoveConfirmDialog
+                  alertOpen={this.state.alertOpen}
+                  setAlertOpen={this.setAlertOpen}
+                  removeThunk={() => this.handleUserDelete(index, store.username)}
+                  removeType="Store"
+                />
 
                 {this.closeView(index)}
 

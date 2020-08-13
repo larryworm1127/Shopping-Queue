@@ -14,6 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
+import RemoveConfirmDialog from '../RemoveConfirmDialog';
 
 
 class QueueRow extends React.Component {
@@ -60,32 +61,12 @@ class QueueRow extends React.Component {
             </Button>
           </TableCell>
 
-          <Dialog
-            open={this.state.alertOpen}
-            onClose={() => this.setAlertOpen(false)}
-          >
-            <DialogTitle>Remove queue?</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Confirm to remove the selected queue.
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => this.setAlertOpen(false)} color="primary">
-                Cancel
-              </Button>
-              <Button
-                onClick={() => {
-                  removeQueue(queue, index);
-                  this.setAlertOpen(false);
-                }}
-                color="primary"
-                autoFocus
-              >
-                Remove
-              </Button>
-            </DialogActions>
-          </Dialog>
+          <RemoveConfirmDialog
+            alertOpen={this.state.alertOpen}
+            setAlertOpen={this.setAlertOpen}
+            removeThunk={() => removeQueue(queue, index)}
+            removeType="Queue"
+          />
         </TableRow>
 
         <TableRow>
