@@ -5,10 +5,12 @@ import UserProfile from './ShopperProfile.js';
 import { getShopper } from '../../../utils/shoppers';
 import ProfileBase from '../ProfileBase';
 import { withRouter } from 'react-router-dom';
+import FavoriteStores from './FavoriteStores';
 
 
 const tabs = [
   'Profile',
+  'Favorite Stores',
   'Search History',
   'Queue History'
 ];
@@ -27,8 +29,10 @@ class ShopperProfile extends React.Component {
       case 0:
         return <UserProfile username={username}/>;
       case 1:
-        return <SearchHistory username={username}/>;
+        return <FavoriteStores username={username}/>;
       case 2:
+        return <SearchHistory username={username}/>;
+      case 3:
         return <QueueHistory shopper={shopper}/>;
       default:
         return Error('Unknown case');

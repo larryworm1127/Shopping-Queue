@@ -18,6 +18,7 @@ import { uid } from 'react-uid';
 
 const tabIcons = [
   <PersonIcon/>,
+  <ShoppingCartIcon/>,
   <HistoryIcon/>,
   <ShoppingCartIcon/>
 ];

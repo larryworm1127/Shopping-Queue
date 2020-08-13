@@ -8,7 +8,8 @@ import { withStyles } from '@material-ui/core';
 import Star from '@material-ui/icons/Star';
 import EmptyStar from '@material-ui/icons/StarBorder';
 import { addToFavorite, removeFavorite } from '../utils/shoppers';
-// import Parser from 'html-react-parser';
+
+
 const styles = () => ({
   title: {
     fontSize: 14,
@@ -37,7 +38,7 @@ class StoreCards extends React.Component {
             {store.type}
           </Typography>
           <Typography variant="h5" component="h2">
-            {store.name}
+            {store.storeName}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
             {store.address}

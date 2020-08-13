@@ -99,6 +99,20 @@ router.patch('/api/shopper/profile/favorites', (req, res) => {
 });
 
 
+// Get favorite stores
+router.get('/api/shopper/favorites/:username', (req, res) => {
+  const username = req.params.username;
+
+  Shopper.getFavoriteStores(username)
+    .then(stores => {
+      res.send(stores);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
+});
+
+
 // Remove store from favorites
 router.delete('/api/shopper/profile/favorites', (req, res) => {
 

@@ -2,6 +2,7 @@
 
 const { model, Schema } = require('mongoose');
 const { isAlphanumeric, isEmail } = require('validator');
+const { Store } = require('./store');
 
 
 const ShopperSchema = new Schema({
@@ -48,6 +49,22 @@ const ShopperSchema = new Schema({
   searchHistory: [{ store: { type: String }, searchDate: { type: String, required: true } }],
   queueHistory: [{ store: { type: String }, searchDate: { type: String, required: true } }],
 });
+
+
+ShopperSchema.statics.getFavoriteStores = function (username) {
+  const Shopper = this;
+
+  return Shopper.findOne({ username }).then(shopper => {
+    if (!shopper) {
+      return Promise.reject();
+    }
+
+    return Store.find({ username: { $in: shopper.favouriteStores }})
+      .then((stores) => {
+        return Promise.resolve(stores)
+      })
+  });
+};
 
 
 const Shopper = model('Shopper', ShopperSchema);
