@@ -23,15 +23,21 @@ router.post('/api/queue', (req, res) => {
 
   // Save queue to the database and add to shopper queue history
   queue.save().then(
-    result1 => {
+    newQueue => {
       Shopper.updateOne(
         { 'username': req.body.username },
-        { $push: { 'queueHistory': queue } }
-      ).then(() => {
-        Shopper.find({ username: req.body.username })
-          .then((result3) => {
-            res.send({ 'Shopper': result3, 'Queue': result1 });
-          });
+        {
+          $push: {
+            'queueHistory': {
+              store: queue.store,
+              searchDate: queue.datetimeQueued,
+              queuedFor: queue.datetime
+            }
+          }
+        },
+        { new: true }
+      ).then(shopper => {
+        res.send({ 'Shopper': shopper, 'Queue': newQueue });
       });
     },
     error => {

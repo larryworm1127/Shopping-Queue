@@ -46,36 +46,60 @@ const ShopperSchema = new Schema({
     required: true
   },
   favouriteStores: [{ type: String }],
-  searchHistory: [{ store: { type: String }, searchDate: { type: String, required: true } }],
-  queueHistory: [{ store: { type: String }, searchDate: { type: String, required: true } }],
+  searchHistory: [{ store: { type: String, required: true }, searchDate: { type: Date, required: true } }],
+  queueHistory: [{
+    store: { type: String, required: true },
+    searchDate: { type: Date, required: true },
+    queuedFor: { type: Date, required: true }
+  }],
 });
 
 
 ShopperSchema.statics.getFavoriteStores = function (username) {
-  return getShopperListHelper(this, username, 'favouriteStores', false);
-};
+  const Shopper = this;
 
-
-ShopperSchema.statics.getSearchHistory = function (username) {
-  return getShopperListHelper(this, username, 'searchHistory', true);
-};
-
-
-ShopperSchema.statics.getQueueHistory = function (username) {
-  return getShopperListHelper(this, username, 'queueHistory', true);
-};
-
-
-const getShopperListHelper = function (Shopper, username, key, useMap) {
   return Shopper.findOne({ username }).then(shopper => {
     if (!shopper) {
       return Promise.reject();
     }
 
-    const storeNames = (useMap) ? shopper[key].map((item) => item.store) : shopper[key];
-    return Store.find({ username: { $in: storeNames } })
+    return Store.find({ username: { $in: shopper.favouriteStores } })
       .then((stores) => {
         return Promise.resolve(stores);
+      });
+  });
+};
+
+
+ShopperSchema.statics.getSearchHistory = function (username) {
+  return Shopper.findOne({ username }).then(shopper => {
+    if (!shopper) {
+      return Promise.reject();
+    }
+
+    const storeNames = shopper.searchHistory.map((item) => item.store);
+    return Store.find({ username: { $in: storeNames } })
+      .then((stores) => {
+        return Promise.resolve(shopper.searchHistory.map(({ _, searchDate }, index) => {
+          return { store: stores[index], searchDate };
+        }));
+      });
+  });
+};
+
+
+ShopperSchema.statics.getQueueHistory = function (username) {
+  return Shopper.findOne({ username }).then(shopper => {
+    if (!shopper) {
+      return Promise.reject();
+    }
+
+    const storeNames = shopper.queueHistory.map((item) => item.store);
+    return Store.find({ username: { $in: storeNames } })
+      .then((stores) => {
+        return Promise.resolve(shopper.queueHistory.map(({ _, searchDate, queuedFor }, index) => {
+          return { store: stores[index], searchDate, queuedFor };
+        }));
       });
   });
 };
