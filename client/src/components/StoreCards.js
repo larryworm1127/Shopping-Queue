@@ -37,7 +37,7 @@ class StoreCards extends React.Component {
             {store.type}
           </Typography>
           <Typography variant="h5" component="h2">
-            {store.name}
+            {store.storeName}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
             {store.address}

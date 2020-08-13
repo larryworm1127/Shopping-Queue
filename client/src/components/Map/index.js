@@ -14,18 +14,25 @@ import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
 import { uid } from 'react-uid';
 
+import { getSearchedStores } from '../../actions/store';
 
 class StoreMap extends React.Component {
 
+  constructor(props) {
+    super(props)
+    getSearchedStores("", this)
+  }
+
   state = {
     currStore: null,
-    showMarker: false
+    showMarker: false,
+    stores: []
   };
 
   handleHighlight = (index) => {
     this.setState({
-      currStore: stores[index],
-      showMarker: true
+      currStore: this.state.stores[index],
+      showMarker: true,
     });
   };
 
@@ -44,6 +51,11 @@ class StoreMap extends React.Component {
       );
     }
   };
+
+  handleOnInputChange = (event) => {
+    getSearchedStores(event.target.value, this)
+  };
+
 
   render() {
     const { classes, location, google, isLoggedIn, userType } = this.props;
@@ -70,6 +82,7 @@ class StoreMap extends React.Component {
                 <TextField
                   variant="outlined"
                   label="Search..."
+                  onChange={this.handleOnInputChange}
                 />
                 <Button
                   size="small"
@@ -79,8 +92,7 @@ class StoreMap extends React.Component {
                 </Button>
               </CardActions>
             </Card>
-
-            {stores.map((store, index) => (
+            {this.state.stores.map((store, index) => (
               <div className={classes.storeCard} key={uid(store)}>
                 <StoreCards
                   secondButton={(
