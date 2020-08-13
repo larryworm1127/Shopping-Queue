@@ -19,7 +19,7 @@ import { addQueue } from '../../actions/queue';
 class StoreDetail extends React.Component {
 
   state = {
-    date: new Date().toISOString().slice(0, 10),
+    date: new Date().toISOString(),
     est: 30,
     numShoppers: 1,
   };
@@ -37,11 +37,11 @@ class StoreDetail extends React.Component {
     var newQueue = {
       username: currentUser,
       store: selectedStore.username,
-      datetime: this.state.date,
+      datetime: new Date().toISOString(),
       shopTime: this.state.est,
       numCustomers: this.state.numShoppers,
+      // datetimeQueued: this.state.date,
       datetimeQueued: this.state.date,
-      // datetimeQueued: new Date().toISOString(),
     };
     console.log(this.state.date)
     addQueue(JSON.stringify(newQueue), history)

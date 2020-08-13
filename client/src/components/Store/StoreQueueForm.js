@@ -31,12 +31,13 @@ class StoreQueueForm extends React.Component {
               }}
             /> */}
             <TextField
-              id="datetime-local"
+              name="date"
               label="Date"
               type="datetime-local"
               defaultValue="2020-08-18T10:30"
-              // className={classes.textField}
-              // value={date}
+              onChange={(event) => {
+                handleFormField('date', event);
+              }}
               InputLabelProps={{
                 shrink: true,
               }}
