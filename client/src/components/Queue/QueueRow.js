@@ -9,17 +9,29 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import QueueDetails from './QueueDetails';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
 
 
 class QueueRow extends React.Component {
 
   state = {
-    open: false
+    detailOpen: false,
+    alertOpen: false
   };
 
-  setOpen = (value) => {
+  setDetailOpen = (value) => {
     this.setState({
-      open: value
+      detailOpen: value
+    });
+  };
+
+  setAlertOpen = (value) => {
+    this.setState({
+      alertOpen: value
     });
   };
 
@@ -30,8 +42,8 @@ class QueueRow extends React.Component {
       <React.Fragment>
         <TableRow className={classes.queueRow}>
           <TableCell>
-            <IconButton size="small" onClick={() => this.setOpen(!this.state.open)}>
-              {this.state.open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+            <IconButton size="small" onClick={() => this.setDetailOpen(!this.state.detailOpen)}>
+              {this.state.detailOpen ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
             </IconButton>
           </TableCell>
           <TableCell align='center'>{queue.username}</TableCell>
@@ -42,16 +54,43 @@ class QueueRow extends React.Component {
               className={classes.button}
               variant="contained"
               color="secondary"
-              onClick={() => removeQueue(queue, index)}
+              onClick={() => this.setAlertOpen(true)}
             >
               Remove Queue
             </Button>
           </TableCell>
+
+          <Dialog
+            open={this.state.alertOpen}
+            onClose={() => this.setAlertOpen(false)}
+          >
+            <DialogTitle>Remove queue?</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Confirm to remove the selected queue.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => this.setAlertOpen(false)} color="primary">
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  removeQueue(queue, index);
+                  this.setAlertOpen(false);
+                }}
+                color="primary"
+                autoFocus
+              >
+                Remove
+              </Button>
+            </DialogActions>
+          </Dialog>
         </TableRow>
 
         <TableRow>
           <TableCell className={classes.tableCellCollapse} colSpan={6}>
-            <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+            <Collapse in={this.state.detailOpen} timeout="auto" unmountOnExit>
               <QueueDetails queue={queue}/>
             </Collapse>
           </TableCell>
