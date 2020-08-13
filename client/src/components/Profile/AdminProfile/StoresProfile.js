@@ -8,7 +8,7 @@ import StoreProfile from '../StoreProfile/StoreProfile';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getAllStores } from '../../../actions/admin';
+import { getAllStores, removeStore } from '../../../actions/admin';
 import { uid } from 'react-uid';
 
 
@@ -22,6 +22,10 @@ class StoresProfile extends React.Component {
     isProfileOpen: false,
     profileOpenIndex: 0,
     stores: []
+  };
+
+  handleUserDelete = (index, username) => {
+    removeStore(username, index, this);
   };
 
   closeView(index) {
@@ -85,6 +89,7 @@ class StoresProfile extends React.Component {
                 </Button>
                 <Button
                   className={classes.deleteButton}
+                  onClick={() => this.handleUserDelete(index, store.username)}
                   variant="contained"
                   color="secondary"
                   startIcon={<DeleteIcon/>}
