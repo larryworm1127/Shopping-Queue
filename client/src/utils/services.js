@@ -39,7 +39,7 @@ export const getServiceData = (id, username) => {
             store.name,
             store.type,
             <LocalGroceryStore/>,
-            `/store/${store.id}`
+            `/store/${store.username}`
           );
         }),
         secondServices: getShopper(username).queueHistory.slice(0, 3).map((queue, index) => {
@@ -48,7 +48,7 @@ export const getServiceData = (id, username) => {
             queue.store.name,
             queue.store.type,
             <LocalGroceryStore/>,
-            `/store/${queue.store.id}`
+            `/store/${queue.store.username}`
           );
         }),
         title: 'Favorite Stores',

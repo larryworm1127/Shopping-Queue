@@ -35,6 +35,7 @@ class QueueHistory extends React.Component {
   };
 
   render() {
+    console.log(this.state.queueHistory);
     const { classes } = this.props;
 
     return (
@@ -48,27 +49,27 @@ class QueueHistory extends React.Component {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Shop Name</TableCell>
-                    <TableCell>Address</TableCell>
-                    <TableCell>Date Booked</TableCell>
-                    <TableCell>Queued For</TableCell>
+                    <TableCell align="center">Shop Name</TableCell>
+                    <TableCell align="center">Address</TableCell>
+                    <TableCell align="center">Date Booked</TableCell>
+                    <TableCell align="center">Queued For</TableCell>
                     <TableCell/>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {this.state.queueHistory.map((queueRow, index) => (
                     <TableRow key={uid(index)}>
-                      <TableCell component="th" scope="row">
-                        {queueRow.store.name}
+                      <TableCell align="center">
+                        {queueRow.storeName}
                       </TableCell>
-                      <TableCell align="left">
-                        {queueRow.store.address}
+                      <TableCell align="center">
+                        {queueRow.address}
                       </TableCell>
-                      <TableCell align="left">
-                        {queueRow.getTimeQueued()}
+                      <TableCell align="center">
+                        {/*{queueRow.getTimeQueued()}*/}
                       </TableCell>
-                      <TableCell align="left">
-                        {queueRow.date}
+                      <TableCell align="center">
+                        {/*{queueRow.date}*/}
                       </TableCell>
                       <TableCell>
                         <Button

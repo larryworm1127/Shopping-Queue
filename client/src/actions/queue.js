@@ -108,9 +108,8 @@ export const addQueue = (queueData, history) => {
     .then(json => {
       if (json.message !== undefined) {
         console.log(json.message);
-        ;
       } else {
-        console.log('Booking added')
+        console.log('Booking added');
         history.push('/queue');
       }
     })

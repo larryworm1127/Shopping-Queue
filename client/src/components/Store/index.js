@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../Nav/navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { getStore, getStoreByUsername } from '../../utils/stores';
+import { getStoreByUsername } from '../../utils/stores';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
@@ -10,8 +10,6 @@ import { styles } from './style';
 import Grid from '@material-ui/core/Grid';
 import StoreDetailList from './StoreDetailList';
 import StoreQueueForm from './StoreQueueForm';
-import { Queue } from '../../utils/queue';
-import { getShopper } from '../../utils/shoppers';
 import BackArrow from '@material-ui/icons/ArrowBackIos';
 import Button from '@material-ui/core/Button';
 import { addQueue } from '../../actions/queue';
@@ -34,26 +32,38 @@ class StoreDetail extends React.Component {
     event.preventDefault();
 
     const { history, currentUser } = this.props;
-    var newQueue = {
+    const newQueue = {
       username: currentUser,
       store: selectedStore.username,
-      datetime: new Date().toISOString(),
+      datetime: this.state.date,
       shopTime: this.state.est,
       numCustomers: this.state.numShoppers,
-      datetimeQueued: this.state.date,
+      datetimeQueued: new Date().toISOString(),
     };
-    console.log(this.state.date)
-    addQueue(JSON.stringify(newQueue), history)
+    console.log(this.state.date);
+    addQueue(JSON.stringify(newQueue), history);
   };
 
 
   render() {
-    const { location, userType, isLoggedIn, match, classes, date, shoppingTime, numCustomer, handleFormField, history } = this.props;
+    const {
+      location,
+      userType,
+      isLoggedIn,
+      match,
+      classes,
+      date,
+      shoppingTime,
+      numCustomer,
+      handleFormField,
+      history
+    } = this.props;
+
     const store = getStoreByUsername(match.params.username);
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn} />
-        <CssBaseline />
+        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
+        <CssBaseline/>
 
         <div className={classes.layout}>
           <Paper className={classes.paper}>
@@ -63,19 +73,19 @@ class StoreDetail extends React.Component {
               color="primary"
               onClick={() => history.goBack()}
             >
-              <BackArrow />Back
+              <BackArrow/>Back
             </Button>
 
             <Typography component="h1" variant="h4" align="center">
               {store.name}
             </Typography>
-            <br />
+            <br/>
             <Grid container>
               <Grid item xs={7}>
                 <Typography variant="h6" gutterBottom>
                   Store details
                 </Typography>
-                <StoreDetailList store={store} />
+                <StoreDetailList store={store}/>
               </Grid>
               <Grid item xs={5}>
                 <Typography variant="h6" gutterBottom>
@@ -85,11 +95,11 @@ class StoreDetail extends React.Component {
                 <StoreQueueForm
                   classes={classes}
                   store={store}
-                  date={(date === undefined) ? this.state.date : date}
-                  shoppingTime={(shoppingTime === undefined) ? this.state.est : shoppingTime}
-                  numCustomer={(numCustomer === undefined) ? this.state.numShoppers : numCustomer}
+                  date={(date) ? date : this.state.date}
+                  shoppingTime={(shoppingTime) ? shoppingTime : this.state.est}
+                  numCustomer={(numCustomer) ? numCustomer : this.state.numShoppers}
                   handleFormSubmit={this.handleFormSubmit}
-                  handleFormField={(handleFormField === undefined) ? this.handleFormField : handleFormField}
+                  handleFormField={(handleFormField) ? handleFormField : this.handleFormField}
                 />
               </Grid>
             </Grid>
