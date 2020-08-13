@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 class StoreQueueForm extends React.Component {
-  
+
   render() {
     const {
       classes,
@@ -20,7 +20,7 @@ class StoreQueueForm extends React.Component {
       <form>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <TextField
+            {/* <TextField
               fullWidth
               name="date"
               label="Date"
@@ -28,6 +28,17 @@ class StoreQueueForm extends React.Component {
               value={date}
               onChange={(event) => {
                 handleFormField('date', event);
+              }}
+            /> */}
+            <TextField
+              id="datetime-local"
+              label="Date"
+              type="datetime-local"
+              defaultValue="2020-08-18T10:30"
+              // className={classes.textField}
+              // value={date}
+              InputLabelProps={{
+                shrink: true,
               }}
             />
           </Grid>
