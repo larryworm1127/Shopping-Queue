@@ -52,17 +52,31 @@ const ShopperSchema = new Schema({
 
 
 ShopperSchema.statics.getFavoriteStores = function (username) {
-  const Shopper = this;
+  return getShopperListHelper(this, username, 'favouriteStores', false);
+};
 
+
+ShopperSchema.statics.getSearchHistory = function (username) {
+  return getShopperListHelper(this, username, 'searchHistory', true);
+};
+
+
+ShopperSchema.statics.getQueueHistory = function (username) {
+  return getShopperListHelper(this, username, 'queueHistory', true);
+};
+
+
+const getShopperListHelper = function (Shopper, username, key, useMap) {
   return Shopper.findOne({ username }).then(shopper => {
     if (!shopper) {
       return Promise.reject();
     }
 
-    return Store.find({ username: { $in: shopper.favouriteStores }})
+    const storeNames = (useMap) ? shopper[key].map((item) => item.store) : shopper[key];
+    return Store.find({ username: { $in: storeNames } })
       .then((stores) => {
-        return Promise.resolve(stores)
-      })
+        return Promise.resolve(stores);
+      });
   });
 };
 

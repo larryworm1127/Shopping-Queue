@@ -113,6 +113,34 @@ router.get('/api/shopper/favorites/:username', (req, res) => {
 });
 
 
+// Get search history stores
+router.get('/api/shopper/searchHistory/:username', (req, res) => {
+  const username = req.params.username;
+
+  Shopper.getSearchHistory(username)
+    .then(stores => {
+      res.send(stores);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
+});
+
+
+// Get queue history stores
+router.get('/api/shopper/queueHistory/:username', (req, res) => {
+  const username = req.params.username;
+
+  Shopper.getQueueHistory(username)
+    .then(stores => {
+      res.send(stores);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
+});
+
+
 // Remove store from favorites
 router.delete('/api/shopper/profile/favorites', (req, res) => {
 

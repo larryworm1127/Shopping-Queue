@@ -10,32 +10,18 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core';
 import { styles } from '../style';
 import Button from '@material-ui/core/Button';
-import { getShopperProfile, updateShopperProfile } from '../../../actions/shopper';
+import { getShopperSearchHistory } from '../../../actions/shopper';
+
 
 class SearchHistory extends React.Component {
 
-  // constructor(props) {
-  //   super(props);
-  //   const { shopper } = this.props;
-  //   this.state = {
-  //     searchHistory: shopper.searchHistory
-  //   };
-  // }
-
   componentDidMount() {
-    getShopperProfile(this.props.username, this);
+    getShopperSearchHistory(this.props.username, this);
   }
 
   state = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    address: '',
-    remindTime: 0,
-    favoriteStores: [],
     searchHistory: [],
-    queueHistory: []
-  }
+  };
 
   handleRemoveSearchHistory = (event, index) => {
     event.preventDefault();

@@ -11,17 +11,18 @@ import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
+import { getShopperQueueHistory } from '../../../actions/shopper';
 
 
 class QueueHistory extends React.Component {
 
-  constructor(props) {
-    super(props);
-    const { shopper } = this.props;
-    this.state = {
-      queueHistory: shopper.queueHistory
-    };
+  componentDidMount() {
+    getShopperQueueHistory(this.props.username, this);
   }
+
+  state = {
+    queueHistory: []
+  };
 
   handleRemoveQueueHistory = (event, index) => {
     event.preventDefault();

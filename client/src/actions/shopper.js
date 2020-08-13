@@ -48,6 +48,50 @@ export const getShopperFavoriteStores = (username, profileComp) => {
 };
 
 
+export const getShopperSearchHistory = (username, profileComp) => {
+  const url = `/api/shopper/searchHistory/${username}`;
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        profileComp.setState({
+          searchHistory: [...json]
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
+export const getShopperQueueHistory = (username, profileComp) => {
+  const url = `/api/shopper/queueHistory/${username}`;
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        profileComp.setState({
+          queueHistory: [...json]
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
 export const updateShopperProfile = (username, profileComp) => {
   const request = new Request(`/api/shopper/profile/${username}`, {
     method: 'PATCH',
