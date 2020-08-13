@@ -85,3 +85,25 @@ export const updateStoreProfile = (username, profileComp) => {
       console.log(error);
     });
 };
+
+export const getSearchedStores = (text, stores) => {
+  const url = `/api/stores`;
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        const jsonFiltered = json.filter(store => (store.storeName.toUpperCase()).includes(text.toUpperCase()))
+        stores.setState({
+          stores: jsonFiltered
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
