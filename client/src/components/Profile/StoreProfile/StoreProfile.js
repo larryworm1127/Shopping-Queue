@@ -121,7 +121,7 @@ class UserProfile extends React.Component {
             handleFormField={this.handleFormField}
           />
           <DataDisplay
-            gridSize={12}
+            gridSize={6}
             title="Customer Limit"
             content={this.state.customerLimit}
             edit={this.state.edit}
@@ -133,7 +133,7 @@ class UserProfile extends React.Component {
             handleFormField={this.handleFormField}
           />
           <DataDisplay
-            gridSize={12}
+            gridSize={6}
             title="Customer Shopping Time Limit (min)"
             content={this.state.customerShopTime}
             edit={this.state.edit}
