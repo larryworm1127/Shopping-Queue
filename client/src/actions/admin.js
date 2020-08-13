@@ -97,7 +97,6 @@ export const getAllStores = (profileComp) => {
     });
 };
 
-
 export const getHelpMessages = (messageComp) => {
   const url = '/api/admin/messages';
 
@@ -116,6 +115,33 @@ export const getHelpMessages = (messageComp) => {
         });
         messageComp.setState({
           messages: [...formattedJson]
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const getSearchedMessages = (text, messageComp) => {
+  const url = '/api/admin/messages';
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        const formattedJson = json.map((message) => {
+          const result = { ...message };
+          result.date = new Date(result.date).toLocaleString();
+          return result;
+        });
+        const jsonFiltered = formattedJson.filter(message => (message.username.toUpperCase()).includes(text.toUpperCase()))
+        messageComp.setState({
+          messages: [...jsonFiltered]
         });
       }
     })

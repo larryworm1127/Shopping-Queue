@@ -124,3 +124,25 @@ export const updateShopperProfile = (username, profileComp) => {
       console.log(error);
     });
 };
+
+export const getSearchedShoppers = (text, shoppers) => {
+  const url = `/api/shoppers`;
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        const jsonFiltered = json.filter(shopper => (shopper.firstName.toUpperCase() + " " + shopper.lastName.toUpperCase()).includes(text.toUpperCase()))
+        shoppers.setState({
+          shoppers: jsonFiltered
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
