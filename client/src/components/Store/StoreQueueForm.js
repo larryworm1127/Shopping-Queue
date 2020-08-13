@@ -20,16 +20,6 @@ class StoreQueueForm extends React.Component {
       <form>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            {/* <TextField
-              fullWidth
-              name="date"
-              label="Date"
-              type="date"
-              value={date}
-              onChange={(event) => {
-                handleFormField('date', event);
-              }}
-            /> */}
             <TextField
               name="date"
               label="Date"

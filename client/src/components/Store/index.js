@@ -33,21 +33,17 @@ class StoreDetail extends React.Component {
   handleFormSubmit = (event, selectedStore) => {
     event.preventDefault();
 
-    const { history, currentUser, username } = this.props;
+    const { history, currentUser } = this.props;
     var newQueue = {
       username: currentUser,
       store: selectedStore.username,
       datetime: new Date().toISOString(),
       shopTime: this.state.est,
       numCustomers: this.state.numShoppers,
-      // datetimeQueued: this.state.date,
       datetimeQueued: this.state.date,
     };
     console.log(this.state.date)
     addQueue(JSON.stringify(newQueue), history)
-    // selectedStore.addNewQueue(newQueue);
-    // getShopper(currentUser).queueUp(newQueue);
-    // history.push('/queue');
   };
 
 
