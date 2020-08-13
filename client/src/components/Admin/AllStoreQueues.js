@@ -30,11 +30,11 @@ class AllStoreQueues extends React.Component {
   };
 
   render() {
-    const { location, classes, isLoggedIn, userType } = this.props;
+    const { classes, isLoggedIn, userType } = this.props;
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} isLoggedIn={isLoggedIn} userType={userType}/>
+        <NavBar isLoggedIn={isLoggedIn} userType={userType}/>
         <CssBaseline/>
 
         <Typography variant='h3' align='center' className={classes.titleText}>

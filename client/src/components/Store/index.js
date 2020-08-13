@@ -51,12 +51,12 @@ class StoreDetail extends React.Component {
 
 
   render() {
-    const { location, classes, history } = this.props;
+    const { classes, history, isLoggedIn, userType } = this.props;
     const { store, date, numCustomer, shoppingTime } = this.state;
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} {...this.props}/>
+        <NavBar isLoggedIn={isLoggedIn} userType={userType}/>
         <CssBaseline/>
 
         <div className={classes.layout}>

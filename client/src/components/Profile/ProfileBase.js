@@ -34,13 +34,13 @@ class ProfileBase extends React.Component {
   };
 
   render() {
-    const { classes, username, tabs, profileSettings, location, currentUser, userType, isLoggedIn } = this.props;
+    const { classes, username, tabs, profileSettings, currentUser, userType, isLoggedIn } = this.props;
     const { setting } = this.state;
 
     return (
       <React.Fragment>
         <CssBaseline/>
-        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
+        <NavBar userType={userType} isLoggedIn={isLoggedIn}/>
 
         <Drawer
           className={classes.drawer}

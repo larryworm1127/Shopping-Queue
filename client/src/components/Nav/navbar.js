@@ -25,7 +25,7 @@ class NavBar extends React.Component {
   }
 
   currPath = () => {
-    switch (this.props.currentPath) {
+    switch (window.location.pathname) {
       case '/':
         return 0;
       case '/profile':

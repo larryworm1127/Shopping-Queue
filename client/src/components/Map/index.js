@@ -13,13 +13,19 @@ import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
 import { uid } from 'react-uid';
+import { getAllStores } from '../../actions/admin';
 
 
 class StoreMap extends React.Component {
 
+  componentDidMount() {
+    getAllStores(this)
+  }
+
   state = {
     currStore: null,
-    showMarker: false
+    showMarker: false,
+    stores: []
   };
 
   handleHighlight = (index) => {
@@ -46,11 +52,11 @@ class StoreMap extends React.Component {
   };
 
   render() {
-    const { classes, location, google, isLoggedIn, userType } = this.props;
+    const { classes, google, isLoggedIn, userType } = this.props;
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} position='fixed' userType={userType} isLoggedIn={isLoggedIn}/>
+        <NavBar position='fixed' userType={userType} isLoggedIn={isLoggedIn}/>
         <CssBaseline/>
 
         <Grid container>
@@ -80,7 +86,7 @@ class StoreMap extends React.Component {
               </CardActions>
             </Card>
 
-            {stores.map((store, index) => (
+            {this.state.stores.map((store, index) => (
               <div className={classes.storeCard} key={uid(store)}>
                 <StoreCards
                   secondButton={(

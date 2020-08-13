@@ -13,11 +13,11 @@ import LoginForm from './LoginForm';
 class Login extends React.Component {
 
   render() {
-    const { classes, location, userType, isLoggedIn, app } = this.props;
+    const { classes, userType, isLoggedIn, app } = this.props;
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
+        <NavBar userType={userType} isLoggedIn={isLoggedIn}/>
 
         <Container component="main" maxWidth="xs">
           <CssBaseline/>

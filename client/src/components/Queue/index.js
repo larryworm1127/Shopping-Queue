@@ -9,12 +9,12 @@ import QueuesTable from './QueuesTable';
 class Queue extends React.Component {
 
   render() {
-    const { location, userType, isLoggedIn } = this.props;
+    const { userType, isLoggedIn } = this.props;
 
     return (
       <div>
         <CssBaseline/>
-        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
+        <NavBar userType={userType} isLoggedIn={isLoggedIn}/>
         <Header
           title="My Queues"
           subtitle="Below are the stores you've queued for."

@@ -12,11 +12,11 @@ import { withRouter } from 'react-router-dom';
 class StoreShoppers extends React.Component {
 
   render() {
-    const { classes, location, userType, isLoggedIn } = this.props;
+    const { classes, userType, isLoggedIn } = this.props;
 
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
+        <NavBar userType={userType} isLoggedIn={isLoggedIn}/>
         <CssBaseline/>
 
         <Typography variant='h3' align='center' className={classes.titleText}>

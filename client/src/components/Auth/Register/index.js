@@ -122,13 +122,13 @@ class Register extends React.Component {
   };
 
   render() {
-    const { classes, location, userType, isLoggedIn } = this.props;
+    const { classes, userType, isLoggedIn } = this.props;
     const { activeStep } = this.state;
 
     return (
       <React.Fragment>
         <CssBaseline/>
-        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
+        <NavBar userType={userType} isLoggedIn={isLoggedIn}/>
 
         <div className={classes.layout}>
           <Paper className={classes.paper}>
