@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../Nav/navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { getStoreByUsername } from '../../utils/stores';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
@@ -13,13 +12,20 @@ import StoreQueueForm from './StoreQueueForm';
 import BackArrow from '@material-ui/icons/ArrowBackIos';
 import Button from '@material-ui/core/Button';
 import { addQueue } from '../../actions/queue';
+import { getStoreObj } from '../../actions/store';
+
 
 class StoreDetail extends React.Component {
 
+  componentDidMount() {
+    getStoreObj(this.props.match.params.username, this);
+  }
+
   state = {
     date: new Date().toISOString(),
-    est: 30,
-    numShoppers: 1,
+    shoppingTime: 1,
+    numCustomer: 1,
+    store: {}
   };
 
   handleFormField = (field, event) => {
@@ -36,33 +42,21 @@ class StoreDetail extends React.Component {
       username: currentUser,
       store: selectedStore.username,
       datetime: this.state.date,
-      shopTime: this.state.est,
-      numCustomers: this.state.numShoppers,
+      shopTime: this.state.shoppingTime,
+      numCustomers: this.state.numCustomer,
       datetimeQueued: new Date().toISOString(),
     };
-    console.log(this.state.date);
     addQueue(JSON.stringify(newQueue), history);
   };
 
 
   render() {
-    const {
-      location,
-      userType,
-      isLoggedIn,
-      match,
-      classes,
-      date,
-      shoppingTime,
-      numCustomer,
-      handleFormField,
-      history
-    } = this.props;
+    const { location, classes, history } = this.props;
+    const { store, date, numCustomer, shoppingTime } = this.state;
 
-    const store = getStoreByUsername(match.params.username);
     return (
       <React.Fragment>
-        <NavBar currentPath={location.pathname} userType={userType} isLoggedIn={isLoggedIn}/>
+        <NavBar currentPath={location.pathname} {...this.props}/>
         <CssBaseline/>
 
         <div className={classes.layout}>
@@ -77,7 +71,7 @@ class StoreDetail extends React.Component {
             </Button>
 
             <Typography component="h1" variant="h4" align="center">
-              {store.name}
+              {store.storeName}
             </Typography>
             <br/>
             <Grid container>
@@ -93,13 +87,12 @@ class StoreDetail extends React.Component {
                 </Typography>
 
                 <StoreQueueForm
-                  classes={classes}
                   store={store}
-                  date={(date) ? date : this.state.date}
-                  shoppingTime={(shoppingTime) ? shoppingTime : this.state.est}
-                  numCustomer={(numCustomer) ? numCustomer : this.state.numShoppers}
+                  date={date}
+                  shoppingTime={shoppingTime}
+                  numCustomer={numCustomer}
                   handleFormSubmit={this.handleFormSubmit}
-                  handleFormField={(handleFormField) ? handleFormField : this.handleFormField}
+                  handleFormField={this.handleFormField}
                 />
               </Grid>
             </Grid>

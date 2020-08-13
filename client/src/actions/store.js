@@ -28,6 +28,28 @@ export const getStoreProfile = (username, profileComp) => {
 };
 
 
+export const getStoreObj = (username, comp) => {
+  const url = `/api/store/profile/${username}`;
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        comp.setState({
+          store: json
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
 export const updateStoreProfile = (username, profileComp) => {
   const request = new Request(`/api/store/profile/${username}`, {
     method: 'PATCH',

@@ -8,7 +8,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Menu from '../../utils/menu';
 import { styles } from './style';
-import PropTypes from 'prop-types';
 
 
 // NavBar component class
@@ -94,11 +93,5 @@ class NavBar extends React.Component {
     );
   }
 }
-
-NavBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  userType: PropTypes.number,
-  isLoggedIn: PropTypes.bool
-};
 
 export default withStyles(styles)(NavBar);

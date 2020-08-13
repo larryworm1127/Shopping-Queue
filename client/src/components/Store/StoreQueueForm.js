@@ -2,6 +2,9 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { styles } from './style';
+import { withStyles } from '@material-ui/core';
+
 
 class StoreQueueForm extends React.Component {
 
@@ -9,7 +12,6 @@ class StoreQueueForm extends React.Component {
     const {
       classes,
       store,
-      date,
       shoppingTime,
       numCustomer,
       handleFormSubmit,
@@ -25,9 +27,7 @@ class StoreQueueForm extends React.Component {
               label="Date"
               type="datetime-local"
               defaultValue="2020-08-18T10:30"
-              onChange={(event) => {
-                handleFormField('date', event);
-              }}
+              onChange={(event) => handleFormField('date', event)}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -36,14 +36,12 @@ class StoreQueueForm extends React.Component {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              name="est"
+              name="shoppingTime"
               label="Estimated Shopping Time (min)"
               type="number"
-              max={store.customerShopTime}
+              inputProps={{ min: 1, max: store.customerShopTime }}
               value={shoppingTime}
-              onChange={(event) => {
-                handleFormField('shoppingTime', event);
-              }}
+              onChange={(event) => handleFormField('shoppingTime', event)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -52,15 +50,13 @@ class StoreQueueForm extends React.Component {
               name="numCustomer"
               label="Number of Shopper"
               type="number"
-              max={store.customerLimit}
+              inputProps={{ min: 1, max: store.customerLimit }}
               value={numCustomer}
-              onChange={(event) => {
-                handleFormField('numCustomer', event);
-              }}
+              onChange={(event) => handleFormField('numCustomer', event)}
             />
           </Grid>
         </Grid>
-        <br />
+        <br/>
 
         <div className={classes.buttons}>
           <Button
@@ -68,7 +64,7 @@ class StoreQueueForm extends React.Component {
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={(event) => { handleFormSubmit(event, store) }}
+            onClick={(event) => handleFormSubmit(event, store)}
             href='/queue'
           >
             Add to queue
@@ -79,4 +75,4 @@ class StoreQueueForm extends React.Component {
   }
 }
 
-export default StoreQueueForm;
+export default withStyles(styles)(StoreQueueForm);
