@@ -2,7 +2,6 @@ import React from 'react';
 import NavBar from '../Nav/navbar';
 import { withRouter } from 'react-router-dom';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
-import { stores } from '../../utils/stores';
 import { withStyles } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -13,19 +12,13 @@ import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
 import { uid } from 'react-uid';
-import { getAllStores } from '../../actions/admin';
-
 import { getSearchedStores } from '../../actions/store';
+
 
 class StoreMap extends React.Component {
 
-/*
   componentDidMount() {
-    getAllStores(this)
-*/
-  constructor(props) {
-    super(props)
-    getSearchedStores("", this)
+    getSearchedStores('', this);
   }
 
   state = {
@@ -58,9 +51,8 @@ class StoreMap extends React.Component {
   };
 
   handleOnInputChange = (event) => {
-    getSearchedStores(event.target.value, this)
+    getSearchedStores(event.target.value, this);
   };
-
 
   render() {
     const { classes, google, isLoggedIn, userType } = this.props;

@@ -9,25 +9,30 @@ import { withStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getAllShoppers } from '../../../actions/admin';
+import { removeShopper } from '../../../actions/admin';
 import { uid } from 'react-uid';
 import FavoriteStores from '../ShopperProfile/FavoriteStores';
 import Box from '@material-ui/core/Box';
+import RemoveConfirmDialog from '../../RemoveConfirmDialog';
+import TextField from '@material-ui/core/TextField';
+import CardActions from '@material-ui/core/CardActions';
+import { getSearchedShoppers } from '../../../actions/shopper';
 
 
 class ShoppersProfile extends React.Component {
 
   componentDidMount() {
-    getAllShoppers(this);
+    getSearchedShoppers('', this);
   }
 
   state = {
+    alertOpen: false,
     stateView: 0,
     profileOpenIndex: 0,
     shoppers: []
   };
 
-  closeView(index) {
+  closeView = (index) => {
     const { classes } = this.props;
     const { stateView, profileOpenIndex } = this.state;
 
@@ -45,7 +50,17 @@ class ShoppersProfile extends React.Component {
     }
   };
 
-  getView(index, username) {
+  handleUserDelete = (index, username) => {
+    removeShopper(username, index, this);
+  };
+
+  setAlertOpen = (value) => {
+    this.setState({
+      alertOpen: value
+    });
+  };
+
+  getView = (index, username) => {
     switch (this.state.stateView) {
       case 1:
         return <UserProfile username={username}/>;
@@ -60,12 +75,31 @@ class ShoppersProfile extends React.Component {
     }
   };
 
+  handleOnInputChange = (event) => {
+    getSearchedShoppers(event.target.value, this);
+  };
+
   render() {
     const { classes } = this.props;
     const { stateView, profileOpenIndex } = this.state;
 
     return (
       <React.Fragment>
+        <Card>
+          <CardActions>
+            <TextField
+              variant="outlined"
+              label="Search..."
+              onChange={this.handleOnInputChange}
+            />
+            <Button
+              size="small"
+              color="primary"
+            >
+              Search
+            </Button>
+          </CardActions>
+        </Card>
         {this.state.shoppers.map((shopper, index) => (
           <Box m={2} key={uid(shopper)}>
             <Card>
@@ -118,12 +152,20 @@ class ShoppersProfile extends React.Component {
                 </Button>
                 <Button
                   className={classes.deleteButton}
+                  onClick={() => this.setAlertOpen(true)}
                   variant="contained"
                   color="secondary"
                   startIcon={<DeleteIcon/>}
                 >
                   Delete User
                 </Button>
+
+                <RemoveConfirmDialog
+                  alertOpen={this.state.alertOpen}
+                  setAlertOpen={this.setAlertOpen}
+                  removeThunk={() => this.handleUserDelete(index, shopper.username)}
+                  removeType="Shopper"
+                />
 
                 {this.closeView(index)}
 

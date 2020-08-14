@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const { ObjectID } = require('mongodb');
 const router = express.Router();
 
 const { User } = require('../models/user');
@@ -57,30 +56,24 @@ router.patch('/api/store/profile/:username', (req, res) => {
     });
 });
 
-// Delete a store owners account
-router.delete('/api/store/profile', (req, res) => {
-  const id = req.body.id;
 
-  // Validate id
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send();
-    return;
-  }
+// Delete a store owners account
+router.delete('/api/store/:username', (req, res) => {
+  const username = req.params.username;
 
   // Delete the store and the user attached to the store
-  Store.findByIdAndRemove(id)
+  Store.findOneAndRemove({ username })
     .then(store => {
       if (!store) {
         res.status(404).send();
       } else {
-        User.remove({ username: store.username })
-          .then(user => {
-            res.send({ 'Store': store });
-          });
+        User.findOneAndRemove({ username, userType: 1 }).then(user => {
+          res.send({ store, user });
+        });
       }
     })
     .catch(error => {
-      res.status(500).send(); // server error, could not delete.
+      res.status(500).send(error);
     });
 });
 

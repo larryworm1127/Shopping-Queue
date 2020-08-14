@@ -8,20 +8,35 @@ import StoreProfile from '../StoreProfile/StoreProfile';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getAllStores } from '../../../actions/admin';
+import { removeStore } from '../../../actions/admin';
 import { uid } from 'react-uid';
+import RemoveConfirmDialog from '../../RemoveConfirmDialog';
+import TextField from '@material-ui/core/TextField';
+import CardActions from '@material-ui/core/CardActions';
+import { getSearchedStores } from '../../../actions/store';
 
 
 class StoresProfile extends React.Component {
 
   componentDidMount() {
-    getAllStores(this);
+    getSearchedStores('', this);
   }
 
   state = {
+    alertOpen: false,
     isProfileOpen: false,
     profileOpenIndex: 0,
     stores: []
+  };
+
+  handleUserDelete = (index, username) => {
+    removeStore(username, index, this);
+  };
+
+  setAlertOpen = (value) => {
+    this.setState({
+      alertOpen: value
+    });
   };
 
   closeView(index) {
@@ -42,12 +57,32 @@ class StoresProfile extends React.Component {
     }
   };
 
+  handleOnInputChange = (event) => {
+    getSearchedStores(event.target.value, this);
+  };
+
   render() {
     const { classes } = this.props;
     const { isProfileOpen, profileOpenIndex } = this.state;
 
     return (
       <React.Fragment>
+        <Card>
+          <CardActions>
+            <TextField
+              variant="outlined"
+              label="Search..."
+              onChange={this.handleOnInputChange}
+            />
+            <Button
+              size="small"
+              color="primary"
+            >
+              Search
+            </Button>
+          </CardActions>
+        </Card>
+
         {this.state.stores.map((store, index) => (
           <Box m={2} key={uid(store)}>
             <Card>
@@ -85,12 +120,20 @@ class StoresProfile extends React.Component {
                 </Button>
                 <Button
                   className={classes.deleteButton}
+                  onClick={() => this.setAlertOpen(true)}
                   variant="contained"
                   color="secondary"
                   startIcon={<DeleteIcon/>}
                 >
                   Delete User
                 </Button>
+
+                <RemoveConfirmDialog
+                  alertOpen={this.state.alertOpen}
+                  setAlertOpen={this.setAlertOpen}
+                  removeThunk={() => this.handleUserDelete(index, store.username)}
+                  removeType="Store"
+                />
 
                 {this.closeView(index)}
 

@@ -12,7 +12,7 @@ export const getCurrentQueues = (username, queueComp, isStore) => {
       if (json) {
         const formattedJson = json.map((message) => {
           const result = { ...message };
-          result.datetime = new Date(result.datetime).toLocaleString();
+          result.datetime = new Date(result.datetime).toISOString();
           result.datetimeQueued = new Date(result.datetimeQueued).toLocaleString();
           return result;
         });
@@ -90,10 +90,10 @@ export const removeQueue = (id, queueComp, index) => {
 };
 
 // A function to send a POST request to add a new queue
-export const addQueue = (queueData, history) => {
+export const addQueue = (queueData, history, comp) => {
   const request = new Request('/api/queue', {
     method: 'post',
-    body: queueData,
+    body: JSON.stringify(queueData),
     headers: {
       Accept: 'application/json, text/plain, */*',
       'Content-Type': 'application/json'
@@ -103,13 +103,15 @@ export const addQueue = (queueData, history) => {
   // Send the request with fetch()
   fetch(request)
     .then(res => {
-      return res;
+      return res.json();
     })
     .then(json => {
       if (json.message !== undefined) {
-        console.log(json.message);
+        comp.setState({
+          displayError: true,
+          errorMessage: json.message
+        });
       } else {
-        console.log('Booking added');
         history.push('/queue');
       }
     })

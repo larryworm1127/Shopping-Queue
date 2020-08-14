@@ -4,7 +4,6 @@ const express = require('express');
 const { ObjectID } = require('mongodb');
 const router = express.Router();
 
-const { Shopper } = require('../models/shopper');
 const { Queue } = require('../models/queue');
 
 
@@ -22,36 +21,21 @@ router.post('/api/queue', (req, res) => {
   });
 
   // Save queue to the database and add to shopper queue history
-  queue.save().then(
-    newQueue => {
-      Shopper.updateOne(
-        { 'username': req.body.username },
-        {
-          $push: {
-            'queueHistory': {
-              store: queue.store,
-              searchDate: queue.datetimeQueued,
-              queuedFor: queue.datetime
-            }
-          }
-        },
-        { new: true }
-      ).then(shopper => {
-        res.send({ 'Shopper': shopper, 'Queue': newQueue });
-      });
-    },
-    error => {
-      res.status(400).send(error);  // 400 for bad request
-    }
-  );
+  Queue.addNewQueue(queue)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
 });
 
 
-// Get queues for shopper
+// Get current queues for shopper
 router.get('/api/queue/shopper/:username', (req, res) => {
   const username = req.params.username;
 
-  Queue.find({ username: username })
+  Queue.getCurrentQueues(username, false)
     .then(queues => {
       if (!queues) {
         res.status(404).send();
@@ -59,8 +43,8 @@ router.get('/api/queue/shopper/:username', (req, res) => {
         res.send(queues);
       }
     })
-    .catch(() => {
-      res.status(500).send(); // server error
+    .catch(error => {
+      res.status(500).send(error); // server error
     });
 });
 
@@ -85,7 +69,7 @@ router.delete('/api/queue', (req, res) => {
       }
     })
     .catch(error => {
-      res.status(500).send(); // server error, could not delete.
+      res.status(500).send(error);
     });
 });
 
@@ -94,7 +78,7 @@ router.delete('/api/queue', (req, res) => {
 router.get('/api/queue/store/:username', (req, res) => {
   const username = req.params.username;
 
-  Queue.find({ store: username, datetime: { $gte: new Date().toISOString() } })
+  Queue.getCurrentQueues(username, true)
     .then(queues => {
       if (!queues) {
         res.status(404).send();
@@ -102,8 +86,8 @@ router.get('/api/queue/store/:username', (req, res) => {
         res.send(queues);
       }
     })
-    .catch(() => {
-      res.status(500).send(); // server error
+    .catch(error => {
+      res.status(500).send(error); // server error
     });
 });
 
@@ -136,6 +120,5 @@ router.patch('/api/queue/:id', (req, res) => {
       res.status(400).send();
     });
 });
-
 
 module.exports = router;
