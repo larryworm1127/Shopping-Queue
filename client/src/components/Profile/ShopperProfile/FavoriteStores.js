@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
 import { styles } from '../style';
+import ContentTitle from '../../ContentTitle';
 
 
 class FavoriteStores extends React.Component {
@@ -21,18 +22,16 @@ class FavoriteStores extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { favoriteStores } = this.state;
 
     return (
-      <React.Fragment>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Your Favorite Stores
-              </Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <ContentTitle isEmpty={favoriteStores.length === 0} name="Favorite Stores"/>
 
-              <Grid container spacing={3}>
-                {this.state.favoriteStores.map((store, index) => (
+            <Grid container spacing={3}>
+              {favoriteStores.map((store, index) => (
                   <Grid item md={4} key={uid(index)}>
                     <StoreCards
                       store={store}
@@ -43,11 +42,10 @@ class FavoriteStores extends React.Component {
                     />
                   </Grid>
                 ))}
-              </Grid>
-            </Paper>
-          </Grid>
+            </Grid>
+          </Paper>
         </Grid>
-      </React.Fragment>
+      </Grid>
     );
   }
 }
