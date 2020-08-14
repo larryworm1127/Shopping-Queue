@@ -36,7 +36,7 @@ class QueueDetails extends React.Component {
     event.preventDefault();
 
     const { queue } = this.props;
-    updateQueue(queue._id, this)
+    updateQueue(queue._id, this);
   };
 
   render() {
@@ -59,7 +59,7 @@ class QueueDetails extends React.Component {
             <DataDisplay
               gridSize={4}
               title="Queued For Date"
-              content={this.state.datetime}
+              content={new Date(this.state.datetime).toLocaleString()}
               edit={this.state.edit}
               setEdit={this.setEdit}
               name="datetime"
