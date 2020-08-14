@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "setup": "npm install && cd client && npm install && cd ..",
-    "start": "cd client && npm run build && cd .. && node server.js",
+    "start": "npm run setup && cd client && npm run build && cd .. && node server.js",
     "start-run": "concurrently \"npm start\" \"cd client && npm start\"",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
