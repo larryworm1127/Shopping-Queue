@@ -79,10 +79,8 @@ router.patch('/api/shopper/profile/favorites', (req, res) => {
       } else {
         Shopper.updateOne(
           { '_id': shopperID },
-          {
-            $push: { 'favouriteStores': store }
-
-          }).then(result => {
+          { $push: { 'favouriteStores': store } }
+        ).then(result => {
           if (!result) {
             res.status(404).send('Resource not found');
           } else {

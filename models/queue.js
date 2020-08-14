@@ -1,10 +1,11 @@
 'use strict';
 
-const mongoose = require('mongoose');
+const { model, Schema } = require('mongoose');
 const validator = require('validator');
+const { Store } = require('./store');
 
 
-const Queue = mongoose.model('Queue', {
+const QueueSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -42,5 +43,35 @@ const Queue = mongoose.model('Queue', {
     }
   }
 });
+
+
+QueueSchema.statics.getCurrentQueues = function (username, isStore) {
+  const Queue = this;
+
+  const filter = { datetime: { $gte: new Date().toISOString() } };
+  (isStore) ? filter.store = username : filter.username = username;
+  return Queue.find(filter).then(queues => {
+    if (!queues) {
+      return Promise.reject();
+    } else if (queues.length === 0) {
+      return Promise.resolve([]);
+    }
+
+    return Store.findOne({ username: queues[0].store }).then(store => {
+      if (!store) {
+        return Promise.reject();
+      }
+
+      const updatedQueues = queues.map((queue) => {
+        queue.store = store.storeName;
+        return queue;
+      });
+      return Promise.resolve(updatedQueues);
+    });
+  });
+};
+
+
+const Queue = model('Queue', QueueSchema);
 
 module.exports = { Queue };

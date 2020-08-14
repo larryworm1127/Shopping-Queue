@@ -47,11 +47,11 @@ router.post('/api/queue', (req, res) => {
 });
 
 
-// Get queues for shopper
+// Get current queues for shopper
 router.get('/api/queue/shopper/:username', (req, res) => {
   const username = req.params.username;
 
-  Queue.find({ username: username })
+  Queue.getCurrentQueues(username, false)
     .then(queues => {
       if (!queues) {
         res.status(404).send();
@@ -59,8 +59,8 @@ router.get('/api/queue/shopper/:username', (req, res) => {
         res.send(queues);
       }
     })
-    .catch(() => {
-      res.status(500).send(); // server error
+    .catch(error => {
+      res.status(500).send(error); // server error
     });
 });
 
@@ -85,7 +85,7 @@ router.delete('/api/queue', (req, res) => {
       }
     })
     .catch(error => {
-      res.status(500).send(); // server error, could not delete.
+      res.status(500).send(error);
     });
 });
 
@@ -94,7 +94,7 @@ router.delete('/api/queue', (req, res) => {
 router.get('/api/queue/store/:username', (req, res) => {
   const username = req.params.username;
 
-  Queue.find({ store: username, datetime: { $gte: new Date().toISOString() } })
+  Queue.getCurrentQueues(username, true)
     .then(queues => {
       if (!queues) {
         res.status(404).send();
@@ -102,8 +102,8 @@ router.get('/api/queue/store/:username', (req, res) => {
         res.send(queues);
       }
     })
-    .catch(() => {
-      res.status(500).send(); // server error
+    .catch(error => {
+      res.status(500).send(error); // server error
     });
 });
 
@@ -136,6 +136,5 @@ router.patch('/api/queue/:id', (req, res) => {
       res.status(400).send();
     });
 });
-
 
 module.exports = router;
