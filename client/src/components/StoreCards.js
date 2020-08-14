@@ -7,8 +7,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
 import Star from '@material-ui/icons/Star';
 import EmptyStar from '@material-ui/icons/StarBorder';
-import { addToFavorite, removeFavorite } from '../utils/shoppers';
-
+import { addFavouriteStore, removeFavouriteStore } from '../actions/shopper'
 
 const styles = () => ({
   title: {
@@ -23,6 +22,7 @@ class StoreCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      favourite: this.props.favourite,
       isCardView: false,
     };
   }
@@ -65,11 +65,12 @@ class StoreCards extends React.Component {
             className="btn btn-primary"
             onClick={
               (event) => {
-                this.setState({ isCardView: !this.state.isCardView });
-                this.state.isCardView ? removeFavorite(event, store) : addToFavorite(event, store);
+                this.setState({ favourite: !this.state.favourite });
+                this.state.favourite ? removeFavouriteStore(this.props.username, store.username) 
+                                     : addFavouriteStore(this.props.username, store.username);
               }}
           >
-            {this.state.isCardView ? <Star/> : <EmptyStar/>}
+            {this.state.favourite ? <Star/> : <EmptyStar/>}
           </Button>
           {secondButton}
         </CardActions>
