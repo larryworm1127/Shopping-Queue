@@ -4,7 +4,6 @@ const express = require('express');
 const { ObjectID } = require('mongodb');
 const router = express.Router();
 
-const { Shopper } = require('../models/shopper');
 const { Queue } = require('../models/queue');
 
 
@@ -22,28 +21,13 @@ router.post('/api/queue', (req, res) => {
   });
 
   // Save queue to the database and add to shopper queue history
-  queue.save().then(
-    newQueue => {
-      Shopper.updateOne(
-        { 'username': req.body.username },
-        {
-          $push: {
-            'queueHistory': {
-              store: queue.store,
-              searchDate: queue.datetimeQueued,
-              queuedFor: queue.datetime
-            }
-          }
-        },
-        { new: true }
-      ).then(shopper => {
-        res.send({ 'Shopper': shopper, 'Queue': newQueue });
-      });
-    },
-    error => {
-      res.status(400).send(error);  // 400 for bad request
-    }
-  );
+  Queue.addNewQueue(queue)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
 });
 
 
