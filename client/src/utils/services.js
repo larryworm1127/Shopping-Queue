@@ -10,6 +10,7 @@ import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
 import Clock from '@material-ui/icons/AccessTime';
 import { stores } from './stores';
 import { getShopper } from './shoppers';
+import { getShopperFavoriteStores } from '../actions/shopper'
 
 
 const getColor = (index) => {
@@ -21,19 +22,29 @@ const getColor = (index) => {
   return colors[index];
 };
 
-
 // Hardcoded store recommendation data that would be replaced
 // with external API calls in phase 2.
 const createServiceData = (color, headline, text, icon, link) => {
   return { color, headline, text, icon, link };
 };
 
-
-export const getServiceData = (id, username) => {
+export const getServiceData = (id, username, favoriteStores) => {
   switch (id) {
     case 0:
       return {
         services: stores.slice(0, 3).map((store, index) => {
+          if (store) {
+            return createServiceData(
+                getColor(index),
+                store.name,
+                store.type,
+                <LocalGroceryStore/>,
+                `/store/${store.username}`
+            );
+          }
+        }),
+
+        secondServices: stores.slice(0, 3).map((store, index) => {
           return createServiceData(
             getColor(index),
             store.name,
@@ -41,16 +52,7 @@ export const getServiceData = (id, username) => {
             <LocalGroceryStore/>,
             `/store/${store.username}`
           );
-        }),
-        secondServices: getShopper(username).queueHistory.slice(0, 3).map((queue, index) => {
-          return createServiceData(
-            getColor(index),
-            queue.store.name,
-            queue.store.type,
-            <LocalGroceryStore/>,
-            `/store/${queue.store.username}`
-          );
-        }),
+        }) ,
         title: 'Favorite Stores',
         secondTitle: 'Queue History',
       };
@@ -91,4 +93,5 @@ export const getServiceData = (id, username) => {
         secondTitle: ''
       };
   }
+
 };

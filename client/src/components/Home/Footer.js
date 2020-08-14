@@ -2,12 +2,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, Grid, TextField, Typography, withStyles } from '@material-ui/core';
 import { styles } from './style';
+import { addHelpMessage } from '../../actions/admin';
 
 
 class Footer extends React.Component {
 
+  constructor(props){
+    super(props)
+  }
+
+  state = {
+    title: "",
+    description: "",
+    visible: false,
+    sent: false
+  };
+
+  handleFormField = (field, event) => {
+    this.setState({
+      [field]: event.target.value,
+    });
+  }
+
+  handleFormSubmit = (username, userType) => {
+    const data = {
+        username: username,
+        userType: userType,
+        title: this.state.title,
+        description: this.state.description,
+        date: new Date()
+    }
+    addHelpMessage(this, data)
+    this.setState({
+        visible: true
+    })
+  };
+
   render() {
-    const { classes } = this.props;
+    const { classes, currentUser, userType} = this.props;
 
     return (
       <div className={classes.footerWrapper}>
@@ -29,6 +61,7 @@ class Footer extends React.Component {
                       className={classes.inputField}
                       fullWidth
                       required
+                      onChange={(event) => this.handleFormField('title', event)}
                     />
                     <TextField
                       variant="outlined"
@@ -38,6 +71,7 @@ class Footer extends React.Component {
                       className={classes.inputField}
                       fullWidth
                       required
+                      onChange={(event) => this.handleFormField('description', event)}
                     />
                   </Box>
                   <Button
@@ -45,10 +79,13 @@ class Footer extends React.Component {
                     color="secondary"
                     fullWidth
                     className={classes.button}
+                    onClick={(event) => this.handleFormSubmit(currentUser, userType)}
                   >
                     Submit
                   </Button>
                 </Box>
+                {this.state.visible && (this.state.sent ? <p className={classes.messageGood}>Message has been sent!</p> :
+                                                         <p className={classes.messageBad}>An error occurred. Message was not sent.</p>)}
               </form>
             </Grid>
 

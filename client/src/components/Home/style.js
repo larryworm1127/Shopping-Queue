@@ -72,4 +72,18 @@ export const styles = theme => ({
     marginRight: 'auto',
     width: '95%',
   },
+  messageGood: {
+    color: 'green',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    textAlign: 'center'
+
+  },
+  messageBad: {
+    color: 'red',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    textAlign: 'center'
+
+  }
 });

@@ -6,10 +6,20 @@ import { getServiceData } from '../../utils/services';
 import Services from './Services';
 import { CssBaseline } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
+import { getShopperFavoriteStores } from '../../actions/shopper'
 
 
 /* Component for the Home page */
 class Home extends React.Component {
+
+  state = {
+    favoriteStores: [],
+    queueHistory: []
+  }
+
+  componentDidMount() {
+    getShopperFavoriteStores(this.props.currentUser, this)
+  }
 
   constructor(props) {
     super(props);
@@ -18,7 +28,7 @@ class Home extends React.Component {
 
   render() {
     const { userType, currentUser, isLoggedIn } = this.props;
-    const serviceData = getServiceData((isLoggedIn) ? userType : -1, currentUser);
+    const serviceData = getServiceData((isLoggedIn) ? userType : -1, currentUser, this.state.favoriteStores);
 
     return (
       <React.Fragment>
@@ -27,7 +37,7 @@ class Home extends React.Component {
         <HeadSection userType={userType} currentUser={currentUser}/>
         <Services serviceData={serviceData}/>
 
-        {userType !== 2 && <Footer/>}
+        {userType !== 2 && <Footer currentUser={currentUser} userType={userType}/>}
       </React.Fragment>
     );
   }
