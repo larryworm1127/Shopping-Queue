@@ -88,6 +88,43 @@ export const getShopperFavoriteStores = (username, profileComp) => {
     });
 };
 
+export const getShopperFavoriteStoresMarkMap = (username, profileComp) => {
+  const url = `/api/shopper/favorites/${username}`;
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        const markedFavourites = [];
+        for (let i = 0; i < profileComp.state.stores.length; i++) {
+          let marked = false;
+          for (let j = 0; j < json.length; j++) {
+            if (profileComp.state.stores[i].username === json[j].username) {
+              marked = true;
+              markedFavourites.push(true);
+            }
+          }
+
+          if (!marked) {
+            markedFavourites.push(false);
+          }
+        }
+
+        profileComp.setState({
+          favoriteStores: [...json],
+          markedFavourites: markedFavourites
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
 
 export const getShopperSearchHistory = (username, profileComp) => {
   const url = `/api/shopper/searchHistory/${username}`;

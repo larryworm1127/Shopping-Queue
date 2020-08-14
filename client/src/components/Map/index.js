@@ -12,6 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
 import { uid } from 'react-uid';
+import { getAllStores } from '../../actions/admin';
+import { getShopperFavoriteStoresMarkMap } from '../../actions/shopper';
 import { getSearchedStores } from '../../actions/store';
 
 
@@ -19,11 +21,15 @@ class StoreMap extends React.Component {
 
   componentDidMount() {
     getSearchedStores('', this);
+    getAllStores(this);
+    getShopperFavoriteStoresMarkMap(this.props.currentUser, this);
   }
 
   state = {
     currStore: null,
     showMarker: false,
+    favoriteStores: [],
+    markedFavourites: [],
     stores: []
   };
 
@@ -92,6 +98,8 @@ class StoreMap extends React.Component {
             {this.state.stores.map((store, index) => (
               <div className={classes.storeCard} key={uid(store)}>
                 <StoreCards
+                  username={this.props.currentUser}
+                  favourite={this.state.markedFavourites[index]}
                   secondButton={(
                     <Button
                       type="button"
