@@ -123,6 +123,34 @@ export const getHelpMessages = (messageComp) => {
     });
 };
 
+export const addHelpMessage = (state, messageData) => {
+  const request = new Request('/api/admin/messages', {
+    method: 'post',
+    body: JSON.stringify(messageData),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  // Send the request with fetch()
+  fetch(request)
+    .then(res => {
+      return res;
+    })
+    .then(json => {
+      if (json.ok){
+        state.setState({
+          sent: true
+        })
+      }
+    })
+    .catch(error => {
+
+      console.log(error);
+    });
+};
+
 export const removeShopper = (username, index, comp) => {
   const request = new Request(`/api/shopper/${username}`, {
     method: 'DELETE',
