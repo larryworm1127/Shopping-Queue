@@ -169,10 +169,10 @@ export const getSearchedMessages = (text, messageComp) => {
           result.date = new Date(result.date).toLocaleString();
           return result;
         });
-        const jsonFiltered = formattedJson.filter(message => (message.username.toUpperCase()).includes(text.toUpperCase()))
+        const jsonFiltered = formattedJson.filter(message => (message.username.toUpperCase()).includes(text.toUpperCase()));
         messageComp.setState({
           messages: [...jsonFiltered]
-        })
+        });
       }
     })
     .catch(error => {

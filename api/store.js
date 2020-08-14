@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const { ObjectID } = require('mongodb');
 const router = express.Router();
 
 const { User } = require('../models/user');

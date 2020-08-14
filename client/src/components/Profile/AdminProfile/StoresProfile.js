@@ -8,7 +8,7 @@ import StoreProfile from '../StoreProfile/StoreProfile';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getAllStores, removeStore } from '../../../actions/admin';
+import { removeStore } from '../../../actions/admin';
 import { uid } from 'react-uid';
 import RemoveConfirmDialog from '../../RemoveConfirmDialog';
 import TextField from '@material-ui/core/TextField';
@@ -19,7 +19,7 @@ import { getSearchedStores } from '../../../actions/store';
 class StoresProfile extends React.Component {
 
   componentDidMount() {
-    getSearchedStores("", this);
+    getSearchedStores('', this);
   }
 
   state = {
@@ -58,7 +58,7 @@ class StoresProfile extends React.Component {
   };
 
   handleOnInputChange = (event) => {
-    getSearchedStores(event.target.value, this)
+    getSearchedStores(event.target.value, this);
   };
 
   render() {
@@ -82,6 +82,7 @@ class StoresProfile extends React.Component {
             </Button>
           </CardActions>
         </Card>
+
         {this.state.stores.map((store, index) => (
           <Box m={2} key={uid(store)}>
             <Card>

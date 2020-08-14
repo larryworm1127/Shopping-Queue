@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getAllShoppers, removeShopper } from '../../../actions/admin';
+import { removeShopper } from '../../../actions/admin';
 import { uid } from 'react-uid';
 import FavoriteStores from '../ShopperProfile/FavoriteStores';
 import Box from '@material-ui/core/Box';
@@ -19,11 +19,10 @@ import CardActions from '@material-ui/core/CardActions';
 import { getSearchedShoppers } from '../../../actions/shopper';
 
 
-
 class ShoppersProfile extends React.Component {
 
   componentDidMount() {
-    getSearchedShoppers("", this);
+    getSearchedShoppers('', this);
   }
 
   state = {
@@ -77,7 +76,7 @@ class ShoppersProfile extends React.Component {
   };
 
   handleOnInputChange = (event) => {
-    getSearchedShoppers(event.target.value, this)
+    getSearchedShoppers(event.target.value, this);
   };
 
   render() {
