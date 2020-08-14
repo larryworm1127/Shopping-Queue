@@ -12,7 +12,8 @@ export const getCurrentQueues = (username, queueComp, isStore) => {
       if (json) {
         const formattedJson = json.map((message) => {
           const result = { ...message };
-          result.datetime = new Date(result.datetime).toISOString();
+          const isoStr = new Date(result.datetime).toISOString();
+          result.datetime = isoStr.substring(0, isoStr.length - 8);
           result.datetimeQueued = new Date(result.datetimeQueued).toLocaleString();
           return result;
         });

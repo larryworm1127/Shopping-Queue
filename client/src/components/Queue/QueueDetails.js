@@ -65,7 +65,7 @@ class QueueDetails extends React.Component {
               name="datetime"
               label="Datetime"
               type="datetime-local"
-              value={datetime.format(new Date(this.state.datetime), 'YYYY-MM-DD[T]hh:mm')}
+              value={this.state.datetime}
               handleFormField={this.handleFormField}
             />
             <DataDisplay

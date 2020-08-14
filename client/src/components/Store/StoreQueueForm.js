@@ -5,7 +5,6 @@ import { styles } from './style';
 import { withStyles } from '@material-ui/core';
 import { addQueue } from '../../actions/queue';
 import FormTextField from '../FormTextField';
-import datetime from 'date-and-time';
 
 
 class StoreQueueForm extends React.Component {
@@ -13,7 +12,7 @@ class StoreQueueForm extends React.Component {
   state = {
     shoppingTime: 1,
     numCustomer: 1,
-    date: new Date().toISOString(),
+    date: new Date().toISOString().substring(0, new Date().toISOString().length - 8),
     displayError: false,
     errorMessage: ''
   };
@@ -53,7 +52,7 @@ class StoreQueueForm extends React.Component {
               label="Date"
               type="datetime-local"
               displayError={displayError}
-              value={datetime.format(new Date(date), 'YYYY-MM-DD[T]hh:mm')}
+              value={date}
               handleFormField={this.handleFormField}
             />
           </Grid>
