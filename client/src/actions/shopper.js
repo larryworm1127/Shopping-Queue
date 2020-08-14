@@ -25,6 +25,47 @@ export const getShopperProfile = (username, profileComp) => {
     });
 };
 
+export const addFavouriteStore = (shopperUsername, storeUsername) => {
+  // const url = `/api/shopper/profile/favorites/${shopperUsername}/${storeUsername}`;
+  const request = new Request(`/api/shopper/profile/favorites/${shopperUsername}/${storeUsername}`, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  fetch(request)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
+export const removeFavouriteStore = (shopperUsername, storeUsername) => {
+  // const url = `/api/shopper/profile/favorites/${shopperUsername}/${storeUsername}`;
+  const request = new Request(`/api/shopper/profile/favorites/${shopperUsername}/${storeUsername}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  fetch(request)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
 
 export const getShopperFavoriteStores = (username, profileComp) => {
   const url = `/api/shopper/favorites/${username}`;

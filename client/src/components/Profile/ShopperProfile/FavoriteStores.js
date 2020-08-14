@@ -2,7 +2,6 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { uid } from 'react-uid';
 import StoreCards from '../../StoreCards';
-import Button from '@material-ui/core/Button';
 import { getShopperFavoriteStores } from '../../../actions/shopper';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -18,22 +17,6 @@ class FavoriteStores extends React.Component {
 
   state = {
     favoriteStores: []
-  };
-
-  handleRemoveFavStore = (event, index) => {
-    event.preventDefault();
-
-    const newFavoriteStores = [...this.state.favoriteStores];
-    newFavoriteStores.splice(index, 1);
-    this.setState({
-      favoriteStores: newFavoriteStores
-    });
-
-    // Need to update the back-end here. Add later.
-  };
-
-  addNewFav = (Fav) => {
-    this.state.favoriteStores.push(Fav);
   };
 
   render() {
@@ -54,18 +37,9 @@ class FavoriteStores extends React.Component {
                     <StoreCards
                       store={store}
                       index={index}
+                      favourite={true}
+                      username={this.props.username}
                       disableQueue={true}
-                      secondButton={
-                        <Button
-                          variant="outlined"
-                          color="primary"
-                          onClick={event => {
-                            this.handleRemoveFavStore(event, index);
-                          }}
-                        >
-                          Remove
-                        </Button>
-                      }
                     />
                   </Grid>
                 ))}
