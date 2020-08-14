@@ -57,36 +57,26 @@ router.patch('/api/shopper/profile/:username', (req, res) => {
 
 
 // Add store to favorites
-router.patch('/api/shopper/profile/favorites', (req, res) => {
+router.patch('/api/shopper/profile/favorites/:shopperUsername/:storeUsername', (req, res) => {
 
-  const shopperID = req.body.shopperID; //id of shopper
-  const storeID = req.body.storeID; //id of store you want to add to favorites
+  const shopperUsername = req.params.shopperUsername; //username of shopper
+  const storeUsername = req.params.storeUsername; //username of store you want to add to favorites
 
-  if (!ObjectID.isValid(shopperID)) {
-    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-    return;
-  }
-
-  if (!ObjectID.isValid(storeID)) {
-    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-    return;
-  }
-
-  Store.findById(storeID)
+  Store.findOne({username: storeUsername})
     .then(store => {
       if (!store) {
         res.status(404).send();
       } else {
         Shopper.updateOne(
-          { '_id': shopperID },
+          { 'username': shopperUsername },
           {
-            $push: { 'favouriteStores': store }
+            $push: { 'favouriteStores': storeUsername }
 
           }).then(result => {
           if (!result) {
             res.status(404).send('Resource not found');
           } else {
-            Shopper.findById(shopperID).then(shopper => {
+            Shopper.findOne({ username: shopperUsername }).then(shopper => {
               res.send(shopper);
             });
           }
@@ -142,29 +132,20 @@ router.get('/api/shopper/queueHistory/:username', (req, res) => {
 
 
 // Remove store from favorites
-router.delete('/api/shopper/profile/favorites', (req, res) => {
+router.delete('/api/shopper/profile/favorites/:shopperUsername/:storeUsername', (req, res) => {
 
-  const shopperID = req.body.shopperID; //id of shopper
-  const storeID = req.body.storeID; //id of store you want to add to favorites
-
-  if (!ObjectID.isValid(shopperID)) {
-    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-    return;
-  }
-
-  if (!ObjectID.isValid(storeID)) {
-    res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-    return;
-  }
-
+  const shopperUsername = req.params.shopperUsername; //username of shopper
+  const storeUsername = req.params.storeUsername; //username of store you want to add to favorites
+  
   // Delete the store from favorites
-  Store.findById(storeID)
+  Store.findOne({username: storeUsername})
     .then(store => {
+      console.log(store);
       Shopper.updateOne(
-        { '_id': shopperID },
-        { $pull: { 'favouriteStores': store._id } }
+        { 'username': shopperUsername },
+        { $pull: { 'favouriteStores': storeUsername } }
       ).then(result => {
-        Shopper.findById(shopperID).then(shopper => {
+        Shopper.findOne({username: shopperUsername}).then(shopper => {
           res.send(shopper);
         });
       });
