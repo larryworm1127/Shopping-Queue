@@ -41,10 +41,6 @@ const ShopperSchema = new Schema({
       message: 'Not valid email'
     }
   },
-  remindTime: {
-    type: Number,
-    required: true
-  },
   favouriteStores: [{ type: String }],
   viewHistory: [{
     store: { type: String, required: true },

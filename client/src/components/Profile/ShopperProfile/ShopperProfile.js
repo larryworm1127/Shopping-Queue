@@ -17,7 +17,6 @@ class UserProfile extends React.Component {
     lastName: '',
     email: '',
     address: '',
-    remindTime: 0,
   };
 
   setEdit = (val) => {
@@ -76,17 +75,6 @@ class UserProfile extends React.Component {
             name="address"
             label="Address"
             value={this.state.address}
-            comp={this}
-          />
-          <DataDisplay
-            gridSize={12}
-            title="Notification Settings"
-            content={`Remind me ${this.state.remindTime} minutes before my booking.`}
-            edit={this.state.edit}
-            setEdit={this.setEdit}
-            name="remindTime"
-            label="Minutes before my booking to remind me."
-            value={this.state.remindTime}
             comp={this}
           />
         </Grid>
