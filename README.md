@@ -203,6 +203,8 @@ and edit them to your will.
 
 # Express Routes
 
+## Admin
+
 | Route   |      Type      |  Description | Body |
 |:----------|:-------------|:------|:-------------|
 | /api/admin/profile/:username | GET | Gets admin profile |
@@ -210,3 +212,14 @@ and edit them to your will.
 | /api/admin/profile | DELETE | Delete an admin | { "id": id}|
 | /api/admin/messages | GET | Get all messages | 
 | /api/admin/messages | POST | Post a message | {"username": username, <br> "userType": userType, <br> "title": title, <br> "description": description, <br> "date": date} |
+
+## Authorization 
+
+| Route   |      Type      |  Description | Body |
+|:----------|:-------------|:------|:-------------|
+| /api/login | POST | Login and create a session | { "username" username, <br> "password": password, <br> "userType": userType } |
+| /api/logout | GET | Logout by destroying session |  |
+| /api/check-session | GET | Get which user is logged in | |
+| /api/verifyRegister | POST | Verify that password is viable and username is not taken | { "username": username, <br> "password": password, <br> "confirmPassword":confirmPassword, <br> "userType": userType } |
+| /api/register/admin | POST | Register a new admin | {"username": username, <br> "password": password, <br> "userType": userType, <br> "firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address} |
+| /api/register | POST | Register a new shopper or store (body is different for each) | Store: {"username": username, <br> "password": password, <br> "registerAs": registerAs, <br> "storeName": storeName, <br> "email": email, <br> "location": location, <br> "coordinate": Array(float, float), <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime}, <br> "customerLimit": customerLimit, <br> "shoppingTimeLimit": shoppingTimeLimit } <br> <br> Shopper: { "username": username, <br> "firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address, <br> "remindTime": remindTime }|
