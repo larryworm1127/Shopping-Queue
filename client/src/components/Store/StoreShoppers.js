@@ -7,17 +7,33 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withRouter } from 'react-router-dom';
-
+import { getAllQueuesforStore, getTodayQueuesforStore } from '../../actions/store'
 
 class StoreShoppers extends React.Component {
 
+  state = {
+    TotalShoppers: 0,
+    TotalShoppersToday: 0,
+    NumberofShoppersinStore: 0,
+    NumberofShoppersinQueue: 0,
+    AverageWaitTime: 0,
+  }
+
+  // constructor(props) {
+  //   super(props);
+  // }
+
+  componentWillMount() {
+    getAllQueuesforStore(this.props.currentUser, this);
+    getTodayQueuesforStore(this.props.currentUser, this);
+  }
   render() {
     const { classes, userType, isLoggedIn } = this.props;
 
     return (
       <React.Fragment>
-        <NavBar userType={userType} isLoggedIn={isLoggedIn}/>
-        <CssBaseline/>
+        <NavBar userType={userType} isLoggedIn={isLoggedIn} />
+        <CssBaseline />
 
         <Typography variant='h3' align='center' className={classes.titleText}>
           Shoppers Stats
@@ -32,7 +48,7 @@ class StoreShoppers extends React.Component {
                 </Typography>
 
                 <Typography component="p" variant="h6">
-                  1000
+                  {this.state.TotalShoppers}
                 </Typography>
 
                 <Typography color="textSecondary" className={classes.secondaryText}>
@@ -48,7 +64,7 @@ class StoreShoppers extends React.Component {
                 </Typography>
 
                 <Typography component="p" variant="h6">
-                  200
+                  {this.state.TotalShoppersToday}
                 </Typography>
 
                 <Typography color="textSecondary" className={classes.secondaryText}>
@@ -64,7 +80,7 @@ class StoreShoppers extends React.Component {
                 </Typography>
 
                 <Typography component="p" variant="h6">
-                  50
+                  {this.state.NumberofShoppersinStore}
                 </Typography>
 
                 <Typography color="textSecondary" className={classes.secondaryText}>
@@ -80,7 +96,7 @@ class StoreShoppers extends React.Component {
                 </Typography>
 
                 <Typography component="p" variant="h6">
-                  20
+                  {this.state.NumberofShoppersinQueue}
                 </Typography>
 
                 <Typography color="textSecondary" className={classes.secondaryText}>
@@ -96,7 +112,7 @@ class StoreShoppers extends React.Component {
                 </Typography>
 
                 <Typography component="p" variant="h6">
-                  10
+                  {this.state.AverageWaitTime} Minutes
                 </Typography>
 
                 <Typography color="textSecondary" className={classes.secondaryText}>

@@ -107,3 +107,83 @@ export const getSearchedStores = (text, stores) => {
       console.log(error);
     });
 };
+
+
+export const getAllQueuesforStore = (storeName, storeComp) => {
+  const url = `/api/store/queues/${storeName}`;
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        var TotalShoppers = 0;
+        for (let eachQueue of json) {
+          TotalShoppers = TotalShoppers + eachQueue.numCustomers;
+        }
+      }
+      storeComp.setState({
+        TotalShoppers: TotalShoppers,
+      });
+    }
+    )
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const getTodayQueuesforStore = (storeName, storeComp) => {
+  const url = `/api/store/todayqueues/${storeName}`;
+
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        var TotalShoppersToday = 0;
+        var NumberofShoppersinStore = 0;
+        var NumberofShoppersinQueue = 0;
+        var AverageWaitTime = 0;
+        var today = new Date();
+        var Anhourafter = new Date();
+
+
+        Anhourafter.setTime(today.getHours() + 1);
+
+        var tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
+        tomorrow.setHours(0, 0, 0, 0);
+
+        var shoppersInQueue = 1;
+
+        for (let eachQueue of json) {
+          TotalShoppersToday = TotalShoppersToday + eachQueue.numCustomers;
+          if (eachQueue.datetime >= today.toISOString() && eachQueue.datetime <= Anhourafter.toISOString()) {
+            NumberofShoppersinStore = + eachQueue.numCustomers;
+          }
+
+          if (eachQueue.datetime >= Anhourafter.toISOString() && eachQueue.datetime <= tomorrow.toISOString()) {
+            NumberofShoppersinQueue = + eachQueue.numCustomers;
+            AverageWaitTime = + eachQueue.shopTime;
+            shoppersInQueue++;
+          }
+          AverageWaitTime = AverageWaitTime / shoppersInQueue;
+        }
+        storeComp.setState({
+          TotalShoppersToday: TotalShoppersToday,
+          NumberofShoppersinStore: NumberofShoppersinStore,
+          NumberofShoppersinQueue: NumberofShoppersinQueue,
+          AverageWaitTime: AverageWaitTime,
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};

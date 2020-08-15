@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { getShopperFavoriteStores, getShopperQueueHistory } from '../../actions/shopper'
 import { getCurrentQueues } from '../../actions/queue'
 import { getHelpMessages, getAllShoppers, getAllStores } from '../../actions/admin'
-
+import { getAllQueuesforStore, getTodayQueuesforStore } from '../../actions/store'
 
 /* Component for the Home page */
 class Home extends React.Component {
@@ -23,7 +23,12 @@ class Home extends React.Component {
     shopTime: 0,
     messages: [],
     shoppers: [],
-    stores: []
+    stores: [],
+    TotalShoppers: 0,
+    TotalShoppersToday: 0,
+    NumberofShoppersinStore: 0,
+    NumberofShoppersinQueue: 0,
+    AverageWaitTime: 0
   }
 
   constructor(props) {
@@ -32,59 +37,34 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    if (this.props.userType === 0){
+    if (this.props.userType === 0) {
       getShopperFavoriteStores(this.props.currentUser, this)
       getShopperQueueHistory(this.props.currentUser, this)
     }
-    else if (this.props.userType === 1){
-      getCurrentQueues(this.props.currentUser, this, 'store')
-
-      if (this.state.queues[0] != undefined) {
-        const total1 = this.state.queues.reduce((a, b) => {
-          return {numCustomers: a.numCustomers + b.numCustomers}
-        })
-        const total2 = this.state.queues.reduce((a, b) => {
-          return {shopTime: a.shopTime + b.shopTime}
-        })
-
-        this.state.numOfQueues = this.state.queues.length
-        this.state.numCustomers = total1.numCustomers
-        this.state.shopTime = total2.shopTime/this.state.queues.length
-
-      }
+    else if (this.props.userType === 1) {
+      getAllQueuesforStore(this.props.currentUser, this);
+      getTodayQueuesforStore(this.props.currentUser, this);
     }
-    else if (this.props.userType === 2){
-        getHelpMessages(this)
-        getAllShoppers(this)
-        getAllStores(this)
+    else if (this.props.userType === 2) {
+      getHelpMessages(this)
+      getAllShoppers(this)
+      getAllStores(this)
     }
   }
 
   componentDidUpdate() {
-    if (this.props.userType === 0){
+    if (this.props.userType === 0) {
       getShopperFavoriteStores(this.props.currentUser, this)
       getShopperQueueHistory(this.props.currentUser, this)
     }
-    else if (this.props.userType === 1){
-      getCurrentQueues(this.props.currentUser, this, 'store')
-
-      if (this.state.queues[0] != undefined) {
-        const total1 = this.state.queues.reduce((a, b) => {
-          return {numCustomers: a.numCustomers + b.numCustomers}
-        })
-        const total2 = this.state.queues.reduce((a, b) => {
-          return {shopTime: a.shopTime + b.shopTime}
-        })
-
-        this.state.numOfQueues = this.state.queues.length
-        this.state.numCustomers = total1.numCustomers
-        this.state.shopTime = total2.shopTime/this.state.queues.length
-      }
+    else if (this.props.userType === 1) {
+      getAllQueuesforStore(this.props.currentUser, this);
+      getTodayQueuesforStore(this.props.currentUser, this);
     }
-    else if (this.props.userType === 2){
-        getHelpMessages(this)
-        getAllShoppers(this)
-        getAllStores(this)
+    else if (this.props.userType === 2) {
+      getHelpMessages(this)
+      getAllShoppers(this)
+      getAllStores(this)
     }
   }
 
@@ -92,17 +72,17 @@ class Home extends React.Component {
     const { userType, currentUser, isLoggedIn } = this.props;
 
     const serviceData = userType === 0 ? getServiceDataShopper(this.state.favoriteStores, this.state.queueHistory) :
-    userType === 1 ? getServiceDataStore(this.state.numOfQueues, this.state.numCustomers, this.state.shopTime) :
-    userType === 2 ? getServiceDataAdmin(this.state.messages.length, this.state.shoppers.length, this.state.stores.length) : getServiceDataDefault()
+      userType === 1 ? getServiceDataStore(this.state.NumberofShoppersinQueue, this.state.TotalShoppersToday, this.state.AverageWaitTime) :
+        userType === 2 ? getServiceDataAdmin(this.state.messages.length, this.state.shoppers.length, this.state.stores.length) : getServiceDataDefault()
 
     return (
       <React.Fragment>
-        <NavBar userType={userType} isLoggedIn={isLoggedIn}/>
-        <CssBaseline/>
-        <HeadSection userType={userType} currentUser={currentUser}/>
-        <Services serviceData={serviceData}/>
+        <NavBar userType={userType} isLoggedIn={isLoggedIn} />
+        <CssBaseline />
+        <HeadSection userType={userType} currentUser={currentUser} />
+        <Services serviceData={serviceData} />
 
-        {userType !== 2 && <Footer currentUser={currentUser} userType={userType}/>}
+        {userType !== 2 && <Footer currentUser={currentUser} userType={userType} />}
       </React.Fragment>
     );
   }
