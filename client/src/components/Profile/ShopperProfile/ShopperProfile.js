@@ -24,12 +24,6 @@ class UserProfile extends React.Component {
     this.setState({ edit: val });
   };
 
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-    });
-  };
-
   handleSave = (event) => {
     event.preventDefault();
 
@@ -49,7 +43,7 @@ class UserProfile extends React.Component {
             name="firstName"
             label="First Name"
             value={this.state.firstName}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={3}
@@ -60,7 +54,7 @@ class UserProfile extends React.Component {
             name="lastName"
             label="Last Name"
             value={this.state.lastName}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={6}
@@ -71,7 +65,7 @@ class UserProfile extends React.Component {
             name="email"
             label="Email"
             value={this.state.email}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={12}
@@ -82,7 +76,7 @@ class UserProfile extends React.Component {
             name="address"
             label="Address"
             value={this.state.address}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={12}
@@ -93,7 +87,7 @@ class UserProfile extends React.Component {
             name="remindTime"
             label="Minutes before my booking to remind me."
             value={this.state.remindTime}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
         </Grid>
         <br/>

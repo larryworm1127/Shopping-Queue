@@ -197,7 +197,7 @@ export const getSearchedMessages = (text, messageComp) => {
           result.date = new Date(result.date).toLocaleString();
           return result;
         });
-        const jsonFiltered = formattedJson.filter(message => (message.username.toUpperCase()).includes(text.toUpperCase()));
+        const jsonFiltered = formattedJson.filter(({ username }) => (username.toUpperCase()).includes(text.toUpperCase()));
         messageComp.setState({
           messages: [...jsonFiltered]
         });
@@ -221,11 +221,6 @@ export const removeStore = (username, index, comp) => {
   fetch(request)
     .then(res => {
       if (res.status === 200) {
-        return res.json();
-      }
-    })
-    .then(json => {
-      if (json) {
         const stores = [...comp.state.stores];
         stores.splice(index, 1);
         comp.setState({

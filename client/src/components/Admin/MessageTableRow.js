@@ -8,7 +8,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { withStyles } from '@material-ui/core';
 import { styles } from '../Queue/style';
 import MessageDetail from './MessageDetail';
-import { getUserTypeText } from '../../utils/user';
+import { getUserTypeText } from '../../utils/utils';
 
 
 class MessageTableRow extends React.Component {

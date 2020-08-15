@@ -31,7 +31,7 @@ class DataDisplay extends React.Component {
       name,
       label,
       setEdit,
-      handleFormField,
+      comp,
       contentComponent,
       editComponent,
       type
@@ -64,7 +64,7 @@ class DataDisplay extends React.Component {
         label={label}
         value={value}
         type={type}
-        handleFormField={handleFormField}
+        comp={comp}
       />
     ) : (
       <React.Fragment>

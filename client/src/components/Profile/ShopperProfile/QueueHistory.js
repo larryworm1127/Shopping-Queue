@@ -10,8 +10,10 @@ import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
-import { getShopperQueueHistory } from '../../../actions/shopper';
+import { deleteShopperQueueHistory, getShopperQueueHistory } from '../../../actions/shopper';
 import ContentTitle from '../../ContentTitle';
+import { getEmptyRows } from '../../../utils/utils';
+import TablePaginationFooter from '../../TablePaginationFooter';
 
 
 class QueueHistory extends React.Component {
@@ -21,22 +23,21 @@ class QueueHistory extends React.Component {
   }
 
   state = {
+    page: 0,
+    rowsPerPage: 5,
     queueHistory: []
   };
 
-  handleRemoveQueueHistory = (event, index) => {
+  handleRemoveQueueHistory = (event, index, id) => {
     event.preventDefault();
 
-    const { shopper } = this.props;
-    shopper.queueHistory.splice(index, 1);
-    this.setState({
-      queueHistory: shopper.queueHistory
-    });
+    deleteShopperQueueHistory(this.props.username, id, this, index);
   };
 
   render() {
     const { classes } = this.props;
-    const { queueHistory } = this.state;
+    const { rowsPerPage, page, queueHistory } = this.state;
+    const emptyRows = getEmptyRows(queueHistory, page, rowsPerPage);
 
     return (
       <React.Fragment>
@@ -46,7 +47,7 @@ class QueueHistory extends React.Component {
               <ContentTitle isEmpty={queueHistory.length === 0} name="Queue History"/>
 
               {(queueHistory.length !== 0) && (
-                <Table>
+                <Table stickyHeader>
                   <TableHead>
                     <TableRow>
                       <TableCell align="center">Shop Name</TableCell>
@@ -56,9 +57,13 @@ class QueueHistory extends React.Component {
                       <TableCell/>
                     </TableRow>
                   </TableHead>
+
                   <TableBody>
-                    {queueHistory.map(({ store, searchDate, queuedFor }, index) => (
-                      <TableRow key={uid(index)}>
+                    {(rowsPerPage > 0
+                        ? queueHistory.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        : queueHistory
+                    ).map(({ store, searchDate, queuedFor, _id }, index) => (
+                      <TableRow key={uid(index)} hover>
                         <TableCell align="center">{store.storeName}</TableCell>
                         <TableCell align="center">{store.address}</TableCell>
                         <TableCell align="center">{new Date(searchDate).toLocaleString()}</TableCell>
@@ -67,14 +72,27 @@ class QueueHistory extends React.Component {
                           <Button
                             variant="outlined"
                             color="primary"
-                            onClick={(event => this.handleRemoveQueueHistory(event, index))}
+                            onClick={(event => this.handleRemoveQueueHistory(event, index, _id))}
                           >
                             Remove
                           </Button>
                         </TableCell>
                       </TableRow>
                     ))}
+
+                    {emptyRows > 0 && (
+                      <TableRow style={{ height: 53 * emptyRows }}>
+                        <TableCell colSpan={6}/>
+                      </TableRow>
+                    )}
                   </TableBody>
+
+                  <TablePaginationFooter
+                    data={queueHistory}
+                    page={page}
+                    rowsPerPage={rowsPerPage}
+                    comp={this}
+                  />
                 </Table>
               )}
             </Paper>

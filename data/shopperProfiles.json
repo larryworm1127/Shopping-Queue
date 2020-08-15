@@ -1,7 +1,7 @@
 [
   {
     "favouriteStores": [],
-    "searchHistory": [],
+    "viewHistory": [],
     "queueHistory": [],
     "username": "user",
     "firstName": "John",
@@ -12,7 +12,7 @@
   },
   {
     "favouriteStores": [],
-    "searchHistory": [],
+    "viewHistory": [],
     "queueHistory": [],
     "username": "user2",
     "firstName": "Doe",
@@ -23,7 +23,7 @@
   },
   {
     "favouriteStores": [],
-    "searchHistory": [],
+    "viewHistory": [],
     "queueHistory": [],
     "username": "user3",
     "firstName": "Dohn",

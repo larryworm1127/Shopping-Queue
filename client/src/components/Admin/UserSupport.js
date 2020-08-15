@@ -13,19 +13,22 @@ import { uid } from 'react-uid';
 import { withRouter } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import { getSearchedMessages } from '../../actions/admin';
+import { getEmptyRows } from '../../utils/utils';
+import TablePaginationFooter from '../TablePaginationFooter';
 
 
 class UserSupport extends React.Component {
 
   componentDidMount() {
-    getSearchedMessages("", this);
+    getSearchedMessages('', this);
   }
 
   state = {
     messages: [],
+    page: 0,
+    rowsPerPage: 5,
     open: false
   };
 
@@ -36,11 +39,13 @@ class UserSupport extends React.Component {
   };
 
   handleOnInputChange = (event) => {
-    getSearchedMessages(event.target.value, this)
+    getSearchedMessages(event.target.value, this);
   };
 
   render() {
     const { classes, isLoggedIn, userType } = this.props;
+    const { messages, page, rowsPerPage } = this.state;
+    const emptyRows = getEmptyRows(messages, page, rowsPerPage);
 
     return (
       <React.Fragment>
@@ -52,21 +57,16 @@ class UserSupport extends React.Component {
         </Typography>
 
         <TableContainer component={Paper} className={classes.table}>
-        <Card>
-          <CardActions>
-            <TextField
-              variant="outlined"
-              label="Search..."
-              onChange={this.handleOnInputChange}
-            />
-            <Button
-              size="small"
-              color="primary"
-            >
-              Search
-            </Button>
-          </CardActions>
-        </Card>
+          <Card>
+            <CardActions>
+              <TextField
+                variant="outlined"
+                label="Search..."
+                onChange={this.handleOnInputChange}
+              />
+            </CardActions>
+          </Card>
+
           <Table>
             <TableHead>
               <TableRow>
@@ -78,10 +78,26 @@ class UserSupport extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.messages.map((message) => (
+              {(rowsPerPage > 0
+                  ? messages.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : messages
+              ).map((message) => (
                 <MessageTableRow key={uid(message)} message={message}/>
               ))}
+
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6}/>
+                </TableRow>
+              )}
             </TableBody>
+
+            <TablePaginationFooter
+              data={messages}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              comp={this}
+            />
           </Table>
         </TableContainer>
       </React.Fragment>

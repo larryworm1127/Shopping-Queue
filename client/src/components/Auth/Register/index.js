@@ -48,14 +48,6 @@ class Register extends React.Component {
     errorMessage: ''
   };
 
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-      displayError: false,
-      errorMessage: ''
-    });
-  };
-
   setError = (message) => {
     this.setState({
       displayError: true,
@@ -72,7 +64,7 @@ class Register extends React.Component {
           <AccountDetail
             handleNext={this.handleNext}
             handleBack={this.handleBack}
-            handleFormField={this.handleFormField}
+            comp={this}
             setError={this.setError}
             {...this.state}
           />
@@ -82,13 +74,13 @@ class Register extends React.Component {
           <ShopperProfile
             handleNext={this.handleNext}
             handleBack={this.handleBack}
-            handleFormField={this.handleFormField}
+            comp={this}
             {...this.state}
           /> :
           <OwnerProfile
             handleNext={this.handleNext}
             handleBack={this.handleBack}
-            handleFormField={this.handleFormField}
+            comp={this}
             {...this.state}
           />;
       case 2:

@@ -3,8 +3,11 @@
 ## Description
 As a response to current Covid-19 pandemic, we decided to create a web app
 that helps control the flow of shoppers going to shopping at various store,
-in response to social distancing policies. 
+in response to social distancing policies.
+
+Click the following link to see deployed web app: https://shopping-queue.herokuapp.com/ 
  
+
 ## Software Setup
  
 To run the web app locally, start by cloning the repo:
@@ -13,23 +16,30 @@ $ git clone https://github.com/csc309-summer-2020/team21.git
 ```
 Use terminal and navigate into the folder of the cloned repo, then run
 ```bash
-$ npm install
+$ npm run setup
 ```
 which will install required npm packages for the web app.
- 
-To start the react local server, run
+
+MongoDB is also required to run the web app, which can be ran locally using:
 ```bash
-$ npm start
+$ mkdir mongo-data
+$ mongod --dbpath mongo-data
 ```
-and the website should be running on http://localhost:3000/.
  
+To run the express server locally, run
+```bash
+$ npm run build-run
+```
+and the website should be running on http://localhost:5000/.
+
+
 ## Website Features and Instruction
  
 ### Basic User Authentication
  
 For our website, we implemented a basic user authentication system for 3 different types of users.
 This includes the shoppers, the store owners, and the website admins.
-For phase 1 of the project, we use the following credentials for authentication:
+For purpose of demoing the project, we will use the following credentials for authentication:
  
 | User Type   | Username | Password |
 |:-----------:|:--------:|:--------:|
@@ -63,9 +73,7 @@ as seen in the screenshot below.
  
 Once a user fills out profile information, they can begin using the website.
  
-Note that for phase 1, the registered account would not work when used to login.
-This will be implemented in phase 2 alongside the database.
- 
+
 ### Home
  
 #### Before Login
@@ -82,7 +90,8 @@ In addition, Admin has access to the messages from users and shop owners on this
 ![Home](/assets/home_owner_screenshot.PNG)
  
 All users will have access to contact us form and profile button for easy access.
- 
+
+
 ### Map
  
 A map feature is implemented for the website. The map itself is currently
@@ -109,21 +118,22 @@ queue page, as shown in screenshot below.
 ![store_queue](/assets/store_queue_screenshot.PNG)
  
 Shoppers can pick the date where they would come into the store, as well
-as their estimated shopping time (default to store limit, used to help speed
-up the queue algorithm which will be implemented in phase 2), and number of
-shoppers. After filling out the queue information, shopper must press
-"add to queue" in order to queue up at the store.
- 
-Note: currently "add to queue" does not update the queue itself as it requires a database which will be implemented in phase 2.
+as their estimated shopping time, and number of shoppers. After filling 
+out the queue information, shopper must press "add to queue" in order to 
+queue up at the store. The website will then verify the entered queue info
+to make sure there are no conflicts.
 
 
 ### My Queues
  
-This page is where the user can view and manage all the queues that they are currently in.
+This page is where the user can view and manage all the queues that they 
+are currently in.
  
 ![store_queue](/assets/my_queues_screenshot.PNG)
  
-The user can view details about the store they are queued for. The user can also choose to edit the day, time, and # of shoppers for their queue. If the user no longer wants to go to a store, they can simply leave the queue.
+The user can view details about the store they are queued for. The user 
+can also choose to edit the day, time, and # of shoppers for their queue. 
+If the user no longer wants to go to a store, they can simply leave the queue.
 
 ![store_queue](/assets/my_queues_detail_screenshot.PNG)
 
@@ -131,42 +141,62 @@ The user can view details about the store they are queued for. The user can also
 ### Shopper, Store Owner, and Admin Profiles
  
 #### Shopper
-Once logging in with the correct credentials for a shopper, you can now visit your own profile page! In this profile page, you will be greeted initially with your own information!
+Once logging in with the correct credentials for a shopper, you can now 
+visit your own profile page! In this profile page, you will be greeted 
+initially with your own information!
  
-This will give you your name, email, and location, as well as your favourite stores that you use, and what your notification settings are for the app to remind you of your bookings.
+This will give you your name, email, and location, as well as your 
+favourite stores that you use, and what your notification settings 
+are for the app to remind you of your bookings.
  
 ![user_profile](/assets/user_profile_screenshot.PNG)
  
-On the favourite stores section, you will also be able to directly queue up for your favourite stores. This will allow for some quick accessing of your favourite store and enable faster workflow.
+On the favourite stores section, you will also be able to directly queue 
+up for your favourite stores. This will allow for some quick accessing 
+of your favourite store and enable faster workflow.
  
-Another interaction you can do on this page is edit your information! Once clicking any edit button on the page, you will be able to edit your information and click to save that information for your profile. Of course, without the functionality from phase 2, this information will not be saved after a reload or refresh.
+Another interaction you can do on this page is edit your information! 
+Once clicking any edit button on the page, you will be able to edit 
+your information and click to save that information for your profile. 
  
 ![user_profile](/assets/user_profile_editing_screenshot.PNG)
  
-The shopper profile page is also accompanied by the search and queue history pages. These pages provide you with the stores that you have queued and searched for. The items in these tables can also be removed from your history on click of the ‘REMOVED’ button. Of course these changes will not save until the phase 2 functionality is present.
+The shopper profile page is also accompanied by the view and queue 
+history pages. These pages provide you with the stores that you have 
+queued and viewed for. The items in these tables can also be removed 
+from your history on click of the ‘REMOVED’ button.
  
 ![user_profile](/assets/user_profile_search_history_screenshot.PNG)
 ![user_profile](/assets/user_profile_queue_history_screenshot.PNG)
  
 #### Store Owner
  
-Once logging in with the correct credentials for a store owner, you can now visit your store profile page. In this profile page, you will be greeted initially with the information of the store!
+Once logging in with the correct credentials for a store owner, you 
+can now visit your store profile page. In this profile page, you will 
+be greeted initially with the information of the store!
  
-This will give you your name, email, and location, as well as the type of store you are.
+This will give you your name, email, and location, as well as the type 
+of store you are.
  
 ![store_profile](/assets/store_profile_screenshot.PNG)
  
-The store profile page is also accompanied by the store settings page that allows you to edit your queue size, store capacity, and the time limit a customer can stay in the store for.
+The store profile page is also accompanied by the store settings page 
+that allows you to edit your queue size, store capacity, and the time 
+limit a customer can stay in the store for.
  
 ![store_profile](/assets/store_settings_screenshot.PNG)
- 
+
 #### Admin
  
-Once logging in with the correct credentials for an admin, you can now visit your own profile page. This page gives you basic information about yourself.
+Once logging in with the correct credentials for an admin, you can now 
+visit your own profile page. This page gives you basic information about 
+yourself.
  
 ![store_profile](/assets/admin_profile_screenshot.PNG)
  
-The admin profile is also accompanied by the User Profiles and Show Owner Profiles page. These will allow you to view other user and store pages and edit them to your will.
+The admin profile is also accompanied by the User Profiles and Show Owner 
+Profiles page. These will allow you to view other user and store pages 
+and edit them to your will.
  
 ![store_profile](/assets/admin_user_profile_screenshot.PNG)
 ![store_profile](/assets/admin_store_profile_screenshot.PNG)

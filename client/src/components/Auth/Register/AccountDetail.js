@@ -23,18 +23,8 @@ class AccountDetail extends React.Component {
   };
 
   render() {
-    const {
-      activeStep,
-      handleBack,
-      handleFormField,
-      username,
-      email,
-      password,
-      confirmPassword,
-      registerAs,
-      displayError,
-      errorMessage
-    } = this.props;
+    const { username, email, password, confirmPassword, registerAs, displayError, errorMessage } = this.props;
+    const { activeStep, handleBack, comp } = this.props;
 
     return (
       <React.Fragment>
@@ -47,7 +37,7 @@ class AccountDetail extends React.Component {
               name="username"
               label="Username"
               displayError={displayError}
-              handleFormField={handleFormField}
+              comp={comp}
               value={username}
             />
             <FormTextField
@@ -55,7 +45,7 @@ class AccountDetail extends React.Component {
               label="Email Address"
               type="email"
               displayError={displayError}
-              handleFormField={handleFormField}
+              comp={comp}
               value={email}
             />
             <FormTextField
@@ -63,7 +53,7 @@ class AccountDetail extends React.Component {
               label="Password"
               type="password"
               displayError={displayError}
-              handleFormField={handleFormField}
+              comp={comp}
               value={password}
             />
             <FormTextField
@@ -71,14 +61,14 @@ class AccountDetail extends React.Component {
               label="Confirm Password"
               type="password"
               displayError={displayError}
-              handleFormField={handleFormField}
+              comp={comp}
               errorMessage={errorMessage}
               value={confirmPassword}
             />
             <FormSelectField
               name="registerAs"
               label="Register For"
-              handleFormField={handleFormField}
+              comp={comp}
               value={registerAs}
               menuItems={['Shopper', 'Shop Owner']}
               useIndex

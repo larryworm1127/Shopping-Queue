@@ -1,23 +1,13 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import { handleFormField } from '../utils/utils';
 
 
 class FormTextField extends React.Component {
 
   render() {
-    const {
-      name,
-      label,
-      type,
-      displayError,
-      handleFormField,
-      errorMessage,
-      margin,
-      variant,
-      defaultValue,
-      value
-    } = this.props;
+    const { name, label, type, displayError, comp, errorMessage, margin, variant, value } = this.props;
 
     return (
       <React.Fragment>
@@ -33,11 +23,8 @@ class FormTextField extends React.Component {
             type={type}
             error={displayError}
             helperText={errorMessage}
-            defaultValue={defaultValue}
             value={value}
-            onChange={(event) => {
-              handleFormField(name, event);
-            }}
+            onChange={(event) => handleFormField.bind(comp)(name, event)}
           />
         </Grid>
       </React.Fragment>

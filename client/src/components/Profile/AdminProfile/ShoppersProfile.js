@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import UserProfile from '../ShopperProfile/ShopperProfile';
-import SearchHistory from '../ShopperProfile/SearchHistory';
+import SearchHistory from '../ShopperProfile/ViewHistory';
 import QueueHistory from '../ShopperProfile/QueueHistory';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';

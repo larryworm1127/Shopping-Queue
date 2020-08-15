@@ -1,8 +1,5 @@
-// React imports
 import React from 'react';
-// Material UI imports
 import { Button, Checkbox, FormControlLabel, withStyles } from '@material-ui/core';
-// User JS imports
 import FormTextField from '../../FormTextField';
 import FormSelectField from '../../FormSelectField';
 import { withRouter } from 'react-router-dom';
@@ -17,26 +14,19 @@ class LoginForm extends React.Component {
     password: '',
     userType: 0,
     displayError: false,
-    errorMessage: ''
-  };
-
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-      displayError: false,
-      errorMessage: null
-    });
+    errorMessage: '',
+    checked: false
   };
 
   handleLoginSubmit = (event) => {
     event.preventDefault();
 
-    login(this, this.props.app)
-  }
+    login(this, this.props.app);
+  };
 
   render() {
     const { classes } = this.props;
-    const { displayError, errorMessage, userType } = this.state;
+    const { displayError, errorMessage, userType, checked } = this.state;
 
     return (
       <React.Fragment>
@@ -47,7 +37,7 @@ class LoginForm extends React.Component {
             name="username"
             label="Username"
             displayError={displayError}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
 
           <FormTextField
@@ -58,7 +48,7 @@ class LoginForm extends React.Component {
             type="password"
             errorMessage={errorMessage}
             displayError={displayError}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
 
           <FormSelectField
@@ -66,13 +56,19 @@ class LoginForm extends React.Component {
             label="Login As"
             variant="outlined"
             value={userType}
-            handleFormField={this.handleFormField}
+            comp={this}
             menuItems={['Shopper', 'Shop Owner', 'Admin']}
             useIndex
           />
 
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary"/>}
+            control={
+              <Checkbox
+                value={checked}
+                color="primary"
+                onChange={(_, checked) => this.setState({ checked })}
+              />
+            }
             label="Remember me"
           />
 

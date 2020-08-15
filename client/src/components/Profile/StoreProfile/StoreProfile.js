@@ -29,12 +29,6 @@ class UserProfile extends React.Component {
     this.setState({ edit: val });
   };
 
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-    });
-  };
-
   handleSave = (event) => {
     event.preventDefault();
 
@@ -55,7 +49,7 @@ class UserProfile extends React.Component {
             name="storeName"
             label="Store Name"
             value={this.state.storeName}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={6}
@@ -66,7 +60,7 @@ class UserProfile extends React.Component {
             name="email"
             label="Email"
             value={this.state.email}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={12}
@@ -77,7 +71,7 @@ class UserProfile extends React.Component {
             name="address"
             label="Address"
             value={this.state.address}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={12}
@@ -89,7 +83,7 @@ class UserProfile extends React.Component {
               <FormSelectField
                 name="storeType"
                 label="Store Type"
-                handleFormField={this.handleFormField}
+                comp={this}
                 value={this.state.storeType}
                 useIndex={false}
                 menuItems={Object.keys(StoreTypes)}
@@ -106,7 +100,7 @@ class UserProfile extends React.Component {
             label="Opening Time"
             type="time"
             value={this.state.openTime}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={6}
@@ -118,7 +112,7 @@ class UserProfile extends React.Component {
             label="Closing Time"
             type="time"
             value={this.state.closeTime}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={6}
@@ -130,7 +124,7 @@ class UserProfile extends React.Component {
             label="Customer Limit"
             type="number"
             value={this.state.customerLimit}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={6}
@@ -142,7 +136,7 @@ class UserProfile extends React.Component {
             label="Customer Shopping Time Limit (min)"
             type="number"
             value={this.state.customerShopTime}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
         </Grid>
         <br/>

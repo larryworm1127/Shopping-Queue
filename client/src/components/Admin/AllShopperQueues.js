@@ -21,24 +21,30 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import { getSearchedShoppers } from '../../actions/shopper';
+import { getEmptyRows } from '../../utils/utils';
+import TablePaginationFooter from '../TablePaginationFooter';
 
 
 class AllShopperQueues extends React.Component {
 
   componentDidMount() {
-    getSearchedShoppers("", this);
+    getSearchedShoppers('', this);
   }
 
   state = {
+    page: 0,
+    rowsPerPage: 5,
     shoppers: []
   };
 
   handleOnInputChange = (event) => {
-    getSearchedShoppers(event.target.value, this)
+    getSearchedShoppers(event.target.value, this);
   };
 
   render() {
     const { classes, isLoggedIn, userType } = this.props;
+    const { shoppers, page, rowsPerPage } = this.state;
+    const emptyRows = getEmptyRows(shoppers, page, rowsPerPage);
 
     return (
       <React.Fragment>
@@ -50,21 +56,22 @@ class AllShopperQueues extends React.Component {
         </Typography>
 
         <TableContainer component={Paper} className={classes.table}>
-        <Card>
-          <CardActions>
-            <TextField
-              variant="outlined"
-              label="Search..."
-              onChange={this.handleOnInputChange}
-            />
-            <Button
-              size="small"
-              color="primary"
-            >
-              Search
-            </Button>
-          </CardActions>
-        </Card>
+          <Card>
+            <CardActions>
+              <TextField
+                variant="outlined"
+                label="Search..."
+                onChange={this.handleOnInputChange}
+              />
+              <Button
+                size="small"
+                color="primary"
+              >
+                Search
+              </Button>
+            </CardActions>
+          </Card>
+
           <Table>
             <TableHead>
               <TableRow>
@@ -77,10 +84,26 @@ class AllShopperQueues extends React.Component {
             </TableHead>
 
             <TableBody>
-              {this.state.shoppers.map((shopper) => (
+              {(rowsPerPage > 0
+                  ? shoppers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : shoppers
+              ).map((shopper) => (
                 <QueueTableRow key={uid(shopper)} shopper={shopper}/>
               ))}
+
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6}/>
+                </TableRow>
+              )}
             </TableBody>
+
+            <TablePaginationFooter
+              data={shoppers}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              comp={this}
+            />
           </Table>
         </TableContainer>
       </React.Fragment>
