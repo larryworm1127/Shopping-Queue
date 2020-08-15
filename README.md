@@ -234,7 +234,6 @@ and edit them to your will.
 | /api/queue/store/:username | GET | Get current queues for a store | 
 | /api/queue/:id | PATCH | Update a queue | {"numCustomers": numCustomers, <br> "shopTime": shopTime, <br> "datetime": datetime }|
 
-
 ## Shopper
 
 | Route   |      Type      |  Description | Body |
@@ -251,3 +250,12 @@ and edit them to your will.
 | /api/shopper/favorites/:shopperUsername/:storeUsername| DELETE | Delete store from shopper's favorites | |
 | /api/shopper/:username| DELETE | Delete a shopper's account | |
 | /api/shoppers| GET | Get all shoppers | |
+
+## Store
+
+| Route   |      Type      |  Description | Body |
+|:----------|:-------------|:------|:-------------|
+| /api/store/profile/:username | GET | Get profile for a store | |
+| /api/store/profile/:username | PATCH |Update profile info for store| {"storeName": storeName, <br> "email": email, <br> "address": address, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime}, <br> "customerLimit": customerLimit, <br> "customerShopTime": customerShopTime }|
+| /api/store/:username | DELETE | Delete a store's account | |
+| /api/stores | GET | Get all stores | 
