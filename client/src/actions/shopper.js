@@ -66,7 +66,6 @@ export const removeFavouriteStore = (shopperUsername, storeUsername) => {
 }
 
 export const getShopperFavoriteStores = (username, profileComp) => {
-  console.log("USERNAMEEEEEE:", username)
   const url = `/api/shopper/favorites/${username}`;
 
   fetch(url)
@@ -77,7 +76,6 @@ export const getShopperFavoriteStores = (username, profileComp) => {
     })
     .then(json => {
       if (json) {
-      console.log("JSONNNNNN", json)
         profileComp.setState({
           favoriteStores: [...json]
         });
