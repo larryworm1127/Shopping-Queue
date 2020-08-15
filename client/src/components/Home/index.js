@@ -12,7 +12,6 @@ import Services from './Services';
 import { CssBaseline } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import { getShopperFavoriteStores, getShopperQueueHistory } from '../../actions/shopper';
-import { getCurrentQueues } from '../../actions/queue';
 import { getAllShoppers, getAllStores, getHelpMessages } from '../../actions/admin';
 import { UserType } from '../../utils/utils';
 import { getAllQueuesforStore, getTodayQueuesforStore } from '../../actions/store';
@@ -27,7 +26,6 @@ class Home extends React.Component {
 
   componentDidMount() {
     const { userType, currentUser } = this.props
-    const { queues } = this.state;
 
     switch (userType) {
       case UserType.shopper:
@@ -37,6 +35,7 @@ class Home extends React.Component {
       case UserType.store:
         getAllQueuesforStore(this.props.currentUser, this);
         getTodayQueuesforStore(this.props.currentUser, this);
+        break;
       case UserType.admin:
         getHelpMessages(this);
         getAllShoppers(this);
@@ -65,7 +64,7 @@ class Home extends React.Component {
   };
 
   getServiceData = (userType) => {
-    const { favoriteStores, queueHistory, numOfQueues, numCustomers, shopTime, messages, shoppers, stores, NumberofShoppersinQueue, TotalShoppersToday, AverageWaitTime } = this.state;
+    const { favoriteStores, queueHistory, messages, shoppers, stores, NumberofShoppersinQueue, TotalShoppersToday, AverageWaitTime } = this.state;
 
     switch (userType) {
       case 0:
