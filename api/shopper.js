@@ -122,8 +122,8 @@ router.get('/api/shopper/queueHistory/:username', (req, res) => {
   const username = req.params.username;
 
   Shopper.getQueueHistory(username)
-    .then(stores => {
-      res.send(stores);
+    .then(queues => {
+      res.send(queues);
     })
     .catch(error => {
       res.status(400).send(error);

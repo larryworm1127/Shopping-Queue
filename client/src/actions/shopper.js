@@ -26,7 +26,6 @@ export const getShopperProfile = (username, profileComp) => {
 };
 
 export const addFavouriteStore = (shopperUsername, storeUsername) => {
-  // const url = `/api/shopper/profile/favorites/${shopperUsername}/${storeUsername}`;
   const request = new Request(`/api/shopper/profile/favorites/${shopperUsername}/${storeUsername}`, {
     method: 'PATCH',
     headers: {
@@ -47,7 +46,6 @@ export const addFavouriteStore = (shopperUsername, storeUsername) => {
 }
 
 export const removeFavouriteStore = (shopperUsername, storeUsername) => {
-  // const url = `/api/shopper/profile/favorites/${shopperUsername}/${storeUsername}`;
   const request = new Request(`/api/shopper/profile/favorites/${shopperUsername}/${storeUsername}`, {
     method: 'DELETE',
     headers: {

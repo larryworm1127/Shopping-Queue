@@ -4,7 +4,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { styles } from '../style';
@@ -12,6 +11,7 @@ import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
 import { getShopperQueueHistory } from '../../../actions/shopper';
+import ContentTitle from '../../ContentTitle';
 
 
 class QueueHistory extends React.Component {
@@ -35,55 +35,48 @@ class QueueHistory extends React.Component {
   };
 
   render() {
-    console.log(this.state.queueHistory);
     const { classes } = this.props;
+    const { queueHistory } = this.state;
 
     return (
       <React.Fragment>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                Queueing History
-              </Typography>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="center">Shop Name</TableCell>
-                    <TableCell align="center">Address</TableCell>
-                    <TableCell align="center">Date Booked</TableCell>
-                    <TableCell align="center">Queued For</TableCell>
-                    <TableCell/>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.state.queueHistory.map(({ store, searchDate, queuedFor }, index) => (
-                    <TableRow key={uid(index)}>
-                      <TableCell align="center">
-                        {store.storeName}
-                      </TableCell>
-                      <TableCell align="center">
-                        {store.address}
-                      </TableCell>
-                      <TableCell align="center">
-                        {new Date(searchDate).toLocaleString()}
-                      </TableCell>
-                      <TableCell align="center">
-                        {new Date(queuedFor).toLocaleString()}
-                      </TableCell>
-                      <TableCell>
-                        <Button
-                          variant="outlined"
-                          color="primary"
-                          onClick={(event => this.handleRemoveQueueHistory(event, index))}
-                        >
-                          Remove
-                        </Button>
-                      </TableCell>
+              <ContentTitle isEmpty={queueHistory.length === 0} name="Queue History"/>
+
+              {(queueHistory.length !== 0) && (
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">Shop Name</TableCell>
+                      <TableCell align="center">Address</TableCell>
+                      <TableCell align="center">Date Booked</TableCell>
+                      <TableCell align="center">Queued For</TableCell>
+                      <TableCell/>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHead>
+                  <TableBody>
+                    {queueHistory.map(({ store, searchDate, queuedFor }, index) => (
+                      <TableRow key={uid(index)}>
+                        <TableCell align="center">{store.storeName}</TableCell>
+                        <TableCell align="center">{store.address}</TableCell>
+                        <TableCell align="center">{new Date(searchDate).toLocaleString()}</TableCell>
+                        <TableCell align="center">{new Date(queuedFor).toLocaleString()}</TableCell>
+                        <TableCell>
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={(event => this.handleRemoveQueueHistory(event, index))}
+                          >
+                            Remove
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
             </Paper>
           </Grid>
         </Grid>
