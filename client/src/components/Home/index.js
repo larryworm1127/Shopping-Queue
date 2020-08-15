@@ -33,8 +33,8 @@ class Home extends React.Component {
         getShopperQueueHistory(currentUser, this);
         break;
       case UserType.store:
-        getAllQueuesforStore(this.props.currentUser, this);
-        getTodayQueuesforStore(this.props.currentUser, this);
+        getAllQueuesforStore(currentUser, this);
+        getTodayQueuesforStore(currentUser, this);
         break;
       case UserType.admin:
         getHelpMessages(this);
