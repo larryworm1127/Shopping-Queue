@@ -206,7 +206,7 @@ and edit them to your will.
 | Route   |      Type      |  Description | Body |
 |:----------|:-------------|:------|:-------------|
 | /api/admin/profile/:username | GET | Gets admin profile |
-| /api/admin/profile/:username | PATCH |Update admin profile| { "username": <username>, "email": <email>, "firstName": <firstName>, "lastName": <lastName>, "address": <address>} |
-| /api/admin/profile | DELETE | Delete an admin | { "id": <id>}|
+| /api/admin/profile/:username | PATCH |Update admin profile| { "username": username, <br> "email": email, <br> "firstName": firstName, <br> "lastName": lastName, <br> "address": address} |
+| /api/admin/profile | DELETE | Delete an admin | { "id": id}|
 | /api/admin/messages | GET | Get all messages | 
-| /api/admin/messages | POST | Post a message | {"username": <username>, "userType": <userType>, "title": <title>, "description": <description>, "date": <date>} |
+| /api/admin/messages | POST | Post a message | {"username": username, <br> "userType": userType, <br> "title": title, <br> "description": description, <br> "date": date} |
