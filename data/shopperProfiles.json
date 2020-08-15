@@ -7,8 +7,7 @@
     "firstName": "John",
     "lastName": "Doe",
     "address": "123 Test Street, Toronto, ON",
-    "email": "user@mail.com",
-    "remindTime": 30
+    "email": "user@mail.com"
   },
   {
     "favouriteStores": [],
@@ -18,8 +17,7 @@
     "firstName": "Doe",
     "lastName": "John",
     "email": "user2@mail.com",
-    "address": "124 Test Street, Toronto, ON",
-    "remindTime": 15
+    "address": "124 Test Street, Toronto, ON"
   },
   {
     "favouriteStores": [],
@@ -29,7 +27,6 @@
     "firstName": "Dohn",
     "lastName": "Joe",
     "email": "user3@mail.com",
-    "address": "125 Test Street, Toronto, ON",
-    "remindTime": 60
+    "address": "125 Test Street, Toronto, ON"
   }
 ]
