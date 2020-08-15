@@ -9,24 +9,47 @@ import { styles } from './style';
 
 class LoginForm extends React.Component {
 
-  state = {
-    username: '',
-    password: '',
-    userType: 0,
-    displayError: false,
-    errorMessage: '',
-    checked: false
-  };
+  constructor(props) {
+    super(props);
+
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+    const userType = localStorage.getItem('userType');
+    const checked = localStorage.getItem('checked');
+    this.state = {
+      username: (username) ? username : '',
+      password: (password) ? password : '',
+      userType: (userType) ? userType : 0,
+      displayError: false,
+      errorMessage: '',
+      checked: (checked) ? checked : false
+    };
+  }
+
 
   handleLoginSubmit = (event) => {
     event.preventDefault();
 
+    // Save credentials in localstorage for remember me
+    if (this.state.checked) {
+      localStorage.setItem('checked', this.state.checked);
+      localStorage.setItem('username', this.state.username);
+      localStorage.setItem('password', this.state.password);
+      localStorage.setItem('userType', this.state.userType);
+    } else {
+      localStorage.removeItem('username');
+      localStorage.removeItem('password');
+      localStorage.removeItem('userType');
+      localStorage.removeItem('checked');
+    }
+
+    // Login user
     login(this, this.props.app);
   };
 
   render() {
     const { classes } = this.props;
-    const { displayError, errorMessage, userType, checked } = this.state;
+    const { displayError, errorMessage, userType, checked, username, password } = this.state;
 
     return (
       <React.Fragment>
@@ -37,6 +60,7 @@ class LoginForm extends React.Component {
             name="username"
             label="Username"
             displayError={displayError}
+            value={username}
             comp={this}
           />
 
@@ -48,6 +72,7 @@ class LoginForm extends React.Component {
             type="password"
             errorMessage={errorMessage}
             displayError={displayError}
+            value={password}
             comp={this}
           />
 
@@ -64,7 +89,7 @@ class LoginForm extends React.Component {
           <FormControlLabel
             control={
               <Checkbox
-                value={checked}
+                checked={checked}
                 color="primary"
                 onChange={(_, checked) => this.setState({ checked })}
               />
