@@ -18,7 +18,6 @@ import { uid } from 'react-uid';
 import { styles } from './style';
 import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import { getSearchedShoppers } from '../../actions/shopper';
 import { getEmptyRows } from '../../utils/utils';
