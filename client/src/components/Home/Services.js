@@ -18,7 +18,6 @@ class Services extends React.Component {
         <Grid container spacing={2}>
           {(serviceData.services.length === 0) ? (
             <React.Fragment>
-              <Grid item xs={6} md={4}/>
               <Grid item xs={6} md={4}>
                 <IconCard
                   Icon={<BuildIcon/>}
@@ -46,7 +45,6 @@ class Services extends React.Component {
         <Grid container spacing={2}>
           {(serviceData.secondServices.length === 0 && serviceData.secondTitle !== '') ? (
             <React.Fragment>
-              <Grid item xs={6} md={4}/>
               <Grid item xs={6} md={4}>
                 <IconCard
                   Icon={<BuildIcon/>}
