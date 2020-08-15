@@ -41,7 +41,7 @@ class Footer extends React.Component {
       <div className={classes.footerWrapper}>
         <div className={classes.footerInner}>
           <Grid container spacing={5}>
-            <Grid item xs={12} md={6} lg={1}/>
+            <Grid item xs={12} md={6} lg={1} />
             <Grid item xs={12} md={6} lg={4}>
               <form>
                 <Typography variant="h3" paragraph className={classes.bigFont}>
@@ -86,19 +86,19 @@ class Footer extends React.Component {
               </form>
             </Grid>
 
-            <Grid item xs={12} md={6} lg={2}/>
+            <Grid item xs={12} md={6} lg={2} />
 
             <Grid item xs={12} md={6} lg={4}>
               <Typography variant="h3" paragraph className={classes.bigFont}>
                 About Us
               </Typography>
               <Typography className={classes.paragraph} paragraph>
-                Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce
-                euismod convallis velit, eu auctor lacus vehicula sit amet.
+                We are a group of 4 students with an aim towards helping users during this pandemic.
+                We hope that you find this Web app helpful.
               </Typography>
 
             </Grid>
-            <Grid item xs={12} md={6} lg={1}/>
+            <Grid item xs={12} md={6} lg={1} />
           </Grid>
         </div>
       </div>
