@@ -10,7 +10,7 @@ const { Queue } = require('../models/queue');
 
 // Get profile for store owner
 router.get('/api/store/profile/:username', (req, res) => {
-  if (req.session.isLoggedIn && req.session.userType !== UserTypes.Shopper) {
+  if (req.session.isLoggedIn) {
     const username = req.params.username;
 
     Store.findOne({ username })

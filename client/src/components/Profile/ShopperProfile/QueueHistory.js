@@ -10,7 +10,7 @@ import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
-import { deleteShopperQueueHistory, getSearchedShoppers, getShopperQueueHistory } from '../../../actions/shopper';
+import { deleteShopperQueueHistory, getShopperQueueHistory } from '../../../actions/shopper';
 import ContentTitle from '../../ContentTitle';
 import { getEmptyRows } from '../../../utils/utils';
 import TablePaginationFooter from '../../TablePaginationFooter';

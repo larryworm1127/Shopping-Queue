@@ -1,32 +1,124 @@
 [
   {
-    "favouriteStores": [],
-    "viewHistory": [],
-    "queueHistory": [],
+    "_id": {
+      "$oid": "5f3304755211b714b0c97f44"
+    },
+    "favouriteStores": [
+      "store1",
+      "store2",
+      "store3",
+      "store4"
+    ],
+    "searchHistory": [],
+    "queueHistory": [
+      {
+        "_id": {
+          "$oid": "5f36f29941f7bf388c2916ba"
+        },
+        "store": "store1",
+        "searchDate": {
+          "$date": "2020-08-14T20:22:49.254Z"
+        },
+        "queuedFor": {
+          "$date": "2020-08-15T21:00:00Z"
+        }
+      },
+      {
+        "_id": {
+          "$oid": "5f36f38441f7bf388c2916be"
+        },
+        "store": "store3",
+        "searchDate": {
+          "$date": "2020-08-14T20:26:44.974Z"
+        },
+        "queuedFor": {
+          "$date": "2020-08-29T00:00:00Z"
+        }
+      },
+      {
+        "_id": {
+          "$oid": "5f36f3ac41f7bf388c2916c0"
+        },
+        "store": "store3",
+        "searchDate": {
+          "$date": "2020-08-14T20:27:24.307Z"
+        },
+        "queuedFor": {
+          "$date": "2020-08-28T12:00:00Z"
+        }
+      },
+      {
+        "_id": {
+          "$oid": "5f36f4db41f7bf388c2916c2"
+        },
+        "store": "store1",
+        "searchDate": {
+          "$date": "2020-08-14T20:32:27.017Z"
+        },
+        "queuedFor": {
+          "$date": "2020-08-30T15:30:00Z"
+        }
+      }
+    ],
     "username": "user",
     "firstName": "John",
     "lastName": "Doe",
     "address": "123 Test Street, Toronto, ON",
-    "email": "user@mail.com"
+    "email": "user@mail.com",
   },
   {
-    "favouriteStores": [],
-    "viewHistory": [],
-    "queueHistory": [],
+    "_id": {
+      "$oid": "5f3304755211b714b0c97f45"
+    },
+    "favouriteStores": [
+      "store1",
+      "store3"
+    ],
+    "searchHistory": [],
+    "queueHistory": [
+      {
+        "_id": {
+          "$oid": "5f37f7a9bd2f7a1408891de4"
+        },
+        "store": "store2",
+        "searchDate": {
+          "$date": "2020-08-15T14:56:41.534Z"
+        },
+        "queuedFor": {
+          "$date": "2020-08-29T15:00:00Z"
+        }
+      }
+    ],
     "username": "user2",
     "firstName": "Doe",
     "lastName": "John",
     "email": "user2@mail.com",
-    "address": "124 Test Street, Toronto, ON"
+    "address": "124 Test Street, Toronto, ON",
   },
   {
+    "_id": {
+      "$oid": "5f3304755211b714b0c97f46"
+    },
     "favouriteStores": [],
-    "viewHistory": [],
-    "queueHistory": [],
+    "searchHistory": [],
+    "queueHistory": [
+      {
+        "_id": {
+          "$oid": "5f37fae59ae6ff1a481b5a40"
+        },
+        "store": "store2",
+        "searchDate": {
+          "$date": "2020-08-15T15:10:29.332Z"
+        },
+        "queuedFor": {
+          "$date": "2020-08-29T15:00:00Z"
+        }
+      }
+    ],
     "username": "user3",
     "firstName": "Dohn",
     "lastName": "Joe",
     "email": "user3@mail.com",
-    "address": "125 Test Street, Toronto, ON"
+    "address": "125 Test Street, Toronto, ON",
   }
 ]
