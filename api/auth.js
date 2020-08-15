@@ -109,7 +109,7 @@ router.post('/api/register', (req, res) => {
       storeName: req.body.storeName,
       email: req.body.email,
       address: req.body.location,
-      coordinate: [43, -79],
+      coordinate: [req.body.coordinates.lat, req.body.coordinates.lng],
       type: req.body.storeType,
       openingTime: req.body.openTime,
       closingTime: req.body.closeTime,
