@@ -21,6 +21,8 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import { getSearchedStores } from '../../actions/store';
+import { getEmptyRows } from '../../utils/utils';
+import TablePaginationFooter from '../TablePaginationFooter';
 
 
 class AllStoreQueues extends React.Component {
@@ -30,6 +32,8 @@ class AllStoreQueues extends React.Component {
   }
 
   state = {
+    page: 0,
+    rowsPerPage: 5,
     stores: []
   };
 
@@ -39,6 +43,8 @@ class AllStoreQueues extends React.Component {
 
   render() {
     const { classes, isLoggedIn, userType } = this.props;
+    const { stores, page, rowsPerPage } = this.state;
+    const emptyRows = getEmptyRows(stores, page, rowsPerPage);
 
     return (
       <React.Fragment>
@@ -65,6 +71,7 @@ class AllStoreQueues extends React.Component {
               </Button>
             </CardActions>
           </Card>
+
           <Table>
             <TableHead>
               <TableRow>
@@ -78,10 +85,26 @@ class AllStoreQueues extends React.Component {
             </TableHead>
 
             <TableBody>
-              {this.state.stores.map((store) => (
+              {(rowsPerPage > 0
+                  ? stores.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : stores
+              ).map((store) => (
                 <QueueTableRow key={uid(store)} store={store}/>
               ))}
+
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6}/>
+                </TableRow>
+              )}
             </TableBody>
+
+            <TablePaginationFooter
+              data={stores}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              comp={this}
+            />
           </Table>
         </TableContainer>
 
