@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container';
 import DataDisplay from '../DataDisplay';
 import ProfileEditButtons from '../Profile/ProfileEditButtons';
 import { updateQueue } from '../../actions/queue';
-import datetime from 'date-and-time';
 
 
 class QueueDetails extends React.Component {

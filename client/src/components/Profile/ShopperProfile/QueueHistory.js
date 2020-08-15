@@ -35,7 +35,6 @@ class QueueHistory extends React.Component {
   };
 
   render() {
-    console.log(this.state.queueHistory);
     const { classes } = this.props;
     const { queueHistory } = this.state;
 
@@ -60,18 +59,10 @@ class QueueHistory extends React.Component {
                   <TableBody>
                     {queueHistory.map(({ store, searchDate, queuedFor }, index) => (
                       <TableRow key={uid(index)}>
-                        <TableCell align="center">
-                          {store.storeName}
-                        </TableCell>
-                        <TableCell align="center">
-                          {store.address}
-                        </TableCell>
-                        <TableCell align="center">
-                          {new Date(searchDate).toLocaleString()}
-                        </TableCell>
-                        <TableCell align="center">
-                          {new Date(queuedFor).toLocaleString()}
-                        </TableCell>
+                        <TableCell align="center">{store.storeName}</TableCell>
+                        <TableCell align="center">{store.address}</TableCell>
+                        <TableCell align="center">{new Date(searchDate).toLocaleString()}</TableCell>
+                        <TableCell align="center">{new Date(queuedFor).toLocaleString()}</TableCell>
                         <TableCell>
                           <Button
                             variant="outlined"

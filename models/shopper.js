@@ -97,8 +97,12 @@ ShopperSchema.statics.getQueueHistory = function (username) {
     const storeNames = shopper.queueHistory.map((item) => item.store);
     return Store.find({ username: { $in: storeNames } })
       .then((stores) => {
-        return Promise.resolve(shopper.queueHistory.map(({ _, searchDate, queuedFor }, index) => {
-          return { store: stores[index], searchDate, queuedFor };
+        return Promise.resolve(shopper.queueHistory.map(({ store, searchDate, queuedFor }) => {
+          return {
+            store: stores.find((storeDoc) => storeDoc.username === store),
+            searchDate,
+            queuedFor
+          };
         }));
       });
   });
