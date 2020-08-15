@@ -15,7 +15,7 @@ export default function Menu(userType, isLoggedIn) {
           { label: 'Home', pathname: '/' },
           { label: 'Profile', pathname: '/store/profile' },
           { label: 'Current Queues', pathname: '/store/queues' },
-          { label: 'Current Shoppers', pathname: '/store/shoppers' },
+          { label: 'Shoppers\' stats', pathname: '/store/shoppers' },
           { label: 'Logout', pathname: '/logout' },
         ];
       default:
