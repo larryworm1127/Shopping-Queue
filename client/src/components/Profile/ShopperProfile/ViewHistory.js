@@ -13,12 +13,15 @@ import { deleteShopperViewHistory, getShopperViewHistory } from '../../../action
 import ContentTitle from '../../ContentTitle';
 import { getEmptyRows } from '../../../utils/utils';
 import TablePaginationFooter from '../../TablePaginationFooter';
+import CardActions from '@material-ui/core/CardActions';
+import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
 
 
 class ViewHistory extends React.Component {
 
   componentDidMount() {
-    getShopperViewHistory(this.props.username, this);
+    getShopperViewHistory(this.props.username, this, '');
   }
 
   state = {
@@ -33,6 +36,10 @@ class ViewHistory extends React.Component {
     deleteShopperViewHistory(this.props.username, id, this, index);
   };
 
+  handleOnInputChange = (event) => {
+    getShopperViewHistory(this.props.username, this, event.target.value);
+  };
+
   render() {
     const { classes } = this.props;
     const { viewHistory, page, rowsPerPage } = this.state;
@@ -44,12 +51,22 @@ class ViewHistory extends React.Component {
           <Paper className={classes.paper}>
             <ContentTitle isEmpty={viewHistory.length === 0} name="Store View History"/>
 
+            <Card>
+              <CardActions>
+                <TextField
+                  variant="outlined"
+                  label="Search..."
+                  onChange={this.handleOnInputChange}
+                />
+              </CardActions>
+            </Card>
+
             {(viewHistory.length !== 0) && (
               <Table stickyHeader>
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Shop Name</TableCell>
-                    <TableCell align="center">Address</TableCell>
+                    <TableCell align="left">Shop Name</TableCell>
+                    <TableCell align="left">Address</TableCell>
                     <TableCell align="center">Shop Type</TableCell>
                     <TableCell align="center">Date Searched</TableCell>
                     <TableCell/>
@@ -62,8 +79,8 @@ class ViewHistory extends React.Component {
                       : viewHistory
                   ).map(({ store, searchDate, _id }, index) => (
                     <TableRow key={index} hover>
-                      <TableCell align="center">{store.storeName}</TableCell>
-                      <TableCell align="center">{store.address}</TableCell>
+                      <TableCell align="left">{store.storeName}</TableCell>
+                      <TableCell align="left">{store.address}</TableCell>
                       <TableCell align="center">{store.type}</TableCell>
                       <TableCell align="center">{new Date(searchDate).toLocaleString()}</TableCell>
                       <TableCell>

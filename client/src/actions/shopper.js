@@ -143,7 +143,7 @@ export const addToViewHistory = (username, store) => {
 };
 
 
-export const getShopperViewHistory = (username, profileComp) => {
+export const getShopperViewHistory = (username, profileComp, text) => {
   const url = `/api/shopper/viewHistory/${username}`;
 
   fetch(url)
@@ -154,8 +154,13 @@ export const getShopperViewHistory = (username, profileComp) => {
     })
     .then(json => {
       if (json) {
+        const jsonFiltered = json.filter(({ store }) => {
+          return store.storeName.toUpperCase().includes(text.toUpperCase()) ||
+            store.address.toUpperCase().includes(text.toUpperCase()) ||
+            store.type.toUpperCase().includes(text.toUpperCase());
+        });
         profileComp.setState({
-          viewHistory: [...json]
+          viewHistory: [...jsonFiltered]
         });
       }
     })
