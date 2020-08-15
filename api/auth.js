@@ -15,7 +15,7 @@ router.post('/api/login', (req, res) => {
 
   User.verifyCredential(username, password, userType)
     .then((user) => {
-      req.session.userId = user._id;
+      req.session.isLoggedIn = true;
       req.session.userType = user.userType;
       req.session.username = user.username;
       res.send({ currentUser: user.username, userType: user.userType });
@@ -40,9 +40,9 @@ router.get('/api/logout', (req, res) => {
 
 // A route to check if a use is logged in on the session cookie
 router.get('/api/check-session', (req, res) => {
-  const { username, userType } = req.session;
+  const { username, userType, isLoggedIn } = req.session;
 
-  if (username) {
+  if (isLoggedIn) {
     res.send({ currentUser: username, userType: userType });
   } else {
     res.status(401).send();
