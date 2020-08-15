@@ -146,7 +146,6 @@ export const addHelpMessage = (state, messageData) => {
       }
     })
     .catch(error => {
-
       console.log(error);
     });
 };
