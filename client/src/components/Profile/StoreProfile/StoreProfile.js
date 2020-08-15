@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
-import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import AddressAutocomplete from '../../AddressAutocomplete';
 
 

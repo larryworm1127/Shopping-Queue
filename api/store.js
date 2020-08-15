@@ -5,8 +5,9 @@ const router = express.Router();
 
 const { User, UserTypes } = require('../models/user');
 const { Store } = require('../models/store');
-const { Shopper } = require('../models/shopper');
 const { Queue } = require('../models/queue');
+
+
 // Get profile for store owner
 router.get('/api/store/profile/:username', (req, res) => {
   if (req.session.isLoggedIn && req.session.userType !== UserTypes.Shopper) {
@@ -98,7 +99,7 @@ router.get('/api/stores', (req, res) => {
         res.send(stores);
       })
       .catch(error => {
-        res.status(500).send(error); // server error
+        res.status(500).send(error);
       });
   } else {
     res.status(404).send();
@@ -114,24 +115,24 @@ router.get('/api/store/queues/:username', (req, res) => {
       res.send(queues);
     })
     .catch(error => {
-      res.sendStatus(500).send(error); // server error
+      res.sendStatus(500).send(error);
     });
 });
 
 
 // Get all Queues for store today
 router.get('/api/store/todayqueues/:username', (req, res) => {
-  const storename = req.params.username;
-  var today = new Date();
+  const storeName = req.params.username;
+  const today = new Date();
   today.setHours(0, 0, 0, 0);
-  var tomorrow = new Date(today);
+  const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
-  Queue.find({ store: storename, datetime: { $gte: today.toISOString(), $lt: tomorrow.toISOString() } })
+  Queue.find({ store: storeName, datetime: { $gte: today.toISOString(), $lt: tomorrow.toISOString() } })
     .then(queues => {
       res.send(queues);
     })
     .catch(error => {
-      res.sendStatus(500).send(error); // server error
+      res.sendStatus(500).send(error);
     });
 });
 

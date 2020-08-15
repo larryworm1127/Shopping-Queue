@@ -10,7 +10,6 @@ const { HelpMessage } = require('../models/helpMessage');
 
 // Get profile for admin
 router.get('/api/admin/profile/:username', (req, res) => {
-  console.log(req.session);
   if (req.session.isLoggedIn && req.session.userType === UserTypes.Admin) {
     const username = req.params.username;
 
@@ -90,7 +89,7 @@ router.delete('/api/admin/profile', (req, res) => {
 
 // Get all messages
 router.get('/api/admin/messages', (req, res) => {
-  if (req.session.isLoggedIn && req.session.userType === UserTypes) {
+  if (req.session.isLoggedIn && req.session.userType === UserTypes.Admin) {
     HelpMessage.find()
       .then(message => {
         res.send(message);
@@ -106,7 +105,7 @@ router.get('/api/admin/messages', (req, res) => {
 
 // Add help message
 router.post('/api/admin/messages', (req, res) => {
-  if (req.session.isLoggedIn && req.session.userType === UserTypes.Admin) {
+  if (req.session.isLoggedIn && req.session.userType !== UserTypes.Admin) {
     const { username, userType, title, description, date } = req.body;
     const message = new HelpMessage({ username, userType, title, description, date });
 

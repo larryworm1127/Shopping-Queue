@@ -217,21 +217,17 @@ router.delete('/api/shopper/queueHistory/:username', (req, res) => {
 // Remove store from favorites
 router.delete('/api/shopper/favorites/:shopperUsername/:storeUsername', (req, res) => {
   if (req.session.isLoggedIn && req.session.userType !== UserTypes.Store) {
-    const shopperUsername = req.params.shopperUsername; //username of shopper
-    const storeUsername = req.params.storeUsername; //username of store you want to add to favorites
+    const shopperUsername = req.params.shopperUsername;
+    const storeUsername = req.params.storeUsername;
 
     // Delete the store from favorites
-    Store.findOne({ username: storeUsername })
-      .then(store => {
-        console.log(store);
-        Shopper.updateOne(
-          { 'username': shopperUsername },
-          { $pull: { 'favouriteStores': storeUsername } }
-        ).then(result => {
-          Shopper.findOne({ username: shopperUsername }).then(shopper => {
-            res.send(shopper);
-          });
-        });
+    Shopper.updateOne(
+      { 'username': shopperUsername },
+      { $pull: { 'favouriteStores': storeUsername } },
+      { new: true }
+    )
+      .then(shopper => {
+        res.send(shopper);
       })
       .catch(error => {
         res.status(500).send(error);
