@@ -17,14 +17,6 @@ class StoreQueueForm extends React.Component {
     errorMessage: ''
   };
 
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-      displayError: false,
-      errorMessage: ''
-    });
-  };
-
   handleFormSubmit = (event, selectedStore) => {
     event.preventDefault();
 
@@ -53,7 +45,7 @@ class StoreQueueForm extends React.Component {
               type="datetime-local"
               displayError={displayError}
               value={date}
-              handleFormField={this.handleFormField}
+              comp={this}
             />
           </Grid>
           <Grid item xs={12}>
@@ -63,7 +55,7 @@ class StoreQueueForm extends React.Component {
               type="number"
               displayError={displayError}
               value={shoppingTime}
-              handleFormField={this.handleFormField}
+              comp={this}
             />
           </Grid>
           <Grid item xs={12}>
@@ -74,7 +66,7 @@ class StoreQueueForm extends React.Component {
               displayError={displayError}
               errorMessage={errorMessage}
               value={numCustomer}
-              handleFormField={this.handleFormField}
+              comp={this}
             />
           </Grid>
         </Grid>

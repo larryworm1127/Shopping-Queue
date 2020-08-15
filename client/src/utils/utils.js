@@ -1,4 +1,3 @@
-
 export const UserType = {
   shopper: 0,
   store: 1,
@@ -19,5 +18,20 @@ export const getUserTypeText = (userType) => {
 
 
 export const getEmptyRows = (data, page, rowsPerPage) => {
-  return (data) ? rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage) : 0
-}
+  return (data) ? rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage) : 0;
+};
+
+
+export const handleFormField = function (field, event) {
+  if (this.state.displayError !== undefined) {
+    this.setState({
+      [field]: event.target.value,
+      displayError: false,
+      errorMessage: ''
+    });
+  } else {
+    this.setState({
+      [field]: event.target.value,
+    });
+  }
+};

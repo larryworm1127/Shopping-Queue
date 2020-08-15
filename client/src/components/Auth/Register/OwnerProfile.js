@@ -12,7 +12,7 @@ class OwnerProfile extends React.Component {
   render() {
     const {
       handleNext,
-      handleFormField,
+      comp,
       activeStep,
       handleBack,
       storeType,
@@ -35,46 +35,46 @@ class OwnerProfile extends React.Component {
               name="storeName"
               label="Store Name"
               value={storeName}
-              handleFormField={handleFormField}
+              comp={comp}
             />
             <FormTextField
               name="location"
               label="Location"
               value={location}
-              handleFormField={handleFormField}
+              comp={comp}
             />
             <FormTextField
               name="customerLimit"
               label="Customer Limit"
               type="number"
               value={customerLimit}
-              handleFormField={handleFormField}
+              comp={comp}
             />
             <FormTextField
               name="shoppingTimeLimit"
               label="Customer Shopping Time Limit (min)"
               type="number"
               value={shoppingTimeLimit}
-              handleFormField={handleFormField}
+              comp={comp}
             />
             <FormTextField
               name="openTime"
               label="Opening Time"
               type="time"
               value={openTime}
-              handleFormField={handleFormField}
+              comp={comp}
             />
             <FormTextField
               name="closeTime"
               label="Closing Time"
               type="time"
               value={closeTime}
-              handleFormField={handleFormField}
+              comp={comp}
             />
             <FormSelectField
               name="storeType"
               label="Store Type"
-              handleFormField={handleFormField}
+              comp={comp}
               value={storeType}
               menuItems={Object.values(StoreTypes)}
             />

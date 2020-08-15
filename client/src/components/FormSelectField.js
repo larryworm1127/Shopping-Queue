@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 import { uid } from 'react-uid';
 import { withStyles } from '@material-ui/core';
+import { handleFormField } from '../utils/utils';
 
 
 const styles = theme => ({
@@ -37,15 +38,7 @@ class FormSelectField extends React.Component {
   }
 
   render() {
-    const {
-      classes,
-      name,
-      label,
-      value,
-      variant,
-      handleFormField,
-      menuItems
-    } = this.props;
+    const { classes, name, label, value, variant, menuItems, comp } = this.props;
 
     return (
       <React.Fragment>
@@ -60,7 +53,7 @@ class FormSelectField extends React.Component {
           >
             <Select
               value={value}
-              onChange={(event) => handleFormField(name, event)}
+              onChange={(event) => handleFormField.bind(comp)(name, event)}
               displayEmpty={true}
             >
               {this.renderMenuItems(menuItems)}

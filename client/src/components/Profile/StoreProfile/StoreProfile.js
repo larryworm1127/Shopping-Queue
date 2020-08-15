@@ -89,7 +89,7 @@ class UserProfile extends React.Component {
               <FormSelectField
                 name="storeType"
                 label="Store Type"
-                handleFormField={this.handleFormField}
+                comp={this}
                 value={this.state.storeType}
                 useIndex={false}
                 menuItems={Object.keys(StoreTypes)}
