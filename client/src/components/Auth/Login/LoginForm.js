@@ -22,7 +22,7 @@ class LoginForm extends React.Component {
       userType: (userType) ? userType : 0,
       displayError: false,
       errorMessage: '',
-      checked: (checked) ? checked : false
+      checked: !!(checked)
     };
   }
 

@@ -92,7 +92,7 @@ router.delete('/api/store/:username', (req, res) => {
 
 // Get all stores
 router.get('/api/stores', (req, res) => {
-  if (req.session.isLoggedIn && req.session.userType === UserTypes.Admin) {
+  if (req.session.isLoggedIn) {
     Store.find()
       .then(stores => {
         res.send(stores);

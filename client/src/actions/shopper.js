@@ -70,6 +70,7 @@ export const removeFavouriteStore = (shopperUsername, storeUsername) => {
 
 export const getShopperFavoriteStores = (username, profileComp) => {
   const url = `/api/shopper/favorites/${username}`;
+  console.log("got here")
 
   fetch(url)
     .then(res => {

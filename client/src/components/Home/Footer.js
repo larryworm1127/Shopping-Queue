@@ -7,13 +7,9 @@ import { addHelpMessage } from '../../actions/admin';
 
 class Footer extends React.Component {
 
-  constructor(props){
-    super(props)
-  }
-
   state = {
-    title: "",
-    description: "",
+    title: '',
+    description: '',
     visible: false,
     sent: false
   };
@@ -22,24 +18,24 @@ class Footer extends React.Component {
     this.setState({
       [field]: event.target.value,
     });
-  }
+  };
 
   handleFormSubmit = (username, userType) => {
     const data = {
-        username: username,
-        userType: userType,
-        title: this.state.title,
-        description: this.state.description,
-        date: new Date()
-    }
-    addHelpMessage(this, data)
+      username: username,
+      userType: userType,
+      title: this.state.title,
+      description: this.state.description,
+      date: new Date()
+    };
+    addHelpMessage(this, data);
     this.setState({
-        visible: true
-    })
+      visible: true
+    });
   };
 
   render() {
-    const { classes, currentUser, userType} = this.props;
+    const { classes, currentUser, userType } = this.props;
 
     return (
       <div className={classes.footerWrapper}>
@@ -79,13 +75,14 @@ class Footer extends React.Component {
                     color="secondary"
                     fullWidth
                     className={classes.button}
-                    onClick={(event) => this.handleFormSubmit(currentUser, userType)}
+                    onClick={() => this.handleFormSubmit(currentUser, userType)}
                   >
                     Submit
                   </Button>
                 </Box>
-                {this.state.visible && (this.state.sent ? <p className={classes.messageGood}>Message has been sent!</p> :
-                                                         <p className={classes.messageBad}>An error occurred. Message was not sent.</p>)}
+                {this.state.visible && (this.state.sent ?
+                  <p className={classes.messageGood}>Message has been sent!</p> :
+                  <p className={classes.messageBad}>An error occurred. Message was not sent.</p>)}
               </form>
             </Grid>
 

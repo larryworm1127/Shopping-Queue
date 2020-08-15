@@ -23,7 +23,7 @@ export default props => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/' render={() => <Home {...props} />}/>
+        <HomePageRoute exact path='/' props={props}/>
         <ShopperRoute exact path='/map' props={props} component={StoreMap}/>
         <ShopperRoute exact path='/queue' props={props} component={Queue}/>
         <ShopperRoute exact path='/profile' props={props} component={ShopperProfile}/>
@@ -64,6 +64,22 @@ const AuthRoute = ({ component: Component, props, ...rest }) => {
     />
   );
 };
+
+
+const HomePageRoute = ({ props, ...rest }) => {
+  const { isReadingCookie } = props;
+
+  return (
+    <Route
+      {...rest}
+      render={({ history }) => {
+        return (isReadingCookie)
+          ? <Loading/>
+          : <Home {...props} history={history}/>
+      }}
+    />
+  )
+}
 
 
 const ShopperRoute = ({ component: Component, props, ...rest }) => (

@@ -12,6 +12,7 @@ export const readCookie = (app) => {
     })
     .then(json => {
       if (json && json.currentUser) {
+        console.log("got here")
         app.setState({
           currentUser: json.currentUser,
           userType: json.userType,
@@ -57,6 +58,7 @@ export const login = (loginComp, app) => {
           currentUser: json.currentUser,
           userType: json.userType,
           isLoggedIn: true,
+          isReadingCookie: false
         });
       }
     })
