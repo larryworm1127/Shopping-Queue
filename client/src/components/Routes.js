@@ -27,7 +27,6 @@ export default props => {
         <ShopperRoute exact path='/map' props={props} component={StoreMap}/>
         <ShopperRoute exact path='/queue' props={props} component={Queue}/>
         <ShopperRoute exact path='/profile' props={props} component={ShopperProfile}/>
-        <ShopperRoute path='/store/:username' props={props} component={StoreDetail}/>
         <AdminRoute exact path='/admin/profile' props={props} component={AdminProfile}/>
         <AdminRoute exact path='/admin/store/queues' props={props} component={AllStoreQueues}/>
         <AdminRoute exact path='/admin/shopper/queues' props={props} component={AllShopperQueues}/>
@@ -35,6 +34,7 @@ export default props => {
         <StoreRoute exact path='/store/profile' props={props} component={StoreProfile}/>
         <StoreRoute exact path='/store/queues' props={props} component={StoreQueues}/>
         <StoreRoute exact path='/store/shoppers' props={props} component={StoreShoppers}/>
+        <ShopperRoute path='/store/:username' props={props} component={StoreDetail}/>
         <AuthRoute exact path='/login' props={props} component={Login}/>
         <AuthRoute exact path='/register' props={props} component={Register}/>
         <Route exact path='/logout' component={() => SignOut(props)}/>
