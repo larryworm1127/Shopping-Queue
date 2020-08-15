@@ -25,12 +25,6 @@ class QueueDetails extends React.Component {
     this.setState({ edit: val });
   };
 
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-    });
-  };
-
   handleSave = (event) => {
     event.preventDefault();
 
@@ -57,7 +51,7 @@ class QueueDetails extends React.Component {
             />
             <DataDisplay
               gridSize={4}
-              title="Queued For Date"
+              title="Arrive At"
               content={new Date(this.state.datetime).toLocaleString()}
               edit={this.state.edit}
               setEdit={this.setEdit}
@@ -65,7 +59,7 @@ class QueueDetails extends React.Component {
               label="Datetime"
               type="datetime-local"
               value={this.state.datetime}
-              handleFormField={this.handleFormField}
+              comp={this}
             />
             <DataDisplay
               gridSize={4}
@@ -77,7 +71,7 @@ class QueueDetails extends React.Component {
               label="Shop Time (min)"
               value={this.state.shopTime}
               type="number"
-              handleFormField={this.handleFormField}
+              comp={this}
             />
             <DataDisplay
               gridSize={4}
@@ -89,7 +83,7 @@ class QueueDetails extends React.Component {
               label="Number of Customers"
               type="number"
               value={this.state.numCustomers}
-              handleFormField={this.handleFormField}
+              comp={this}
             />
           </Grid>
           <br/>

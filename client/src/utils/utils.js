@@ -22,7 +22,7 @@ export const getEmptyRows = (data, page, rowsPerPage) => {
 };
 
 
-export const handleFormField = function (field, event) {
+export function handleFormField(field, event) {
   if (this.state.displayError !== undefined) {
     this.setState({
       [field]: event.target.value,
@@ -34,4 +34,4 @@ export const handleFormField = function (field, event) {
       [field]: event.target.value,
     });
   }
-};
+}

@@ -23,12 +23,6 @@ class AdminPage extends React.Component {
     this.setState({ edit: val });
   };
 
-  handleFormField = (field, event) => {
-    this.setState({
-      [field]: event.target.value,
-    });
-  };
-
   handleSave = (event) => {
     event.preventDefault();
 
@@ -48,9 +42,8 @@ class AdminPage extends React.Component {
             setEdit={this.setEdit}
             name="firstName"
             label="First Name"
-            // TODO: remove value prop and replace it with content
             value={this.state.firstName}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={3}
@@ -61,7 +54,7 @@ class AdminPage extends React.Component {
             name="lastName"
             label="Last Name"
             value={this.state.lastName}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={6}
@@ -72,7 +65,7 @@ class AdminPage extends React.Component {
             name="email"
             label="Email"
             value={this.state.email}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
           <DataDisplay
             gridSize={12}
@@ -83,7 +76,7 @@ class AdminPage extends React.Component {
             name="address"
             label="Address"
             value={this.state.address}
-            handleFormField={this.handleFormField}
+            comp={this}
           />
         </Grid>
         <br />
