@@ -30,12 +30,15 @@ class StoreMap extends React.Component {
     showMarker: false,
     favoriteStores: [],
     markedFavourites: [],
-    stores: []
+    stores: [],
+    initialCenter: { lat: 43.662410, lng: -79.395424 }
   };
 
   handleHighlight = (index) => {
+    const currStore = this.state.stores[index]
     this.setState({
-      currStore: this.state.stores[index],
+      initialCenter: { lat: currStore.coordinate[0], lng: currStore.coordinate[1] },
+      currStore: currStore,
       showMarker: true,
     });
   };
@@ -72,8 +75,8 @@ class StoreMap extends React.Component {
           <Grid item xs={9} className={classes.mapStyles}>
             <Map
               google={google}
-              zoom={16}
-              initialCenter={{ lat: 43.662410, lng: -79.395424 }}
+              zoom={14}
+              center={this.state.initialCenter}
             >
               {this.renderMarkers()}
             </Map>
@@ -87,14 +90,9 @@ class StoreMap extends React.Component {
                   label="Search..."
                   onChange={this.handleOnInputChange}
                 />
-                <Button
-                  size="small"
-                  color="primary"
-                >
-                  Search
-                </Button>
               </CardActions>
             </Card>
+
             {this.state.stores.map((store, index) => (
               <div className={classes.storeCard} key={uid(store)}>
                 <StoreCards
@@ -104,9 +102,7 @@ class StoreMap extends React.Component {
                     <Button
                       type="button"
                       color="primary"
-                      onClick={() => {
-                        this.handleHighlight(index);
-                      }}
+                      onClick={() => this.handleHighlight(index)}
                     >
                       Highlight on Map
                     </Button>
