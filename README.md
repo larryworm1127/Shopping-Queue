@@ -223,3 +223,13 @@ and edit them to your will.
 | /api/verifyRegister | POST | Verify that password is viable and username is not taken | { "username": username, <br> "password": password, <br> "confirmPassword":confirmPassword, <br> "userType": userType } |
 | /api/register/admin | POST | Register a new admin | {"username": username, <br> "password": password, <br> "userType": userType, <br> "firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address} |
 | /api/register | POST | Register a new shopper or store (body is different for each) | Store: {"username": username, <br> "password": password, <br> "registerAs": registerAs, <br> "storeName": storeName, <br> "email": email, <br> "location": location, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime}, <br> "customerLimit": customerLimit, <br> "shoppingTimeLimit": shoppingTimeLimit } <br> <br> Shopper: { "username": username, <br> "firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address, <br> "remindTime": remindTime }|
+
+## Queue
+
+| Route   |      Type      |  Description | Body |
+|:----------|:-------------|:------|:-------------|
+| /api/queue | POST | Add new queue for shopper | { "username": username, <br> "store": store, <br> "datetime": datetime, <br> "shopTime": shopTime, <br> "numCustomers": numCustomers, <br> "datetimeQueued": datetimeQueued }
+| /api/queue/shopper/:username | GET |Get current queues for a shopper| |
+| /api/queue | DELETE | Remove a queue | { "id": id}|
+| /api/queue/store/:username | GET | Get current queues for a store | 
+| /api/queue/:id | PATCH | Update a queue | {"numCustomers": numCustomers, <br> "shopTime": shopTime, <br> "datetime": datetime }|
