@@ -12,12 +12,14 @@ import StoreQueueForm from './StoreQueueForm';
 import BackArrow from '@material-ui/icons/ArrowBackIos';
 import Button from '@material-ui/core/Button';
 import { getStoreObj } from '../../actions/store';
+import { addToViewHistory } from '../../actions/shopper';
 
 
 class StoreDetail extends React.Component {
 
   componentDidMount() {
     getStoreObj(this.props.match.params.username, this);
+    addToViewHistory(this.props.currentUser, this.props.match.params.username);
   }
 
   state = {

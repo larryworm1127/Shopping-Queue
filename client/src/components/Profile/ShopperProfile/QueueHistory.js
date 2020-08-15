@@ -24,10 +24,10 @@ class QueueHistory extends React.Component {
     queueHistory: []
   };
 
-  handleRemoveQueueHistory = (event, index, queue) => {
+  handleRemoveQueueHistory = (event, index, id) => {
     event.preventDefault();
 
-    deleteShopperQueueHistory(this.props.username, queue._id, this, index);
+    deleteShopperQueueHistory(this.props.username, id, this, index);
   };
 
   render() {
@@ -53,17 +53,17 @@ class QueueHistory extends React.Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {queueHistory.map(({ store, queue }, index) => (
+                    {queueHistory.map(({ store, searchDate, queuedFor, _id }, index) => (
                       <TableRow key={uid(index)}>
                         <TableCell align="center">{store.storeName}</TableCell>
                         <TableCell align="center">{store.address}</TableCell>
-                        <TableCell align="center">{new Date(queue.searchDate).toLocaleString()}</TableCell>
-                        <TableCell align="center">{new Date(queue.queuedFor).toLocaleString()}</TableCell>
+                        <TableCell align="center">{new Date(searchDate).toLocaleString()}</TableCell>
+                        <TableCell align="center">{new Date(queuedFor).toLocaleString()}</TableCell>
                         <TableCell>
                           <Button
                             variant="outlined"
                             color="primary"
-                            onClick={(event => this.handleRemoveQueueHistory(event, index, queue))}
+                            onClick={(event => this.handleRemoveQueueHistory(event, index, _id))}
                           >
                             Remove
                           </Button>

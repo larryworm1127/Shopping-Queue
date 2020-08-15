@@ -100,11 +100,28 @@ router.get('/api/shopper/favorites/:username', (req, res) => {
 });
 
 
-// Get search history stores
-router.get('/api/shopper/searchHistory/:username', (req, res) => {
+// Add to view history
+router.post('/api/shopper/viewHistory/:username', (req, res) => {
   const username = req.params.username;
 
-  Shopper.getSearchHistory(username)
+  Shopper.updateOne(
+    { username },
+    { $push: { viewHistory: { store: req.body.store, searchDate: new Date().toISOString() } } },
+  )
+    .then(result => {
+      res.send(result);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+});
+
+
+// Get view history stores
+router.get('/api/shopper/viewHistory/:username', (req, res) => {
+  const username = req.params.username;
+
+  Shopper.getViewHistory(username)
     .then(stores => {
       res.send(stores);
     })
@@ -114,7 +131,21 @@ router.get('/api/shopper/searchHistory/:username', (req, res) => {
 });
 
 
-// Update search history
+// Update view history
+router.delete('/api/shopper/viewHistory/:username', (req, res) => {
+  const username = req.params.username;
+
+  Shopper.updateOne(
+    { username },
+    { $pull: { viewHistory: { '_id': req.body.id } } },
+  )
+    .then(result => {
+      res.send(result);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+});
 
 
 // Get queue history stores

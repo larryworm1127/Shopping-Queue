@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchHistory from './SearchHistory.js';
+import ViewHistory from './ViewHistory.js';
 import QueueHistory from './QueueHistory.js';
 import UserProfile from './ShopperProfile.js';
 import ProfileBase from '../ProfileBase';
@@ -28,7 +28,7 @@ class ShopperProfile extends React.Component {
       case 1:
         return <FavoriteStores username={username}/>;
       case 2:
-        return <SearchHistory username={username}/>;
+        return <ViewHistory username={username}/>;
       case 3:
         return <QueueHistory username={username}/>;
       default:

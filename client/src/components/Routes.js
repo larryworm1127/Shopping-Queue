@@ -23,22 +23,22 @@ export default props => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/' render={() => <Home {...props} />} />
-        <ShopperRoute exact path='/map' props={props} component={StoreMap} />
-        <ShopperRoute exact path='/queue' props={props} component={Queue} />
-        <ShopperRoute exact path='/profile' props={props} component={ShopperProfile} />
-        <AdminRoute exact path='/admin/profile' props={props} component={AdminProfile} />
-        <AdminRoute exact path='/admin/store/queues' props={props} component={AllStoreQueues} />
-        <AdminRoute exact path='/admin/shopper/queues' props={props} component={AllShopperQueues} />
-        <AdminRoute exact path='/admin/messages' props={props} component={UserSupport} />
-        <StoreRoute exact path='/store/profile' props={props} component={StoreProfile} />
-        <StoreRoute exact path='/store/queues' props={props} component={StoreQueues} />
-        <StoreRoute exact path='/store/shoppers' props={props} component={StoreShoppers} />
-        <AuthRoute exact path='/login' props={props} component={Login} />
-        <AuthRoute exact path='/register' props={props} component={Register} />
-        <Route path='/store/:username' render={() => <StoreDetail {...props} />} />
-        <Route exact path='/logout' component={() => SignOut(props)} />
-        <Route path='*' component={NoMatch} />
+        <Route exact path='/' render={() => <Home {...props} />}/>
+        <ShopperRoute exact path='/map' props={props} component={StoreMap}/>
+        <ShopperRoute exact path='/queue' props={props} component={Queue}/>
+        <ShopperRoute exact path='/profile' props={props} component={ShopperProfile}/>
+        <ShopperRoute path='/store/:username' props={props} component={StoreDetail}/>
+        <AdminRoute exact path='/admin/profile' props={props} component={AdminProfile}/>
+        <AdminRoute exact path='/admin/store/queues' props={props} component={AllStoreQueues}/>
+        <AdminRoute exact path='/admin/shopper/queues' props={props} component={AllShopperQueues}/>
+        <AdminRoute exact path='/admin/messages' props={props} component={UserSupport}/>
+        <StoreRoute exact path='/store/profile' props={props} component={StoreProfile}/>
+        <StoreRoute exact path='/store/queues' props={props} component={StoreQueues}/>
+        <StoreRoute exact path='/store/shoppers' props={props} component={StoreShoppers}/>
+        <AuthRoute exact path='/login' props={props} component={Login}/>
+        <AuthRoute exact path='/register' props={props} component={Register}/>
+        <Route exact path='/logout' component={() => SignOut(props)}/>
+        <Route path='*' component={NoMatch}/>
       </Switch>
     </BrowserRouter>
   );
@@ -46,7 +46,7 @@ export default props => {
 
 const SignOut = (props) => {
   logout(props.app);
-  return <Redirect to={{ pathname: '/login' }} />;
+  return <Redirect to={{ pathname: '/login' }}/>;
 };
 
 
@@ -58,7 +58,7 @@ const AuthRoute = ({ component: Component, props, ...rest }) => {
       {...rest}
       render={({ history }) => {
         return isLoggedIn ?
-          <Redirect to={{ pathname: '/' }} /> :
+          <Redirect to={{ pathname: '/' }}/> :
           <Component history={history} {...props} />;
       }}
     />
@@ -67,17 +67,17 @@ const AuthRoute = ({ component: Component, props, ...rest }) => {
 
 
 const ShopperRoute = ({ component: Component, props, ...rest }) => (
-  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={0} />
+  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={0}/>
 );
 
 
 const StoreRoute = ({ component: Component, props, ...rest }) => (
-  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={1} />
+  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={1}/>
 );
 
 
 const AdminRoute = ({ component: Component, props, ...rest }) => (
-  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={2} />
+  <AuthenticateRoute {...rest} props={props} component={Component} authUserType={2}/>
 );
 
 
@@ -89,13 +89,13 @@ const AuthenticateRoute = ({ component: Component, props, authUserType, ...rest 
       {...rest}
       render={({ history }) => {
         if (!isLoggedIn && !isReadingCookie) {
-          return <Redirect to={{ pathname: '/login' }} />;
+          return <Redirect to={{ pathname: '/login' }}/>;
         } else if (isReadingCookie) {
-          return <Loading />;
+          return <Loading/>;
         }
         return (userType === authUserType) ?
-          <Component {...props} history={history} /> :
-          <Redirect to={{ pathname: '/' }} />;
+          <Component {...props} history={history}/> :
+          <Redirect to={{ pathname: '/' }}/>;
       }}
     />
   );

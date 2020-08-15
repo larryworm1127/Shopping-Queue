@@ -46,7 +46,7 @@ const ShopperSchema = new Schema({
     required: true
   },
   favouriteStores: [{ type: String }],
-  searchHistory: [{
+  viewHistory: [{
     store: { type: String, required: true },
     searchDate: { type: Date, required: true }
   }],
@@ -74,19 +74,22 @@ ShopperSchema.statics.getFavoriteStores = function (username) {
 };
 
 
-ShopperSchema.statics.getSearchHistory = function (username) {
+ShopperSchema.statics.getViewHistory = function (username) {
   return Shopper.findOne({ username }).then(shopper => {
     if (!shopper) {
       return Promise.reject();
     }
 
-    const storeNames = shopper.searchHistory.map((item) => item.store);
-    return Store.find({ username: { $in: storeNames } })
-      .then((stores) => {
-        return Promise.resolve(shopper.searchHistory.map(({ _, searchDate }, index) => {
-          return { store: stores[index], searchDate };
-        }));
-      });
+    const storeNames = shopper.viewHistory.map((item) => item.store);
+    return Store.find({ username: { $in: storeNames } }).then((stores) => {
+      return Promise.resolve(shopper.viewHistory.map(({ searchDate, store, _id }) => {
+        return {
+          store: stores.find(storeDoc => storeDoc.username === store),
+          searchDate,
+          _id
+        };
+      }));
+    });
   });
 };
 
@@ -98,15 +101,16 @@ ShopperSchema.statics.getQueueHistory = function (username) {
     }
 
     const storeNames = shopper.queueHistory.map((item) => item.store);
-    return Store.find({ username: { $in: storeNames } })
-      .then((stores) => {
-        return Promise.resolve(shopper.queueHistory.map((queue) => {
-          return {
-            store: stores.find(storeDoc => storeDoc.username === queue.store),
-            queue
-          };
-        }));
-      });
+    return Store.find({ username: { $in: storeNames } }).then((stores) => {
+      return Promise.resolve(shopper.queueHistory.map(({ store, searchDate, queuedFor, _id }) => {
+        return {
+          store: stores.find(storeDoc => storeDoc.username === store),
+          _id,
+          searchDate,
+          queuedFor
+        };
+      }));
+    });
   });
 };
 

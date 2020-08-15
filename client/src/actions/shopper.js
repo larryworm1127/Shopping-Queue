@@ -128,8 +128,22 @@ export const getShopperFavoriteStoresMarkMap = (username, profileComp) => {
 };
 
 
-export const getShopperSearchHistory = (username, profileComp) => {
-  const url = `/api/shopper/searchHistory/${username}`;
+export const addToViewHistory = (username, store) => {
+  const request = new Request(`/api/shopper/viewHistory/${username}`, {
+    method: 'POST',
+    body: JSON.stringify({ store }),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  })
+
+  fetch(request).catch(error => console.log(error))
+}
+
+
+export const getShopperViewHistory = (username, profileComp) => {
+  const url = `/api/shopper/viewHistory/${username}`;
 
   fetch(url)
     .then(res => {
@@ -140,7 +154,33 @@ export const getShopperSearchHistory = (username, profileComp) => {
     .then(json => {
       if (json) {
         profileComp.setState({
-          searchHistory: [...json]
+          viewHistory: [...json]
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
+export const deleteShopperViewHistory = (username, id, comp, index) => {
+  const request = new Request(`/api/shopper/viewHistory/${username}`, {
+    method: 'DELETE',
+    body: JSON.stringify({ id }),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  fetch(request)
+    .then(res => {
+      if (res.status === 200) {
+        const viewHistory = [...comp.state.viewHistory];
+        viewHistory.splice(index, 1);
+        comp.setState({
+          viewHistory: [...viewHistory]
         });
       }
     })
