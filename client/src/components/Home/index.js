@@ -15,7 +15,7 @@ import { getShopperFavoriteStores, getShopperQueueHistory } from '../../actions/
 import { getCurrentQueues } from '../../actions/queue';
 import { getAllShoppers, getAllStores, getHelpMessages } from '../../actions/admin';
 import { UserType } from '../../utils/utils';
-
+import { getAllQueuesforStore, getTodayQueuesforStore } from '../../actions/store';
 
 /* Component for the Home page */
 class Home extends React.Component {
@@ -35,23 +35,8 @@ class Home extends React.Component {
         getShopperQueueHistory(currentUser, this);
         break;
       case UserType.store:
-        getCurrentQueues(currentUser, this, 'store');
-
-        if (queues[0] !== undefined) {
-          const total1 = queues.reduce((a, b) => {
-            return { numCustomers: a.numCustomers + b.numCustomers };
-          });
-          const total2 = queues.reduce((a, b) => {
-            return { shopTime: a.shopTime + b.shopTime };
-          });
-
-          this.setState({
-            numOfQueues: queues.length,
-            numCustomers: total1.numCustomers,
-            shopTime: total2.shopTime / queues.length
-          });
-        }
-        break;
+        getAllQueuesforStore(this.props.currentUser, this);
+        getTodayQueuesforStore(this.props.currentUser, this);
       case UserType.admin:
         getHelpMessages(this);
         getAllShoppers(this);
@@ -71,17 +56,22 @@ class Home extends React.Component {
     shopTime: 0,
     messages: [],
     shoppers: [],
-    stores: []
+    stores: [],
+    TotalShoppers: 0,
+    TotalShoppersToday: 0,
+    NumberofShoppersinStore: 0,
+    NumberofShoppersinQueue: 0,
+    AverageWaitTime: 0
   };
 
   getServiceData = (userType) => {
-    const { favoriteStores, queueHistory, numOfQueues, numCustomers, shopTime, messages, shoppers, stores } = this.state;
+    const { favoriteStores, queueHistory, numOfQueues, numCustomers, shopTime, messages, shoppers, stores, NumberofShoppersinQueue, TotalShoppersToday, AverageWaitTime } = this.state;
 
     switch (userType) {
       case 0:
         return getServiceDataShopper(favoriteStores, queueHistory);
       case 1:
-        return getServiceDataStore(numOfQueues, numCustomers, shopTime);
+        return getServiceDataStore(NumberofShoppersinQueue, TotalShoppersToday, AverageWaitTime);
       case 2:
         return getServiceDataAdmin(messages.length, shoppers.length, stores.length);
       default:
