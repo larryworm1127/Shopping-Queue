@@ -33,7 +33,6 @@ export const getServiceDataShopper = (favoriteStores, queueHistory) => {
   };
   const favoriteStoresCopy = JSON.parse(JSON.stringify(favoriteStores));
   const queueHistoryCopy = JSON.parse(JSON.stringify(queueHistory));
-  console.log(favoriteStores);
 
   info.services = favoriteStoresCopy.slice(0, 3).map((store, index) => {
     return createServiceData(
