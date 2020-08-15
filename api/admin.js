@@ -10,7 +10,6 @@ const { HelpMessage } = require('../models/helpMessage');
 
 // Get profile for admin
 router.get('/api/admin/profile/:username', (req, res) => {
-  console.log(req.session);
   if (req.session.isLoggedIn && req.session.userType === UserTypes.Admin) {
     const username = req.params.username;
 

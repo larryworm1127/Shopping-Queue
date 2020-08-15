@@ -65,13 +65,15 @@ class Home extends React.Component {
   };
 
   getServiceData = (userType) => {
-    const { favoriteStores, queueHistory, messages, shoppers, stores, numShoppersInQueue, TotalShoppersToday, avgWaitTime } = this.state;
+    const { favoriteStores, queueHistory, messages, shoppers, stores, numShoppersInQueue, totalShoppersToday, avgWaitTime } = this.state;
+
+    console.log(this.state)
 
     switch (userType) {
       case 0:
         return getServiceDataShopper(favoriteStores, queueHistory);
       case 1:
-        return getServiceDataStore(numShoppersInQueue, TotalShoppersToday, avgWaitTime);
+        return getServiceDataStore(numShoppersInQueue, totalShoppersToday, avgWaitTime);
       case 2:
         return getServiceDataAdmin(messages.length, shoppers.length, stores.length);
       default:
