@@ -11,6 +11,8 @@ import { styles } from '../style';
 import Button from '@material-ui/core/Button';
 import { deleteShopperViewHistory, getShopperViewHistory } from '../../../actions/shopper';
 import ContentTitle from '../../ContentTitle';
+import { getEmptyRows } from '../../../utils/utils';
+import TablePaginationFooter from '../../TablePaginationFooter';
 
 
 class ViewHistory extends React.Component {
@@ -20,6 +22,8 @@ class ViewHistory extends React.Component {
   }
 
   state = {
+    page: 0,
+    rowsPerPage: 5,
     viewHistory: [],
   };
 
@@ -31,7 +35,8 @@ class ViewHistory extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { viewHistory } = this.state;
+    const { viewHistory, page, rowsPerPage } = this.state;
+    const emptyRows = getEmptyRows(viewHistory, page, rowsPerPage);
 
     return (
       <Grid container spacing={3}>
@@ -40,7 +45,7 @@ class ViewHistory extends React.Component {
             <ContentTitle isEmpty={viewHistory.length === 0} name="Store View History"/>
 
             {(viewHistory.length !== 0) && (
-              <Table>
+              <Table stickyHeader>
                 <TableHead>
                   <TableRow>
                     <TableCell align="center">Shop Name</TableCell>
@@ -52,8 +57,11 @@ class ViewHistory extends React.Component {
                 </TableHead>
 
                 <TableBody>
-                  {viewHistory.map(({ store, searchDate, _id }, index) => (
-                    <TableRow key={index}>
+                  {(rowsPerPage > 0
+                      ? viewHistory.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      : viewHistory
+                  ).map(({ store, searchDate, _id }, index) => (
+                    <TableRow key={index} hover>
                       <TableCell align="center">{store.storeName}</TableCell>
                       <TableCell align="center">{store.address}</TableCell>
                       <TableCell align="center">{store.type}</TableCell>
@@ -69,7 +77,20 @@ class ViewHistory extends React.Component {
                       </TableCell>
                     </TableRow>
                   ))}
+
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={6}/>
+                    </TableRow>
+                  )}
                 </TableBody>
+
+                <TablePaginationFooter
+                  data={viewHistory}
+                  page={page}
+                  rowsPerPage={rowsPerPage}
+                  comp={this}
+                />
               </Table>
             )}
           </Paper>

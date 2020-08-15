@@ -16,3 +16,8 @@ export const getUserTypeText = (userType) => {
       return 'Admin';
   }
 };
+
+
+export const getEmptyRows = (data, page, rowsPerPage) => {
+  return (data) ? rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage) : 0
+}

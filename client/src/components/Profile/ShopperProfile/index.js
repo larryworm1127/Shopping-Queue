@@ -10,7 +10,7 @@ import FavoriteStores from './FavoriteStores';
 const tabs = [
   'Profile',
   'Favorite Stores',
-  'Search History',
+  'View History',
   'Queue History'
 ];
 

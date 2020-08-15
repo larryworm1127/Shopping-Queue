@@ -11,6 +11,8 @@ import TableCell from '@material-ui/core/TableCell';
 import { styles } from './style';
 import { getCurrentQueues, removeQueue } from '../../actions/queue';
 import Typography from '@material-ui/core/Typography';
+import { getEmptyRows } from '../../utils/utils';
+import TablePaginationFooter from '../TablePaginationFooter';
 
 
 class QueuesTable extends React.Component {
@@ -21,6 +23,8 @@ class QueuesTable extends React.Component {
   }
 
   state = {
+    page: 0,
+    rowsPerPage: 5,
     queues: []
   };
 
@@ -30,7 +34,8 @@ class QueuesTable extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { queues } = this.state;
+    const { queues, page, rowsPerPage } = this.state;
+    const emptyRows = getEmptyRows(queues, page, rowsPerPage);
 
     return (queues.length === 0) ? (
       <Container>
@@ -43,27 +48,30 @@ class QueuesTable extends React.Component {
     ) : (
       <Container>
         <TableContainer component={Paper} className={classes.queueList}>
-          <Table>
+          <Table stickyHeader>
             <TableHead>
               <TableRow scope="row">
                 <TableCell className={classes.tableCellHead}/>
-                <TableCell component="th" scope="row" align='center' className={classes.tableCellHead}>
+                <TableCell align='center' className={classes.tableCellHead}>
                   Shopper
                 </TableCell>
-                <TableCell component="th" scope="row" align='center' className={classes.tableCellHead}>
+                <TableCell align='center' className={classes.tableCellHead}>
                   Store
                 </TableCell>
-                <TableCell component="th" scope="row" align='center' className={classes.tableCellHead}>
+                <TableCell align='center' className={classes.tableCellHead}>
                   Time Booked
                 </TableCell>
-                <TableCell component="th" scope="row" align='center' className={classes.tableCellHead}>
+                <TableCell align='center' className={classes.tableCellHead}>
                   Actions
                 </TableCell>
               </TableRow>
             </TableHead>
 
             <TableBody>
-              {queues.map((booking, index) => (
+              {(rowsPerPage > 0
+                  ? queues.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : queues
+              ).map((booking, index) => (
                 <QueueRow
                   key={uid(booking)}
                   queue={booking}
@@ -71,7 +79,20 @@ class QueuesTable extends React.Component {
                   index={index}
                 />
               ))}
+
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6}/>
+                </TableRow>
+              )}
             </TableBody>
+
+            <TablePaginationFooter
+              data={queues}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              comp={this}
+            />
           </Table>
         </TableContainer>
       </Container>
