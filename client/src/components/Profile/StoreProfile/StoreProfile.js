@@ -5,6 +5,10 @@ import ProfileEditButtons from '../ProfileEditButtons';
 import { StoreTypes } from '../../../utils/stores';
 import FormSelectField from '../../FormSelectField';
 import { getStoreProfile, updateStoreProfile } from '../../../actions/store';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import { styles } from '../style';
+import { withStyles } from '@material-ui/core';
 
 
 class UserProfile extends React.Component {
@@ -36,6 +40,7 @@ class UserProfile extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
@@ -73,6 +78,15 @@ class UserProfile extends React.Component {
             value={this.state.address}
             comp={this}
           />
+          {/*<Grid item xs={12}>*/}
+          {/*  <Paper className={classes.paper}>*/}
+          {/*    <Typography component="h2" variant="h5" color="primary" gutterBottom>*/}
+          {/*      Store Location*/}
+          {/*    </Typography>*/}
+          {/*    {this.getContent()}*/}
+          {/*  </Paper>*/}
+          {/*</Grid>*/}
+
           <DataDisplay
             gridSize={12}
             title="Store Type"
@@ -151,4 +165,4 @@ class UserProfile extends React.Component {
   }
 }
 
-export default UserProfile;
+export default withStyles(styles)(UserProfile);

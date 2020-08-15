@@ -37,7 +37,6 @@ class FavoriteStores extends React.Component {
                     index={index}
                     favourite={true}
                     username={this.props.username}
-                    disableQueue={true}
                   />
                 </Grid>
               ))}
