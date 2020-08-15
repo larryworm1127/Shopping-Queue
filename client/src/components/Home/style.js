@@ -11,7 +11,7 @@ export const styles = theme => ({
     borderRadius: '2px',
     borderStyle: 'solid',
     fontSize: '30',
-    backgroundColor: 0x0000ff,
+    backgroundColor: '0x0000ff',
     align: 'center',
     color: props.color
   }),
@@ -84,6 +84,5 @@ export const styles = theme => ({
     fontSize: '20px',
     fontWeight: 'bold',
     textAlign: 'center'
-
   }
 });

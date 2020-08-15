@@ -67,8 +67,6 @@ class Home extends React.Component {
   getServiceData = (userType) => {
     const { favoriteStores, queueHistory, messages, shoppers, stores, numShoppersInQueue, totalShoppersToday, avgWaitTime } = this.state;
 
-    console.log(this.state)
-
     switch (userType) {
       case 0:
         return getServiceDataShopper(favoriteStores, queueHistory);
@@ -92,7 +90,7 @@ class Home extends React.Component {
         <HeadSection userType={userType} currentUser={currentUser}/>
         <Services serviceData={serviceData}/>
 
-        {userType !== 2 && <Footer currentUser={currentUser} userType={userType}/>}
+        {userType !== 2 && <Footer currentUser={currentUser} userType={userType} isLoggedin={isLoggedIn}/>}
       </React.Fragment>
     );
   }
