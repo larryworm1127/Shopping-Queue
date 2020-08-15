@@ -1,3 +1,76 @@
-[
-  {}
-]
+[{
+  "_id": {
+    "$oid": "5f36f38441f7bf388c2916bd"
+  },
+  "username": "user",
+  "store": "store3",
+  "datetime": {
+    "$date": "2020-08-29T00:00:00Z"
+  },
+  "shopTime": 20,
+  "numCustomers": 29,
+  "datetimeQueued": {
+    "$date": "2020-08-14T20:26:44.974Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f36f3ac41f7bf388c2916bf"
+  },
+  "username": "user",
+  "store": "store3",
+  "datetime": {
+    "$date": "2020-08-28T12:00:00Z"
+  },
+  "shopTime": 5,
+  "numCustomers": 2,
+  "datetimeQueued": {
+    "$date": "2020-08-14T20:27:24.307Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f36f4db41f7bf388c2916c1"
+  },
+  "username": "user",
+  "store": "store1",
+  "datetime": {
+    "$date": "2020-08-30T15:30:00Z"
+  },
+  "shopTime": 20,
+  "numCustomers": 3,
+  "datetimeQueued": {
+    "$date": "2020-08-14T20:32:27.017Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f37f7a9bd2f7a1408891de3"
+  },
+  "username": "user2",
+  "store": "store2",
+  "datetime": {
+    "$date": "2020-08-29T15:00:00Z"
+  },
+  "shopTime": 15,
+  "numCustomers": 3,
+  "datetimeQueued": {
+    "$date": "2020-08-15T14:56:41.534Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f37fae59ae6ff1a481b5a3f"
+  },
+  "username": "user3",
+  "store": "store2",
+  "datetime": {
+    "$date": "2020-08-29T15:00:00Z"
+  },
+  "shopTime": 20,
+  "numCustomers": 12,
+  "datetimeQueued": {
+    "$date": "2020-08-15T15:10:29.332Z"
+  },
+  "__v": 0
+}]
