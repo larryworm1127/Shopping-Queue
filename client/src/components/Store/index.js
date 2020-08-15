@@ -29,8 +29,6 @@ class StoreDetail extends React.Component {
   render() {
     const { classes, history, isLoggedIn, userType, currentUser } = this.props;
     const { store } = this.state;
-    console.log(store)
-    console.log(this.props)
 
     return (
       <React.Fragment>
