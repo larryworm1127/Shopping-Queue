@@ -233,3 +233,21 @@ and edit them to your will.
 | /api/queue | DELETE | Remove a queue | { "id": id}|
 | /api/queue/store/:username | GET | Get current queues for a store | 
 | /api/queue/:id | PATCH | Update a queue | {"numCustomers": numCustomers, <br> "shopTime": shopTime, <br> "datetime": datetime }|
+
+
+## Shopper
+
+| Route   |      Type      |  Description | Body |
+|:----------|:-------------|:------|:-------------|
+| /api/shopper/profile/:username | GET | Get profile for a shopper | |
+| /api/shopper/profile/:username | PATCH |Update profile for a shopper|{"firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address, <br> "remindTime": remindTime } |
+| /api/shopper/favorites/:shopperUsername/:storeUsername | PATCH | Add a store to shopper's favorites | |
+| /api/shopper/viewHistory/:username | GET | Get favorite stores for a shopper | 
+| /api/shopper/viewHistory/:username| POST | Add to view history | {"store": store}|
+| /api/shopper/viewHistory/:username| GET | Get view history | |
+| /api/shopper/viewHistory/:username| DELETE | Delete from view history | {"id": id}|
+| /api/shopper/queueHistory/:username| GET | Get queue history | |
+| /api/shopper/queueHistory/:username| DELETE | Delete from queue history | {"id": id}|
+| /api/shopper/favorites/:shopperUsername/:storeUsername| DELETE | Delete store from shopper's favorites | |
+| /api/shopper/:username| DELETE | Delete a shopper's account | |
+| /api/shoppers| GET | Get all shoppers | |
