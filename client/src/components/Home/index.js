@@ -14,18 +14,19 @@ import { withRouter } from 'react-router-dom';
 import { getShopperFavoriteStores, getShopperQueueHistory } from '../../actions/shopper';
 import { getAllShoppers, getAllStores, getHelpMessages } from '../../actions/admin';
 import { UserType } from '../../utils/utils';
-import { getAllQueuesforStore, getTodayQueuesforStore } from '../../actions/store';
+import { getStoreAllQueues, getStoreTodayQueues } from '../../actions/store';
+
 
 /* Component for the Home page */
 class Home extends React.Component {
 
   constructor(props) {
     super(props);
-    this.props.history.push('/')
+    this.props.history.push('/');
   }
 
   componentDidMount() {
-    const { userType, currentUser } = this.props
+    const { userType, currentUser } = this.props;
 
     switch (userType) {
       case UserType.shopper:
@@ -33,8 +34,8 @@ class Home extends React.Component {
         getShopperQueueHistory(currentUser, this);
         break;
       case UserType.store:
-        getAllQueuesforStore(currentUser, this);
-        getTodayQueuesforStore(currentUser, this);
+        getStoreAllQueues(currentUser, this);
+        getStoreTodayQueues(currentUser, this);
         break;
       case UserType.admin:
         getHelpMessages(this);
@@ -56,21 +57,21 @@ class Home extends React.Component {
     messages: [],
     shoppers: [],
     stores: [],
-    TotalShoppers: 0,
-    TotalShoppersToday: 0,
-    NumberofShoppersinStore: 0,
-    NumberofShoppersinQueue: 0,
-    AverageWaitTime: 0
+    totalShoppers: 0,
+    totalShoppersToday: 0,
+    numShoppersInStore: 0,
+    numShoppersInQueue: 0,
+    avgWaitTime: 0
   };
 
   getServiceData = (userType) => {
-    const { favoriteStores, queueHistory, messages, shoppers, stores, NumberofShoppersinQueue, TotalShoppersToday, AverageWaitTime } = this.state;
+    const { favoriteStores, queueHistory, messages, shoppers, stores, numShoppersInQueue, TotalShoppersToday, avgWaitTime } = this.state;
 
     switch (userType) {
       case 0:
         return getServiceDataShopper(favoriteStores, queueHistory);
       case 1:
-        return getServiceDataStore(NumberofShoppersinQueue, TotalShoppersToday, AverageWaitTime);
+        return getServiceDataStore(numShoppersInQueue, TotalShoppersToday, avgWaitTime);
       case 2:
         return getServiceDataAdmin(messages.length, shoppers.length, stores.length);
       default:
@@ -84,12 +85,12 @@ class Home extends React.Component {
     const serviceData = this.getServiceData(userType);
     return (
       <React.Fragment>
-        <NavBar userType={userType} isLoggedIn={isLoggedIn} />
-        <CssBaseline />
-        <HeadSection userType={userType} currentUser={currentUser} />
-        <Services serviceData={serviceData} />
+        <NavBar userType={userType} isLoggedIn={isLoggedIn}/>
+        <CssBaseline/>
+        <HeadSection userType={userType} currentUser={currentUser}/>
+        <Services serviceData={serviceData}/>
 
-        {userType !== 2 && <Footer currentUser={currentUser} userType={userType} />}
+        {userType !== 2 && <Footer currentUser={currentUser} userType={userType}/>}
       </React.Fragment>
     );
   }

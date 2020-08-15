@@ -86,6 +86,7 @@ export const updateStoreProfile = (username, profileComp) => {
     });
 };
 
+
 export const getSearchedStores = (text, stores) => {
   const url = `/api/stores`;
 
@@ -97,7 +98,7 @@ export const getSearchedStores = (text, stores) => {
     })
     .then(json => {
       if (json) {
-        const jsonFiltered = json.filter(store => (store.storeName.toUpperCase()).includes(text.toUpperCase()))
+        const jsonFiltered = json.filter(store => (store.storeName.toUpperCase()).includes(text.toUpperCase()));
         stores.setState({
           stores: jsonFiltered
         });
@@ -109,7 +110,7 @@ export const getSearchedStores = (text, stores) => {
 };
 
 
-export const getAllQueuesforStore = (storeName, storeComp) => {
+export const getStoreAllQueues = (storeName, storeComp) => {
   const url = `/api/store/queues/${storeName}`;
 
   fetch(url)
@@ -120,22 +121,21 @@ export const getAllQueuesforStore = (storeName, storeComp) => {
     })
     .then(json => {
       if (json) {
-        var TotalShoppers = 0;
-        for (let eachQueue of json) {
-          TotalShoppers = TotalShoppers + eachQueue.numCustomers;
-        }
+        const totalShoppers = json.reduce((a, { numCustomers }) => {
+          return a + numCustomers;
+        }, 0);
+        storeComp.setState({
+          totalShoppers: totalShoppers,
+        });
       }
-      storeComp.setState({
-        TotalShoppers: TotalShoppers,
-      });
-    }
-    )
+    })
     .catch(error => {
       console.log(error);
     });
 };
 
-export const getTodayQueuesforStore = (storeName, storeComp) => {
+
+export const getStoreTodayQueues = (storeName, storeComp) => {
   const url = `/api/store/todayqueues/${storeName}`;
 
   fetch(url)
@@ -146,40 +146,38 @@ export const getTodayQueuesforStore = (storeName, storeComp) => {
     })
     .then(json => {
       if (json) {
-        var TotalShoppersToday = 0;
-        var NumberofShoppersinStore = 0;
-        var NumberofShoppersinQueue = 0;
-        var AverageWaitTime = 0;
-        var today = new Date();
-        var Anhourafter = new Date();
+        let totalShoppersToday = 0;
+        let numShoppersInStore = 0;
+        let numShoppersInQueue = 0;
+        let avgWaitTime = 0;
 
-
-        Anhourafter.setTime(today.getHours() + 1);
-
-        var tomorrow = new Date();
+        // Create various date objects for filtering
+        const today = new Date();
+        const anHourAfter = new Date();
+        anHourAfter.setTime(today.getHours() + 1);
+        const tomorrow = new Date();
         tomorrow.setDate(today.getDate() + 1);
         tomorrow.setHours(0, 0, 0, 0);
 
-        var shoppersInQueue = 1;
-
+        let shoppersInQueue = 1;
         for (let eachQueue of json) {
-          TotalShoppersToday = TotalShoppersToday + eachQueue.numCustomers;
-          if (eachQueue.datetime >= today.toISOString() && eachQueue.datetime <= Anhourafter.toISOString()) {
-            NumberofShoppersinStore = + eachQueue.numCustomers;
+          totalShoppersToday = totalShoppersToday + eachQueue.numCustomers;
+          if (eachQueue.datetime >= today.toISOString() && eachQueue.datetime <= anHourAfter.toISOString()) {
+            numShoppersInStore = +eachQueue.numCustomers;
           }
 
-          if (eachQueue.datetime >= Anhourafter.toISOString() && eachQueue.datetime <= tomorrow.toISOString()) {
-            NumberofShoppersinQueue = + eachQueue.numCustomers;
-            AverageWaitTime = + eachQueue.shopTime;
+          if (eachQueue.datetime >= anHourAfter.toISOString() && eachQueue.datetime <= tomorrow.toISOString()) {
+            numShoppersInQueue = +eachQueue.numCustomers;
+            avgWaitTime += eachQueue.shopTime;
             shoppersInQueue++;
           }
-          AverageWaitTime = AverageWaitTime / shoppersInQueue;
+          avgWaitTime = avgWaitTime / shoppersInQueue;
         }
         storeComp.setState({
-          TotalShoppersToday: TotalShoppersToday,
-          NumberofShoppersinStore: NumberofShoppersinStore,
-          NumberofShoppersinQueue: NumberofShoppersinQueue,
-          AverageWaitTime: AverageWaitTime,
+          totalShoppersToday: totalShoppersToday,
+          numShoppersInStore: numShoppersInStore,
+          numShoppersInQueue: numShoppersInQueue,
+          avgWaitTime: avgWaitTime,
         });
       }
     })
