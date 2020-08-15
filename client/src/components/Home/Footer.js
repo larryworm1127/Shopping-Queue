@@ -94,7 +94,7 @@ class Footer extends React.Component {
               </Typography>
               <Typography className={classes.paragraph} paragraph>
                 We are a group of 4 students with an aim towards helping users during this pandemic.
-                We hope that you find this Web app helpful.
+                <br />We hope that you find this Web app helpful!
               </Typography>
 
             </Grid>
