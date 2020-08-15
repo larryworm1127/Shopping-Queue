@@ -9,6 +9,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
+import Link from '@material-ui/core/Link';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import AddressAutocomplete from '../../AddressAutocomplete';
 
 
 class UserProfile extends React.Component {
@@ -21,7 +24,7 @@ class UserProfile extends React.Component {
     edit: false,
     storeName: '',
     email: '',
-    address: '',
+    location: '',
     storeType: '',
     openTime: '',
     closeTime: '',
@@ -67,25 +70,37 @@ class UserProfile extends React.Component {
             value={this.state.email}
             comp={this}
           />
-          <DataDisplay
-            gridSize={12}
-            title="Store Location"
-            content={this.state.address}
-            edit={this.state.edit}
-            setEdit={this.setEdit}
-            name="address"
-            label="Address"
-            value={this.state.address}
-            comp={this}
-          />
-          {/*<Grid item xs={12}>*/}
-          {/*  <Paper className={classes.paper}>*/}
-          {/*    <Typography component="h2" variant="h5" color="primary" gutterBottom>*/}
-          {/*      Store Location*/}
-          {/*    </Typography>*/}
-          {/*    {this.getContent()}*/}
-          {/*  </Paper>*/}
-          {/*</Grid>*/}
+
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                Store Location
+              </Typography>
+
+              {(this.state.edit) ? (
+                <AddressAutocomplete
+                  comp={this}
+                  location={this.state.location}
+                  variant="outlined"
+                  margin="normal"
+                />
+              ) : (
+                <React.Fragment>
+                  <Typography component="p" variant="h6">
+                    {this.state.location}
+                  </Typography>
+
+                  {this.setEdit !== undefined && (
+                    <div className={classes.edit}>
+                      <Link color="primary" onClick={() => this.setEdit(true)}>
+                        Edit
+                      </Link>
+                    </div>
+                  )}
+                </React.Fragment>
+              )}
+            </Paper>
+          </Grid>
 
           <DataDisplay
             gridSize={12}

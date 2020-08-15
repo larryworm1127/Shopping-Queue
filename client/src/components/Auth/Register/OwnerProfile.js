@@ -5,26 +5,10 @@ import FormTextField from '../../FormTextField';
 import FormSelectField from '../../FormSelectField';
 import { StoreTypes } from '../../../utils/stores';
 import RegisterFormButtons from './RegisterFormButtons';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import { uid } from 'react-uid';
-import TextField from '@material-ui/core/TextField';
-import { Container, Paper } from '@material-ui/core';
+import AddressAutocomplete from '../../AddressAutocomplete';
 
 
 class OwnerProfile extends React.Component {
-
-  handleSelect = (address) => {
-    geocodeByAddress(address)
-      .then(results => {
-        getLatLng(results[0]).then(coordinates => {
-          this.props.comp.setState({
-            location: address,
-            coordinates: { ...coordinates }
-          });
-        });
-      })
-      .catch(error => console.log(error));
-  };
 
   render() {
     const {
@@ -55,50 +39,11 @@ class OwnerProfile extends React.Component {
               comp={comp}
             />
 
-            <PlacesAutocomplete
-              value={location}
-              onChange={value => comp.setState({ location: value })}
-              onSelect={this.handleSelect}
-              searchOptions={{
-                types: ['address'],
-                componentRestrictions: { country: 'ca' }
-              }}
-            >
-              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
-                return (
-                  <React.Fragment>
-                    <Grid item xs={12}>
-                      <TextField
-                        {...getInputProps({
-                          placeholder: 'Address ...',
-                          className: 'location-search-input',
-                        })}
-                        fullWidth
-                        required
-                        value={location}
-                      />
+            <AddressAutocomplete
+              comp={comp}
+              location={location}
+            />
 
-                      <Container component={Paper}>
-                        {loading && <div>Loading...</div>}
-                        {suggestions.map(suggestion => {
-                          const style = suggestion.active
-                            ? { backgroundColor: '#fafafa', cursor: 'pointer', marginBottom: '3px' }
-                            : { backgroundColor: '#ffffff', cursor: 'pointer', marginBottom: '3px' };
-                          return (
-                            <div
-                              {...getSuggestionItemProps(suggestion, { style })}
-                              key={uid(suggestion)}
-                            >
-                              <Typography variant='body1' component='span'>{suggestion.description}</Typography>
-                            </div>
-                          );
-                        })}
-                      </Container>
-                    </Grid>
-                  </React.Fragment>
-                );
-              }}
-            </PlacesAutocomplete>
             <FormTextField
               name="customerLimit"
               label="Customer Limit"
