@@ -200,3 +200,13 @@ and edit them to your will.
  
 ![store_profile](/assets/admin_user_profile_screenshot.PNG)
 ![store_profile](/assets/admin_store_profile_screenshot.PNG)
+
+# Express Routes
+
+| Route   |      Type      |  Description | Body |
+|:----------|:-------------|:------|:-------------|
+| /api/admin/profile/:username | GET | Gets admin profile |
+| /api/admin/profile/:username | PATCH |Update admin profile| { "username": <username>, "email": <email>, "firstName": <firstName>, "lastName": <lastName>, "address": <address>} |
+| /api/admin/profile | DELETE | Delete an admin | { "id": <id>}|
+| /api/admin/messages | GET | Get all messages | 
+| /api/admin/messages | POST | Post a message | {"username": <username>, "userType": <userType>, "title": <title>, "description": <description>, "date": <date>} |
