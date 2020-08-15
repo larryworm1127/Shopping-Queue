@@ -208,45 +208,45 @@ and edit them to your will.
 | Route   |      Type      |  Description | Body |
 |:----------|:-------------|:------|:-------------|
 | /api/admin/profile/:username | GET | Gets admin profile |
-| /api/admin/profile/:username | PATCH |Update admin profile| { "username": username, <br> "email": email, <br> "firstName": firstName, <br> "lastName": lastName, <br> "address": address} |
-| /api/admin/profile | DELETE | Delete an admin | { "id": id}|
+| /api/admin/profile/:username | PATCH |Update admin profile| "username": username, <br> "email": email, <br> "firstName": firstName, <br> "lastName": lastName, <br> "address": address |
+| /api/admin/profile | DELETE | Delete an admin | "id": id|
 | /api/admin/messages | GET | Get all messages | 
-| /api/admin/messages | POST | Post a message | {"username": username, <br> "userType": userType, <br> "title": title, <br> "description": description, <br> "date": date} |
+| /api/admin/messages | POST | Post a message | "username": username, <br> "userType": userType, <br> "title": title, <br> "description": description, <br> "date": date |
 
 ## Authorization 
 
 | Route   |      Type      |  Description | Body |
 |:----------|:-------------|:------|:-------------|
-| /api/login | POST | Login and create a session | { "username" username, <br> "password": password, <br> "userType": userType } |
+| /api/login | POST | Login and create a session |  "username" username, <br> "password": password, <br> "userType": userType  |
 | /api/logout | GET | Logout by destroying session |  |
 | /api/check-session | GET | Get which user is logged in | |
-| /api/verifyRegister | POST | Verify that password is viable and username is not taken | { "username": username, <br> "password": password, <br> "confirmPassword":confirmPassword, <br> "userType": userType } |
-| /api/register/admin | POST | Register a new admin | {"username": username, <br> "password": password, <br> "userType": userType, <br> "firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address} |
-| /api/register | POST | Register a new shopper or store (body is different for each) | Store: {"username": username, <br> "password": password, <br> "registerAs": registerAs, <br> "storeName": storeName, <br> "email": email, <br> "location": location, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime}, <br> "customerLimit": customerLimit, <br> "shoppingTimeLimit": shoppingTimeLimit } <br> <br> Shopper: { "username": username, <br> "firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address, <br> "remindTime": remindTime }|
+| /api/verifyRegister | POST | Verify that password is viable and username is not taken |  "username": username, <br> "password": password, <br> "confirmPassword":confirmPassword, <br> "userType": userType  |
+| /api/register/admin | POST | Register a new admin | "username": username, <br> "password": password, <br> "userType": userType, <br> "firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address |
+| /api/register | POST | Register a new shopper or store (body is different for each) | Store: <br>"username": username, <br> "password": password, <br> "registerAs": registerAs, <br> "storeName": storeName, <br> "email": email, <br> "location": location, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime, <br> "customerLimit": customerLimit, <br> "shoppingTimeLimit": shoppingTimeLimit  <br> <br> Shopper: <br>"username": username, <br> "firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address, <br> "remindTime": remindTime |
 
 ## Queue
 
 | Route   |      Type      |  Description | Body |
 |:----------|:-------------|:------|:-------------|
-| /api/queue | POST | Add new queue for shopper | { "username": username, <br> "store": store, <br> "datetime": datetime, <br> "shopTime": shopTime, <br> "numCustomers": numCustomers, <br> "datetimeQueued": datetimeQueued }
+| /api/queue | POST | Add new queue for shopper | "username": username, <br> "store": store, <br> "datetime": datetime, <br> "shopTime": shopTime, <br> "numCustomers": numCustomers, <br> "datetimeQueued": datetimeQueued |
 | /api/queue/shopper/:username | GET |Get current queues for a shopper| |
-| /api/queue | DELETE | Remove a queue | { "id": id}|
+| /api/queue | DELETE | Remove a queue |  "id": id|
 | /api/queue/store/:username | GET | Get current queues for a store | 
-| /api/queue/:id | PATCH | Update a queue | {"numCustomers": numCustomers, <br> "shopTime": shopTime, <br> "datetime": datetime }|
+| /api/queue/:id | PATCH | Update a queue | "numCustomers": numCustomers, <br> "shopTime": shopTime, <br> "datetime": datetime |
 
 ## Shopper
 
 | Route   |      Type      |  Description | Body |
 |:----------|:-------------|:------|:-------------|
 | /api/shopper/profile/:username | GET | Get profile for a shopper | |
-| /api/shopper/profile/:username | PATCH |Update profile for a shopper|{"firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address, <br> "remindTime": remindTime } |
+| /api/shopper/profile/:username | PATCH |Update profile for a shopper|"firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address, <br> "remindTime": remindTime  |
 | /api/shopper/favorites/:shopperUsername/:storeUsername | PATCH | Add a store to shopper's favorites | |
 | /api/shopper/viewHistory/:username | GET | Get favorite stores for a shopper | 
-| /api/shopper/viewHistory/:username| POST | Add to view history | {"store": store}|
+| /api/shopper/viewHistory/:username| POST | Add to view history | "store": store|
 | /api/shopper/viewHistory/:username| GET | Get view history | |
-| /api/shopper/viewHistory/:username| DELETE | Delete from view history | {"id": id}|
+| /api/shopper/viewHistory/:username| DELETE | Delete from view history | "id": id|
 | /api/shopper/queueHistory/:username| GET | Get queue history | |
-| /api/shopper/queueHistory/:username| DELETE | Delete from queue history | {"id": id}|
+| /api/shopper/queueHistory/:username| DELETE | Delete from queue history | "id": id|
 | /api/shopper/favorites/:shopperUsername/:storeUsername| DELETE | Delete store from shopper's favorites | |
 | /api/shopper/:username| DELETE | Delete a shopper's account | |
 | /api/shoppers| GET | Get all shoppers | |
@@ -256,6 +256,6 @@ and edit them to your will.
 | Route   |      Type      |  Description | Body |
 |:----------|:-------------|:------|:-------------|
 | /api/store/profile/:username | GET | Get profile for a store | |
-| /api/store/profile/:username | PATCH |Update profile info for store| {"storeName": storeName, <br> "email": email, <br> "address": address, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime}, <br> "customerLimit": customerLimit, <br> "customerShopTime": customerShopTime }|
+| /api/store/profile/:username | PATCH |Update profile info for store| "storeName": storeName, <br> "email": email, <br> "address": address, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime}, <br> "customerLimit": customerLimit, <br> "customerShopTime": customerShopTime |
 | /api/store/:username | DELETE | Delete a store's account | |
 | /api/stores | GET | Get all stores | 
