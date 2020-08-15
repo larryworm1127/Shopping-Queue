@@ -32,25 +32,9 @@ class DataDisplay extends React.Component {
       label,
       setEdit,
       comp,
-      contentComponent,
       editComponent,
       type
     } = this.props;
-
-    if (!edit && contentComponent !== undefined) {
-      return (
-        <React.Fragment>
-          {contentComponent}
-          {setEdit !== undefined && (
-            <div className={classes.edit}>
-              <Link color="primary" onClick={() => setEdit(true)}>
-                Edit
-              </Link>
-            </div>
-          )}
-        </React.Fragment>
-      );
-    }
 
     if (edit && editComponent !== undefined) {
       return editComponent;
@@ -87,16 +71,14 @@ class DataDisplay extends React.Component {
     const { classes, gridSize, title } = this.props;
 
     return (
-      <React.Fragment>
-        <Grid item xs={gridSize}>
-          <Paper className={classes.paper}>
-            <Typography component="h2" variant="h5" color="primary" gutterBottom>
-              {title}
-            </Typography>
-            {this.getContent()}
-          </Paper>
-        </Grid>
-      </React.Fragment>
+      <Grid item xs={gridSize}>
+        <Paper className={classes.paper}>
+          <Typography component="h2" variant="h5" color="primary" gutterBottom>
+            {title}
+          </Typography>
+          {this.getContent()}
+        </Paper>
+      </Grid>
     );
   }
 }

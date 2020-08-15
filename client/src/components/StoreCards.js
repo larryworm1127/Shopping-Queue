@@ -64,7 +64,7 @@ class StoreCards extends React.Component {
             color="primary"
             className="btn btn-primary"
             onClick={
-              (event) => {
+              () => {
                 this.setState({ favourite: !this.state.favourite });
                 this.state.favourite ? removeFavouriteStore(this.props.username, store.username) 
                                      : addFavouriteStore(this.props.username, store.username);
