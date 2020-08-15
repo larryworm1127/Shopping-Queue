@@ -35,7 +35,7 @@ IconCard.propTypes = {
   Icon: PropTypes.element.isRequired,
   color: PropTypes.string.isRequired,
   headline: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   link: PropTypes.string
 };
 

@@ -200,3 +200,36 @@ and edit them to your will.
  
 ![store_profile](/assets/admin_user_profile_screenshot.PNG)
 ![store_profile](/assets/admin_store_profile_screenshot.PNG)
+
+# Express Routes
+
+## Admin
+
+| Route   |      Type      |  Description | Body |
+|:----------|:-------------|:------|:-------------|
+| /api/admin/profile/:username | GET | Gets admin profile |
+| /api/admin/profile/:username | PATCH |Update admin profile| { "username": username, <br> "email": email, <br> "firstName": firstName, <br> "lastName": lastName, <br> "address": address} |
+| /api/admin/profile | DELETE | Delete an admin | { "id": id}|
+| /api/admin/messages | GET | Get all messages | 
+| /api/admin/messages | POST | Post a message | {"username": username, <br> "userType": userType, <br> "title": title, <br> "description": description, <br> "date": date} |
+
+## Authorization 
+
+| Route   |      Type      |  Description | Body |
+|:----------|:-------------|:------|:-------------|
+| /api/login | POST | Login and create a session | { "username" username, <br> "password": password, <br> "userType": userType } |
+| /api/logout | GET | Logout by destroying session |  |
+| /api/check-session | GET | Get which user is logged in | |
+| /api/verifyRegister | POST | Verify that password is viable and username is not taken | { "username": username, <br> "password": password, <br> "confirmPassword":confirmPassword, <br> "userType": userType } |
+| /api/register/admin | POST | Register a new admin | {"username": username, <br> "password": password, <br> "userType": userType, <br> "firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address} |
+| /api/register | POST | Register a new shopper or store (body is different for each) | Store: {"username": username, <br> "password": password, <br> "registerAs": registerAs, <br> "storeName": storeName, <br> "email": email, <br> "location": location, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime}, <br> "customerLimit": customerLimit, <br> "shoppingTimeLimit": shoppingTimeLimit } <br> <br> Shopper: { "username": username, <br> "firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address, <br> "remindTime": remindTime }|
+
+## Queue
+
+| Route   |      Type      |  Description | Body |
+|:----------|:-------------|:------|:-------------|
+| /api/queue | POST | Add new queue for shopper | { "username": username, <br> "store": store, <br> "datetime": datetime, <br> "shopTime": shopTime, <br> "numCustomers": numCustomers, <br> "datetimeQueued": datetimeQueued }
+| /api/queue/shopper/:username | GET |Get current queues for a shopper| |
+| /api/queue | DELETE | Remove a queue | { "id": id}|
+| /api/queue/store/:username | GET | Get current queues for a store | 
+| /api/queue/:id | PATCH | Update a queue | {"numCustomers": numCustomers, <br> "shopTime": shopTime, <br> "datetime": datetime }|
