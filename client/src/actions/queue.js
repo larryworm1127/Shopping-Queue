@@ -73,11 +73,6 @@ export const removeQueue = (id, queueComp, index) => {
   fetch(request)
     .then(res => {
       if (res.status === 200) {
-        return res.json();
-      }
-    })
-    .then(json => {
-      if (json) {
         const queues = [...queueComp.state.queues];
         queues.splice(index, 1);
         queueComp.setState({

@@ -25,8 +25,9 @@ export const getShopperProfile = (username, profileComp) => {
     });
 };
 
+
 export const addFavouriteStore = (shopperUsername, storeUsername) => {
-  const request = new Request(`/api/shopper/profile/favorites/${shopperUsername}/${storeUsername}`, {
+  const request = new Request(`/api/shopper/favorites/${shopperUsername}/${storeUsername}`, {
     method: 'PATCH',
     headers: {
       Accept: 'application/json, text/plain, */*',
@@ -42,11 +43,12 @@ export const addFavouriteStore = (shopperUsername, storeUsername) => {
     })
     .catch(err => {
       console.log(err);
-    })
-}
+    });
+};
+
 
 export const removeFavouriteStore = (shopperUsername, storeUsername) => {
-  const request = new Request(`/api/shopper/profile/favorites/${shopperUsername}/${storeUsername}`, {
+  const request = new Request(`/api/shopper/favorites/${shopperUsername}/${storeUsername}`, {
     method: 'DELETE',
     headers: {
       Accept: 'application/json, text/plain, */*',
@@ -62,8 +64,9 @@ export const removeFavouriteStore = (shopperUsername, storeUsername) => {
     })
     .catch(err => {
       console.log(err);
-    })
-}
+    });
+};
+
 
 export const getShopperFavoriteStores = (username, profileComp) => {
   const url = `/api/shopper/favorites/${username}`;
@@ -85,6 +88,7 @@ export const getShopperFavoriteStores = (username, profileComp) => {
       console.log(error);
     });
 };
+
 
 export const getShopperFavoriteStoresMarkMap = (username, profileComp) => {
   const url = `/api/shopper/favorites/${username}`;
@@ -168,6 +172,32 @@ export const getShopperQueueHistory = (username, profileComp) => {
 };
 
 
+export const deleteShopperQueueHistory = (username, id, comp, index) => {
+  const request = new Request(`/api/shopper/queueHistory/${username}`, {
+    method: 'DELETE',
+    body: JSON.stringify({ id }),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  fetch(request)
+    .then(res => {
+      if (res.status === 200) {
+        const queueHistory = [...comp.state.queueHistory];
+        queueHistory.splice(index, 1);
+        comp.setState({
+          queueHistory: [...queueHistory]
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
 export const updateShopperProfile = (username, profileComp) => {
   const request = new Request(`/api/shopper/profile/${username}`, {
     method: 'PATCH',
@@ -201,6 +231,7 @@ export const updateShopperProfile = (username, profileComp) => {
     });
 };
 
+
 export const getSearchedShoppers = (text, shoppers) => {
   const url = `/api/shoppers`;
 
@@ -212,7 +243,9 @@ export const getSearchedShoppers = (text, shoppers) => {
     })
     .then(json => {
       if (json) {
-        const jsonFiltered = json.filter(shopper => (shopper.firstName.toUpperCase() + " " + shopper.lastName.toUpperCase()).includes(text.toUpperCase()))
+        const jsonFiltered = json.filter(({ firstName, lastName }) => {
+          return `${firstName.toUpperCase()} ${lastName.toUpperCase()}`.includes(text.toUpperCase());
+        });
         shoppers.setState({
           shoppers: jsonFiltered
         });

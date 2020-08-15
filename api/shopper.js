@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const { ObjectID } = require('mongodb');
 const router = express.Router();
 
 const { User } = require('../models/user');
@@ -57,22 +56,20 @@ router.patch('/api/shopper/profile/:username', (req, res) => {
 
 
 // Add store to favorites
-router.patch('/api/shopper/profile/favorites/:shopperUsername/:storeUsername', (req, res) => {
+router.patch('/api/shopper/favorites/:shopperUsername/:storeUsername', (req, res) => {
 
   const shopperUsername = req.params.shopperUsername; //username of shopper
   const storeUsername = req.params.storeUsername; //username of store you want to add to favorites
 
-  Store.findOne({username: storeUsername})
+  Store.findOne({ username: storeUsername })
     .then(store => {
       if (!store) {
         res.status(404).send();
       } else {
         Shopper.updateOne(
           { 'username': shopperUsername },
-          {
-            $push: { 'favouriteStores': storeUsername }
-
-          }).then(result => {
+          { $push: { 'favouriteStores': storeUsername } }
+        ).then(result => {
           if (!result) {
             res.status(404).send('Resource not found');
           } else {
@@ -84,7 +81,7 @@ router.patch('/api/shopper/profile/favorites/:shopperUsername/:storeUsername', (
       }
     })
     .catch(error => {
-      res.status(500).send(); // server error
+      res.status(500).send(error);
     });
 });
 
@@ -117,6 +114,9 @@ router.get('/api/shopper/searchHistory/:username', (req, res) => {
 });
 
 
+// Update search history
+
+
 // Get queue history stores
 router.get('/api/shopper/queueHistory/:username', (req, res) => {
   const username = req.params.username;
@@ -131,27 +131,45 @@ router.get('/api/shopper/queueHistory/:username', (req, res) => {
 });
 
 
+// Remove queue history
+router.delete('/api/shopper/queueHistory/:username', (req, res) => {
+  const username = req.params.username;
+
+  Shopper.updateOne(
+    { username },
+    { $pull: { queueHistory: { '_id': req.body.id } } },
+  )
+    .then(result => {
+      res.send(result);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+});
+
+
 // Remove store from favorites
-router.delete('/api/shopper/profile/favorites/:shopperUsername/:storeUsername', (req, res) => {
+router.delete('/api/shopper/favorites/:shopperUsername/:storeUsername', (req, res) => {
 
   const shopperUsername = req.params.shopperUsername; //username of shopper
   const storeUsername = req.params.storeUsername; //username of store you want to add to favorites
-  
+
   // Delete the store from favorites
-  Store.findOne({username: storeUsername})
+  Store.findOne({ username: storeUsername })
     .then(store => {
       console.log(store);
       Shopper.updateOne(
         { 'username': shopperUsername },
         { $pull: { 'favouriteStores': storeUsername } }
       ).then(result => {
-        Shopper.findOne({username: shopperUsername}).then(shopper => {
+        Shopper.findOne({ username: shopperUsername }).then(shopper => {
           res.send(shopper);
         });
       });
-    }).catch(error => {
-    res.status(500).send(); // server error
-  });
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
 
 });
 

@@ -10,7 +10,7 @@ import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
-import { getShopperQueueHistory } from '../../../actions/shopper';
+import { deleteShopperQueueHistory, getShopperQueueHistory } from '../../../actions/shopper';
 import ContentTitle from '../../ContentTitle';
 
 
@@ -24,14 +24,10 @@ class QueueHistory extends React.Component {
     queueHistory: []
   };
 
-  handleRemoveQueueHistory = (event, index) => {
+  handleRemoveQueueHistory = (event, index, queue) => {
     event.preventDefault();
 
-    const { shopper } = this.props;
-    shopper.queueHistory.splice(index, 1);
-    this.setState({
-      queueHistory: shopper.queueHistory
-    });
+    deleteShopperQueueHistory(this.props.username, queue._id, this, index);
   };
 
   render() {
@@ -57,17 +53,17 @@ class QueueHistory extends React.Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {queueHistory.map(({ store, searchDate, queuedFor }, index) => (
+                    {queueHistory.map(({ store, queue }, index) => (
                       <TableRow key={uid(index)}>
                         <TableCell align="center">{store.storeName}</TableCell>
                         <TableCell align="center">{store.address}</TableCell>
-                        <TableCell align="center">{new Date(searchDate).toLocaleString()}</TableCell>
-                        <TableCell align="center">{new Date(queuedFor).toLocaleString()}</TableCell>
+                        <TableCell align="center">{new Date(queue.searchDate).toLocaleString()}</TableCell>
+                        <TableCell align="center">{new Date(queue.queuedFor).toLocaleString()}</TableCell>
                         <TableCell>
                           <Button
                             variant="outlined"
                             color="primary"
-                            onClick={(event => this.handleRemoveQueueHistory(event, index))}
+                            onClick={(event => this.handleRemoveQueueHistory(event, index, queue))}
                           >
                             Remove
                           </Button>

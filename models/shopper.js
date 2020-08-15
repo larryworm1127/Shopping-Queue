@@ -46,7 +46,10 @@ const ShopperSchema = new Schema({
     required: true
   },
   favouriteStores: [{ type: String }],
-  searchHistory: [{ store: { type: String, required: true }, searchDate: { type: Date, required: true } }],
+  searchHistory: [{
+    store: { type: String, required: true },
+    searchDate: { type: Date, required: true }
+  }],
   queueHistory: [{
     store: { type: String, required: true },
     searchDate: { type: Date, required: true },
@@ -97,11 +100,10 @@ ShopperSchema.statics.getQueueHistory = function (username) {
     const storeNames = shopper.queueHistory.map((item) => item.store);
     return Store.find({ username: { $in: storeNames } })
       .then((stores) => {
-        return Promise.resolve(shopper.queueHistory.map(({ store, searchDate, queuedFor }) => {
+        return Promise.resolve(shopper.queueHistory.map((queue) => {
           return {
-            store: stores.find((storeDoc) => storeDoc.username === store),
-            searchDate,
-            queuedFor
+            store: stores.find(storeDoc => storeDoc.username === queue.store),
+            queue
           };
         }));
       });
