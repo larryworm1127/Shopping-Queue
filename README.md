@@ -145,29 +145,29 @@ Once logging in with the correct credentials for a shopper, you can now
 visit your own profile page! In this profile page, you will be greeted 
 initially with your own information!
  
-This will give you your name, email, and location, as well as your 
-favourite stores that you use, and what your notification settings 
-are for the app to remind you of your bookings.
+This will give you your name, email, and location that you use.
  
-![user_profile](/assets/user_profile_screenshot.PNG)
- 
-On the favourite stores section, you will also be able to directly queue 
-up for your favourite stores. This will allow for some quick accessing 
-of your favourite store and enable faster workflow.
+![user_profile](/assets/shopper_profile_UPDATED.PNG)
  
 Another interaction you can do on this page is edit your information! 
 Once clicking any edit button on the page, you will be able to edit 
 your information and click to save that information for your profile. 
  
-![user_profile](/assets/user_profile_editing_screenshot.PNG)
+![user_profile](/assets/shoppper_profile_editing_UPDATED.PNG)
+
+On the favourite stores section, you will also be able to directly queue 
+up for your favourite stores. This will allow for some quick accessing 
+of your favourite store and enable faster workflow.
+ 
+![user_profile](/assets/shopper_profile_favourites_UPDATED.PNG)
  
 The shopper profile page is also accompanied by the view and queue 
 history pages. These pages provide you with the stores that you have 
 queued and viewed for. The items in these tables can also be removed 
 from your history on click of the ‘REMOVED’ button.
  
-![user_profile](/assets/user_profile_search_history_screenshot.PNG)
-![user_profile](/assets/user_profile_queue_history_screenshot.PNG)
+![user_profile](/assets/shopper_profile_view_history_UPDATED.PNG)
+![user_profile](/assets/shopper_profile_queue_history_UPDATED.PNG)
  
 #### Store Owner
  
