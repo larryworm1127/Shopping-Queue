@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import DataDisplay from '../../DataDisplay';
+import DataDisplay from '../../Util/DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
 import { getShopperProfile, updateShopperProfile } from '../../../actions/shopper';
 

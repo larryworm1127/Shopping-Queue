@@ -13,7 +13,7 @@ import { removeShopper } from '../../../actions/admin';
 import { uid } from 'react-uid';
 import FavoriteStores from '../ShopperProfile/FavoriteStores';
 import Box from '@material-ui/core/Box';
-import RemoveConfirmDialog from '../../RemoveConfirmDialog';
+import RemoveConfirmDialog from '../../Util/RemoveConfirmDialog';
 import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
 import { getSearchedShoppers } from '../../../actions/shopper';

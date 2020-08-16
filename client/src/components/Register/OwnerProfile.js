@@ -1,11 +1,11 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import FormTextField from '../../FormTextField';
-import FormSelectField from '../../FormSelectField';
-import { StoreTypes } from '../../../utils/utils';
+import FormTextField from '../Util/FormTextField';
+import FormSelectField from '../Util/FormSelectField';
+import { StoreTypes } from '../../utils/utils';
 import RegisterFormButtons from './RegisterFormButtons';
-import AddressAutocomplete from '../../AddressAutocomplete';
+import AddressAutocomplete from '../Util/AddressAutocomplete';
 
 
 class OwnerProfile extends React.Component {

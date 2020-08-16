@@ -1,5 +1,5 @@
 import React from 'react';
-import { register } from '../../../actions/auth';
+import { register } from '../../actions/auth';
 import RegisterFormButtons from './RegisterFormButtons';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import Button from '@material-ui/core/Button';

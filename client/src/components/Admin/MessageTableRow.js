@@ -9,7 +9,6 @@ import { withStyles } from '@material-ui/core';
 import { styles } from '../Queue/style';
 import MessageDetail from './MessageDetail';
 import { getUserTypeText } from '../../utils/utils';
-import { resolveHelpMessage } from '../../actions/admin';
 
 
 class MessageTableRow extends React.Component {

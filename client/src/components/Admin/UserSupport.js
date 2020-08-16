@@ -16,7 +16,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
 import { getSearchedMessages } from '../../actions/admin';
 import { getEmptyRows } from '../../utils/utils';
-import TablePaginationFooter from '../TablePaginationFooter';
+import TablePaginationFooter from '../Util/TablePaginationFooter';
 
 
 class UserSupport extends React.Component {

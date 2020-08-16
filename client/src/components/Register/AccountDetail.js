@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
-import FormTextField from '../../FormTextField';
-import FormSelectField from '../../FormSelectField';
+import FormTextField from '../Util/FormTextField';
+import FormSelectField from '../Util/FormSelectField';
 import RegisterFormButtons from './RegisterFormButtons';
-import { registerVerify } from '../../../actions/auth';
+import { registerVerify } from '../../actions/auth';
 
 
 class AccountDetail extends React.Component {

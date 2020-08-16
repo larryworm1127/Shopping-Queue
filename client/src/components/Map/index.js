@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { styles } from './style';
-import StoreCards from '../StoreCards';
+import StoreCards from '../Util/StoreCards';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';

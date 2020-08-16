@@ -3,7 +3,7 @@ import { styles } from './style';
 import { withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import DataDisplay from '../DataDisplay';
+import DataDisplay from '../Util/DataDisplay';
 import ProfileEditButtons from '../Profile/ProfileEditButtons';
 import { updateQueue } from '../../actions/queue';
 

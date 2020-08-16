@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Checkbox, FormControlLabel, withStyles } from '@material-ui/core';
-import FormTextField from '../../FormTextField';
-import FormSelectField from '../../FormSelectField';
+import FormTextField from '../Util/FormTextField';
+import FormSelectField from '../Util/FormSelectField';
 import { withRouter } from 'react-router-dom';
-import { login } from '../../../actions/auth';
+import { login } from '../../actions/auth';
 import { styles } from './style';
 
 

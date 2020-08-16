@@ -1,16 +1,16 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import DataDisplay from '../../DataDisplay';
+import DataDisplay from '../../Util/DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
 import { StoreTypes } from '../../../utils/utils';
-import FormSelectField from '../../FormSelectField';
+import FormSelectField from '../../Util/FormSelectField';
 import { getStoreProfile, updateStoreProfile } from '../../../actions/store';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { styles } from '../style';
 import { withStyles } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
-import AddressAutocomplete from '../../AddressAutocomplete';
+import AddressAutocomplete from '../../Util/AddressAutocomplete';
 
 
 class UserProfile extends React.Component {
