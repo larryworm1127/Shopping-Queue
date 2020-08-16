@@ -35,3 +35,15 @@ export function handleFormField(field, event) {
     });
   }
 }
+
+
+/**
+ * Types of stores.
+ * @enum {string}
+ */
+export const StoreTypes = {
+  GROCERY: 'Grocery',
+  DEPARTMENT: 'Department',
+  CLOTHING: 'Clothing',
+  ACCESSORY: 'Accessory',
+};

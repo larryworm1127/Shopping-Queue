@@ -4,7 +4,6 @@ import { Typography, withStyles } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 
@@ -32,12 +31,11 @@ class MessageDetail extends React.Component {
             <Grid item xs={6}>
               <Paper className={classes.paper}>
                 <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                  Reply
+                  Resolve Issue
                 </Typography>
 
-                <TextField className={classes.replyTextField} label="Reply Message" variant="outlined"/>
                 <Button variant="contained" color="secondary">
-                  Reply
+                  Resolved
                 </Button>
               </Paper>
             </Grid>
