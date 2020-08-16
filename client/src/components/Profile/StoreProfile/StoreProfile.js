@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import DataDisplay from '../../DataDisplay';
 import ProfileEditButtons from '../ProfileEditButtons';
-import { StoreTypes } from '../../../utils/stores';
+import { StoreTypes } from '../../../utils/utils';
 import FormSelectField from '../../FormSelectField';
 import { getStoreProfile, updateStoreProfile } from '../../../actions/store';
 import Paper from '@material-ui/core/Paper';
