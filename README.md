@@ -53,10 +53,12 @@ For purpose of demoing the project, we will use the following credentials for au
 |:-----------:|:--------:|:--------:|
 | shopper     | user     | user     |
 | shopper     | user2    | user2    |
+| shopper     | user3    | user3    |
 | store owner | store1   | store1   |
 | store owner | store2   | store2   |
 | store owner | store3   | store3   |
 | store owner | store4   | store4   |
+| store owner | store5   | store5   |
 | admin       | admin    | admin    |
  
 User can select the type of user they want to login as using the LOGIN AS input field shown in screenshot below.
