@@ -178,7 +178,7 @@ be greeted initially with the information of the store!
 This will give you your name, email, and location, as well as the type 
 of store you are.
  
-![store_profile](/assets/store_profile_screenshot.PNG)
+![user_profile](/assets/UpdatedScreenshots/profile_store.PNG)
  
 The store profile page is also accompanied by the store settings page 
 that allows you to edit your queue size, store capacity, and the time 
@@ -192,14 +192,14 @@ Once logging in with the correct credentials for an admin, you can now
 visit your own profile page. This page gives you basic information about 
 yourself.
  
-![store_profile](/assets/admin_profile_screenshot.PNG)
+![user_profile](/assets/UpdatedScreenshots/profile_admin.PNG)
  
 The admin profile is also accompanied by the User Profiles and Show Owner 
 Profiles page. These will allow you to view other user and store pages 
 and edit them to your will.
  
-![store_profile](/assets/admin_user_profile_screenshot.PNG)
-![store_profile](/assets/admin_store_profile_screenshot.PNG)
+![user_profile](/assets/UpdatedScreenshots/admin_shoppers.PNG)
+![user_profile](/assets/UpdatedScreenshots/admin_stores.PNG)
 
 # Express Routes
 
