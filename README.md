@@ -100,7 +100,7 @@ centered at a fixed coordinate for phase 1 and will be made more dynamic for pha
 The left side of the page is a view-only map where user can see the stores
 they want to queue in on the map, as shown in the screenshot below. 
  
-![map](/assets/map_screenshot.PNG)
+![map](/assets/UpdatedScreenshots/map.PNG)
  
 The right side of the page is a list of all the shops registered on the website.
 The "highlight on map" button will place a marker (coordinate randomized 
@@ -129,13 +129,13 @@ to make sure there are no conflicts.
 This page is where the user can view and manage all the queues that they 
 are currently in.
  
-![store_queue](/assets/my_queues_screenshot.PNG)
+![store_queue](/assets/UpdatedScreenshots/queues_shopper.PNG)
  
 The user can view details about the store they are queued for. The user 
 can also choose to edit the day, time, and # of shoppers for their queue. 
 If the user no longer wants to go to a store, they can simply leave the queue.
 
-![store_queue](/assets/my_queues_detail_screenshot.PNG)
+![store_queue](/assets/UpdatedScreenshots/queue_details.PNG)
 
  
 ### Shopper, Store Owner, and Admin Profiles
