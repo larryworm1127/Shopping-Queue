@@ -72,7 +72,9 @@ as seen in the screenshot below.
 ![register_profile](/assets/register_profile_screenshot.PNG)
  
 Once a user fills out profile information, they can begin using the website.
- 
+Store owners will need to fill out location using the autocomplete system to allow
+their store to show up on the map feature which will be explained later.
+
 
 ### Home
  
@@ -82,32 +84,31 @@ This is the landing page of the website, it shows a signup button for easy acces
  
 #### After Login
 Home page is the first page shown after the login.
-Shoppers will see recommendations and Queue history.
+Shoppers will see their view history (the stores they have browsed) and Queue history.
 ![Home](/assets/UpdatedScreenshots/homepage_shopper.PNG)
-While for admin and shop owner; depending on the role of the user different stats are displayed.
-In addition, Admin has access to the messages from users and shop owners on this page.
+While for the admin and shop owner; depending on the role of the user different stats are displayed.
 ![Home](/assets/UpdatedScreenshots/homepage_admin.PNG)
 ![Home](/assets/UpdatedScreenshots/homepage_store.PNG)
  
-All users will have access to contact us form and profile button for easy access.
+All users will have access to contact admin form to easily send help requests to admins,
+and a profile button for easy access to user profiles.
 
 
 ### Map
  
-A map feature is implemented for the website. The map itself is currently
-centered at a fixed coordinate for phase 1 and will be made more dynamic for phase 2 which will use a shopper given address.
- 
-The left side of the page is a view-only map where user can see the stores
-they want to queue in on the map, as shown in the screenshot below. 
+A map feature is implemented for the website. The right side of the page is a 
+view-only map where user can see the stores they want to queue in on the map, as 
+shown in the screenshot below.
  
 ![map](/assets/UpdatedScreenshots/map.PNG)
  
-The right side of the page is a list of all the shops registered on the website.
-The "highlight on map" button will place a marker (coordinate randomized 
-for phase 1) on the map to show user where the store is, while the "queue here"
+The left side of the page is a list of all the shops registered on the website.
+The "highlight on map" button will place a marker on the map and re-center the map 
+to show user where the store is, while the "queue here"
 button will take the user to the store queue page where the user can queue up that store.
 Detailed information about each store is also listed on the cards to help
-shoppers decide which store to queue at.
+shoppers decide which store to queue at. A search bar is implemented on top to help
+filter the store cards by store name.
  
  
 ### Store Queue
@@ -117,11 +118,11 @@ queue page, as shown in screenshot below.
  
 ![store_queue](/assets/store_queue_screenshot.PNG)
  
-Shoppers can pick the date where they would come into the store, as well
+Shoppers can pick the date and time in which they would come into the store, as well
 as their estimated shopping time, and number of shoppers. After filling 
 out the queue information, shopper must press "add to queue" in order to 
 queue up at the store. The website will then verify the entered queue info
-to make sure there are no conflicts.
+to make sure there are no conflicts with other shoppers or store restrictions.
 
 
 ### My Queues
@@ -132,7 +133,7 @@ are currently in.
 ![store_queue](/assets/UpdatedScreenshots/queues_shopper.PNG)
  
 The user can view details about the store they are queued for. The user 
-can also choose to edit the day, time, and # of shoppers for their queue. 
+can also choose to edit the day, time, and number of shoppers for their queue. 
 If the user no longer wants to go to a store, they can simply leave the queue.
 
 ![store_queue](/assets/UpdatedScreenshots/queue_details.PNG)
