@@ -77,17 +77,17 @@ Once a user fills out profile information, they can begin using the website.
 ### Home
  
 #### Before Login
-![Home](/assets/home_before_screenshot.PNG)
+![Home](/assets/UpdatedScreenshots/homepage_default.PNG)
 This is the landing page of the website, it shows a signup button for easy access to the new users. It also lists various value added services provided by the website.
  
 #### After Login
 Home page is the first page shown after the login.
 Shoppers will see recommendations and Queue history.
-![Home](/assets/home_shopper_screenshot.PNG)
+![Home](/assets/UpdatedScreenshots/homepage_shopper.PNG)
 While for admin and shop owner; depending on the role of the user different stats are displayed.
 In addition, Admin has access to the messages from users and shop owners on this page.
-![Home](/assets/home_admin_screenshot.PNG)
-![Home](/assets/home_owner_screenshot.PNG)
+![Home](/assets/UpdatedScreenshots/homepage_admin.PNG)
+![Home](/assets/UpdatedScreenshots/homepage_store.PNG)
  
 All users will have access to contact us form and profile button for easy access.
 
