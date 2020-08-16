@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core';
 import { styles } from '../Queue/style';
 import MessageDetail from './MessageDetail';
 import { getUserTypeText } from '../../utils/utils';
+import { resolveHelpMessage } from '../../actions/admin';
 
 
 class MessageTableRow extends React.Component {
@@ -24,7 +25,7 @@ class MessageTableRow extends React.Component {
   };
 
   render() {
-    const { classes, message } = this.props;
+    const { classes, message, comp, index } = this.props;
 
     return (
       <React.Fragment>
@@ -42,7 +43,11 @@ class MessageTableRow extends React.Component {
         <TableRow>
           <TableCell className={classes.tableCellCollapse} colSpan={6}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-              <MessageDetail message={message}/>
+              <MessageDetail
+                message={message}
+                comp={comp}
+                index={index}
+              />
             </Collapse>
           </TableCell>
         </TableRow>

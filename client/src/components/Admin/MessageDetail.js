@@ -5,12 +5,13 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import { resolveHelpMessage } from '../../actions/admin';
 
 
 class MessageDetail extends React.Component {
 
   render() {
-    const { classes, message } = this.props;
+    const { classes, message, index, comp } = this.props;
 
     return (
       <React.Fragment>
@@ -34,8 +35,12 @@ class MessageDetail extends React.Component {
                   Resolve Issue
                 </Typography>
 
-                <Button variant="contained" color="secondary">
-                  Resolved
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => resolveHelpMessage(message._id, index, comp)}
+                >
+                  Resolve
                 </Button>
               </Paper>
             </Grid>
