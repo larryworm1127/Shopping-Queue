@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import { styles } from './style';
 import { withStyles } from '@material-ui/core';
 import { addQueue } from '../../actions/queue';
-import FormTextField from '../FormTextField';
+import FormTextField from '../Util/FormTextField';
 
 
 class StoreQueueForm extends React.Component {

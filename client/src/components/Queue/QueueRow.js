@@ -9,7 +9,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import QueueDetails from './QueueDetails';
-import RemoveConfirmDialog from '../RemoveConfirmDialog';
+import RemoveConfirmDialog from '../Util/RemoveConfirmDialog';
 
 
 class QueueRow extends React.Component {

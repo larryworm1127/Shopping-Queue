@@ -1,12 +1,12 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { uid } from 'react-uid';
-import StoreCards from '../../StoreCards';
+import StoreCards from '../../Util/StoreCards';
 import { getShopperFavoriteStores } from '../../../actions/shopper';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core';
 import { styles } from '../style';
-import ContentTitle from '../../ContentTitle';
+import ContentTitle from '../../Util/ContentTitle';
 
 
 class FavoriteStores extends React.Component {

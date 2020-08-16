@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { removeStore } from '../../../actions/admin';
 import { uid } from 'react-uid';
-import RemoveConfirmDialog from '../../RemoveConfirmDialog';
+import RemoveConfirmDialog from '../../Util/RemoveConfirmDialog';
 import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
 import { getSearchedStores } from '../../../actions/store';

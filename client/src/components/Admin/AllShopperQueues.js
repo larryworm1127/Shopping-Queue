@@ -21,7 +21,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
 import { getSearchedShoppers } from '../../actions/shopper';
 import { getEmptyRows } from '../../utils/utils';
-import TablePaginationFooter from '../TablePaginationFooter';
+import TablePaginationFooter from '../Util/TablePaginationFooter';
 
 
 class AllShopperQueues extends React.Component {
@@ -51,7 +51,7 @@ class AllShopperQueues extends React.Component {
         <CssBaseline/>
 
         <Typography variant='h3' align='center' className={classes.titleText}>
-          All Store Queues
+          All Shopper Queues
         </Typography>
 
         <TableContainer component={Paper} className={classes.table}>

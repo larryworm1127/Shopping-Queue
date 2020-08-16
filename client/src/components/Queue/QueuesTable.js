@@ -11,7 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import { styles } from './style';
 import { getCurrentQueues, removeQueue } from '../../actions/queue';
 import Typography from '@material-ui/core/Typography';
-import TablePaginationFooter from '../TablePaginationFooter';
+import TablePaginationFooter from '../Util/TablePaginationFooter';
 import CardActions from '@material-ui/core/CardActions';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';

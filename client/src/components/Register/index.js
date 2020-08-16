@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { CssBaseline, Link, Paper, Step, StepLabel, Stepper, Typography, withStyles } from '@material-ui/core';
 // User JS imports
 import AccountDetail from './AccountDetail';
-import NavBar from '../../Nav/navbar';
+import NavBar from '../Nav/navbar';
 import ShopperProfile from './ShopperProfile';
 import OwnerProfile from './OwnerProfile';
 import { styles } from './style';

@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
 import Star from '@material-ui/icons/Star';
 import EmptyStar from '@material-ui/icons/StarBorder';
-import { addFavouriteStore, removeFavouriteStore } from '../actions/shopper'
+import { addFavouriteStore, removeFavouriteStore } from '../../actions/shopper'
 
 const styles = () => ({
   title: {

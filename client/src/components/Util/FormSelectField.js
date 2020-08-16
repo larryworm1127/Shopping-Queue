@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 import { uid } from 'react-uid';
 import { withStyles } from '@material-ui/core';
-import { handleFormField } from '../utils/utils';
+import { handleFormField } from '../../utils/utils';
 
 
 const styles = theme => ({

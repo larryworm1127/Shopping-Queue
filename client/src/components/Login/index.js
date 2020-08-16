@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Avatar, Container, CssBaseline, Grid, Link, Typography, withStyles } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import NavBar from '../../Nav/navbar';
+import NavBar from '../Nav/navbar';
 import { styles } from './style';
 import LoginForm from './LoginForm';
 

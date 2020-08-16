@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import Home from './Home';
 import Queue from './Queue';
-import Login from './Auth/Login';
+import Login from './Login';
 import ShopperProfile from './Profile/ShopperProfile';
 import AdminProfile from './Profile/AdminProfile';
 import StoreProfile from './Profile/StoreProfile';
@@ -13,7 +13,7 @@ import StoreShoppers from './Store/StoreShoppers';
 import AllStoreQueues from './Admin/AllStoreQueues';
 import UserSupport from './Admin/UserSupport';
 import Loading from './Loading';
-import Register from './Auth/Register';
+import Register from './Register';
 import { logout } from '../actions/auth';
 import AllShopperQueues from './Admin/AllShopperQueues';
 
