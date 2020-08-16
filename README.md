@@ -149,51 +149,31 @@ If the user no longer wants to go to a store, they can simply leave the queue.
  
 ### Shopper, Store Owner, and Admin Profiles
  
-#### Shopper
-Once logging in with the correct credentials for a shopper, you can now 
-visit your own profile page! In this profile page, you will be greeted 
-initially with your own information!
- 
-This will give you your name, email, and location that you use.
- 
-![user_profile](/assets/UpdatedScreenshots/shopper_profile_UPDATED.PNG)
- 
-Another interaction you can do on this page is edit your information! 
-Once clicking any edit button on the page, you will be able to edit 
-your information and click to save that information for your profile. 
- 
-![user_profile](/assets/UpdatedScreenshots/shopper_profile_editing_UPDATED.PNG)
-
-On the favourite stores section, you will also be able to directly queue 
-up for your favourite stores. This will allow for some quick accessing 
-of your favourite store and enable faster workflow.
- 
-![user_profile](/assets/UpdatedScreenshots/shopper_profile_favourites_UPDATED.PNG)
- 
-The shopper profile page is also accompanied by the view and queue 
-history pages. These pages provide you with the stores that you have 
-queued and viewed for. The items in these tables can also be removed 
-from your history on click of the ‘REMOVED’ button.
- 
-![user_profile](/assets/UpdatedScreenshots/view_history_shopper.PNG)
-![user_profile](/assets/UpdatedScreenshots/queue_history_shopper.PNG)
- 
 #### Store Owner
  
 Once logging in with the correct credentials for a store owner, you 
 can now visit your store profile page. In this profile page, you will 
 be greeted initially with the information of the store!
  
-This will give you your name, email, and location, as well as the type 
-of store you are.
+This will give you your name, email, and location.
  
 ![user_profile](/assets/UpdatedScreenshots/profile_store.PNG)
  
-The store profile page is also accompanied by the store settings page 
-that allows you to edit your queue size, store capacity, and the time 
-limit a customer can stay in the store for.
+Another interaction you can do on this page is edit your information! Once 
+clicking any edit button on the page, you will be able to edit your information 
+and click to save that information for your profile.
  
 ![store_profile](/assets/store_settings_screenshot.PNG)
+
+The store owner can view all the shoppers queued at their store
+and edit queue information if necessary
+
+![user_profile](/assets/UpdatedScreenshots/queues_store.PNG)
+
+The store owner can view more detailed stats about their store on
+this page:
+
+![user_profile](/assets/UpdatedScreenshots/store_stats.PNG)
 
 #### Admin
  
@@ -209,6 +189,17 @@ and edit them to your will.
  
 ![user_profile](/assets/UpdatedScreenshots/admin_shoppers.PNG)
 ![user_profile](/assets/UpdatedScreenshots/admin_stores.PNG)
+
+The admin can also view all queues at each store and all queues for 
+each shopper.
+
+![user_profile](/assets/UpdatedScreenshots/admin_store_queues.PNG)
+![user_profile](/assets/UpdatedScreenshots/admin_shopper_queues.PNG)
+
+Messages can be sent to the admin by shoppers and shop owners. These
+messages can be viewed by the admin here:
+
+![user_profile](/assets/UpdatedScreenshots/admin_messages.PNG)
 
 # Express Routes
 
