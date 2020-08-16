@@ -34,6 +34,14 @@ and the website should be running on http://localhost:5000/.
 
 
 ## Website Features and Instruction
+
+### Features not implemented
+
+For final submission of the project, we were able to implement all features listed
+in the proposal except for the confirmation feature for shoppers. After doing some
+research on the possible ways to implement a confirmation system, we decided that
+the workload and complexity is beyond our current ability with the given time, and we would
+be better off spending that time making other features better.
  
 ### Basic User Authentication
  
