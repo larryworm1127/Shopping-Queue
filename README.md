@@ -232,22 +232,26 @@ messages can be viewed by the admin here:
 
 # Express Routes
 
+Note: Admin users have access to all routes, and therefore omitted from most routes access
+
 ## Admin
 
-| Route   |      Type      |  Description | Body |
-|:----------|:-------------|:------|:-------------|
-| /api/admin/profile/:username | GET | Gets admin profile |
-| /api/admin/profile/:username | PATCH |Update admin profile| "username": username, <br> "email": email, <br> "firstName": firstName, <br> "lastName": lastName, <br> "address": address |
-| /api/admin/profile | DELETE | Delete an admin | "id": id |
-| /api/admin/messages | GET | Get all help messages | 
-| /api/admin/messages | DELETE | Resolve/delete a message | "id": id
-| /api/admin/messages | POST | Post a message | "username": username, <br> "userType": userType, <br> "title": title, <br> "description": description, <br> "date": date |
+| Route   |      Type      | User Access | Description | Body |
+|:----------|:-------------|:------|:------|:-------------|
+| /api/admin/profile/:username | GET | Admin | Gets admin profile |
+| /api/admin/profile/:username | PATCH | Admin | Update admin profile| "username": username, <br> "email": email, <br> "firstName": firstName, <br> "lastName": lastName, <br> "address": address |
+| /api/admin/profile | DELETE | Admin |Delete an admin | "id": id |
+| /api/admin/messages | GET | Admin | Get all help messages | 
+| /api/admin/messages | DELETE | Admin | Resolve/delete a message | "id": id
+| /api/admin/messages | POST | All | Post a message | "username": username, <br> "userType": userType, <br> "title": title, <br> "description": description, <br> "date": date |
 
-## Authorization 
+## Authentication 
 
-| Route   |      Type      |  Description | Body |
+Note: All authentication routes can be accessed by both authenticated and non-authenticated users.
+
+| Route   |      Type      | Description | Body |
 |:----------|:-------------|:------|:-------------|
-| /api/login | POST | Login and create a session |  "username" username, <br> "password": password, <br> "userType": userType  |
+| /api/login | POST | Login and create a session | "username" username, <br> "password": password, <br> "userType": userType  |
 | /api/logout | GET | Logout by destroying session |  |
 | /api/check-session | GET | Get which user is logged in | |
 | /api/verifyRegister | POST | Verify that password is viable and username is not taken |  "username": username, <br> "password": password, <br> "confirmPassword":confirmPassword, <br> "userType": userType  |
@@ -256,38 +260,38 @@ messages can be viewed by the admin here:
 
 ## Queue
 
-| Route   |      Type      |  Description | Body |
-|:----------|:-------------|:------|:-------------|
-| /api/queue | POST | Add new queue for shopper | "username": username, <br> "store": store, <br> "datetime": datetime, <br> "shopTime": shopTime, <br> "numCustomers": numCustomers, <br> "datetimeQueued": datetimeQueued |
-| /api/queue/shopper/:username | GET |Get current queues for a shopper| |
-| /api/queue | DELETE | Remove a queue |  "id": id|
-| /api/queue/store/:username | GET | Get current queues for a store | 
-| /api/queue/:id | PATCH | Update a queue | "numCustomers": numCustomers, <br> "shopTime": shopTime, <br> "datetime": datetime |
+| Route   |      Type      | User Access | Description | Body |
+|:----------|:-------------|:------|:--------|:-------------|
+| /api/queue | POST | Shopper | Add new queue for shopper | "username": username, <br> "store": store, <br> "datetime": datetime, <br> "shopTime": shopTime, <br> "numCustomers": numCustomers, <br> "datetimeQueued": datetimeQueued |
+| /api/queue/shopper/:username | GET | Shopper | Get current queues for a shopper| |
+| /api/queue | DELETE | All | Remove a queue | "id": id|
+| /api/queue/store/:username | GET | Store | Get current queues for a store | 
+| /api/queue/:id | PATCH | All | Update a queue | "numCustomers": numCustomers, <br> "shopTime": shopTime, <br> "datetime": datetime |
 
 ## Shopper
 
-| Route   |      Type      |  Description | Body |
-|:----------|:-------------|:------|:-------------|
-| /api/shopper/profile/:username | GET | Get profile for a shopper | |
-| /api/shopper/profile/:username | PATCH |Update profile for a shopper|"firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address, <br> "remindTime": remindTime  |
-| /api/shopper/favorites/:shopperUsername/:storeUsername | PATCH | Add a store to shopper's favorites | |
-| /api/shopper/viewHistory/:username | GET | Get favorite stores for a shopper | 
-| /api/shopper/viewHistory/:username| POST | Add to view history | "store": store|
-| /api/shopper/viewHistory/:username| GET | Get view history | |
-| /api/shopper/viewHistory/:username| DELETE | Delete from view history | "id": id|
-| /api/shopper/queueHistory/:username| GET | Get queue history | |
-| /api/shopper/queueHistory/:username| DELETE | Delete from queue history | "id": id|
-| /api/shopper/favorites/:shopperUsername/:storeUsername| DELETE | Delete store from shopper's favorites | |
-| /api/shopper/:username| DELETE | Delete a shopper's account | |
-| /api/shoppers| GET | Get all shoppers | |
+| Route   |      Type      | User Access |  Description | Body |
+|:----------|:-------------|:------|:------|:-------------|
+| /api/shopper/profile/:username | GET | Shopper | Get profile for a shopper | |
+| /api/shopper/profile/:username | PATCH | Shopper | Update profile for a shopper|"firstName": firstName, <br> "lastName": lastName, <br> "email": email, <br> "address": address, <br> "remindTime": remindTime  |
+| /api/shopper/favorites/:shopperUsername/:storeUsername | PATCH | Shopper | Add a store to shopper's favorites | |
+| /api/shopper/favorites/:username | GET | Shopper | Get favorite stores for a shopper | 
+| /api/shopper/viewHistory/:username| POST | Shopper | Add to view history | "store": store|
+| /api/shopper/viewHistory/:username| GET | Shopper | Get view history | |
+| /api/shopper/viewHistory/:username| DELETE | Shopper | Delete from view history | "id": id|
+| /api/shopper/queueHistory/:username| GET | Shopper| Get queue history | |
+| /api/shopper/queueHistory/:username| DELETE | Shopper |Delete from queue history | "id": id|
+| /api/shopper/favorites/:shopperUsername/:storeUsername | DELETE | Shopper| Delete store from shopper's favorites | |
+| /api/shopper/:username| DELETE | Admin | Delete a shopper's account | |
+| /api/shoppers| GET | Admin | Get all shoppers | |
 
 ## Store
 
-| Route   |      Type      |  Description | Body |
-|:----------|:-------------|:------|:-------------|
-| /api/store/profile/:username | GET | Get profile for a store | |
-| /api/store/profile/:username | PATCH |Update profile info for store| "storeName": storeName, <br> "email": email, <br> "address": address, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime, <br> "customerLimit": customerLimit, <br> "customerShopTime": customerShopTime |
-| /api/store/:username | DELETE | Delete a store's account | |
-| /api/stores | GET | Get all stores |
-| /api/store/queues/:username | GET | Get all queues for a store | "storeName": storeName |
-| /api/store/todayqueues/:username | GET | Get all queues for a store for today | "storeName": storeName |
+| Route   |      Type      |  User Access | Description | Body |
+|:----------|:-------------|:------|:-------|:-------------|
+| /api/store/profile/:username | GET | All | Get profile for a store | |
+| /api/store/profile/:username | PATCH | Store | Update profile info for store| "storeName": storeName, <br> "email": email, <br> "address": address, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime, <br> "customerLimit": customerLimit, <br> "customerShopTime": customerShopTime |
+| /api/store/:username | DELETE | Admin | Delete a store's account | |
+| /api/stores | GET | All | Get all stores |
+| /api/store/queues/:username | GET | Store | Get all queues for a store | "storeName": storeName |
+| /api/store/todayqueues/:username | GET | Store | Get all queues for a store for today | "storeName": storeName |
