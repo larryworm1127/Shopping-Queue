@@ -209,8 +209,9 @@ and edit them to your will.
 |:----------|:-------------|:------|:-------------|
 | /api/admin/profile/:username | GET | Gets admin profile |
 | /api/admin/profile/:username | PATCH |Update admin profile| "username": username, <br> "email": email, <br> "firstName": firstName, <br> "lastName": lastName, <br> "address": address |
-| /api/admin/profile | DELETE | Delete an admin | "id": id|
-| /api/admin/messages | GET | Get all messages | 
+| /api/admin/profile | DELETE | Delete an admin | "id": id |
+| /api/admin/messages | GET | Get all help messages | 
+| /api/admin/messages | DELETE | Resolve/delete a message | "id": id
 | /api/admin/messages | POST | Post a message | "username": username, <br> "userType": userType, <br> "title": title, <br> "description": description, <br> "date": date |
 
 ## Authorization 
