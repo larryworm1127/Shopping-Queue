@@ -148,19 +148,19 @@ initially with your own information!
  
 This will give you your name, email, and location that you use.
  
-![user_profile](/assets/shopper_profile_UPDATED.PNG)
+![user_profile](/assets/UpdatedScreenshots/shopper_profile_UPDATED.PNG)
  
 Another interaction you can do on this page is edit your information! 
 Once clicking any edit button on the page, you will be able to edit 
 your information and click to save that information for your profile. 
  
-![user_profile](/assets/shoppper_profile_editing_UPDATED.PNG)
+![user_profile](/assets/UpdatedScreenshots/shopper_profile_editing_UPDATED.PNG)
 
 On the favourite stores section, you will also be able to directly queue 
 up for your favourite stores. This will allow for some quick accessing 
 of your favourite store and enable faster workflow.
  
-![user_profile](/assets/shopper_profile_favourites_UPDATED.PNG)
+![user_profile](/assets/UpdatedScreenshots/shopper_profile_favourites_UPDATED.PNG)
  
 The shopper profile page is also accompanied by the view and queue 
 history pages. These pages provide you with the stores that you have 
