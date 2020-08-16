@@ -286,7 +286,7 @@ messages can be viewed by the admin here:
 | Route   |      Type      |  Description | Body |
 |:----------|:-------------|:------|:-------------|
 | /api/store/profile/:username | GET | Get profile for a store | |
-| /api/store/profile/:username | PATCH |Update profile info for store| "storeName": storeName, <br> "email": email, <br> "address": address, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime}, <br> "customerLimit": customerLimit, <br> "customerShopTime": customerShopTime |
+| /api/store/profile/:username | PATCH |Update profile info for store| "storeName": storeName, <br> "email": email, <br> "address": address, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime, <br> "customerLimit": customerLimit, <br> "customerShopTime": customerShopTime |
 | /api/store/:username | DELETE | Delete a store's account | |
 | /api/stores | GET | Get all stores |
 | /api/store/queues/:username | GET | Get all queues for a store | "storeName": storeName |
