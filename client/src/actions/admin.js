@@ -97,6 +97,7 @@ export const getAllStores = (profileComp) => {
     });
 };
 
+
 export const getHelpMessages = (messageComp) => {
   const url = '/api/admin/messages';
 
@@ -123,6 +124,7 @@ export const getHelpMessages = (messageComp) => {
     });
 };
 
+
 export const addHelpMessage = (state, messageData) => {
   const request = new Request('/api/admin/messages', {
     method: 'post',
@@ -146,10 +148,41 @@ export const addHelpMessage = (state, messageData) => {
       }
     })
     .catch(error => {
-
       console.log(error);
     });
 };
+
+
+export const resolveHelpMessage = (id, index, comp) => {
+  const request = new Request(`/api/admin/messages`, {
+    method: 'DELETE',
+    body: JSON.stringify({ id }),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  fetch(request)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then(json => {
+      if (json) {
+        const messages = [...comp.state.messages];
+        messages.splice(index, 1);
+        comp.setState({
+          messages: [...messages]
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
 
 export const removeShopper = (username, index, comp) => {
   const request = new Request(`/api/shopper/${username}`, {
@@ -181,6 +214,7 @@ export const removeShopper = (username, index, comp) => {
     });
 };
 
+
 export const getSearchedMessages = (text, messageComp) => {
   const url = '/api/admin/messages';
 
@@ -207,6 +241,7 @@ export const getSearchedMessages = (text, messageComp) => {
       console.log(error);
     });
 };
+
 
 export const removeStore = (username, index, comp) => {
   const request = new Request(`/api/store/${username}`, {

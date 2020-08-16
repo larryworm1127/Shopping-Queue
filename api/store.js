@@ -10,7 +10,7 @@ const { Queue } = require('../models/queue');
 
 // Get profile for store owner
 router.get('/api/store/profile/:username', (req, res) => {
-  if (req.session.isLoggedIn && req.session.userType !== UserTypes.Shopper) {
+  if (req.session.isLoggedIn) {
     const username = req.params.username;
 
     Store.findOne({ username })
@@ -109,31 +109,39 @@ router.get('/api/stores', (req, res) => {
 
 // Get all Queues for store
 router.get('/api/store/queues/:username', (req, res) => {
-  const storename = req.params.username;
-  Queue.find({ store: storename })
-    .then(queues => {
-      res.send(queues);
-    })
-    .catch(error => {
-      res.sendStatus(500).send(error);
-    });
+  if (req.session.isLoggedIn && req.session.userType !== UserTypes.Shopper) {
+    const storeName = req.params.username;
+    Queue.find({ store: storeName })
+      .then(queues => {
+        res.send(queues);
+      })
+      .catch(error => {
+        res.sendStatus(500).send(error);
+      });
+  } else {
+    res.status(404).send();
+  }
 });
 
 
 // Get all Queues for store today
 router.get('/api/store/todayqueues/:username', (req, res) => {
-  const storeName = req.params.username;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  Queue.find({ store: storeName, datetime: { $gte: today.toISOString(), $lt: tomorrow.toISOString() } })
-    .then(queues => {
-      res.send(queues);
-    })
-    .catch(error => {
-      res.sendStatus(500).send(error);
-    });
+  if (req.session.isLoggedIn && req.session.userType !== UserTypes.Shopper) {
+    const storeName = req.params.username;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    Queue.find({ store: storeName, datetime: { $gte: today.toISOString(), $lt: tomorrow.toISOString() } })
+      .then(queues => {
+        res.send(queues);
+      })
+      .catch(error => {
+        res.sendStatus(500).send(error);
+      });
+  } else {
+    res.send(404).send();
+  }
 });
 
 module.exports = router;

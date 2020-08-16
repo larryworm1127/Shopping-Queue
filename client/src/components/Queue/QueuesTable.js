@@ -11,15 +11,17 @@ import TableCell from '@material-ui/core/TableCell';
 import { styles } from './style';
 import { getCurrentQueues, removeQueue } from '../../actions/queue';
 import Typography from '@material-ui/core/Typography';
-import { getEmptyRows } from '../../utils/utils';
 import TablePaginationFooter from '../TablePaginationFooter';
+import CardActions from '@material-ui/core/CardActions';
+import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
 
 
 class QueuesTable extends React.Component {
 
   componentDidMount() {
     const { username, currentUser, isStore } = this.props;
-    getCurrentQueues((username) ? username : currentUser, this, isStore);
+    getCurrentQueues((username) ? username : currentUser, this, isStore, '');
   }
 
   state = {
@@ -32,22 +34,28 @@ class QueuesTable extends React.Component {
     removeQueue(queue._id, this, index);
   };
 
+  handleOnInputChange = (event) => {
+    const { username, currentUser, isStore } = this.props;
+    getCurrentQueues((username) ? username : currentUser, this, isStore, event.target.value);
+  };
+
   render() {
     const { classes } = this.props;
     const { queues, page, rowsPerPage } = this.state;
-    const emptyRows = getEmptyRows(queues, page, rowsPerPage);
 
-    return (queues.length === 0) ? (
-      <Container>
-        <Paper className={classes.paper}>
-          <Typography component="h2" variant="h5" color="primary" gutterBottom>
-            You have no queues currently.
-          </Typography>
-        </Paper>
-      </Container>
-    ) : (
+    return (
       <Container>
         <TableContainer component={Paper} className={classes.queueList}>
+          <Card>
+            <CardActions>
+              <TextField
+                variant="outlined"
+                label="Search..."
+                onChange={this.handleOnInputChange}
+              />
+            </CardActions>
+          </Card>
+
           <Table stickyHeader>
             <TableHead>
               <TableRow scope="row">
@@ -80,11 +88,6 @@ class QueuesTable extends React.Component {
                 />
               ))}
 
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6}/>
-                </TableRow>
-              )}
             </TableBody>
 
             <TablePaginationFooter
@@ -95,6 +98,16 @@ class QueuesTable extends React.Component {
             />
           </Table>
         </TableContainer>
+
+        {(queues.length === 0) && (
+          <Container>
+            <Paper className={classes.paper}>
+              <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                You have no queues currently.
+              </Typography>
+            </Paper>
+          </Container>
+        )}
       </Container>
     );
   }

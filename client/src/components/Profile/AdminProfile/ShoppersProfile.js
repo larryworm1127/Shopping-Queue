@@ -92,12 +92,6 @@ class ShoppersProfile extends React.Component {
               label="Search..."
               onChange={this.handleOnInputChange}
             />
-            <Button
-              size="small"
-              color="primary"
-            >
-              Search
-            </Button>
           </CardActions>
         </Card>
         {this.state.shoppers.map((shopper, index) => (

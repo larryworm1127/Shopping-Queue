@@ -8,7 +8,7 @@ import RegisterFormButtons from './RegisterFormButtons';
 class ShopperProfile extends React.Component {
 
   render() {
-    const { handleNext, activeStep, handleBack, firstName, lastName, address, remindTime, comp } = this.props;
+    const { handleNext, activeStep, handleBack, firstName, lastName, address, comp } = this.props;
 
     return (
       <React.Fragment>
@@ -33,13 +33,6 @@ class ShopperProfile extends React.Component {
               name="address"
               label="Address"
               value={address}
-              comp={comp}
-            />
-            <FormTextField
-              name="remindTime"
-              label="Remind Time (min)"
-              value={remindTime}
-              type="number"
               comp={comp}
             />
           </Grid>

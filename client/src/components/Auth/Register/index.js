@@ -34,7 +34,6 @@ class Register extends React.Component {
     firstName: '',
     lastName: '',
     address: '',
-    remindTime: '',
     // shop owner profile states
     storeName: '',
     location: '',

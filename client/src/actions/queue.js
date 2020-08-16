@@ -1,4 +1,4 @@
-export const getCurrentQueues = (username, queueComp, isStore) => {
+export const getCurrentQueues = (username, queueComp, isStore, text) => {
   const userType = (isStore) ? 'store' : 'shopper';
   const url = `/api/queue/${userType}/${username}`;
 
@@ -17,8 +17,13 @@ export const getCurrentQueues = (username, queueComp, isStore) => {
           result.datetimeQueued = new Date(result.datetimeQueued).toLocaleString();
           return result;
         });
+        const jsonFiltered = formattedJson.filter(({ store, username }) => {
+          return (isStore) ?
+            username.toUpperCase().includes(text.toUpperCase()) :
+            store.toUpperCase().includes(text.toUpperCase());
+        });
         queueComp.setState({
-          queues: [...formattedJson]
+          queues: [...jsonFiltered]
         });
       }
     })

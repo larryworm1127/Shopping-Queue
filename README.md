@@ -77,17 +77,17 @@ Once a user fills out profile information, they can begin using the website.
 ### Home
  
 #### Before Login
-![Home](/assets/home_before_screenshot.PNG)
+![Home](/assets/UpdatedScreenshots/homepage_default.PNG)
 This is the landing page of the website, it shows a signup button for easy access to the new users. It also lists various value added services provided by the website.
  
 #### After Login
 Home page is the first page shown after the login.
 Shoppers will see recommendations and Queue history.
-![Home](/assets/home_shopper_screenshot.PNG)
+![Home](/assets/UpdatedScreenshots/homepage_shopper.PNG)
 While for admin and shop owner; depending on the role of the user different stats are displayed.
 In addition, Admin has access to the messages from users and shop owners on this page.
-![Home](/assets/home_admin_screenshot.PNG)
-![Home](/assets/home_owner_screenshot.PNG)
+![Home](/assets/UpdatedScreenshots/homepage_admin.PNG)
+![Home](/assets/UpdatedScreenshots/homepage_store.PNG)
  
 All users will have access to contact us form and profile button for easy access.
 
@@ -100,7 +100,7 @@ centered at a fixed coordinate for phase 1 and will be made more dynamic for pha
 The left side of the page is a view-only map where user can see the stores
 they want to queue in on the map, as shown in the screenshot below. 
  
-![map](/assets/map_screenshot.PNG)
+![map](/assets/UpdatedScreenshots/map.PNG)
  
 The right side of the page is a list of all the shops registered on the website.
 The "highlight on map" button will place a marker (coordinate randomized 
@@ -129,13 +129,13 @@ to make sure there are no conflicts.
 This page is where the user can view and manage all the queues that they 
 are currently in.
  
-![store_queue](/assets/my_queues_screenshot.PNG)
+![store_queue](/assets/UpdatedScreenshots/queues_shopper.PNG)
  
 The user can view details about the store they are queued for. The user 
 can also choose to edit the day, time, and # of shoppers for their queue. 
 If the user no longer wants to go to a store, they can simply leave the queue.
 
-![store_queue](/assets/my_queues_detail_screenshot.PNG)
+![store_queue](/assets/UpdatedScreenshots/queue_details.PNG)
 
  
 ### Shopper, Store Owner, and Admin Profiles
@@ -166,8 +166,8 @@ history pages. These pages provide you with the stores that you have
 queued and viewed for. The items in these tables can also be removed 
 from your history on click of the ‘REMOVED’ button.
  
-![user_profile](/assets/shopper_profile_view_history_UPDATED.PNG)
-![user_profile](/assets/shopper_profile_queue_history_UPDATED.PNG)
+![user_profile](/assets/UpdatedScreenshots/view_history_shopper.PNG)
+![user_profile](/assets/UpdatedScreenshots/queue_history_shopper.PNG)
  
 #### Store Owner
  
@@ -178,7 +178,7 @@ be greeted initially with the information of the store!
 This will give you your name, email, and location, as well as the type 
 of store you are.
  
-![store_profile](/assets/store_profile_screenshot.PNG)
+![user_profile](/assets/UpdatedScreenshots/profile_store.PNG)
  
 The store profile page is also accompanied by the store settings page 
 that allows you to edit your queue size, store capacity, and the time 
@@ -192,14 +192,14 @@ Once logging in with the correct credentials for an admin, you can now
 visit your own profile page. This page gives you basic information about 
 yourself.
  
-![store_profile](/assets/admin_profile_screenshot.PNG)
+![user_profile](/assets/UpdatedScreenshots/profile_admin.PNG)
  
 The admin profile is also accompanied by the User Profiles and Show Owner 
 Profiles page. These will allow you to view other user and store pages 
 and edit them to your will.
  
-![store_profile](/assets/admin_user_profile_screenshot.PNG)
-![store_profile](/assets/admin_store_profile_screenshot.PNG)
+![user_profile](/assets/UpdatedScreenshots/admin_shoppers.PNG)
+![user_profile](/assets/UpdatedScreenshots/admin_stores.PNG)
 
 # Express Routes
 
@@ -209,8 +209,9 @@ and edit them to your will.
 |:----------|:-------------|:------|:-------------|
 | /api/admin/profile/:username | GET | Gets admin profile |
 | /api/admin/profile/:username | PATCH |Update admin profile| "username": username, <br> "email": email, <br> "firstName": firstName, <br> "lastName": lastName, <br> "address": address |
-| /api/admin/profile | DELETE | Delete an admin | "id": id|
-| /api/admin/messages | GET | Get all messages | 
+| /api/admin/profile | DELETE | Delete an admin | "id": id |
+| /api/admin/messages | GET | Get all help messages | 
+| /api/admin/messages | DELETE | Resolve/delete a message | "id": id
 | /api/admin/messages | POST | Post a message | "username": username, <br> "userType": userType, <br> "title": title, <br> "description": description, <br> "date": date |
 
 ## Authorization 
@@ -258,4 +259,6 @@ and edit them to your will.
 | /api/store/profile/:username | GET | Get profile for a store | |
 | /api/store/profile/:username | PATCH |Update profile info for store| "storeName": storeName, <br> "email": email, <br> "address": address, <br> "coordinate": coordinate, <br> "storeType": storeType, <br> "openTime": openTime, <br> "closeTime": closeTime}, <br> "customerLimit": customerLimit, <br> "customerShopTime": customerShopTime |
 | /api/store/:username | DELETE | Delete a store's account | |
-| /api/stores | GET | Get all stores | 
+| /api/stores | GET | Get all stores |
+| /api/store/queues/:username | GET | Get all queues for a store | "storeName": storeName |
+| /api/store/todayqueues/:username | GET | Get all queues for a store for today | "storeName": storeName |

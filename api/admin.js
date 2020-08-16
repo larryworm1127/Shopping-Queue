@@ -121,4 +121,24 @@ router.post('/api/admin/messages', (req, res) => {
   }
 });
 
+
+// Resolve (remove) help messages
+router.delete('/api/admin/messages', (req, res) => {
+  if (req.session.isLoggedIn && req.session.userType === UserTypes.Admin) {
+    const id = req.body.id;
+
+    HelpMessage.findByIdAndDelete(id)
+      .then(message => {
+        if (!message) {
+          res.status(404).send();
+        } else {
+          res.send(message);
+        }
+      })
+      .catch(error => {
+        res.status(500).send(error);
+      });
+  }
+});
+
 module.exports = router;

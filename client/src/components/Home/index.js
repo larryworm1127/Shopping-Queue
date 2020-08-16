@@ -31,7 +31,7 @@ class Home extends React.Component {
     switch (userType) {
       case UserType.shopper:
         getShopperFavoriteStores(currentUser, this);
-        getShopperQueueHistory(currentUser, this);
+        getShopperQueueHistory(currentUser, this, '');
         break;
       case UserType.store:
         getStoreAllQueues(currentUser, this);

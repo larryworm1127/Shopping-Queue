@@ -81,8 +81,13 @@ class UserSupport extends React.Component {
               {(rowsPerPage > 0
                   ? messages.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   : messages
-              ).map((message) => (
-                <MessageTableRow key={uid(message)} message={message}/>
+              ).map((message, index) => (
+                <MessageTableRow
+                  key={uid(message)}
+                  message={message}
+                  index={index}
+                  comp={this}
+                />
               ))}
 
               {emptyRows > 0 && (

@@ -124,7 +124,6 @@ router.post('/api/register', (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       address: req.body.address,
-      remindTime: req.body.remindTime,
       favouriteStores: [],
       searchHistory: [],
       queueHistory: []
