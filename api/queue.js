@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const { UserTypes } = require('../models/user');
 const { ObjectID } = require('mongodb');
 const router = express.Router();
 
@@ -9,7 +10,7 @@ const { Queue } = require('../models/queue');
 
 // Add new booking for shopper
 router.post('/api/queue', (req, res) => {
-  if (req.session.isLoggedIn && req.session.userType !== 1) {
+  if (req.session.isLoggedIn && req.session.userType !== UserTypes.Store) {
     // Create a new queue
     const queue = new Queue({
       username: req.body.username,
@@ -36,7 +37,7 @@ router.post('/api/queue', (req, res) => {
 
 // Get current queues for shopper
 router.get('/api/queue/shopper/:username', (req, res) => {
-  if (req.session.isLoggedIn && req.session.userType !== 1) {
+  if (req.session.isLoggedIn && req.session.userType !== UserTypes.Store) {
     const username = req.params.username;
 
     Queue.getCurrentQueues(username, false)
@@ -87,7 +88,7 @@ router.delete('/api/queue', (req, res) => {
 
 // Get current queues for store
 router.get('/api/queue/store/:username', (req, res) => {
-  if (req.session.isLoggedIn && req.session.userType !== 0) {
+  if (req.session.isLoggedIn && req.session.userType !== UserTypes.Shopper) {
     const username = req.params.username;
 
     Queue.getCurrentQueues(username, true)
